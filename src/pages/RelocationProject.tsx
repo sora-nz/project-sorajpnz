@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { assets, common, links, Locale, projects, relocation, rentRadar, siteUrl } from '../lib/content';
@@ -10,49 +10,78 @@ type RelocationProjectProps = {
   path: string;
 };
 
-function TableauEmbed() {
-  const containerRef = useRef<HTMLDivElement>(null);
+type DetailSection = {
+  label: string;
+  body: string;
+};
+
+const TABLEAU_BASE_WIDTH = 1400;
+const TABLEAU_BASE_HEIGHT = 977;
+
+function ResponsiveTableauEmbed() {
+  const shellRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
 
   useEffect(() => {
-    const container = containerRef.current;
-    if (!container) return;
+    const shell = shellRef.current;
+    if (!shell) return;
 
-    container.innerHTML = `
-      <div class="tableauPlaceholder" id="nz-japan-relocation-viz" style="position: relative; width: 100%;">
-        <noscript>
-          <a href="${links.tableau}">
-            <img alt="New Zealand Relocation Affordability Dashboard" src="https://public.tableau.com/static/images/NZ/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard/1_rss.png" style="border: none" />
-          </a>
-        </noscript>
-        <object class="tableauViz" style="display:none;">
-          <param name="host_url" value="https%3A%2F%2Fpublic.tableau.com%2F" />
-          <param name="embed_code_version" value="3" />
-          <param name="site_root" value="" />
-          <param name="name" value="NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard" />
-          <param name="tabs" value="no" />
-          <param name="toolbar" value="yes" />
-          <param name="static_image" value="https://public.tableau.com/static/images/NZ/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard/1.png" />
-          <param name="animate_transition" value="yes" />
-          <param name="display_static_image" value="yes" />
-          <param name="display_spinner" value="yes" />
-          <param name="display_overlay" value="yes" />
-          <param name="display_count" value="yes" />
-          <param name="language" value="en-US" />
-        </object>
-      </div>
-    `;
+    const updateScale = () => {
+      const nextScale = Math.min(1, shell.clientWidth / TABLEAU_BASE_WIDTH);
+      setScale(Number(nextScale.toFixed(4)));
+    };
 
-    const script = document.createElement('script');
-    script.src = 'https://public.tableau.com/javascripts/api/viz_v1.js';
-    script.async = true;
-    container.appendChild(script);
+    updateScale();
+    const observer = new ResizeObserver(updateScale);
+    observer.observe(shell);
+    window.addEventListener('resize', updateScale);
 
     return () => {
-      container.innerHTML = '';
+      observer.disconnect();
+      window.removeEventListener('resize', updateScale);
     };
   }, []);
 
-  return <div ref={containerRef} className="tableau-shell" />;
+  return (
+    <div
+      ref={shellRef}
+      className="scaled-embed-shell"
+      style={{ height: Math.ceil(TABLEAU_BASE_HEIGHT * scale) }}
+    >
+      <iframe
+        title="New Zealand Relocation Affordability Tableau Dashboard"
+        src={links.tableauEmbed}
+        loading="lazy"
+        allowFullScreen
+        className="scaled-tableau-frame"
+        style={{
+          width: TABLEAU_BASE_WIDTH,
+          height: TABLEAU_BASE_HEIGHT,
+          transform: `scale(${scale})`
+        }}
+      />
+    </div>
+  );
+}
+
+function DetailCard({
+  section,
+  index,
+  variant = 'soft'
+}: {
+  section: DetailSection;
+  index: number;
+  variant?: 'soft' | 'white';
+}) {
+  return (
+    <article className={`legacy-card ${variant}`}>
+      <span className="legacy-card-index">
+        {index}. {section.label}
+      </span>
+      <h2>{section.label}</h2>
+      <p>{section.body}</p>
+    </article>
+  );
 }
 
 export function RelocationProject({ locale, path }: RelocationProjectProps) {
@@ -61,6 +90,8 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
   const p = projects[locale];
   const rr = rentRadar[locale];
   const base = localize(locale);
+  const [summary, businessProblem, targetUsers, dataSources, dashboardSections, metricNotes, keyInsights, limitations, tools, future, dataNotes] =
+    r.sections;
 
   useMeta({
     locale,
@@ -82,7 +113,7 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
         {
           '@type': 'CreativeWork',
           name: 'New Zealand Relocation Affordability Dashboard',
-          description: r.sections[0].body,
+          description: summary.body,
           url: `${siteUrl}${path}`,
           author: { '@type': 'Person', name: 'Sora Oya', url: siteUrl },
           dateCreated: '2026',
@@ -115,7 +146,10 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
         </section>
 
         <section className="content-section compact">
-          <div className="section-inner">
+          <div className="section-inner project-preview-inner">
+            <div className="section-heading">
+              <h2>{r.previewTitle}</h2>
+            </div>
             <div className="media-frame">
               <img src={assets.dashboard} alt="New Zealand Relocation Affordability Dashboard" />
             </div>
@@ -132,41 +166,61 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
           </div>
         </section>
 
-        <section className="content-section wide">
+        <section className="content-section wide dashboard-band">
           <div className="section-inner wide-inner">
             <div className="section-heading left">
-              <p className="eyebrow">Tableau</p>
               <h2>{r.interactiveTitle}</h2>
             </div>
-            <TableauEmbed />
+            <div className="embed-card">
+              <ResponsiveTableauEmbed />
+            </div>
+            <div className="button-row center">
+              <a className="button primary small" href={links.tableau} target="_blank" rel="noopener noreferrer">
+                <i className="ri-external-link-line" />
+                <span>{r.viewTableau}</span>
+              </a>
+            </div>
           </div>
         </section>
 
         <section className="content-section">
-          <div className="section-inner article-layout">
-            <section className="article-block">
-              <p className="eyebrow">{locale === 'ja' ? '構築したもの' : 'What I Built'}</p>
-              <h2>{locale === 'ja' ? '実装内容' : 'Build Scope'}</h2>
-              <ul className="check-list">
+          <div className="section-inner legacy-detail-layout">
+            <DetailCard section={summary} index={1} />
+
+            <div className="legacy-grid two">
+              <DetailCard section={businessProblem} index={2} />
+              <DetailCard section={targetUsers} index={3} />
+            </div>
+
+            <article className="legacy-card soft">
+              <span className="legacy-card-index">
+                4. {locale === 'ja' ? '構築したもの' : 'What I Built'}
+              </span>
+              <h2>{locale === 'ja' ? '構築したもの' : 'What I Built'}</h2>
+              <ol className="number-list">
                 {r.built.map((item) => (
-                  <li key={item}>
-                    <span><i className="ri-check-line" /></span>
-                    {item}
-                  </li>
+                  <li key={item}>{item}</li>
                 ))}
-              </ul>
-            </section>
+              </ol>
+            </article>
 
-            {r.sections.map((section, index) => (
-              <section className="article-block" key={section.label}>
-                <p className="eyebrow">{String(index + 1).padStart(2, '0')}</p>
-                <h2>{section.label}</h2>
-                <p>{section.body}</p>
-              </section>
-            ))}
+            <DetailCard section={dataSources} index={5} />
+            <DetailCard section={dashboardSections} index={6} />
+            <DetailCard section={metricNotes} index={7} />
+            <DetailCard section={keyInsights} index={8} />
 
-            <section className="article-block">
-              <p className="eyebrow">Sources</p>
+            <div className="legacy-grid two">
+              <DetailCard section={limitations} index={9} variant="white" />
+              <DetailCard section={dataNotes} index={10} variant="white" />
+            </div>
+
+            <div className="legacy-grid two">
+              <DetailCard section={tools} index={11} />
+              <DetailCard section={future} index={12} />
+            </div>
+
+            <article className="legacy-card soft">
+              <span className="legacy-card-index">13. {r.referencesTitle}</span>
               <h2>{r.referencesTitle}</h2>
               <div className="source-list">
                 {r.references.map((source) => (
@@ -176,7 +230,7 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
                   </a>
                 ))}
               </div>
-            </section>
+            </article>
           </div>
         </section>
 

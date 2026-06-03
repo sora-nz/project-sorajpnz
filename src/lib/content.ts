@@ -23,7 +23,13 @@ export const links = {
   youtube: 'https://www.youtube.com/@yurufuwa_life',
   relocationGithub: 'https://github.com/sora-nz/nz-relocation-affordability-dashboard',
   tableau:
-    'https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard'
+    'https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard',
+  tableauEmbed:
+    'https://public.tableau.com/views/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard?:embed=y&:showVizHome=no',
+  powerBi:
+    'https://app.powerbi.com/view?r=eyJrIjoiOTdlNmRhZWMtODY4Mi00NDllLTk1ZGMtNjg0N2VjM2Q3MjM4IiwidCI6IjliNzM4NTI2LTY3N2YtNDY2MS1hYTVlLTgyZjk1NDdiZDBhNCJ9',
+  powerBiEmbed:
+    'https://app.powerbi.com/view?r=eyJrIjoiOTdlNmRhZWMtODY4Mi00NDllLTk1ZGMtNjg0N2VjM2Q3MjM4IiwidCI6IjliNzM4NTI2LTY3N2YtNDY2MS1hYTVlLTgyZjk1NDdiZDBhNCJ9'
 };
 
 export const common = {
@@ -142,70 +148,83 @@ export const relocation = {
     title: 'New Zealand Relocation Affordability Dashboard',
     subtitle:
       'For Japanese-speaking movers: NZ rent, NZD/JPY exchange-rate impact, and Stats NZ Food Price Index context.',
-    meta: 'Current Tableau dashboard - public data analytics portfolio project',
-    viewTableau: 'Open Tableau Dashboard',
+    meta: 'Completed Tableau dashboard | 2026 | Tableau | Public Data',
+    previewTitle: 'Dashboard Preview',
+    viewTableau: 'View Tableau Dashboard',
     viewGithub: 'View GitHub Repository',
-    interactiveTitle: 'Interactive Tableau Dashboard',
+    interactiveTitle: 'Interactive Preview',
     sections: [
       {
-        label: 'Overview',
+        label: 'Project Summary',
         body:
-          'This project brings together New Zealand rent, exchange-rate, and selected food-price context into one dashboard for Japanese-speaking movers comparing potential relocation areas.'
+          'This project is an end-to-end data workflow and Tableau dashboard designed to support early relocation and budgeting decisions for Japanese-speaking people considering life in New Zealand. The dashboard brings together three real public data sources: New Zealand rental bond data, NZD/JPY exchange rates, and the Stats NZ Food Price Index. The goal is to help users compare rent pressure by location, understand estimated rent in both NZD and JPY, and review selected cost-context trends over time. This is not a direct comparison of New Zealand and Japanese markets. The Japan connection is the decision context: Japanese-speaking users may need to understand New Zealand rent in both NZD and JPY.'
       },
       {
         label: 'Business Problem',
         body:
-          'Rent, currency, and price-index data are available from separate public sources, but they are difficult to compare directly. This project structures those sources into a clearer view for early relocation and budgeting decisions.'
+          'Japanese newcomers to New Zealand and Japanese-speaking residents often need to understand where they can realistically live and how much money they should prepare before making relocation or budgeting decisions. Public data exists, but it is scattered across different organisations and file formats. Rent data, exchange-rate data, and price-index data are usually published separately, so users still need cleaning, alignment, transformation, and interpretation before the data becomes useful for practical decision-making. This project turns scattered public data into a single decision-support view for comparing location-level rent pressure and broader cost context.'
       },
       {
         label: 'Target Users',
         body:
-          'The primary users are Japanese-speaking people considering a move to New Zealand, residents comparing rent between areas, and people using Japanese-yen savings who need to understand NZD/JPY pressure.'
+          'Japanese people planning to move to New Zealand. Japanese speakers already living in New Zealand who want to compare locations. People with Japanese-yen savings who want to understand the NZD/JPY impact on rent affordability. Community advisers, analysts, or hiring managers who want to see a clear public-data workflow from source files to dashboard output.'
       },
       {
         label: 'Data Sources',
         body:
-          'The dashboard uses Tenancy Services / MBIE monthly territorial authority rental bond data, RBNZ B1 monthly NZD/JPY exchange rates, and Stats NZ Selected Price Indexes Food Price Index data. The Food Price Index is context only, not a full household living-cost model.'
+          'This dashboard uses real public data from: Tenancy Services / MBIE monthly territorial authority rental bond data for rent. Reserve Bank of New Zealand B1 monthly exchange-rate data for NZD/JPY. Stats NZ Selected Price Indexes, using the Food Price Index as selected-price context. The Food Price Index is used as a monthly selected-price context for everyday cost pressure. It is not presented as a full household living-cost model. The recommended analysis period is 1999 onward because this is the common period where rent, FX, and selected-price context can be compared together.'
       },
       {
         label: 'Dashboard Sections',
         body:
-          'The completed dashboard includes KPI cards for latest average rent in NZD and JPY, latest NZD/JPY rate, latest Food Price Index level, latest rent pressure score, top 15 locations by rent, location count by pressure level, average rent trends in NZD and JPY, NZD/JPY exchange-rate trend, and Food Price Index trend.'
+          'The completed Tableau dashboard includes: KPI cards for latest average rent in NZD and JPY. Latest NZD/JPY rate. Latest Food Price Index level. Latest rent pressure score. Top 15 locations by rent in the latest month. Location count by rent pressure level. Average rent trend in NZD. Average rent trend in JPY. NZD/JPY exchange-rate trend. Food Price Index trend.'
       },
       {
         label: 'Metric Notes',
         body:
-          'Latest average rent shows the average estimated monthly rent across included New Zealand city/district areas in the latest available dashboard month. NZD/JPY shows Japanese yen per 1 New Zealand dollar. Food Price Index is an index, not a dollar amount; in the selected Stats NZ series, June 2017 equals 1000. Rent Pressure Score is a simple directional 0-100 comparison indicator based on rent level, rent trend, Food Price Index movement, and NZD/JPY movement. It is not a complete affordability model or financial advice. Pressure bands: Lower below 55, Medium from 55 to below 70, High 70 or above.'
+          'Latest average rent shows the average estimated monthly rent across included New Zealand city/district areas in the latest available dashboard month. NZD/JPY shows Japanese yen per 1 New Zealand dollar. A higher rate can increase pressure for people using Japanese-yen savings. Food Price Index is an index, not a dollar amount. In the selected Stats NZ series, June 2017 month equals 1000. It is used as selected food-price context only, not as a full household living-cost model. Rent Pressure Score is a simple directional 0-100 comparison indicator based on rent level, rent trend, Food Price Index movement, and NZD/JPY movement. It is not a complete affordability model or financial advice. Pressure bands: Lower: score below 55. Medium: score from 55 to below 70. High: score 70 or above.'
+      },
+      {
+        label: 'Key Insights',
+        body:
+          'The dashboard helps users quickly see: which territorial authority areas have the highest estimated monthly rents. How New Zealand rent levels translate into Japanese yen. Whether NZD/JPY movement increases or reduces pressure for people using Japanese-yen savings. How selected food-price context has changed over time. How locations are distributed across simple affordability pressure bands. The affordability pressure score is directional only. It is designed to support comparison and discussion, not to replace personal financial planning or detailed economic modelling.'
       },
       {
         label: 'Limitations',
         body:
-          'Rent data is aggregated at territorial authority level, using all tenancy types and all bedroom counts. The Food Price Index is not a complete living-cost model. A map view is excluded until reliable TLA latitude and longitude data is added. The dashboard supports comparison and early budgeting; it is not financial advice.'
+          'Rent data is aggregated at territorial authority level. Property type is aggregated as All tenancy types. Bedrooms are aggregated as All. The Food Price Index is selected-price context, not a full household living-cost model. The affordability pressure score is a simple indicator, not a complete economic model. Map view is excluded because reliable territorial authority latitude/longitude values were not yet added. The dashboard supports early comparison and budgeting context only. It is not financial advice.'
       },
       {
-        label: 'Tools',
+        label: 'Tools Used',
         body:
-          'Python, SQL, CSV, Tableau Public, Markdown documentation, and AI-assisted workflow review were used to create and document the project.'
+          'Python for data preparation, cleaning, validation, and output generation. SQL for transparent transformation logic. CSV files as simple local inputs and outputs. Tableau Public for dashboard design and publishing. Markdown documentation for requirements, data-source notes, metric logic, and project explanation. Codex as an AI-assisted development tool for scaffolding, documentation, code review, and workflow iteration.'
       },
       {
         label: 'Potential Improvements',
         body:
-          'Potential improvements include adding a reliable map view, improving location selection in Tableau, adding more granular rent cuts if dependable public sources are available, and semi-automating monthly updates.'
+          'Add reliable latitude/longitude values for a New Zealand territorial authority bubble map. Improve Tableau location selector behaviour. Add more granular rent breakdowns if a reliable official public source is available. Consider a fuller Household Living-costs Price Index in a future version. Automate monthly refresh later, after the manual workflow remains stable.'
+      },
+      {
+        label: 'Data Notes',
+        body:
+          'Rent figures are based on Tenancy Services / MBIE rental bond data. The dashboard uses median weekly rent, converted into estimated monthly rent. Property type and bedrooms are aggregated as All tenancy types / All. Exchange rates use monthly averages. Food prices use the Stats NZ Food Price Index rather than real-time supermarket data. Treat all numbers as directional indicators, not fixed quotes.'
       }
     ],
     built: [
-      'Reusable local data-processing flow for manually sourced public data.',
-      'Python preparation, cleaning, validation, and output generation.',
-      'SQL checks for transformation logic.',
-      'CSV outputs, completed Tableau dashboard, and monthly insight notes.',
-      'Documentation covering business problem, requirements, data sources, metric logic, acceptance criteria, and limitations.'
+      'A local, repeatable data workflow using manually downloaded public data files.',
+      'Python scripts to prepare, clean, validate, and transform rent, FX, and selected-price data.',
+      'SQL transformation files to make the metric logic transparent and easy to inspect.',
+      'Tableau-ready CSV outputs, including a common-period dashboard file where rent, FX, and selected-price context are all available.',
+      'A completed Tableau dashboard.',
+      'A rules-based monthly insight note for human review.',
+      'Documentation covering the business problem, requirements, data sources, metric logic, acceptance criteria, and limitations.'
     ],
     referencesTitle: 'References / Data Sources',
     references: [
       {
         label: 'Tenancy Services / MBIE rental bond data',
         url: 'https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/',
-        desc: 'Monthly territorial authority rental bond data for rent comparison.'
+        desc: 'MBIE / Tenancy Services: monthly territorial authority rental bond data for rent comparison.'
       },
       {
         label: 'Reserve Bank of New Zealand B1 monthly exchange rates',
@@ -220,7 +239,7 @@ export const relocation = {
       {
         label: 'Tableau Public dashboard',
         url: links.tableau,
-        desc: 'Published interactive dashboard.'
+        desc: 'Tableau Public: published interactive dashboard.'
       }
     ],
     nextLabel: 'Next Project'
@@ -229,85 +248,98 @@ export const relocation = {
     title: 'ニュージーランド移住向け 家賃負担ダッシュボード',
     subtitle:
       '日本語話者向けに、NZの家賃、NZD/JPY為替レート、Stats NZ食品価格指数をまとめて比較します。',
-    meta: '完成済み Tableau ダッシュボード - 公的データ分析ポートフォリオ',
-    viewTableau: 'Tableau ダッシュボードを開く',
-    viewGithub: 'GitHub リポジトリを見る',
-    interactiveTitle: 'インタラクティブ Tableau ダッシュボード',
+    meta: '完了済みダッシュボード | 2026 | Tableau | 公的データ',
+    previewTitle: 'ダッシュボードプレビュー',
+    viewTableau: 'Tableauダッシュボードを見る',
+    viewGithub: 'GitHubリポジトリを見る',
+    interactiveTitle: 'インタラクティブプレビュー',
     sections: [
       {
-        label: '概要',
+        label: 'プロジェクト概要',
         body:
-          'ニュージーランド移住を検討する日本語話者向けに、家賃、NZD/JPY為替レート、食品価格指数の文脈をひとつのダッシュボードにまとめたプロジェクトです。'
+          'このプロジェクトは、ニュージーランドへの移住や生活費の見積もりを考える日本語話者向けに作成した、データワークフローとTableauダッシュボードです。Tenancy Services / MBIEの家賃データ、RBNZのNZD/JPY為替レート、Stats NZ Food Price Indexを組み合わせ、地域ごとの家賃負担、円換算した家賃、物価の参考指標を一つの画面で確認できるようにしました。このダッシュボードは、ニュージーランドと日本の市場を直接比較するものではありません。日本語話者がNZでの家賃をNZDとJPYの両方で把握し、移住や予算検討に使いやすくすることを目的としています。'
       },
       {
         label: 'ビジネス課題',
         body:
-          '家賃、為替、物価に関する公的データはそれぞれ別の機関・形式で公開されており、そのままでは比較しにくい状態です。このプロジェクトでは、移住や予算検討の初期判断に使いやすい形へ整理しました。'
+          '家賃、為替、物価に関する公的データは存在しますが、別々の機関・形式で公開されているため、そのままでは移住や予算検討に使いにくい状態です。このプロジェクトでは、散らばった公的データを整理・突合・変換し、場所選びや生活費の初期判断に使いやすい形へまとめました。'
       },
       {
         label: '対象ユーザー',
         body:
-          '主な対象は、ニュージーランドへの移住を検討している日本語話者、地域別の家賃を比較したい人、日本円の貯蓄を持ちNZD/JPYの影響を把握したい人です。'
+          '主な対象は、ニュージーランドへの移住を検討している日本人、すでにニュージーランドに住んでいて地域ごとの家賃を比較したい日本語話者、日本円の貯蓄を持ちNZD/JPYの影響を把握したい人です。また、採用担当者に向けて、公的データを使った分析ワークフローを示すポートフォリオとしても作成しています。'
       },
       {
         label: 'データソース',
         body:
-          'Tenancy Services / MBIEの月次TLA賃貸ボンドデータ、RBNZ B1の月次NZD/JPY為替データ、Stats NZ Selected Price IndexesのFood Price Indexを使用しています。Food Price Indexは生活費全体を表すものではなく、食品価格の文脈として扱っています。'
+          'このダッシュボードでは、Tenancy Services / MBIEの月次TLA賃貸ボンドデータ、RBNZ B1の月次NZD/JPY為替データ、Stats NZ Selected Price IndexesのFood Price Indexを使用しています。Food Price Indexは生活費全体を表すものではなく、日常的な物価変化を捉えるための参考指標として扱っています。推奨分析期間は、家賃・為替・物価指標を共通して比較できる1999年以降です。'
       },
       {
         label: 'ダッシュボード構成',
         body:
-          '最新平均家賃（NZD/JPY）のKPIカード、最新NZD/JPYレート、最新Food Price Indexレベル、最新家賃プレッシャースコア、最新月の家賃Top 15地域、プレッシャーレベル別の地域数、NZD平均家賃トレンド、JPY平均家賃トレンド、NZD/JPY為替レートトレンド、Food Price Indexトレンドを含みます。'
+          '完成したTableauダッシュボードには以下が含まれます：最新平均家賃（NZD）と（JPY）のKPIカード。最新NZD/JPYレート。最新Food Price Indexレベル。最新家賃プレッシャースコア。最新月の家賃Top 15地域。プレッシャーレベル別の地域数。NZD平均家賃トレンド。JPY平均家賃トレンド。NZD/JPY為替レートトレンド。Food Price Indexトレンド。'
       },
       {
         label: '指標の読み方',
         body:
-          '最新平均家賃は、ダッシュボード最新月における対象ニュージーランド市・地区の平均推定月額家賃です。NZD/JPYは1ニュージーランドドルあたりの日本円を示します。Food Price Indexはドル金額ではなく指数で、Stats NZの選択シリーズでは2017年6月を1000としています。Rent Pressure Scoreは、家賃水準、家賃トレンド、Food Price Indexの動き、NZD/JPYの動きに基づく0-100の方向性比較指標です。完全な負担能力モデルや金融アドバイスではありません。プレッシャーバンドは、低：55未満、中：55以上70未満、高：70以上です。'
+          '最新平均家賃は、ダッシュボードの最新月における対象ニュージーランド市・地区の平均推定月額家賃を示します。NZD/JPYは1ニュージーランドドルあたりの日本円を示します。レートが高いと、日本円の貯蓄を使う人にとってプレッシャーが増える可能性があります。Food Price Indexは指数であり、ドル金額ではありません。Stats NZの選択シリーズでは2017年6月を1000としています。これは選択された食品価格の文脈としてのみ使用され、完全な家計生活費モデルではありません。Rent Pressure Scoreは、家賃水準、家賃トレンド、Food Price Indexの動き、NZD/JPYの動きに基づく単純な方向性の0-100比較指標です。完全な負担能力モデルや金融アドバイスではありません。プレッシャーバンド：低：55未満。中：55以上70未満。高：70以上。'
+      },
+      {
+        label: '主要インサイト',
+        body:
+          'このダッシュボードでは、どの地域の家賃が高いか、家賃を日本円で見るとどの程度の負担になるか、為替の変動が日本円ベースの準備資金にどう影響するかを確認できます。プレッシャースコアは比較のための方向性を示す簡易指標であり、完全な経済モデルではありません。'
       },
       {
         label: '制約',
         body:
-          '家賃データはTLA単位で集計され、物件タイプはAll tenancy types、寝室数はAllとして扱っています。Food Price Indexは生活費全体のモデルではありません。信頼できるTLA緯度経度データをまだ追加していないため、マップビューは除外しています。このダッシュボードは比較と初期予算検討を支援するもので、金融アドバイスではありません。'
+          '家賃データはTLA単位で集計されており、物件タイプはAll tenancy types、寝室数はAllとして扱っています。Food Price Indexは生活費全体を表すモデルではありません。マップビューは、信頼できるTLA緯度経度データをまだ追加していないため除外しています。このダッシュボードは初期比較と予算検討を支援するものであり、金融アドバイスではありません。'
       },
       {
         label: '使用ツール',
         body:
-          'Python、SQL、CSV、Tableau Public、Markdown documentation、AI支援によるワークフロー整理を使用しました。'
+          'Python、SQL、CSV、Tableau Public、Markdown documentation、Codexを使用しました。Codexは、プロジェクト構造の作成、ドキュメント整理、コードレビュー、分析ワークフローの改善にAI支援ツールとして活用しました。'
       },
       {
         label: '今後の改善',
         body:
-          '信頼できるマップ表示の追加、Tableauの地域選択改善、信頼できる公的ソースがある場合の細かい家賃区分追加、月次更新の半自動化を検討しています。'
+          '今後は、信頼できるTLA緯度経度データを追加してマップ表示を作成すること、Tableauの地域選択を改善すること、信頼できる公的ソースがあればより細かい家賃区分を追加すること、将来的に月次更新を半自動化することを検討します。'
+      },
+      {
+        label: 'データの注意点',
+        body:
+          '家賃はTenancy Services / MBIEの賃貸ボンドデータに基づき、中央値の週額家賃を推定月額家賃に変換しています。為替はRBNZの月次NZD/JPYデータを使用しています。Food Price IndexはStats NZの公的統計であり、リアルタイムのスーパー価格ではありません。数値は固定見積もりではなく、比較と傾向把握のための参考値として扱ってください。'
       }
     ],
     built: [
-      '手動取得した公的データをローカルで再実行できる処理フローを作成。',
-      'Pythonでデータ準備、クリーニング、検証、出力生成を実施。',
-      'SQLで変換ロジックを確認。',
-      'Tableau向けCSV、完成済みダッシュボード、月次インサイトノートを作成。',
-      'ビジネス課題、要件、データソース、指標ロジック、受け入れ基準、制約を文書化。'
+      '手動で取得した公的データを使い、ローカルで再実行できるデータ処理フローを作成しました。',
+      'Pythonでデータ準備、クリーニング、検証、出力生成を行いました。',
+      'SQLで変換ロジックを確認できるようにしました。',
+      'Tableauで読み込めるCSV出力、ダッシュボード、月次インサイトノートを作成しました。',
+      'Tableauダッシュボードを完成させました。',
+      'ルールベースの月次インサイトノート（人間によるレビュー用）を作成しました。',
+      'ビジネス課題、要件、データソース、指標ロジック、受け入れ基準、制約を網羅したドキュメントを整備しました。'
     ],
     referencesTitle: '参考文献・データソース',
     references: [
       {
         label: 'Tenancy Services / MBIE 賃貸ボンドデータ',
         url: 'https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/',
-        desc: '月次TLA賃貸ボンドデータを家賃比較に使用。'
+        desc: 'MBIE / Tenancy Services：月次TLA賃貸ボンドデータ（家賃比較用）。'
       },
       {
         label: 'RBNZ B1 月次為替レート',
         url: 'https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates/new-zealand-dollar-exchange-rates',
-        desc: '月次NZD/JPY為替レートを、1NZドルあたりの日本円として使用。'
+        desc: 'RBNZ：月次NZD/JPY為替レート（1NZドルあたりの日本円として扱う）。'
       },
       {
         label: 'Stats NZ Selected Price Indexes メタデータ',
         url: 'https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/9e9f65b8-533f-4e96-8d6e-030d37de1a65',
-        desc: 'Food Price Indexを食品価格の文脈として使用。'
+        desc: 'Stats NZ：Food Price Index（食品価格コンテキストとして使用）。'
       },
       {
         label: 'Tableau Public ダッシュボード',
         url: links.tableau,
-        desc: '公開済みインタラクティブダッシュボード。'
+        desc: 'Tableau Public：公開インタラクティブダッシュボード。'
       }
     ],
     nextLabel: '次のプロジェクト'
@@ -317,19 +349,43 @@ export const relocation = {
 export const rentRadar = {
   en: {
     title: 'Rent Radar (Power BI)',
-    subtitle: 'An earlier BI prototype for rental dashboard design using mock data.',
-    body:
-      'Rent Radar is a compact Power BI prototype created to explore rental dashboard layout, KPI hierarchy, and visual comparison patterns before moving into a larger public-data Tableau project.',
-    note:
-      'This project uses mock data and is presented as a dashboard design exercise, not as a source-backed affordability model.'
+    meta: 'Built in August 2025 | Early BI Prototype | Mock Data',
+    subtitle: 'An early BI prototype for rental dashboard design using mock data',
+    overviewTitle: 'Project Summary',
+    overviewContent:
+      'Rent Radar is an early BI prototype built in August 2025 using mock data. It was created to test how rental information could be structured into a simple dashboard format with filters, summary metrics, and comparison views. Rather than a real-world market analysis tool, this project should be viewed as an exploratory portfolio piece focused on dashboard structure and BI thinking.',
+    whatIDidTitle: 'Prototype Scope',
+    whatIDidContent:
+      'Defined the dashboard structure and key metrics, generated mock rental data for prototyping purposes, modeled area-level indicators, and built an interactive Power BI report with filters and comparison views.',
+    keyResultsTitle: 'Design Value & Limitations',
+    keyResultsContent:
+      'This project shows my approach to structuring a BI dashboard problem: deciding what should be compared, what users should see first, and how key indicators can be presented clearly. Its main limitation is that it uses a small mock dataset with limited coverage, so it should be read as an early prototype rather than a real-world housing analysis product.',
+    dataNotesTitle: 'Data Notes',
+    dataNotesContent:
+      'All figures used in this dashboard are mock/sample data generated for prototyping purposes. They do not represent real rental market statistics or actual suburb-level data.',
+    dashboardTitle: 'Interactive Dashboard',
+    dashboardFallback: 'Open dashboard in a new tab',
+    viewAllProjects: 'View All Projects'
   },
   ja: {
     title: 'Rent Radar (Power BI)',
-    subtitle: '架空サンプルデータを使用した、家賃ダッシュボード設計の初期BIプロトタイプです。',
-    body:
-      'Rent Radarは、より大きな公的データTableauプロジェクトへ進む前に、家賃ダッシュボードのレイアウト、KPI構成、比較表現を検討するために作成したPower BIプロトタイプです。',
-    note:
-      'このプロジェクトは架空データを使用しており、根拠データに基づく負担能力モデルではなく、ダッシュボード設計の練習として掲載しています。'
+    meta: '2025年8月作成 | 初期BIプロトタイプ | 架空データ使用',
+    subtitle: '架空データで家賃ダッシュボード設計を試した初期BIプロトタイプ',
+    overviewTitle: 'プロジェクト概要',
+    overviewContent:
+      'Rent Radar は、2025年8月に架空データを使って作成した初期BIプロトタイプです。家賃に関する情報を、フィルタ、要約指標、比較ビューを用いたシンプルなダッシュボードとしてどう整理できるかを試す目的で作成しました。実務で使う市場分析ツールというより、ダッシュボード構成とBI的な情報設計の考え方を示す探索的なポートフォリオ案件として位置づけています。',
+    whatIDidTitle: 'プロトタイプで設計したこと',
+    whatIDidContent:
+      'ダッシュボードの構成と主要指標を設計し、プロトタイプ用の架空データを作成。エリア別の比較指標を整理し、フィルタや比較ビューを備えたPower BIレポートを構築しました。',
+    keyResultsTitle: 'このプロトタイプで示したことと制約',
+    keyResultsContent:
+      'このプロジェクトでは、何を比較対象にするか、何を先に見せるべきか、主要指標をどう分かりやすく見せるかという、BIダッシュボード設計の考え方を形にしています。一方で、小規模な架空データを使った限定的な内容であるため、実際の住宅市場分析ではなく、初期プロトタイプとして見るべき案件です。',
+    dataNotesTitle: 'データの注意点',
+    dataNotesContent:
+      'このダッシュボードで使用しているデータはすべてプロトタイプ用の架空サンプルデータです。実際の家賃市場の統計や地域別データを反映するものではありません。',
+    dashboardTitle: 'インタラクティブダッシュボード',
+    dashboardFallback: '新しいタブでダッシュボードを開く',
+    viewAllProjects: 'すべてのプロジェクトを見る'
   }
 } as const;
 

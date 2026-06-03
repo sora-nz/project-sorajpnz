@@ -603,6 +603,154 @@ img {
   box-shadow: var(--shadow-soft);
 }
 
+.project-preview-inner {
+  width: min(1040px, calc(100% - 32px));
+}
+
+.dashboard-band {
+  background: #f7faff;
+}
+
+.dashboard-inner {
+  width: min(1160px, calc(100% - 32px));
+}
+
+.embed-card {
+  overflow: hidden;
+  border: 1px solid rgba(15, 23, 42, 0.1);
+  border-radius: 8px;
+  background: var(--white);
+  box-shadow: var(--shadow-soft);
+}
+
+.embed-frame {
+  width: 100%;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.embed-frame iframe {
+  display: block;
+  width: 100%;
+  height: 100%;
+  border: 0;
+  background: var(--white);
+}
+
+.embed-frame.powerbi {
+  aspect-ratio: 16 / 9;
+  min-height: 420px;
+}
+
+.embed-frame.tableau {
+  aspect-ratio: 14 / 9;
+  min-height: 760px;
+}
+
+.scaled-embed-shell {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  background: var(--white);
+}
+
+.scaled-tableau-frame {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  border: 0;
+  transform-origin: top left;
+  background: var(--white);
+}
+
+.embed-fallback {
+  margin: 14px 0 0;
+  padding: 0 0 20px;
+  text-align: center;
+}
+
+.embed-fallback a {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--blue-strong);
+  font-weight: 650;
+}
+
+.legacy-text-stack,
+.legacy-detail-layout {
+  display: grid;
+  gap: 42px;
+}
+
+.legacy-copy-block h2,
+.legacy-card h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.22;
+  font-weight: 740;
+  letter-spacing: 0;
+}
+
+.legacy-copy-block p,
+.legacy-card p {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: 18px;
+  line-height: 1.75;
+}
+
+.legacy-grid {
+  display: grid;
+  gap: 24px;
+}
+
+.legacy-grid.two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.legacy-card {
+  padding: 30px;
+  border-radius: 8px;
+  box-shadow: none;
+}
+
+.legacy-card.soft {
+  background: #f7faff;
+}
+
+.legacy-card.white {
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  background: var(--white);
+}
+
+.legacy-card-index {
+  display: block;
+  margin-bottom: 10px;
+  color: var(--blue-strong);
+  font-size: 12px;
+  font-weight: 750;
+  letter-spacing: 0;
+  text-transform: uppercase;
+}
+
+.number-list {
+  display: grid;
+  gap: 12px;
+  margin: 18px 0 0;
+  padding-left: 28px;
+  color: var(--muted);
+  font-size: 17px;
+  line-height: 1.65;
+}
+
+.number-list li::marker {
+  color: var(--blue-strong);
+  font-weight: 750;
+}
+
 .article-layout {
   display: grid;
   gap: 18px;
@@ -923,6 +1071,7 @@ img {
 
   .project-grid,
   .split-grid,
+  .legacy-grid.two,
   .footer-grid {
     grid-template-columns: 1fr;
   }
@@ -987,6 +1136,30 @@ img {
 
   .tableau-shell {
     min-height: 420px;
+  }
+
+  .embed-card {
+    margin-left: -4px;
+    margin-right: -4px;
+  }
+
+  .embed-frame.powerbi {
+    min-height: 320px;
+  }
+
+  .embed-frame.tableau {
+    aspect-ratio: 1 / 1;
+    min-height: 480px;
+  }
+
+  .legacy-copy-block h2,
+  .legacy-card h2 {
+    font-size: 24px;
+  }
+
+  .legacy-copy-block p,
+  .legacy-card p {
+    font-size: 16px;
   }
 
   .footer-grid {
