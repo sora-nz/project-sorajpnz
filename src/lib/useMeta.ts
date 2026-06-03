@@ -1,0 +1,112 @@
+import { useEffect } from 'react';
+import { Locale, siteUrl } from './content';
+
+type MetaConfig = {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  image?: string;
+  jsonLd?: unknown;
+};
+
+function setMeta(name: string, content: string, property = false) {
+  const attr = property ? 'property' : 'name';
+  let node = document.querySelector<HTMLMetaElement>(`meta[${attr}="${name}"]`);
+  if (!node) {
+    node = document.createElement('meta');
+    node.setAttribute(attr, name);
+    document.head.appendChild(node);
+  }
+  node.setAttribute('content', content);
+}
+
+function setLink(rel: string, href: string, extra?: Record<string, string>) {
+  const selector = extra?.hreflang
+    ? `link[rel="${rel}"][hreflang="${extra.hreflang}"]`
+    : `link[rel="${rel}"]`;
+  let node = document.querySelector<HTMLLinkElement>(selector);
+  if (!node) {
+    node = document.createElement('link');
+    node.setAttribute('rel', rel);
+    document.head.appendChild(node);
+  }
+  node.setAttribute('href', href);
+  Object.entries(extra ?? {}).forEach(([key, value]) => node?.setAttribute(key, value));
+}
+
+export function useMeta({ locale, path, title, description, image, jsonLd }: MetaConfig) {
+  useEffect(() => {
+    const canonicalPath = path === '/' ? '/en' : path;
+    const canonicalUrl = `${siteUrl}${canonicalPath}`;
+    const alternatePath = canonicalPath.replace(/^\/(en|ja)/, '');
+    const imageUrl = image ? `${siteUrl}${image}` : `${siteUrl}/assets/sora-jpnz-logo-full.png`;
+
+    document.documentElement.lang = locale;
+    document.title = title;
+    setMeta('description', description);
+    setMeta('og:title', title, true);
+    setMeta('og:description', description, true);
+    setMeta('og:url', canonicalUrl, true);
+    setMeta('og:locale', locale === 'ja' ? 'ja_JP' : 'en_NZ', true);
+    setMeta('og:image', imageUrl, true);
+    setMeta('twitter:title', title);
+    setMeta('twitter:description', description);
+    setMeta('twitter:image', imageUrl);
+    setLink('canonical', canonicalUrl);
+    setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'en' });
+    setLink('alternate', `${siteUrl}/ja${alternatePath}`, { hreflang: 'ja' });
+    setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'x-default' });
+
+    document.querySelectorAll('script[data-managed-jsonld="true"]').forEach((node) => node.remove());
+    if (jsonLd) {
+      const script = document.createElement('script');
+      script.type = 'application/ld+json';
+      script.dataset.managedJsonld = 'true';
+      script.textContent = JSON.stringify(jsonLd);
+      document.head.appendChild(script);
+    }
+  }, [description, image, jsonLd, locale, path, title]);
+}
+
+export function pageJsonLd(locale: Locale, path: string, title: string, description: string) {
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'WebSite',
+        name: 'Sora Oya',
+        url: siteUrl,
+        description,
+        inLanguage: locale,
+        author: { '@type': 'Person', name: 'Sora Oya' }
+      },
+      {
+        '@type': 'Person',
+        name: 'Sora Oya',
+        jobTitle: 'Data & Business Analyst',
+        description,
+        url: siteUrl,
+        email: 'contact@sorajpnz.com',
+        address: {
+          '@type': 'PostalAddress',
+          addressLocality: 'Auckland',
+          addressCountry: 'NZ'
+        },
+        sameAs: [
+          'https://www.linkedin.com/in/soraoya/',
+          'https://github.com/sora-nz',
+          'https://www.youtube.com/@yurufuwa_life'
+        ]
+      },
+      {
+        '@type': 'WebPage',
+        name: title,
+        url: `${siteUrl}${path}`,
+        description,
+        inLanguage: locale,
+        isPartOf: { '@type': 'WebSite', name: 'Sora Oya', url: siteUrl }
+      }
+    ]
+  };
+}

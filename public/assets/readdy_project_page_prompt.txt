@@ -1,0 +1,170 @@
+Please make one focused portfolio website update.
+
+Do not publish automatically.
+Do not change the main navigation, footer links, social links, contact email, Tableau link, or GitHub link unless explicitly listed below.
+Keep the current clean portfolio style, but make the homepage motion more visible and make the NZ relocation project page clearer and more transparent.
+
+## 1. Homepage background motion
+
+The homepage background images are correct, but the motion is too subtle and looks almost static.
+
+Please increase the visible movement while keeping it professional and not distracting.
+
+Recommended behaviour:
+
+- Hero section background:
+  - Use a clearer slow pan and zoom.
+  - Around 10-14 seconds per loop.
+  - Scale roughly from 1.04 to 1.12.
+  - Translate up to about 2-3%.
+  - Keep the text readable and centered.
+
+- Projects section background:
+  - Add a different gentle movement direction from the hero.
+  - Around 16-20 seconds per loop.
+  - Use subtle horizontal drift and slight zoom.
+
+- Profile / Contact section background:
+  - Add a softer movement than the hero.
+  - Around 18-22 seconds per loop.
+  - Use gentle diagonal drift and slight zoom.
+
+- Keep foreground cards slightly lifted with subtle reveal/fade motion as they enter the viewport.
+- Keep the design professional for Business Analyst / Data Analyst hiring managers.
+- Respect reduced-motion accessibility if possible.
+- Do not make the site look flashy, game-like, or distracting.
+
+## 2. Project page title and version wording
+
+Please update the project page so it no longer feels like an unfinished "Version 1" project.
+
+Use this English title:
+
+New Zealand Relocation Affordability Dashboard
+
+Use this English subtitle:
+
+For Japanese-speaking movers: NZ rent, NZD/JPY exchange-rate impact, and Stats NZ Food Price Index context.
+
+Use this Japanese title:
+
+ニュージーランド移住向け 家賃負担ダッシュボード
+
+Use this Japanese subtitle:
+
+日本語話者向けに、NZの家賃、NZD/JPY為替レート、Stats NZ食品価格指数をまとめて比較します。
+
+Replace public-facing "Version 1" wording with more natural wording such as:
+
+- Current dashboard
+- Completed Tableau dashboard
+- Current project scope
+- Potential improvements
+
+Do not remove honest limitations.
+Do not claim that a map view is completed.
+Do not claim the project is financial advice.
+
+## 3. Use updated dashboard screenshot
+
+Where the project page shows the dashboard screenshot, use the latest uploaded image if available:
+
+NZ Relocation Affordability Dashboard.png
+
+If the previous screenshot still says "NZ-Japan Relocation Affordability Dashboard", replace it with the latest image that says:
+
+New Zealand Relocation Affordability Dashboard
+
+## 4. Clarify dashboard metrics in plain language
+
+Add a short "How to read the dashboard" or "Metric notes" section.
+
+Use wording like this:
+
+Latest average rent shows the average estimated monthly rent across included New Zealand city/district areas in the latest available dashboard month.
+
+NZD/JPY shows Japanese yen per 1 New Zealand dollar. A higher rate can increase pressure for people using Japanese-yen savings.
+
+Food Price Index is an index, not a dollar amount. In the selected Stats NZ series, June 2017 month equals 1000. It is used as selected food-price context only, not as a full household living-cost model.
+
+Rent Pressure Score is a simple directional 0-100 comparison indicator based on rent level, rent trend, Food Price Index movement, and NZD/JPY movement. It is not a complete affordability model or financial advice.
+
+Pressure bands:
+
+- Lower: score below 55
+- Medium: score from 55 to below 70
+- High: score 70 or above
+
+## 5. Add references / data sources section
+
+Please add a clear References or Data Sources section on the project page.
+
+Include these source links:
+
+- Tenancy Services / MBIE rental bond data:
+  https://www.tenancy.govt.nz/about-tenancy-services/data-and-statistics/rental-bond-data/
+
+- Reserve Bank of New Zealand B1 monthly exchange rates:
+  https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates/new-zealand-dollar-exchange-rates
+
+- Stats NZ Selected Price Indexes metadata:
+  https://datainfoplus.stats.govt.nz/Item/nz.govt.stats/9e9f65b8-533f-4e96-8d6e-030d37de1a65
+
+- Tableau Public dashboard:
+  https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard
+
+For each source, briefly explain how it is used:
+
+- MBIE / Tenancy Services: monthly territorial authority rental bond data for rent comparison.
+- RBNZ: monthly NZD/JPY exchange rate, treated as Japanese yen per 1 NZ dollar.
+- Stats NZ: Food Price Index used as selected food-price context.
+- Tableau Public: published interactive dashboard.
+
+## 6. Update project page sections
+
+Keep the existing page structure, but update the wording so it matches the completed dashboard.
+
+Dashboard sections should be described as:
+
+- KPI cards for latest average rent in NZD and JPY.
+- Latest NZD/JPY rate.
+- Latest Food Price Index level.
+- Latest rent pressure score.
+- Top 15 locations by rent in the latest month.
+- Location count by rent pressure level.
+- Average rent trend in NZD.
+- Average rent trend in JPY.
+- NZD/JPY exchange-rate trend.
+- Food Price Index trend.
+
+## 7. Update Japanese wording naturally
+
+On Japanese pages, avoid awkward direct translation.
+
+Use:
+
+移住に向けた家賃負担の比較
+
+Do not use:
+
+移住負担力比較
+
+For the Japanese project page, keep the wording natural and clear for Japanese readers, but do not add new claims.
+
+## 8. Keep links and scope stable
+
+Keep:
+
+- Tableau dashboard button.
+- Existing contact email.
+- Existing YouTube link.
+- Existing header/footer navigation.
+- Current project cards.
+
+Do not:
+
+- Add a map.
+- Add new data sources.
+- Add fake interactivity.
+- Add claims that the dashboard is a full affordability model.
+- Publish automatically.
