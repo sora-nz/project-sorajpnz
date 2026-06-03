@@ -100,7 +100,7 @@ export function Home({ locale, path }: HomeProps) {
               <p className="eyebrow">Profile</p>
               <h2>{h.aboutTitle}</h2>
               <p>{h.about}</p>
-              <div className="button-row left">
+              <div className="button-row left profile-social-row">
                 <a className="icon-button linkedin" href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
                   <i className="ri-linkedin-fill" />
                 </a>

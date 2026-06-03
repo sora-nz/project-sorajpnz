@@ -116,6 +116,45 @@ export const home = {
   }
 } as const;
 
+export const contactPage = {
+  en: {
+    title: 'Contact',
+    intro: "Feel free to reach out to me. I'll get back to you as soon as possible.",
+    emailLabel: 'Email',
+    privacyLabel: 'Privacy contact',
+    nameLabel: 'Name',
+    namePlaceholder: 'Enter your name',
+    emailFieldLabel: 'Email',
+    emailPlaceholder: 'Enter your email',
+    messageLabel: 'Message',
+    messagePlaceholder: 'Enter your message (max 500 characters)',
+    characters: 'characters',
+    send: 'Send Message',
+    sending: 'Sending...',
+    success: 'Thank you. Your message has been sent.',
+    error: 'Sorry, the form could not be sent. Please email me directly.',
+    subject: 'Contact form - Sora Oya'
+  },
+  ja: {
+    title: 'お問い合わせ',
+    intro: 'お気軽にお問い合わせください。できるだけ早くご返信いたします。',
+    emailLabel: 'メール',
+    privacyLabel: '個人情報問い合わせ',
+    nameLabel: '氏名',
+    namePlaceholder: 'お名前を入力してください',
+    emailFieldLabel: 'メールアドレス',
+    emailPlaceholder: 'メールアドレスを入力してください',
+    messageLabel: 'メッセージ',
+    messagePlaceholder: 'メッセージを入力してください（500文字以内）',
+    characters: '文字',
+    send: '送信',
+    sending: '送信中...',
+    success: 'お問い合わせを送信しました。',
+    error: '送信できませんでした。メールで直接ご連絡ください。',
+    subject: 'お問い合わせフォーム - Sora Oya'
+  }
+} as const;
+
 export const projects = {
   en: {
     title: 'Projects',

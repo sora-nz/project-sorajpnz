@@ -1,6 +1,7 @@
+import { FormEvent, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { common, home, links, Locale } from '../lib/content';
+import { contactPage, links, Locale } from '../lib/content';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 
 type ContactProps = {
@@ -9,41 +10,119 @@ type ContactProps = {
 };
 
 export function Contact({ locale, path }: ContactProps) {
-  const c = common[locale];
-  const h = home[locale];
-  const title = `${c.contact} - Sora Oya`;
+  const copy = contactPage[locale];
+  const [message, setMessage] = useState('');
+  const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
+  const title = `${copy.title} - Sora Oya`;
+
+  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const formData = new FormData(form);
+    const body = new URLSearchParams();
+
+    formData.forEach((value, key) => {
+      if (typeof value === 'string') body.append(key, value);
+    });
+
+    setStatus('sending');
+
+    try {
+      const response = await fetch('/__forms.html', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: body.toString()
+      });
+
+      if (!response.ok) throw new Error('Contact form submission failed');
+
+      form.reset();
+      setMessage('');
+      setStatus('success');
+    } catch {
+      setStatus('error');
+    }
+  };
 
   useMeta({
     locale,
     path,
     title,
-    description: h.contact,
-    jsonLd: pageJsonLd(locale, path, title, h.contact)
+    description: copy.intro,
+    jsonLd: pageJsonLd(locale, path, title, copy.intro)
   });
 
   return (
     <div className="page">
       <Header locale={locale} path={path} />
       <main>
-        <section className="subhero">
-          <div className="section-inner narrow">
-            <p className="eyebrow">Contact</p>
-            <h1>{c.contact}</h1>
-            <p>{h.contact}</p>
-          </div>
-        </section>
-        <section className="content-section">
-          <div className="section-inner narrow">
-            <div className="contact-panel">
-              <div>
-                <p className="eyebrow">Email</p>
-                <h2>{links.emailText}</h2>
+        <section className="contact-page-section">
+          <div className="section-inner contact-layout">
+            <div className="contact-copy">
+              <h1>{copy.title}</h1>
+              <p>{copy.intro}</p>
+
+              <div className="contact-methods" aria-label={copy.title}>
+                <a className="contact-method" href={links.email}>
+                  <span className="contact-method-icon">
+                    <i className="ri-mail-line" />
+                  </span>
+                  <span>{links.emailText}</span>
+                </a>
+                <a className="contact-method" href={links.privacyEmail}>
+                  <span className="contact-method-icon">
+                    <i className="ri-shield-user-line" />
+                  </span>
+                  <span>
+                    {copy.privacyLabel}: {links.privacyEmailText}
+                  </span>
+                </a>
               </div>
-              <a className="button primary" href={links.email}>
-                <span>{c.emailMe}</span>
-                <i className="ri-mail-line" />
-              </a>
             </div>
+
+            <form className="contact-form" name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" onSubmit={handleSubmit}>
+              <input type="hidden" name="form-name" value="contact" />
+              <input type="hidden" name="subject" value={copy.subject} />
+              <p className="hidden-field" aria-hidden="true">
+                <label>
+                  Do not fill this out
+                  <input name="bot-field" tabIndex={-1} autoComplete="off" />
+                </label>
+              </p>
+
+              <div className="contact-form-field">
+                <label htmlFor="contact-name">{copy.nameLabel} *</label>
+                <input id="contact-name" name="name" type="text" placeholder={copy.namePlaceholder} required />
+              </div>
+
+              <div className="contact-form-field">
+                <label htmlFor="contact-email">{copy.emailFieldLabel} *</label>
+                <input id="contact-email" name="email" type="email" placeholder={copy.emailPlaceholder} required />
+              </div>
+
+              <div className="contact-form-field">
+                <label htmlFor="contact-message">{copy.messageLabel} *</label>
+                <textarea
+                  id="contact-message"
+                  name="message"
+                  placeholder={copy.messagePlaceholder}
+                  maxLength={500}
+                  value={message}
+                  onChange={(event) => setMessage(event.target.value)}
+                  required
+                />
+                <span className="char-counter">
+                  {message.length}/500 {copy.characters}
+                </span>
+              </div>
+
+              <button className="button primary contact-submit" type="submit" disabled={status === 'sending'}>
+                {status === 'sending' ? copy.sending : copy.send}
+              </button>
+
+              {status === 'success' && <p className="form-status success">{copy.success}</p>}
+              {status === 'error' && <p className="form-status error">{copy.error}</p>}
+            </form>
           </div>
         </section>
       </main>
