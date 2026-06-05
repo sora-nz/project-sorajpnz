@@ -12,6 +12,7 @@
   from = "/"
   to = "/en"
   status = 301
+  force = true
 
 [[redirects]]
   from = "/project"
