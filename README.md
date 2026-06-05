@@ -11,6 +11,14 @@ npm run build
 
 Netlify publish directory: `out`
 
+## Analytics
+
+Google Analytics 4 is optional. Add this environment variable in Netlify to enable page-view and contact-form-success tracking:
+
+```text
+VITE_GA_MEASUREMENT_ID=G-XXXXXXXXXX
+```
+
 ## Notes
 
 - Existing Sora JPNZ icons and project images are stored in `public/assets`.

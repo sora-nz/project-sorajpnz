@@ -7,6 +7,7 @@ import { NotFound } from './pages/NotFound';
 import { Projects } from './pages/Projects';
 import { RelocationProject } from './pages/RelocationProject';
 import { RentRadarProject } from './pages/RentRadarProject';
+import { trackPageView } from './lib/analytics';
 import { getLocale, routeKey } from './lib/routes';
 
 function normalizePath(pathname: string) {
@@ -46,6 +47,11 @@ export function App() {
 
   const locale = getLocale(path);
   const key = useMemo(() => routeKey(path), [path]);
+
+  useEffect(() => {
+    const timer = window.setTimeout(() => trackPageView(path), 0);
+    return () => window.clearTimeout(timer);
+  }, [path]);
 
   if (key === '/') return <Home locale={locale} path={path} />;
   if (key === '/projects') return <Projects locale={locale} path={path} />;

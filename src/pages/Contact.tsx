@@ -2,6 +2,7 @@ import { FormEvent, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { contactPage, links, Locale, seo } from '../lib/content';
+import { trackEvent } from '../lib/analytics';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 
 type ContactProps = {
@@ -39,6 +40,10 @@ export function Contact({ locale, path }: ContactProps) {
       form.reset();
       setMessage('');
       setStatus('success');
+      trackEvent('generate_lead', {
+        form_name: 'contact',
+        method: 'netlify_form'
+      });
     } catch {
       setStatus('error');
     }
