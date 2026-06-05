@@ -34,7 +34,7 @@ export function Home({ locale, path }: HomeProps) {
       <main>
         <section className="hero-section">
           <div className="motion-layer">
-            <img className="motion-image animate-hero-pan" src={assets.hero} alt="" />
+            <img className="motion-image animate-hero-pan" src={assets.hero} alt="" fetchPriority="high" decoding="async" />
             <div className="image-wash" />
           </div>
           <div className="section-inner hero-inner">
@@ -60,7 +60,7 @@ export function Home({ locale, path }: HomeProps) {
 
         <section className="image-band">
           <div className="motion-layer">
-            <img className="motion-image animate-projects-drift" src={assets.projectsBg} alt="" />
+            <img className="motion-image animate-projects-drift" src={assets.projectsBg} alt="" loading="lazy" decoding="async" />
             <div className="image-wash stronger" />
           </div>
           <div className="section-inner">
@@ -92,12 +92,12 @@ export function Home({ locale, path }: HomeProps) {
 
         <section className="image-band profile-band">
           <div className="motion-layer">
-            <img className="motion-image animate-about-drift" src={assets.profileBg} alt="" />
+            <img className="motion-image animate-about-drift" src={assets.profileBg} alt="" loading="lazy" decoding="async" />
             <div className="image-wash" />
           </div>
           <div className="section-inner split-grid">
             <div className="info-panel reveal-on-scroll">
-              <img className="profile-image" src={assets.avatar} alt={locale === 'ja' ? '大谷 空' : 'Sora Oya'} />
+              <img className="profile-image" src={assets.avatar} alt={locale === 'ja' ? '大谷 空' : 'Sora Oya'} loading="lazy" decoding="async" />
               <p className="eyebrow">Profile</p>
               <h2>{h.aboutTitle}</h2>
               <p>{h.about}</p>

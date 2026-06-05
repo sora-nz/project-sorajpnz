@@ -24,7 +24,7 @@ export function Footer({ locale }: FooterProps) {
     <footer className="site-footer">
       <div className="section-inner footer-grid">
         <div>
-          <img className="footer-logo" src={assets.logoFull} alt="Sora JPNZ" />
+          <img className="footer-logo" src={assets.logoFull} alt="Sora JPNZ" loading="lazy" decoding="async" />
           <p>{t.siteTagline}</p>
         </div>
         <div>

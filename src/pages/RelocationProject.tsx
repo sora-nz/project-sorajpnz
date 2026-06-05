@@ -152,7 +152,7 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
               <h2>{r.previewTitle}</h2>
             </div>
             <div className="media-frame">
-              <img src={assets.dashboard} alt="New Zealand Relocation Affordability Dashboard" />
+              <img src={assets.dashboard} alt="New Zealand Relocation Affordability Dashboard" loading="lazy" decoding="async" />
             </div>
             <div className="button-row center">
               <a className="button primary" href={links.tableau} target="_blank" rel="noopener noreferrer">

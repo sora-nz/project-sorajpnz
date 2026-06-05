@@ -5,9 +5,9 @@ export const siteUrl = 'https://sorajpnz.com';
 export const assets = {
   logoFull: '/assets/sora-jpnz-logo-full.png',
   logoMark: '/assets/sora-jpnz-logo-mark.png',
-  hero: '/assets/homepage1.png',
-  projectsBg: '/assets/homepage2.png',
-  profileBg: '/assets/homepage3.png',
+  hero: '/assets/homepage1.jpg',
+  projectsBg: '/assets/homepage2.jpg',
+  profileBg: '/assets/homepage3.jpg',
   dashboard: '/assets/nz-relocation-dashboard.png',
   rentRadar: '/assets/rentradar.png',
   avatar: '/assets/sora-avatar.png'

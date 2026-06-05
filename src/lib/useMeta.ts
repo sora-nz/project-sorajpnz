@@ -54,7 +54,7 @@ export function useMeta({ locale, path, title, description, image, noIndex = fal
     const canonicalPath = canonicalizePath(path);
     const canonicalUrl = `${siteUrl}${canonicalPath}`;
     const alternatePath = canonicalPath.replace(/^\/(en|ja)/, '');
-    const imageUrl = image ? `${siteUrl}${image}` : `${siteUrl}/assets/homepage1.png`;
+    const imageUrl = image ? `${siteUrl}${image}` : `${siteUrl}/assets/homepage1.jpg`;
 
     document.documentElement.lang = locale;
     document.title = title;

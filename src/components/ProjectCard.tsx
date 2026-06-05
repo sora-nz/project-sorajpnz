@@ -12,7 +12,7 @@ export function ProjectCard({ image, title, description, tags, href, action, fea
   return (
     <article className="project-card">
       <a href={href} className="project-image-link" aria-label={title}>
-        <img src={image} alt={`${title} preview`} />
+        <img src={image} alt={`${title} preview`} loading="lazy" decoding="async" />
         {featured && <span className="featured-badge">{featured}</span>}
       </a>
       <div className="project-card-body">
