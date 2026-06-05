@@ -9,6 +9,12 @@
   force = true
 
 [[redirects]]
+  from = "https://soraoya-portfolio.netlify.app/*"
+  to = "https://sorajpnz.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/"
   to = "/en"
   status = 301
