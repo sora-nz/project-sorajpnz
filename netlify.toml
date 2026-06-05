@@ -3,6 +3,12 @@
   publish = "out"
 
 [[redirects]]
+  from = "https://project.sorajpnz.com/*"
+  to = "https://sorajpnz.com/:splat"
+  status = 301
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
