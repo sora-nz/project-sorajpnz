@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { assets, common, links, Locale, rentRadar, siteUrl } from '../lib/content';
+import { assets, common, links, Locale, rentRadar, seo, siteUrl } from '../lib/content';
 import { localize } from '../lib/routes';
 import { useMeta } from '../lib/useMeta';
 
@@ -12,6 +12,7 @@ type RentRadarProjectProps = {
 export function RentRadarProject({ locale, path }: RentRadarProjectProps) {
   const r = rentRadar[locale];
   const c = common[locale];
+  const meta = seo[locale].rentRadar;
   const base = localize(locale);
   const textBlocks = [
     { title: r.overviewTitle, body: r.overviewContent },
@@ -22,16 +23,16 @@ export function RentRadarProject({ locale, path }: RentRadarProjectProps) {
   useMeta({
     locale,
     path,
-    title: `${r.title} - Sora Oya`,
-    description: r.subtitle,
+    title: meta.title,
+    description: meta.description,
     image: assets.rentRadar,
     jsonLd: {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': 'WebPage',
-          name: `${r.title} - Sora Oya`,
-          description: r.subtitle,
+          name: meta.title,
+          description: meta.description,
           url: `${siteUrl}${path}`,
           inLanguage: locale,
           author: { '@type': 'Person', name: 'Sora Oya' }

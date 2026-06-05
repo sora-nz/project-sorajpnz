@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { blog, Locale } from '../lib/content';
+import { blog, Locale, seo } from '../lib/content';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 
 type BlogProps = {
@@ -10,13 +10,14 @@ type BlogProps = {
 
 export function Blog({ locale, path }: BlogProps) {
   const b = blog[locale];
+  const meta = seo[locale].blog;
 
   useMeta({
     locale,
     path,
-    title: `${b.title} - Sora Oya`,
-    description: b.subtitle,
-    jsonLd: pageJsonLd(locale, path, `${b.title} - Sora Oya`, b.subtitle)
+    title: meta.title,
+    description: meta.description,
+    jsonLd: pageJsonLd(locale, path, meta.title, meta.description)
   });
 
   return (

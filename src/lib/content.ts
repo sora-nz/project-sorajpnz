@@ -81,6 +81,73 @@ export const common = {
   }
 } as const;
 
+export const seo = {
+  en: {
+    home: {
+      title: 'Sora Oya | Data Analyst Portfolio in Auckland',
+      description:
+        'Auckland-based Business Analyst / Data Analyst portfolio featuring Python, SQL, Tableau, Power BI, and public-data dashboard projects.'
+    },
+    projects: {
+      title: 'Data Analytics Projects | Sora Oya',
+      description:
+        'Explore practical analytics projects covering New Zealand relocation affordability, rent dashboards, public data, Tableau, and Power BI.'
+    },
+    relocation: {
+      title: 'NZ Relocation Affordability Dashboard | Sora Oya',
+      description:
+        'A Tableau public-data dashboard comparing New Zealand rent, NZD/JPY exchange-rate impact, and selected price-index context for relocation planning.'
+    },
+    rentRadar: {
+      title: 'Rent Radar Power BI Dashboard | Sora Oya',
+      description:
+        'An early Power BI rental dashboard prototype showing BI layout, mock rental indicators, filters, and comparison-focused dashboard design.'
+    },
+    blog: {
+      title: 'Blog | Sora Oya',
+      description:
+        'Notes on data analysis, New Zealand life, relocation, training, and practical portfolio projects from Sora Oya.'
+    },
+    contact: {
+      title: 'Contact | Sora Oya',
+      description:
+        'Contact Sora Oya for Business Analyst / Data Analyst opportunities, project enquiries, interviews, or data analysis conversations.'
+    }
+  },
+  ja: {
+    home: {
+      title: '大谷 空 | データ分析ポートフォリオ',
+      description:
+        'オークランド拠点のBusiness Analyst / Data Analystポートフォリオ。Python、SQL、Tableau、Power BI、公的データ分析の実例を掲載しています。'
+    },
+    projects: {
+      title: 'データ分析プロジェクト | 大谷 空',
+      description:
+        'ニュージーランド移住向け家賃負担、家賃ダッシュボード、公的データ、Tableau、Power BIを使った分析プロジェクトです。'
+    },
+    relocation: {
+      title: 'NZ移住向け家賃負担ダッシュボード | 大谷 空',
+      description:
+        'ニュージーランドの家賃、NZD/JPY為替、食品価格指数を組み合わせた、移住検討向けのTableau公的データダッシュボードです。'
+    },
+    rentRadar: {
+      title: 'Rent Radar Power BIダッシュボード | 大谷 空',
+      description:
+        '架空データを使い、家賃情報の整理、比較、フィルター設計を試した初期Power BIダッシュボードプロトタイプです。'
+    },
+    blog: {
+      title: 'ブログ | 大谷 空',
+      description:
+        'データ分析、ニュージーランド生活、移住、トレーニング、ポートフォリオ開発についての記録です。'
+    },
+    contact: {
+      title: 'お問い合わせ | 大谷 空',
+      description:
+        'Business Analyst / Data Analystの機会、面談、プロジェクト相談、データ分析に関するお問い合わせはこちらから。'
+    }
+  }
+} as const;
+
 export const home = {
   en: {
     title: 'Sora Oya',

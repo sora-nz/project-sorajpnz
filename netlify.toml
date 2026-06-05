@@ -9,6 +9,66 @@
   force = true
 
 [[redirects]]
+  from = "/"
+  to = "/en"
+  status = 301
+
+[[redirects]]
+  from = "/project"
+  to = "/en/projects/rent-radar"
+  status = 301
+
+[[redirects]]
+  from = "/en/project"
+  to = "/en/projects/rent-radar"
+  status = 301
+
+[[redirects]]
+  from = "/ja/project"
+  to = "/ja/projects/rent-radar"
+  status = 301
+
+[[redirects]]
+  from = "/project-relocation"
+  to = "/en/projects/nz-japan-relocation"
+  status = 301
+
+[[redirects]]
+  from = "/en/project-relocation"
+  to = "/en/projects/nz-japan-relocation"
+  status = 301
+
+[[redirects]]
+  from = "/ja/project-relocation"
+  to = "/ja/projects/nz-japan-relocation"
+  status = 301
+
+[[redirects]]
+  from = "/projects"
+  to = "/en/projects"
+  status = 301
+
+[[redirects]]
+  from = "/projects/rent-radar"
+  to = "/en/projects/rent-radar"
+  status = 301
+
+[[redirects]]
+  from = "/projects/nz-japan-relocation"
+  to = "/en/projects/nz-japan-relocation"
+  status = 301
+
+[[redirects]]
+  from = "/blog"
+  to = "/en/blog"
+  status = 301
+
+[[redirects]]
+  from = "/contact"
+  to = "/en/contact"
+  status = 301
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

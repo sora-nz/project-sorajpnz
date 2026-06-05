@@ -8,20 +8,69 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en" />
   </url>
   <url>
+    <loc>https://sorajpnz.com/ja</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en" />
+  </url>
+  <url>
     <loc>https://sorajpnz.com/en/projects</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/projects" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/projects" />
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/ja/projects</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/projects" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/projects" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/projects" />
   </url>
   <url>
     <loc>https://sorajpnz.com/en/projects/nz-japan-relocation</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/projects/nz-japan-relocation" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/projects/nz-japan-relocation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/projects/nz-japan-relocation" />
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/ja/projects/nz-japan-relocation</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/projects/nz-japan-relocation" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/projects/nz-japan-relocation" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/projects/nz-japan-relocation" />
   </url>
   <url>
     <loc>https://sorajpnz.com/en/projects/rent-radar</loc>
     <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/projects/rent-radar" />
     <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/projects/rent-radar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/projects/rent-radar" />
   </url>
-  <url><loc>https://sorajpnz.com/en/blog</loc></url>
-  <url><loc>https://sorajpnz.com/en/contact</loc></url>
+  <url>
+    <loc>https://sorajpnz.com/ja/projects/rent-radar</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/projects/rent-radar" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/projects/rent-radar" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/projects/rent-radar" />
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/en/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/blog" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/blog" />
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/ja/blog</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/blog" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/blog" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/blog" />
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/en/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/contact" />
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/ja/contact</loc>
+    <xhtml:link rel="alternate" hreflang="en" href="https://sorajpnz.com/en/contact" />
+    <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/contact" />
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/contact" />
+  </url>
 </urlset>

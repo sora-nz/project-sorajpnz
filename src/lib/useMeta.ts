@@ -7,6 +7,7 @@ type MetaConfig = {
   title: string;
   description: string;
   image?: string;
+  noIndex?: boolean;
   jsonLd?: unknown;
 };
 
@@ -35,24 +36,40 @@ function setLink(rel: string, href: string, extra?: Record<string, string>) {
   Object.entries(extra ?? {}).forEach(([key, value]) => node?.setAttribute(key, value));
 }
 
-export function useMeta({ locale, path, title, description, image, jsonLd }: MetaConfig) {
+export function canonicalizePath(path: string) {
+  const clean = path.replace(/\/$/, '') || '/';
+  if (clean === '/') return '/en';
+  if (/^\/(en|ja)\/project$/.test(clean)) {
+    return clean.replace('/project', '/projects/rent-radar');
+  }
+  if (/^\/(en|ja)\/project-relocation$/.test(clean)) {
+    return clean.replace('/project-relocation', '/projects/nz-japan-relocation');
+  }
+  if (!clean.startsWith('/en') && !clean.startsWith('/ja')) return `/en${clean}`;
+  return clean;
+}
+
+export function useMeta({ locale, path, title, description, image, noIndex = false, jsonLd }: MetaConfig) {
   useEffect(() => {
-    const canonicalPath = path === '/' ? '/en' : path;
+    const canonicalPath = canonicalizePath(path);
     const canonicalUrl = `${siteUrl}${canonicalPath}`;
     const alternatePath = canonicalPath.replace(/^\/(en|ja)/, '');
-    const imageUrl = image ? `${siteUrl}${image}` : `${siteUrl}/assets/sora-jpnz-logo-full.png`;
+    const imageUrl = image ? `${siteUrl}${image}` : `${siteUrl}/assets/homepage1.png`;
 
     document.documentElement.lang = locale;
     document.title = title;
     setMeta('description', description);
+    setMeta('robots', noIndex ? 'noindex, follow' : 'index, follow');
     setMeta('og:title', title, true);
     setMeta('og:description', description, true);
     setMeta('og:url', canonicalUrl, true);
     setMeta('og:locale', locale === 'ja' ? 'ja_JP' : 'en_NZ', true);
     setMeta('og:image', imageUrl, true);
+    setMeta('og:image:alt', `${title} preview`, true);
     setMeta('twitter:title', title);
     setMeta('twitter:description', description);
     setMeta('twitter:image', imageUrl);
+    setMeta('twitter:image:alt', `${title} preview`);
     setLink('canonical', canonicalUrl);
     setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'en' });
     setLink('alternate', `${siteUrl}/ja${alternatePath}`, { hreflang: 'ja' });
@@ -66,10 +83,12 @@ export function useMeta({ locale, path, title, description, image, jsonLd }: Met
       script.textContent = JSON.stringify(jsonLd);
       document.head.appendChild(script);
     }
-  }, [description, image, jsonLd, locale, path, title]);
+  }, [description, image, jsonLd, locale, noIndex, path, title]);
 }
 
 export function pageJsonLd(locale: Locale, path: string, title: string, description: string) {
+  const canonicalUrl = `${siteUrl}${canonicalizePath(path)}`;
+
   return {
     '@context': 'https://schema.org',
     '@graph': [
@@ -102,7 +121,7 @@ export function pageJsonLd(locale: Locale, path: string, title: string, descript
       {
         '@type': 'WebPage',
         name: title,
-        url: `${siteUrl}${path}`,
+        url: canonicalUrl,
         description,
         inLanguage: locale,
         isPartOf: { '@type': 'WebSite', name: 'Sora Oya', url: siteUrl }

@@ -2,6 +2,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { common, Locale } from '../lib/content';
 import { localize } from '../lib/routes';
+import { useMeta } from '../lib/useMeta';
 
 type NotFoundProps = {
   locale: Locale;
@@ -10,6 +11,19 @@ type NotFoundProps = {
 
 export function NotFound({ locale, path }: NotFoundProps) {
   const c = common[locale];
+  const title = locale === 'ja' ? 'ページが見つかりません - Sora Oya' : 'Page not found - Sora Oya';
+  const description =
+    locale === 'ja'
+      ? '指定されたページは見つかりませんでした。URLを確認するか、ホームへ戻ってください。'
+      : 'The requested page could not be found. Check the URL or return home.';
+
+  useMeta({
+    locale,
+    path,
+    title,
+    description,
+    noIndex: true
+  });
 
   return (
     <div className="page">

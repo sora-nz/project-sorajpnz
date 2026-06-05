@@ -1,7 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
-import { assets, common, Locale, projects } from '../lib/content';
+import { assets, common, Locale, projects, seo } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
@@ -14,16 +14,17 @@ type ProjectsProps = {
 export function Projects({ locale, path }: ProjectsProps) {
   const p = projects[locale];
   const c = common[locale];
+  const meta = seo[locale].projects;
   const base = localize(locale);
 
   useReveal();
   useMeta({
     locale,
     path,
-    title: `${p.title} - Sora Oya`,
-    description: p.subtitle,
+    title: meta.title,
+    description: meta.description,
     image: assets.dashboard,
-    jsonLd: pageJsonLd(locale, path, `${p.title} - Sora Oya`, p.subtitle)
+    jsonLd: pageJsonLd(locale, path, meta.title, meta.description)
   });
 
   return (

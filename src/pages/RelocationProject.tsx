@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { assets, common, links, Locale, projects, relocation, rentRadar, siteUrl } from '../lib/content';
+import { assets, common, links, Locale, projects, relocation, rentRadar, seo, siteUrl } from '../lib/content';
 import { localize } from '../lib/routes';
 import { useMeta } from '../lib/useMeta';
 
@@ -89,6 +89,7 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
   const c = common[locale];
   const p = projects[locale];
   const rr = rentRadar[locale];
+  const meta = seo[locale].relocation;
   const base = localize(locale);
   const [summary, businessProblem, targetUsers, dataSources, dashboardSections, metricNotes, keyInsights, limitations, tools, future, dataNotes] =
     r.sections;
@@ -96,16 +97,16 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
   useMeta({
     locale,
     path,
-    title: `${r.title} - Sora Oya`,
-    description: r.subtitle,
+    title: meta.title,
+    description: meta.description,
     image: assets.dashboard,
     jsonLd: {
       '@context': 'https://schema.org',
       '@graph': [
         {
           '@type': 'WebPage',
-          name: `${r.title} - Sora Oya`,
-          description: r.subtitle,
+          name: meta.title,
+          description: meta.description,
           url: `${siteUrl}${path}`,
           inLanguage: locale,
           author: { '@type': 'Person', name: 'Sora Oya' }

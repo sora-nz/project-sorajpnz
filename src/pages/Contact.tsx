@@ -1,7 +1,7 @@
 import { FormEvent, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { contactPage, links, Locale } from '../lib/content';
+import { contactPage, links, Locale, seo } from '../lib/content';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 
 type ContactProps = {
@@ -11,9 +11,9 @@ type ContactProps = {
 
 export function Contact({ locale, path }: ContactProps) {
   const copy = contactPage[locale];
+  const meta = seo[locale].contact;
   const [message, setMessage] = useState('');
   const [status, setStatus] = useState<'idle' | 'sending' | 'success' | 'error'>('idle');
-  const title = `${copy.title} - Sora Oya`;
 
   const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -47,9 +47,9 @@ export function Contact({ locale, path }: ContactProps) {
   useMeta({
     locale,
     path,
-    title,
-    description: copy.intro,
-    jsonLd: pageJsonLd(locale, path, title, copy.intro)
+    title: meta.title,
+    description: meta.description,
+    jsonLd: pageJsonLd(locale, path, meta.title, meta.description)
   });
 
   return (

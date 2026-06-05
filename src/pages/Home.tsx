@@ -1,7 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
-import { assets, common, home, links, Locale, projects } from '../lib/content';
+import { assets, common, home, links, Locale, projects, seo } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
@@ -15,16 +15,17 @@ export function Home({ locale, path }: HomeProps) {
   const h = home[locale];
   const c = common[locale];
   const p = projects[locale];
+  const meta = seo[locale].home;
   const base = localize(locale);
 
   useReveal();
   useMeta({
     locale,
     path,
-    title: `${h.title} - ${h.role}`,
-    description: h.description,
+    title: meta.title,
+    description: meta.description,
     image: assets.hero,
-    jsonLd: pageJsonLd(locale, path, `${h.title} - ${h.role}`, h.description)
+    jsonLd: pageJsonLd(locale, path, meta.title, meta.description)
   });
 
   return (
