@@ -106,7 +106,7 @@ export const seo = {
     blog: {
       title: 'Blog | Sora Oya',
       description:
-        'Notes on data analysis, New Zealand life, relocation, training, and practical portfolio projects from Sora Oya.'
+        'A two-track notes hub for analytics and tools, New Zealand life, relocation, spearfishing, travel, training, and future brand experiments.'
     },
     contact: {
       title: 'Contact | Sora Oya',
@@ -138,7 +138,7 @@ export const seo = {
     blog: {
       title: 'ブログ | 大谷 空',
       description:
-        'データ分析、ニュージーランド生活、移住、トレーニング、ポートフォリオ開発についての記録です。'
+        '分析・ツール、ニュージーランド生活、移住、スピアフィッシング、旅行、トレーニング、将来のブランド仮説を育てる2トラックの記録です。'
     },
     contact: {
       title: 'お問い合わせ | 大谷 空',
@@ -591,14 +591,88 @@ export const blog = {
   en: {
     title: 'Blog',
     subtitle: 'Notes on data work, life in New Zealand, relocation, training, and practical analysis.',
+    introLabel: 'Working direction',
+    introTitle: 'Two tracks, one home base',
     body:
-      'Long-form posts will live here once they are ready. For now, the site is structured so Pacibridge-style analytics projects and Oceaflow-style lifestyle notes can grow under the existing domain without extra domain cost.'
+      'This blog starts as a flexible home for two directions I am exploring. The names are not treated as fixed company names yet; they are lightweight brand hypotheses that can grow into products, services, or media later.',
+    tracks: [
+      {
+        icon: 'ri-bar-chart-grouped-line',
+        label: 'Analytics & Tools',
+        direction: 'Pacibridge direction',
+        description:
+          'Data analysis, dashboards, public datasets, app experiments, and small product ideas that could become services or templates later.',
+        topics: ['Public-data dashboards', 'Power BI / Tableau notes', 'Micro-SaaS experiments', 'Workflow templates'],
+        ideas: [
+          'How I built the NZ relocation affordability dashboard',
+          'Rent Radar: what mock data can teach about BI design',
+          'Turning public datasets into small product ideas'
+        ]
+      },
+      {
+        icon: 'ri-sailboat-line',
+        label: 'Life in New Zealand',
+        direction: 'Oceaflow direction',
+        description:
+          'New Zealand life, spearfishing, travel, training, and personal notes that can become a lifestyle media lane over time.',
+        topics: ['Spearfishing logs', 'Travel with Thea', 'Auckland life', 'Marathon and training notes'],
+        ideas: [
+          'What living in Auckland has taught me so far',
+          'Spearfishing notes before the polished videos exist',
+          'Travel logs that connect lifestyle, cost, and place'
+        ]
+      }
+    ],
+    socialTitle: 'Built for future social publishing',
+    socialBody:
+      'Each finished post can become a short X post, a conversational Threads note, and an Instagram caption after review. The first step is a steady source of good material, not full automation.',
+    socialSteps: ['Write one useful note', 'Turn it into platform-specific drafts', 'Review before publishing'],
+    upcomingTitle: 'First posts to prepare',
+    upcomingBody:
+      'The first useful posts should connect portfolio work with real life: one analytics case study, one New Zealand life note, and one spearfishing or travel draft.'
   },
   ja: {
     title: 'ブログ',
     subtitle: 'データ、ニュージーランド生活、移住、トレーニング、実用的な分析についての記録です。',
+    introLabel: '方向性の整理',
+    introTitle: '2つの方向性を、1つの拠点から育てる',
     body:
-      '長めの記事は準備ができた段階でここに追加します。まずは追加ドメイン費用をかけず、既存ドメイン内でPacibridge系の分析プロジェクトとOceaflow系のライフスタイル発信を育てられる構成にしています。'
+      'このブログは、今後の方向性を探りながら育てる場所です。PacibridgeとOceaflowは、現時点では確定した会社名ではなく、将来の商品・サービス・メディアに育つ可能性のある軽いブランド仮説として扱います。',
+    tracks: [
+      {
+        icon: 'ri-bar-chart-grouped-line',
+        label: 'Analytics & Tools',
+        direction: 'Pacibridge方向',
+        description:
+          'データ分析、ダッシュボード、公的データ、アプリ開発、小さなプロダクト案など、将来サービスやテンプレート販売につながる可能性のある領域です。',
+        topics: ['公的データダッシュボード', 'Power BI / Tableauメモ', 'micro SaaS実験', '分析テンプレート'],
+        ideas: [
+          'NZ移住向け家賃負担ダッシュボードをどう作ったか',
+          'Rent Radarから学べるBI設計の考え方',
+          '公的データを小さなプロダクト案に変える流れ'
+        ]
+      },
+      {
+        icon: 'ri-sailboat-line',
+        label: 'Life in New Zealand',
+        direction: 'Oceaflow方向',
+        description:
+          'ニュージーランド生活、スピアフィッシング、旅行、トレーニング、日々の記録など、将来ライフスタイル系メディアに育つ可能性のある領域です。',
+        topics: ['スピアフィッシング記録', 'Theaとの旅行', 'オークランド生活', 'マラソン・トレーニング'],
+        ideas: [
+          'オークランド生活で学んだこと',
+          '動画編集前のスピアフィッシング記録',
+          '旅行記を生活費・場所・体験とつなげて残す'
+        ]
+      }
+    ],
+    socialTitle: '将来のSNS展開を見据えた設計',
+    socialBody:
+      '完成した記事は、確認後にX向けの短文、Threads向けの会話調投稿、Instagram向けキャプションへ展開できます。最初に必要なのは完全自動化ではなく、良い素材を継続的に残すことです。',
+    socialSteps: ['まず1本の役立つ記録を書く', 'SNS別の下書きに切り分ける', '確認してから投稿する'],
+    upcomingTitle: '最初に準備したい記事',
+    upcomingBody:
+      '最初は、分析ケーススタディ、ニュージーランド生活メモ、スピアフィッシングまたは旅行の下書きを1本ずつ用意するのが良さそうです。'
   }
 } as const;
 
