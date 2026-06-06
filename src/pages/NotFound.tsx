@@ -11,7 +11,7 @@ type NotFoundProps = {
 
 export function NotFound({ locale, path }: NotFoundProps) {
   const c = common[locale];
-  const title = locale === 'ja' ? 'ページが見つかりません - Sora Oya' : 'Page not found - Sora Oya';
+  const title = locale === 'ja' ? 'ページが見つかりません - SoraJPNZ' : 'Page not found - SoraJPNZ';
   const description =
     locale === 'ja'
       ? '指定されたページは見つかりませんでした。URLを確認するか、ホームへ戻ってください。'

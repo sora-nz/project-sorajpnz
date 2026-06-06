@@ -24,7 +24,10 @@ export function Footer({ locale }: FooterProps) {
     <footer className="site-footer">
       <div className="section-inner footer-grid">
         <div>
-          <img className="footer-logo" src={assets.logoFull} alt="Sora JPNZ" loading="lazy" decoding="async" />
+          <div className="footer-brand">
+            <img className="footer-mark" src={assets.logoMark} alt="" loading="lazy" decoding="async" />
+            <span>{t.name}</span>
+          </div>
           <p>{t.siteTagline}</p>
         </div>
         <div>
@@ -56,7 +59,7 @@ export function Footer({ locale }: FooterProps) {
         </div>
       </div>
       <div className="section-inner footer-bottom">
-        <p>© 2026 Sora Oya. All rights reserved.</p>
+        <p>© 2026 SoraJPNZ. All rights reserved.</p>
       </div>
     </footer>
   );

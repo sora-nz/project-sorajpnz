@@ -94,7 +94,7 @@ export function pageJsonLd(locale: Locale, path: string, title: string, descript
     '@graph': [
       {
         '@type': 'WebSite',
-        name: 'Sora Oya',
+        name: 'SoraJPNZ',
         url: siteUrl,
         description,
         inLanguage: locale,
@@ -124,7 +124,7 @@ export function pageJsonLd(locale: Locale, path: string, title: string, descript
         url: canonicalUrl,
         description,
         inLanguage: locale,
-        isPartOf: { '@type': 'WebSite', name: 'Sora Oya', url: siteUrl }
+        isPartOf: { '@type': 'WebSite', name: 'SoraJPNZ', url: siteUrl }
       }
     ]
   };

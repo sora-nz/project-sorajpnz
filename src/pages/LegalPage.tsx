@@ -13,7 +13,7 @@ type LegalPageProps = {
 
 export function LegalPage({ locale, path, kind }: LegalPageProps) {
   const page = legal[kind][locale];
-  const title = `${page.title} - Sora Oya`;
+  const title = `${page.title} - SoraJPNZ`;
 
   useMeta({
     locale,

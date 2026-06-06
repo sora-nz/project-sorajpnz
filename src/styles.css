@@ -375,6 +375,10 @@ img {
   padding: 88px 0;
 }
 
+.services-section {
+  background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+}
+
 .section-heading {
   margin-bottom: 36px;
   text-align: center;
@@ -382,6 +386,13 @@ img {
 
 .section-heading.left {
   text-align: left;
+}
+
+.section-heading > p:not(.eyebrow) {
+  margin: 12px auto 0;
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 18px;
 }
 
 .section-heading h2,
@@ -401,6 +412,48 @@ img {
   display: grid;
   grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 24px;
+}
+
+.service-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.service-card {
+  min-height: 238px;
+  padding: 26px;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.88);
+  box-shadow: 0 12px 32px rgba(15, 23, 42, 0.055);
+}
+
+.service-icon {
+  display: grid;
+  width: 48px;
+  height: 48px;
+  margin-bottom: 22px;
+  place-items: center;
+  border-radius: 999px;
+  color: var(--blue-strong);
+  background: var(--blue-soft);
+  font-size: 24px;
+}
+
+.service-card h3 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.25;
+  font-weight: 740;
+}
+
+.service-card p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.65;
 }
 
 .project-card {
@@ -1243,11 +1296,23 @@ img {
   padding: 48px 0;
 }
 
-.footer-logo {
-  width: 166px;
-  height: auto;
+.footer-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
   margin-bottom: 12px;
-  border-radius: 8px;
+  color: var(--white);
+  font-size: 20px;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.footer-mark {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  object-fit: cover;
+  background: var(--white);
 }
 
 .site-footer h2 {
@@ -1456,6 +1521,7 @@ img {
   }
 
   .project-grid,
+  .service-grid,
   .split-grid,
   .glance-grid,
   .blog-track-grid,
@@ -1590,6 +1656,7 @@ img {
   }
 
   .project-card-body,
+  .service-card,
   .info-panel,
   .article-block,
   .blog-intro-card,

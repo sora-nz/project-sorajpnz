@@ -34,8 +34,8 @@ export const links = {
 
 export const common = {
   en: {
-    name: 'Sora Oya',
-    shortName: 'Sora',
+    name: 'SoraJPNZ',
+    shortName: 'SoraJPNZ',
     home: 'Home',
     projects: 'Projects',
     blog: 'Blog',
@@ -49,7 +49,7 @@ export const common = {
     language: 'Language',
     english: 'English',
     japanese: 'Japanese',
-    siteTagline: 'Turning data into clear decisions',
+    siteTagline: 'Data, dashboards, and practical insights from New Zealand',
     viewProject: 'View Project',
     viewProjects: 'View Projects',
     emailMe: 'Email Me',
@@ -57,8 +57,8 @@ export const common = {
     footerPrivacyOfficer: 'Privacy Officer: Sora Oya - privacy@sorajpnz.com'
   },
   ja: {
-    name: '大谷 空',
-    shortName: '空',
+    name: 'SoraJPNZ',
+    shortName: 'SoraJPNZ',
     home: 'ホーム',
     projects: 'プロジェクト',
     blog: 'ブログ',
@@ -72,7 +72,7 @@ export const common = {
     language: '言語',
     english: 'English',
     japanese: '日本語',
-    siteTagline: 'データを、意思決定に使える情報へ',
+    siteTagline: 'ニュージーランドから、データを意思決定に使える形へ',
     viewProject: 'プロジェクトを見る',
     viewProjects: 'プロジェクト一覧',
     emailMe: 'メールする',
@@ -84,64 +84,64 @@ export const common = {
 export const seo = {
   en: {
     home: {
-      title: 'Sora Oya | Data Analyst Portfolio in Auckland',
+      title: 'SoraJPNZ | Data Analytics and Dashboard Services in Auckland',
       description:
-        'Auckland-based Business Analyst / Data Analyst portfolio featuring Python, SQL, Tableau, Power BI, and public-data dashboard projects.'
+        'SoraJPNZ is an Auckland-based data analytics and dashboard portfolio for practical Python, SQL, Tableau, Power BI, and web analytics projects.'
     },
     projects: {
-      title: 'Data Analytics Projects | Sora Oya',
+      title: 'Data Analytics Projects | SoraJPNZ',
       description:
         'Explore practical analytics projects covering New Zealand relocation affordability, rent dashboards, public data, Tableau, and Power BI.'
     },
     relocation: {
-      title: 'NZ Relocation Affordability Dashboard | Sora Oya',
+      title: 'NZ Relocation Affordability Dashboard | SoraJPNZ',
       description:
         'A Tableau public-data dashboard comparing New Zealand rent, NZD/JPY exchange-rate impact, and selected price-index context for relocation planning.'
     },
     rentRadar: {
-      title: 'Rent Radar Power BI Dashboard | Sora Oya',
+      title: 'Rent Radar Power BI Dashboard | SoraJPNZ',
       description:
         'An early Power BI rental dashboard prototype showing BI layout, mock rental indicators, filters, and comparison-focused dashboard design.'
     },
     blog: {
-      title: 'Blog | Sora Oya',
+      title: 'Blog | SoraJPNZ',
       description:
-        'Blog posts from Sora Oya are being prepared.'
+        'Blog posts from SoraJPNZ are being prepared.'
     },
     contact: {
-      title: 'Contact | Sora Oya',
+      title: 'Contact | SoraJPNZ',
       description:
-        'Contact Sora Oya for Business Analyst / Data Analyst opportunities, project enquiries, interviews, or data analysis conversations.'
+        'Contact SoraJPNZ for Business Analyst / Data Analyst opportunities, project enquiries, interviews, or data analysis conversations.'
     }
   },
   ja: {
     home: {
-      title: '大谷 空 | データ分析ポートフォリオ',
+      title: 'SoraJPNZ | データ分析・ダッシュボード制作',
       description:
-        'オークランド拠点のBusiness Analyst / Data Analystポートフォリオ。Python、SQL、Tableau、Power BI、公的データ分析の実例を掲載しています。'
+        'SoraJPNZはオークランド拠点のデータ分析・ダッシュボード制作ポートフォリオです。Python、SQL、Tableau、Power BI、公的データ分析の実例を掲載しています。'
     },
     projects: {
-      title: 'データ分析プロジェクト | 大谷 空',
+      title: 'データ分析プロジェクト | SoraJPNZ',
       description:
         'ニュージーランド移住向け家賃負担、家賃ダッシュボード、公的データ、Tableau、Power BIを使った分析プロジェクトです。'
     },
     relocation: {
-      title: 'NZ移住向け家賃負担ダッシュボード | 大谷 空',
+      title: 'NZ移住向け家賃負担ダッシュボード | SoraJPNZ',
       description:
         'ニュージーランドの家賃、NZD/JPY為替、食品価格指数を組み合わせた、移住検討向けのTableau公的データダッシュボードです。'
     },
     rentRadar: {
-      title: 'Rent Radar Power BIダッシュボード | 大谷 空',
+      title: 'Rent Radar Power BIダッシュボード | SoraJPNZ',
       description:
         '架空データを使い、家賃情報の整理、比較、フィルター設計を試した初期Power BIダッシュボードプロトタイプです。'
     },
     blog: {
-      title: 'ブログ | 大谷 空',
+      title: 'ブログ | SoraJPNZ',
       description:
-        '大谷空のブログ記事を準備中です。'
+        'SoraJPNZのブログ記事を準備中です。'
     },
     contact: {
-      title: 'お問い合わせ | 大谷 空',
+      title: 'お問い合わせ | SoraJPNZ',
       description:
         'Business Analyst / Data Analystの機会、面談、プロジェクト相談、データ分析に関するお問い合わせはこちらから。'
     }
@@ -150,13 +150,33 @@ export const seo = {
 
 export const home = {
   en: {
-    title: 'Sora Oya',
-    role: 'Business Analyst / Data Analyst Portfolio',
-    tagline: 'Turning operational problems and public data into clear, decision-ready information.',
+    title: 'SoraJPNZ',
+    role: 'Data Analytics / Dashboard Design / Web Analytics Setup',
+    tagline: 'Turning data into decision-ready insights.',
     description:
-      "I was born in Japan and have lived in New Zealand since 2019. I studied Business at AUT, majoring in Information Systems and Finance, and later worked in operations-focused roles in Auckland's micromobility sector. My projects explore practical topics such as housing, living costs, mobility, and currency movement.",
-    primaryCta: 'View Featured Project',
-    contactCta: 'Contact Me',
+      'A New Zealand-based analytics hub for practical dashboards, public-data projects, and lightweight web analytics setup. Built for clear reporting, useful decisions, and small teams that need understandable data.',
+    primaryCta: 'Start a Conversation',
+    contactCta: 'View Projects',
+    servicesTitle: 'Ways I Can Help',
+    servicesSubtitle:
+      'Small, practical data support for dashboards, portfolio projects, and first analytics setups.',
+    services: [
+      {
+        icon: 'ri-dashboard-3-line',
+        title: 'Dashboard Starter',
+        body: 'Power BI or Tableau dashboards that turn messy data into a clear view of what is happening.'
+      },
+      {
+        icon: 'ri-line-chart-line',
+        title: 'Analytics Setup',
+        body: 'GA4, Search Console, simple tracking plans, and reporting foundations for small websites.'
+      },
+      {
+        icon: 'ri-file-chart-line',
+        title: 'Data Storytelling',
+        body: 'Case-study style analysis, public-data exploration, and clear summaries for decision making.'
+      }
+    ],
     projectsTitle: 'Projects',
     aboutTitle: 'About Me',
     about:
@@ -166,13 +186,33 @@ export const home = {
       'For hiring, interviews, or project-related enquiries, please get in touch. I am open to Business Analyst / Data Analyst opportunities, as well as conversations around data analysis, reporting, and process improvement.'
   },
   ja: {
-    title: '大谷 空',
-    role: 'Business Analyst / Data Analyst Portfolio',
-    tagline: '業務課題や公的データを、意思決定に使える情報へ整理します。',
+    title: 'SoraJPNZ',
+    role: 'データ分析 / ダッシュボード設計 / Web分析設定',
+    tagline: 'データを、意思決定に使える形へ。',
     description:
-      '日本出身で、2019年からニュージーランドに住んでいます。AUTでBusinessを学び、Information SystemsとFinanceを専攻しました。その後、オークランドのマイクロモビリティ領域で、オペレーション寄りの業務に携わりました。ポートフォリオでは、住居費、生活コスト、移動、為替など、実用的なテーマをデータで扱っています。',
-    primaryCta: '注目プロジェクトを見る',
-    contactCta: '連絡する',
+      'ニュージーランドを拠点に、実用的なダッシュボード、公的データ分析、Web分析設定を扱う小さな分析ハブです。見やすいレポート、判断しやすい情報整理、初期の分析基盤づくりを重視しています。',
+    primaryCta: '相談する',
+    contactCta: 'プロジェクトを見る',
+    servicesTitle: 'できること',
+    servicesSubtitle:
+      'ダッシュボード制作、分析設定、データの整理を小さく実用的に支援します。',
+    services: [
+      {
+        icon: 'ri-dashboard-3-line',
+        title: 'Dashboard Starter',
+        body: 'Power BIやTableauで、散らばったデータを状況が見えるダッシュボードに整理します。'
+      },
+      {
+        icon: 'ri-line-chart-line',
+        title: 'Analytics Setup',
+        body: 'GA4、Search Console、簡単な計測設計など、小さなWebサイトの分析基盤を整えます。'
+      },
+      {
+        icon: 'ri-file-chart-line',
+        title: 'Data Storytelling',
+        body: '公的データや業務データを使い、判断に使いやすいケーススタディや要約にまとめます。'
+      }
+    ],
     projectsTitle: 'プロジェクト',
     aboutTitle: '自己紹介',
     about:
@@ -200,7 +240,7 @@ export const contactPage = {
     sending: 'Sending...',
     success: 'Thank you. Your message has been sent.',
     error: 'Sorry, the form could not be sent. Please email me directly.',
-    subject: 'Contact form - Sora Oya'
+    subject: 'Contact form - SoraJPNZ'
   },
   ja: {
     title: 'お問い合わせ',
@@ -218,7 +258,7 @@ export const contactPage = {
     sending: '送信中...',
     success: 'お問い合わせを送信しました。',
     error: '送信できませんでした。メールで直接ご連絡ください。',
-    subject: 'お問い合わせフォーム - Sora Oya'
+    subject: 'お問い合わせフォーム - SoraJPNZ'
   }
 } as const;
 

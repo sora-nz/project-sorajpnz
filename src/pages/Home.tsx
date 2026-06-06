@@ -45,15 +45,36 @@ export function Home({ locale, path }: HomeProps) {
               <p className="hero-tagline">{h.tagline}</p>
               <p className="hero-description">{h.description}</p>
               <div className="button-row">
-                <a className="button primary" href={`${base}/projects/nz-japan-relocation`}>
+                <a className="button primary" href={`${base}/contact`}>
                   <span>{h.primaryCta}</span>
                   <i className="ri-arrow-right-line" />
                 </a>
-                <a className="button secondary" href={links.email}>
+                <a className="button secondary" href={`${base}/projects`}>
                   <span>{h.contactCta}</span>
-                  <i className="ri-mail-line" />
+                  <i className="ri-folder-chart-line" />
                 </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="content-section services-section">
+          <div className="section-inner">
+            <div className="section-heading reveal-on-scroll">
+              <p className="eyebrow">Services</p>
+              <h2>{h.servicesTitle}</h2>
+              <p>{h.servicesSubtitle}</p>
+            </div>
+            <div className="service-grid">
+              {h.services.map((service) => (
+                <article className="service-card reveal-on-scroll" key={service.title}>
+                  <span className="service-icon" aria-hidden="true">
+                    <i className={service.icon} />
+                  </span>
+                  <h3>{service.title}</h3>
+                  <p>{service.body}</p>
+                </article>
+              ))}
             </div>
           </div>
         </section>

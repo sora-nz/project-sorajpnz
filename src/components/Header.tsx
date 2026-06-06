@@ -21,7 +21,7 @@ export function Header({ locale, path }: HeaderProps) {
   return (
     <header className="site-header">
       <div className="header-shell">
-        <a href={localize(locale)} className="brand" aria-label="Sora Oya home">
+        <a href={localize(locale)} className="brand" aria-label="SoraJPNZ home">
           <img src={assets.logoMark} alt="" />
           <span>{t.name}</span>
         </a>
