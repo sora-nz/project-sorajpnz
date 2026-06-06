@@ -1,5 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { ProjectGlance } from '../components/ProjectGlance';
 import { assets, common, links, Locale, rentRadar, seo, siteUrl } from '../lib/content';
 import { localize } from '../lib/routes';
 import { useMeta } from '../lib/useMeta';
@@ -65,6 +66,8 @@ export function RentRadarProject({ locale, path }: RentRadarProjectProps) {
             <span className="meta-text">{r.meta}</span>
           </div>
         </section>
+
+        <ProjectGlance title={r.glanceTitle} items={r.glanceItems} />
 
         <section className="content-section">
           <div className="section-inner narrow legacy-text-stack">

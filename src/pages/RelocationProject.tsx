@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { ProjectGlance } from '../components/ProjectGlance';
 import { assets, common, links, Locale, projects, relocation, rentRadar, seo, siteUrl } from '../lib/content';
 import { localize } from '../lib/routes';
 import { useMeta } from '../lib/useMeta';
@@ -145,6 +146,8 @@ export function RelocationProject({ locale, path }: RelocationProjectProps) {
             </div>
           </div>
         </section>
+
+        <ProjectGlance title={r.glanceTitle} items={r.glanceItems} />
 
         <section className="content-section compact">
           <div className="section-inner project-preview-inner">

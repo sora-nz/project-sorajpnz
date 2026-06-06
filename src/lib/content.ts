@@ -259,6 +259,29 @@ export const relocation = {
     viewTableau: 'View Tableau Dashboard',
     viewGithub: 'View GitHub Repository',
     interactiveTitle: 'Interactive Preview',
+    glanceTitle: 'At a glance',
+    glanceItems: [
+      {
+        icon: 'ri-dashboard-3-line',
+        label: 'What it is',
+        value: 'A Tableau decision-support dashboard for early New Zealand relocation and budgeting decisions.'
+      },
+      {
+        icon: 'ri-database-2-line',
+        label: 'Data',
+        value: 'MBIE rental bond data, RBNZ NZD/JPY exchange rates, and Stats NZ Food Price Index context.'
+      },
+      {
+        icon: 'ri-tools-line',
+        label: 'Built with',
+        value: 'Python, SQL, Tableau Public, CSV outputs, documentation, and validation checks.'
+      },
+      {
+        icon: 'ri-line-chart-line',
+        label: 'Outcome',
+        value: 'Compare location-level rent pressure, yen impact, and selected cost-context trends in one view.'
+      }
+    ],
     sections: [
       {
         label: 'Project Summary',
@@ -359,6 +382,29 @@ export const relocation = {
     viewTableau: 'Tableauダッシュボードを見る',
     viewGithub: 'GitHubリポジトリを見る',
     interactiveTitle: 'インタラクティブプレビュー',
+    glanceTitle: '概要',
+    glanceItems: [
+      {
+        icon: 'ri-dashboard-3-line',
+        label: '何を作ったか',
+        value: 'ニュージーランド移住や予算検討の初期判断を支援するTableauダッシュボードです。'
+      },
+      {
+        icon: 'ri-database-2-line',
+        label: '使用データ',
+        value: 'MBIE家賃データ、RBNZのNZD/JPY為替、Stats NZ Food Price Indexを使用しています。'
+      },
+      {
+        icon: 'ri-tools-line',
+        label: '使用技術',
+        value: 'Python、SQL、Tableau Public、CSV出力、ドキュメント、検証チェックを組み合わせました。'
+      },
+      {
+        icon: 'ri-line-chart-line',
+        label: '見えること',
+        value: '地域別の家賃負担、日本円換算の影響、選択された物価指標の推移を一画面で比較できます。'
+      }
+    ],
     sections: [
       {
         label: 'プロジェクト概要',
@@ -471,7 +517,30 @@ export const rentRadar = {
       'All figures used in this dashboard are mock/sample data generated for prototyping purposes. They do not represent real rental market statistics or actual suburb-level data.',
     dashboardTitle: 'Interactive Dashboard',
     dashboardFallback: 'Open dashboard in a new tab',
-    viewAllProjects: 'View All Projects'
+    viewAllProjects: 'View All Projects',
+    glanceTitle: 'At a glance',
+    glanceItems: [
+      {
+        icon: 'ri-dashboard-line',
+        label: 'What it is',
+        value: 'An early Power BI prototype exploring how rental information can be structured into a dashboard.'
+      },
+      {
+        icon: 'ri-flask-line',
+        label: 'Data',
+        value: 'Mock/sample rental data generated for layout, filtering, and BI storytelling practice.'
+      },
+      {
+        icon: 'ri-bar-chart-box-line',
+        label: 'Built with',
+        value: 'Power BI, dashboard wireframing, metric design, filters, and comparison views.'
+      },
+      {
+        icon: 'ri-compass-3-line',
+        label: 'Status',
+        value: 'A portfolio prototype, useful for showing BI thinking rather than real market analysis.'
+      }
+    ]
   },
   ja: {
     title: 'Rent Radar (Power BI)',
@@ -491,7 +560,30 @@ export const rentRadar = {
       'このダッシュボードで使用しているデータはすべてプロトタイプ用の架空サンプルデータです。実際の家賃市場の統計や地域別データを反映するものではありません。',
     dashboardTitle: 'インタラクティブダッシュボード',
     dashboardFallback: '新しいタブでダッシュボードを開く',
-    viewAllProjects: 'すべてのプロジェクトを見る'
+    viewAllProjects: 'すべてのプロジェクトを見る',
+    glanceTitle: '概要',
+    glanceItems: [
+      {
+        icon: 'ri-dashboard-line',
+        label: '何を作ったか',
+        value: '家賃情報をダッシュボードとしてどう整理できるかを試したPower BI初期プロトタイプです。'
+      },
+      {
+        icon: 'ri-flask-line',
+        label: '使用データ',
+        value: 'レイアウト、フィルタ、BIストーリー設計を試すための架空サンプル家賃データです。'
+      },
+      {
+        icon: 'ri-bar-chart-box-line',
+        label: '使用技術',
+        value: 'Power BI、ダッシュボード設計、指標設計、フィルタ、比較ビューを使用しました。'
+      },
+      {
+        icon: 'ri-compass-3-line',
+        label: '位置づけ',
+        value: '実際の市場分析ではなく、BI的な考え方と情報設計を示すポートフォリオ用プロトタイプです。'
+      }
+    ]
   }
 } as const;
 
