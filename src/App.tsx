@@ -7,6 +7,7 @@ import { NotFound } from './pages/NotFound';
 import { Projects } from './pages/Projects';
 import { RelocationProject } from './pages/RelocationProject';
 import { RentRadarProject } from './pages/RentRadarProject';
+import { Services } from './pages/Services';
 import { trackPageView } from './lib/analytics';
 import { getLocale, routeKey } from './lib/routes';
 
@@ -54,6 +55,7 @@ export function App() {
   }, [path]);
 
   if (key === '/') return <Home locale={locale} path={path} />;
+  if (key === '/services') return <Services locale={locale} path={path} />;
   if (key === '/projects') return <Projects locale={locale} path={path} />;
   if (key === '/projects/nz-japan-relocation') return <RelocationProject locale={locale} path={path} />;
   if (key === '/projects/rent-radar' || key === '/project') return <RentRadarProject locale={locale} path={path} />;

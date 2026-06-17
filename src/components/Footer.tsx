@@ -10,6 +10,7 @@ export function Footer({ locale }: FooterProps) {
   const t = common[locale];
   const nav = [
     { label: t.home, href: localize(locale) },
+    { label: t.services, href: localize(locale, '/services') },
     { label: t.projects, href: localize(locale, '/projects') },
     { label: t.blog, href: localize(locale, '/blog') }
   ];

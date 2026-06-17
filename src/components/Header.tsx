@@ -14,6 +14,7 @@ export function Header({ locale, path }: HeaderProps) {
   const base = routeKey(path);
   const nav = [
     { label: t.home, href: localize(locale), match: '/' },
+    { label: t.services, href: localize(locale, '/services'), match: '/services' },
     { label: t.projects, href: localize(locale, '/projects'), match: '/projects' },
     { label: t.blog, href: localize(locale, '/blog'), match: '/blog' }
   ];

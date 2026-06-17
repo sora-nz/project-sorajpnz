@@ -37,6 +37,7 @@ export const common = {
     name: 'SoraJPNZ',
     shortName: 'SoraJPNZ',
     home: 'Home',
+    services: 'Services',
     projects: 'Projects',
     blog: 'Blog',
     contact: 'Contact',
@@ -60,6 +61,7 @@ export const common = {
     name: 'SoraJPNZ',
     shortName: 'SoraJPNZ',
     home: 'ホーム',
+    services: 'サービス',
     projects: 'プロジェクト',
     blog: 'ブログ',
     contact: 'お問い合わせ',
@@ -87,6 +89,11 @@ export const seo = {
       title: 'SoraJPNZ | Data Analytics and Dashboard Services in Auckland',
       description:
         'SoraJPNZ is an Auckland-based data analytics and dashboard portfolio for practical Python, SQL, Tableau, Power BI, and web analytics projects.'
+    },
+    services: {
+      title: 'Services | SoraJPNZ',
+      description:
+        'Practical SoraJPNZ services for dashboards, BI reporting, web analytics setup, and clear data storytelling for small teams and early projects.'
     },
     projects: {
       title: 'Data Analytics Projects | SoraJPNZ',
@@ -119,6 +126,11 @@ export const seo = {
       title: 'SoraJPNZ | データ分析・ダッシュボード制作',
       description:
         'SoraJPNZはオークランド拠点のデータ分析・ダッシュボード制作ポートフォリオです。Python、SQL、Tableau、Power BI、公的データ分析の実例を掲載しています。'
+    },
+    services: {
+      title: 'サービス | SoraJPNZ',
+      description:
+        'SoraJPNZのサービスページです。ダッシュボード制作、BIレポーティング、Web分析設定、データストーリーテリングを小さく実用的に支援します。'
     },
     projects: {
       title: 'データ分析プロジェクト | SoraJPNZ',
@@ -220,6 +232,163 @@ export const home = {
     contactTitle: 'お問い合わせ',
     contact:
       '採用、面談、プロジェクトに関するご連絡はこちらからお願いします。Business Analyst / Data Analystとしての機会に加え、データ分析、レポーティング、業務改善に関する相談も歓迎しています。'
+  }
+} as const;
+
+export const servicesPage = {
+  en: {
+    eyebrow: 'Services',
+    title: 'Practical analytics support for early decisions',
+    subtitle:
+      'SoraJPNZ helps turn scattered data, public datasets, and small website signals into dashboards, reports, and simple measurement systems that are easier to act on.',
+    primaryCta: 'Discuss a Project',
+    secondaryCta: 'See Portfolio Work',
+    introTitle: 'What this is good for',
+    intro:
+      'The current focus is intentionally narrow: practical dashboard work, lightweight analytics setup, and clear documentation. It is designed to support small projects, hiring conversations, and early-stage business questions without overbuilding.',
+    packages: [
+      {
+        icon: 'ri-dashboard-3-line',
+        title: 'Dashboard Starter',
+        summary:
+          'A focused Tableau or Power BI dashboard for one clear question, using business data, spreadsheet data, or public datasets.',
+        deliverables: [
+          'Dashboard structure and key metric definition',
+          'Cleaned input data or documented data assumptions',
+          'Power BI or Tableau dashboard with simple navigation',
+          'Short handover notes explaining what to trust and what to check'
+        ]
+      },
+      {
+        icon: 'ri-line-chart-line',
+        title: 'Analytics Setup',
+        summary:
+          'A lightweight measurement foundation for a portfolio, small website, landing page, or early product idea.',
+        deliverables: [
+          'GA4 and Google Search Console setup review',
+          'Basic event and conversion naming plan',
+          'Simple reporting view for traffic, pages, and contact signals',
+          'Privacy-aware notes for what should and should not be tracked'
+        ]
+      },
+      {
+        icon: 'ri-file-chart-line',
+        title: 'Data Storytelling',
+        summary:
+          'A clear case-study style report that explains what the data shows, what it does not show, and what decision it supports.',
+        deliverables: [
+          'Data-source review and limitation notes',
+          'Charts or dashboard screenshots for the main findings',
+          'Plain-English summary for non-technical readers',
+          'Portfolio-ready write-up or internal decision note'
+        ]
+      }
+    ],
+    processTitle: 'How I work',
+    process: [
+      {
+        step: '01',
+        title: 'Scope the question',
+        body:
+          'Start with one decision, one audience, and the smallest useful output. This keeps the work practical and avoids a dashboard that tries to answer everything.'
+      },
+      {
+        step: '02',
+        title: 'Build transparently',
+        body:
+          'Clean the data, document assumptions, and keep metric logic visible. AI tools can support drafting and validation, but source transparency stays central.'
+      },
+      {
+        step: '03',
+        title: 'Hand over clearly',
+        body:
+          'Deliver the dashboard, report, or analytics setup with notes that explain how to read it, where the limits are, and what to improve next.'
+      }
+    ],
+    brandTitle: 'Where Pacibridge and Oceaflow fit',
+    brandBody:
+      'SoraJPNZ is the public hub today. Pacibridge can become the future analytics and tools branch, while Oceaflow can become the lifestyle and storytelling branch. For now, both should stay light until there is enough content or a product worth separating.',
+    ctaTitle: 'Have a small data problem or portfolio conversation?',
+    ctaBody:
+      'Reach out for project enquiries, hiring conversations, dashboard feedback, or a practical analytics setup discussion.',
+    ctaButton: 'Contact SoraJPNZ'
+  },
+  ja: {
+    eyebrow: 'Services',
+    title: '小さく実用的なデータ分析サポート',
+    subtitle:
+      'SoraJPNZでは、散らばったデータ、公的データ、小さなWebサイトの計測情報を、判断しやすいダッシュボード、レポート、分析基盤へ整理します。',
+    primaryCta: '相談する',
+    secondaryCta: '実績を見る',
+    introTitle: '何に向いているか',
+    intro:
+      '現在のサービス方針はあえて絞っています。ダッシュボード制作、軽い分析設定、わかりやすいドキュメント化を中心に、小さな案件、採用面談、初期の事業アイデアに使える形を作ります。',
+    packages: [
+      {
+        icon: 'ri-dashboard-3-line',
+        title: 'Dashboard Starter',
+        summary:
+          'ひとつの問いに絞ったTableau / Power BIダッシュボードを、業務データ、スプレッドシート、公的データから作成します。',
+        deliverables: [
+          'ダッシュボード構成と主要指標の整理',
+          '入力データのクリーニング、または前提条件の整理',
+          'Power BIまたはTableauでのシンプルなダッシュボード',
+          '読み方、注意点、確認すべき点をまとめた短い引き継ぎメモ'
+        ]
+      },
+      {
+        icon: 'ri-line-chart-line',
+        title: 'Analytics Setup',
+        summary:
+          'ポートフォリオ、小規模Webサイト、ランディングページ、初期プロダクト向けに、軽い計測基盤を整えます。',
+        deliverables: [
+          'GA4とGoogle Search Consoleの設定確認',
+          '基本的なイベント名、コンバージョン名の整理',
+          '流入、ページ、問い合わせシグナルを確認する簡単なレポート',
+          '何を計測し、何を計測しないべきかのプライバシー配慮メモ'
+        ]
+      },
+      {
+        icon: 'ri-file-chart-line',
+        title: 'Data Storytelling',
+        summary:
+          'データから何が言えるか、何は言えないか、どの判断に使えるかを、ケーススタディ形式で整理します。',
+        deliverables: [
+          'データソースと制約の整理',
+          '主要な発見を示すチャート、またはダッシュボード画面',
+          '非エンジニアにも伝わる要約',
+          'ポートフォリオ掲載用、または社内メモ向けの文章'
+        ]
+      }
+    ],
+    processTitle: '進め方',
+    process: [
+      {
+        step: '01',
+        title: '問いを絞る',
+        body:
+          '最初に、ひとつの判断、ひとつの読み手、最小限のアウトプットに絞ります。何でも入ったダッシュボードではなく、使える形を優先します。'
+      },
+      {
+        step: '02',
+        title: '透明性を保って作る',
+        body:
+          'データを整え、前提条件を残し、指標ロジックを見える状態にします。AIツールは下書きや検証に使いますが、元データと人間の確認を重視します。'
+      },
+      {
+        step: '03',
+        title: '読み方まで渡す',
+        body:
+          'ダッシュボード、レポート、分析設定だけでなく、読み方、制約、次に改善すべき点を一緒にまとめます。'
+      }
+    ],
+    brandTitle: 'Pacibridge / Oceaflow の位置づけ',
+    brandBody:
+      '現時点ではSoraJPNZを公開ハブにします。Pacibridgeは将来の分析・ツール系ブランド、Oceaflowはライフスタイル・発信系ブランドとして育てる候補です。今は無理に分けず、コンテンツや商品が形になった段階で独立させる方針が自然です。',
+    ctaTitle: '小さなデータ課題やポートフォリオ相談がありますか？',
+    ctaBody:
+      'プロジェクト相談、採用面談、ダッシュボードへのフィードバック、Web分析設定の相談など、お気軽にご連絡ください。',
+    ctaButton: 'SoraJPNZに問い合わせる'
   }
 } as const;
 
