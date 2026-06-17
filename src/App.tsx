@@ -3,6 +3,7 @@ import { Blog } from './pages/Blog';
 import { Contact } from './pages/Contact';
 import { Home } from './pages/Home';
 import { LegalPage } from './pages/LegalPage';
+import { LinksPage } from './pages/LinksPage';
 import { NotFound } from './pages/NotFound';
 import { Projects } from './pages/Projects';
 import { RelocationProject } from './pages/RelocationProject';
@@ -56,6 +57,7 @@ export function App() {
 
   if (key === '/') return <Home locale={locale} path={path} />;
   if (key === '/services') return <Services locale={locale} path={path} />;
+  if (key === '/links') return <LinksPage locale={locale} path={path} />;
   if (key === '/projects') return <Projects locale={locale} path={path} />;
   if (key === '/projects/nz-japan-relocation') return <RelocationProject locale={locale} path={path} />;
   if (key === '/projects/rent-radar' || key === '/project') return <RentRadarProject locale={locale} path={path} />;

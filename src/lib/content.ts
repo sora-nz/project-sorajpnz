@@ -20,7 +20,7 @@ export const links = {
   privacyEmail: 'mailto:privacy@sorajpnz.com',
   linkedin: 'https://www.linkedin.com/in/soraoya/',
   github: 'https://github.com/sora-nz',
-  youtube: 'https://www.youtube.com/@yurufuwa_life',
+  youtube: 'https://www.youtube.com/@sorajpnz',
   relocationGithub: 'https://github.com/sora-nz/nz-relocation-affordability-dashboard',
   tableau:
     'https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard',
@@ -31,6 +31,75 @@ export const links = {
   powerBiEmbed:
     'https://app.powerbi.com/view?r=eyJrIjoiOTdlNmRhZWMtODY4Mi00NDllLTk1ZGMtNjg0N2VjM2Q3MjM4IiwidCI6IjliNzM4NTI2LTY3N2YtNDY2MS1hYTVlLTgyZjk1NDdiZDBhNCJ9'
 };
+
+export const socialLinks = [
+  {
+    id: 'youtube',
+    label: 'YouTube',
+    href: links.youtube,
+    icon: 'ri-youtube-fill',
+    tone: 'youtube',
+    role: {
+      en: 'Long-form videos and main video archive',
+      ja: '長尺動画とメインの動画アーカイブ'
+    }
+  },
+  {
+    id: 'instagram',
+    label: 'Instagram',
+    href: 'https://www.instagram.com/sorajpnz',
+    icon: 'ri-instagram-line',
+    tone: 'instagram',
+    role: {
+      en: 'Short clips, ocean moments, and daily updates',
+      ja: '短尺動画、海の記録、日々の更新'
+    }
+  },
+  {
+    id: 'threads',
+    label: 'Threads',
+    href: 'https://www.threads.com/@sorajpnz',
+    icon: 'ri-threads-line',
+    tone: 'threads',
+    role: {
+      en: 'Short thoughts and lightweight updates',
+      ja: '短い考えや軽い更新'
+    }
+  },
+  {
+    id: 'facebook',
+    label: 'Facebook',
+    href: 'https://www.facebook.com/sorajpnz',
+    icon: 'ri-facebook-circle-fill',
+    tone: 'facebook',
+    role: {
+      en: 'NZ life and local community updates',
+      ja: 'NZ生活とローカル向けの補助導線'
+    }
+  },
+  {
+    id: 'tiktok',
+    label: 'TikTok',
+    href: 'https://www.tiktok.com/@sorajpnz',
+    icon: 'ri-tiktok-fill',
+    tone: 'tiktok',
+    role: {
+      en: 'Short-form discovery and quick stories',
+      ja: '短尺動画と認知拡大'
+    }
+  },
+  {
+    id: 'x',
+    label: 'X',
+    href: 'https://x.com/sorajpnz',
+    icon: 'ri-twitter-x-fill',
+    tone: 'x',
+    role: {
+      en: 'Work, AI, data, migration, and update notes',
+      ja: '仕事、AI、データ、移住、更新告知'
+    }
+  }
+] as const;
 
 export const common = {
   en: {
@@ -50,7 +119,7 @@ export const common = {
     language: 'Language',
     english: 'English',
     japanese: 'Japanese',
-    siteTagline: 'Data, dashboards, and practical insights from New Zealand',
+    siteTagline: 'New Zealand life, ocean notes, work, money, and practical data',
     viewProject: 'View Project',
     viewProjects: 'View Projects',
     emailMe: 'Email Me',
@@ -74,7 +143,7 @@ export const common = {
     language: '言語',
     english: 'English',
     japanese: '日本語',
-    siteTagline: 'ニュージーランドから、データを意思決定に使える形へ',
+    siteTagline: 'NZ生活、海、仕事、お金、データ活用の記録',
     viewProject: 'プロジェクトを見る',
     viewProjects: 'プロジェクト一覧',
     emailMe: 'メールする',
@@ -86,9 +155,9 @@ export const common = {
 export const seo = {
   en: {
     home: {
-      title: 'SoraJPNZ | Data Analytics and Dashboard Services in Auckland',
+      title: 'SoraJPNZ | New Zealand Life, Ocean, Work, Money, and Data',
       description:
-        'SoraJPNZ is an Auckland-based data analytics and dashboard portfolio for practical Python, SQL, Tableau, Power BI, and web analytics projects.'
+        'SoraJPNZ is a New Zealand-based content hub for NZ life, ocean and fishing stories, work, money, practical data projects, and social updates.'
     },
     services: {
       title: 'Services | SoraJPNZ',
@@ -111,9 +180,14 @@ export const seo = {
         'An early Power BI rental dashboard prototype showing BI layout, mock rental indicators, filters, and comparison-focused dashboard design.'
     },
     blog: {
-      title: 'Blog | SoraJPNZ',
+      title: 'Blog Hub | SoraJPNZ',
       description:
-        'Blog posts from SoraJPNZ are being prepared.'
+        'SoraJPNZ blog hub for video notes, New Zealand life, ocean and fishing, work and money, and data tools.'
+    },
+    links: {
+      title: 'Links | SoraJPNZ',
+      description:
+        'Quick links to SoraJPNZ YouTube, blog, projects, services, contact, and social channels.'
     },
     contact: {
       title: 'Contact | SoraJPNZ',
@@ -123,9 +197,9 @@ export const seo = {
   },
   ja: {
     home: {
-      title: 'SoraJPNZ | データ分析・ダッシュボード制作',
+      title: 'SoraJPNZ | NZ生活・海・仕事・お金・データ',
       description:
-        'SoraJPNZはオークランド拠点のデータ分析・ダッシュボード制作ポートフォリオです。Python、SQL、Tableau、Power BI、公的データ分析の実例を掲載しています。'
+        'SoraJPNZは、NZ生活、海・釣り、仕事、お金、データ活用、SNS発信をまとめる個人ブランドの発信母艦です。'
     },
     services: {
       title: 'サービス | SoraJPNZ',
@@ -148,9 +222,14 @@ export const seo = {
         '架空データを使い、家賃情報の整理、比較、フィルター設計を試した初期Power BIダッシュボードプロトタイプです。'
     },
     blog: {
-      title: 'ブログ | SoraJPNZ',
+      title: 'ブログHub | SoraJPNZ',
       description:
-        'SoraJPNZのブログ記事を準備中です。'
+        '動画メモ、NZ生活、海と釣り、仕事とお金、データとツールを整理するSoraJPNZのブログHubです。'
+    },
+    links: {
+      title: 'リンク | SoraJPNZ',
+      description:
+        'SoraJPNZのYouTube、ブログ、プロジェクト、サービス、お問い合わせ、各SNSへの入口です。'
     },
     contact: {
       title: 'お問い合わせ | SoraJPNZ',
@@ -163,95 +242,109 @@ export const seo = {
 export const home = {
   en: {
     title: 'SoraJPNZ',
-    role: 'Data Analytics / Dashboard Design / Web Analytics Setup',
-    tagline: 'Turning data into decision-ready insights.',
+    role: 'New Zealand life, ocean stories, work, money, and data projects',
+    tagline: 'A practical record of living, learning, and building in New Zealand.',
     description:
-      'A New Zealand-based analytics hub for practical dashboards, public-data projects, and lightweight web analytics setup. Built for clear reporting, useful decisions, and small teams that need understandable data.',
-    primaryCta: 'Start a Conversation',
-    contactCta: 'View Projects',
-    servicesTitle: 'Ways I Can Help',
+      'SoraJPNZ brings together videos, blog notes, dashboards, and small tools about Auckland life, ocean and fishing, work, money, and how data can make everyday decisions clearer.',
+    primaryCta: 'Watch on YouTube',
+    contactCta: 'Read the Blog',
+    socialEyebrow: 'Social Channels',
+    socialTitle: 'Follow the journey',
+    socialSubtitle:
+      'YouTube is the main archive. Short clips, updates, and lightweight notes live across the other channels, then the useful parts become blog posts and projects here.',
+    socialPrimaryLabel: 'Main channel',
+    socialSecondaryLabel: 'Short clips and updates',
+    allLinksCta: 'Open all links',
+    servicesTitle: 'Small ways I can help',
     servicesSubtitle:
-      'Small, practical data support for dashboards, portfolio projects, and first analytics setups.',
+      'Light support that grows naturally from the content, projects, and analytics work on this site.',
     services: [
       {
         icon: 'ri-dashboard-3-line',
         title: 'Dashboard Starter',
-        body: 'Power BI or Tableau dashboards that turn messy data into a clear view of what is happening.'
+        body: 'A focused Power BI or Tableau dashboard for one question, one audience, or one small project.'
       },
       {
         icon: 'ri-line-chart-line',
         title: 'Analytics Setup',
-        body: 'GA4, Search Console, simple tracking plans, and reporting foundations for small websites.'
+        body: 'GA4, Search Console, and simple tracking foundations for a website, portfolio, or content project.'
       },
       {
         icon: 'ri-file-chart-line',
         title: 'Data Storytelling',
-        body: 'Case-study style analysis, public-data exploration, and clear summaries for decision making.'
+        body: 'Clear write-ups that turn data, experience, or a project into something people can understand.'
       }
     ],
     projectsTitle: 'Projects',
     aboutTitle: 'About Me',
     about:
-      "I am working toward Business Analyst / Data Analyst roles, focusing on turning practical problems into clear, decision-ready information. My portfolio projects use public data to explore topics such as housing, living costs, mobility, and currency movement through data cleaning, metric design, dashboards, and insight reporting.",
+      'I use SoraJPNZ as a public record of what I am learning and building in New Zealand. The work still includes data analysis, dashboards, and practical reporting, but it now sits alongside content about life, ocean activities, career building, money, and small experiments.',
     contactTitle: 'Contact',
     contact:
-      'For hiring, interviews, or project-related enquiries, please get in touch. I am open to Business Analyst / Data Analyst opportunities, as well as conversations around data analysis, reporting, and process improvement.'
+      'For hiring, interviews, collaborations, portfolio feedback, or small project conversations, please get in touch.'
   },
   ja: {
     title: 'SoraJPNZ',
-    role: 'データ分析 / ダッシュボード設計 / Web分析設定',
-    tagline: 'データを、意思決定に使える形へ。',
+    role: 'NZ生活・海・仕事・お金・データ活用の発信と記録',
+    tagline: 'ニュージーランドで暮らし、学び、作っていく過程を残す場所。',
     description:
-      'ニュージーランドを拠点に、実用的なダッシュボード、公的データ分析、Web分析設定を扱う小さな分析ハブです。見やすいレポート、判断しやすい情報整理、初期の分析基盤づくりを重視しています。',
-    primaryCta: '相談する',
-    contactCta: 'プロジェクトを見る',
-    servicesTitle: 'できること',
+      'SoraJPNZは、オークランドでの生活、海・釣り、仕事、お金、そしてデータ活用を、動画・ブログ・プロジェクトとして整理していく個人ブランドの発信母艦です。',
+    primaryCta: 'YouTubeを見る',
+    contactCta: 'ブログを読む',
+    socialEyebrow: 'Social Channels',
+    socialTitle: '発信をフォローする',
+    socialSubtitle:
+      'YouTubeをメインの動画アーカイブにしつつ、短尺動画や軽い更新は各SNSに出していきます。役に立つ内容はブログやプロジェクトとして、このサイトに残していきます。',
+    socialPrimaryLabel: 'メインチャンネル',
+    socialSecondaryLabel: '短尺動画と更新',
+    allLinksCta: 'リンク一覧を見る',
+    servicesTitle: '小さく手伝えること',
     servicesSubtitle:
-      'ダッシュボード制作、分析設定、データの整理を小さく実用的に支援します。',
+      '発信、Webサイト、ポートフォリオ、データ整理から自然につながる軽いサポートです。',
     services: [
       {
         icon: 'ri-dashboard-3-line',
         title: 'Dashboard Starter',
-        body: 'Power BIやTableauで、散らばったデータを状況が見えるダッシュボードに整理します。'
+        body: 'ひとつの問い、ひとつの読者、ひとつの小さなプロジェクトに絞ったダッシュボードを作ります。'
       },
       {
         icon: 'ri-line-chart-line',
         title: 'Analytics Setup',
-        body: 'GA4、Search Console、簡単な計測設計など、小さなWebサイトの分析基盤を整えます。'
+        body: 'GA4、Search Console、簡単な計測設計など、サイトや発信の土台を整えます。'
       },
       {
         icon: 'ri-file-chart-line',
         title: 'Data Storytelling',
-        body: '公的データや業務データを使い、判断に使いやすいケーススタディや要約にまとめます。'
+        body: 'データ、経験、プロジェクトを、あとから読み返せる分かりやすい文章に整理します。'
       }
     ],
     projectsTitle: 'プロジェクト',
     aboutTitle: '自己紹介',
     about:
-      'Business Analyst / Data Analystとして、実務上の課題を整理し、意思決定に使える情報へ変換することを重視しています。公的データを使ったポートフォリオでは、データクリーニング、指標設計、ダッシュボード、インサイトレポートを通じて、住宅、生活費、移動、為替などのテーマを扱っています。',
+      'SoraJPNZは、ニュージーランドで暮らしながら学び、作り、発信していく過程を残す場所です。データ分析、ダッシュボード、レポート制作の強みは残しつつ、生活、海、仕事、お金、AI活用、発信活動も一緒に扱っていきます。',
     contactTitle: 'お問い合わせ',
     contact:
-      '採用、面談、プロジェクトに関するご連絡はこちらからお願いします。Business Analyst / Data Analystとしての機会に加え、データ分析、レポーティング、業務改善に関する相談も歓迎しています。'
+      '採用、面談、コラボレーション、ポートフォリオへのフィードバック、小さなプロジェクト相談などはこちらからお願いします。'
   }
 } as const;
 
 export const servicesPage = {
   en: {
     eyebrow: 'Services',
-    title: 'Practical analytics support for early decisions',
+    title: 'Small support for content, data, and practical projects',
     subtitle:
-      'SoraJPNZ helps turn scattered data, public datasets, and small website signals into dashboards, reports, and simple measurement systems that are easier to act on.',
-    primaryCta: 'Discuss a Project',
-    secondaryCta: 'See Portfolio Work',
-    introTitle: 'What this is good for',
+      'SoraJPNZ is not trying to look like a large BI agency. This page is for lightweight help around dashboards, analytics setup, data write-ups, websites, portfolios, and small experiments.',
+    primaryCta: 'Start a Light Conversation',
+    secondaryCta: 'See Projects',
+    introTitle: 'What this is useful for',
     intro:
-      'The current focus is intentionally narrow: practical dashboard work, lightweight analytics setup, and clear documentation. It is designed to support small projects, hiring conversations, and early-stage business questions without overbuilding.',
+      'The current focus is intentionally small: practical dashboard work, simple analytics setup, and clear documentation. It is useful when you have a project, content idea, portfolio piece, or early business question that needs a clean first version before anything bigger is built.',
     packages: [
       {
         icon: 'ri-dashboard-3-line',
         title: 'Dashboard Starter',
         summary:
-          'A focused Tableau or Power BI dashboard for one clear question, using business data, spreadsheet data, or public datasets.',
+          'A focused Tableau or Power BI dashboard for one clear question, using business data, spreadsheet data, public datasets, or content-performance data.',
         deliverables: [
           'Dashboard structure and key metric definition',
           'Cleaned input data or documented data assumptions',
@@ -263,7 +356,7 @@ export const servicesPage = {
         icon: 'ri-line-chart-line',
         title: 'Analytics Setup',
         summary:
-          'A lightweight measurement foundation for a portfolio, small website, landing page, or early product idea.',
+          'A lightweight measurement foundation for a portfolio, small website, blog, social-content funnel, landing page, or early product idea.',
         deliverables: [
           'GA4 and Google Search Console setup review',
           'Basic event and conversion naming plan',
@@ -275,7 +368,7 @@ export const servicesPage = {
         icon: 'ri-file-chart-line',
         title: 'Data Storytelling',
         summary:
-          'A clear case-study style report that explains what the data shows, what it does not show, and what decision it supports.',
+          'A clear write-up that turns data, project work, or lived experience into a useful case study, blog post, or decision note.',
         deliverables: [
           'Data-source review and limitation notes',
           'Charts or dashboard screenshots for the main findings',
@@ -284,7 +377,7 @@ export const servicesPage = {
         ]
       }
     ],
-    processTitle: 'How I work',
+    processTitle: 'How this stays simple',
     process: [
       {
         step: '01',
@@ -310,25 +403,25 @@ export const servicesPage = {
       'SoraJPNZ is the public hub today. Pacibridge can become the future analytics and tools branch, while Oceaflow can become the lifestyle and storytelling branch. For now, both should stay light until there is enough content or a product worth separating.',
     ctaTitle: 'Have a small data problem or portfolio conversation?',
     ctaBody:
-      'Reach out for project enquiries, hiring conversations, dashboard feedback, or a practical analytics setup discussion.',
+      'Reach out for a small project, portfolio feedback, dashboard review, website analytics setup, or a practical conversation about turning content and data into something useful.',
     ctaButton: 'Contact SoraJPNZ'
   },
   ja: {
     eyebrow: 'Services',
-    title: '小さく実用的なデータ分析サポート',
+    title: '発信・データ・小さな制作を整えるサポート',
     subtitle:
-      'SoraJPNZでは、散らばったデータ、公的データ、小さなWebサイトの計測情報を、判断しやすいダッシュボード、レポート、分析基盤へ整理します。',
-    primaryCta: '相談する',
-    secondaryCta: '実績を見る',
-    introTitle: '何に向いているか',
+      'SoraJPNZは大きな会社向けの本格BIサービスとして見せるより、ダッシュボード、分析設定、文章化、Webサイト、ポートフォリオ、小さな実験を軽く整える相談窓口として置いています。',
+    primaryCta: '軽く相談する',
+    secondaryCta: 'プロジェクトを見る',
+    introTitle: 'どういう時に使えるか',
     intro:
-      '現在のサービス方針はあえて絞っています。ダッシュボード制作、軽い分析設定、わかりやすいドキュメント化を中心に、小さな案件、採用面談、初期の事業アイデアに使える形を作ります。',
+      '現在のサービス方針はあえて小さくしています。ダッシュボード制作、軽い分析設定、分かりやすいドキュメント化を中心に、発信、ポートフォリオ、初期の事業アイデアをまず形にするためのサポートです。',
     packages: [
       {
         icon: 'ri-dashboard-3-line',
         title: 'Dashboard Starter',
         summary:
-          'ひとつの問いに絞ったTableau / Power BIダッシュボードを、業務データ、スプレッドシート、公的データから作成します。',
+          'ひとつの問いに絞ったTableau / Power BIダッシュボードを、業務データ、スプレッドシート、公的データ、発信活動のデータから作成します。',
         deliverables: [
           'ダッシュボード構成と主要指標の整理',
           '入力データのクリーニング、または前提条件の整理',
@@ -340,7 +433,7 @@ export const servicesPage = {
         icon: 'ri-line-chart-line',
         title: 'Analytics Setup',
         summary:
-          'ポートフォリオ、小規模Webサイト、ランディングページ、初期プロダクト向けに、軽い計測基盤を整えます。',
+          'ポートフォリオ、小規模Webサイト、ブログ、SNS導線、ランディングページ、初期プロダクト向けに、軽い計測基盤を整えます。',
         deliverables: [
           'GA4とGoogle Search Consoleの設定確認',
           '基本的なイベント名、コンバージョン名の整理',
@@ -352,7 +445,7 @@ export const servicesPage = {
         icon: 'ri-file-chart-line',
         title: 'Data Storytelling',
         summary:
-          'データから何が言えるか、何は言えないか、どの判断に使えるかを、ケーススタディ形式で整理します。',
+          'データ、制作物、経験から何が言えるかを、ケーススタディ、ブログ記事、判断メモとして整理します。',
         deliverables: [
           'データソースと制約の整理',
           '主要な発見を示すチャート、またはダッシュボード画面',
@@ -361,7 +454,7 @@ export const servicesPage = {
         ]
       }
     ],
-    processTitle: '進め方',
+    processTitle: 'シンプルな進め方',
     process: [
       {
         step: '01',
@@ -387,7 +480,7 @@ export const servicesPage = {
       '現時点ではSoraJPNZを公開ハブにします。Pacibridgeは将来の分析・ツール系ブランド、Oceaflowはライフスタイル・発信系ブランドとして育てる候補です。今は無理に分けず、コンテンツや商品が形になった段階で独立させる方針が自然です。',
     ctaTitle: '小さなデータ課題やポートフォリオ相談がありますか？',
     ctaBody:
-      'プロジェクト相談、採用面談、ダッシュボードへのフィードバック、Web分析設定の相談など、お気軽にご連絡ください。',
+      '小さな制作、ポートフォリオへのフィードバック、ダッシュボードレビュー、Web分析設定、発信とデータの整理など、お気軽にご連絡ください。',
     ctaButton: 'SoraJPNZに問い合わせる'
   }
 } as const;
@@ -434,7 +527,8 @@ export const contactPage = {
 export const projects = {
   en: {
     title: 'Projects',
-    subtitle: 'Practical analytics projects that turn public and operational data into usable decisions.',
+    subtitle:
+      'Practical projects that connect public data, New Zealand life, content experiments, and analytics into something useful.',
     featured: 'Featured',
     relocationTitle: 'New Zealand Relocation Affordability Dashboard',
     relocationDescription:
@@ -446,7 +540,8 @@ export const projects = {
   },
   ja: {
     title: 'プロジェクト',
-    subtitle: '公的データや業務データを、実際に判断へ使える形にする分析プロジェクトです。',
+    subtitle:
+      '公的データ、NZ生活、発信活動、分析の実験を、あとから使える形にしていくプロジェクトです。',
     featured: '注目',
     relocationTitle: 'ニュージーランド移住向け 家賃負担ダッシュボード',
     relocationDescription:
@@ -798,20 +893,139 @@ export const rentRadar = {
 
 export const blog = {
   en: {
-    title: 'Blog',
-    subtitle: 'Articles are being prepared.',
-    introLabel: 'Coming soon',
-    introTitle: 'Notes are being shaped carefully',
+    title: 'Blog Hub',
+    subtitle:
+      'A place where videos, short posts, projects, and real-life notes become searchable records.',
+    introLabel: 'Content hub',
+    introTitle: 'Videos become notes. Notes become projects.',
     body:
-      'I am preparing longer notes and case studies. For now, this page stays intentionally simple until each post is ready to publish.'
+      'The blog is the quiet archive behind SoraJPNZ. YouTube and short-form posts create momentum, while this page will hold the useful parts in a slower, more searchable format.',
+    categories: [
+      {
+        icon: 'ri-youtube-line',
+        title: 'Video Notes',
+        description:
+          'Readable notes from YouTube videos, Shorts, and social clips so the useful ideas can be revisited later.',
+        themes: ['Video summaries', 'Behind-the-scenes notes', 'Links and references']
+      },
+      {
+        icon: 'ri-home-heart-line',
+        title: 'New Zealand Life',
+        description:
+          'Auckland living, housing, transport, food costs, daily observations, and the small realities of building a life in New Zealand.',
+        themes: ['Auckland life', 'Moving and settling', 'Cost-of-living notes']
+      },
+      {
+        icon: 'ri-sailboat-line',
+        title: 'Ocean & Fishing',
+        description:
+          'Shore fishing, spearfishing, ocean safety, gear, trip notes, and the lessons that come from spending time near the water.',
+        themes: ['Spearfishing logs', 'Gear and safety', 'Trip notes']
+      },
+      {
+        icon: 'ri-briefcase-4-line',
+        title: 'Work & Money',
+        description:
+          'Career building, visa context, living costs, investing, and the practical money side of trying to build a stable life in New Zealand.',
+        themes: ['Career notes', 'Visa and job search context', 'Money reality checks']
+      },
+      {
+        icon: 'ri-database-2-line',
+        title: 'Data & Tools',
+        description:
+          'AI, website analytics, dashboards, content performance, and the data experiments behind the public projects.',
+        themes: ['GA4 and Search Console', 'Dashboards', 'AI-assisted workflows']
+      }
+    ],
+    nextTitle: 'What will come later',
+    nextItems: [
+      'Short social posts can become YouTube topics.',
+      'YouTube topics can become blog notes.',
+      'Blog notes can become projects, services, or future lightweight products.'
+    ]
   },
   ja: {
-    title: 'ブログ',
-    subtitle: '記事を準備中です。',
-    introLabel: 'Coming soon',
-    introTitle: '公開できる形に整えています',
+    title: 'ブログHub',
+    subtitle:
+      '動画、短文投稿、プロジェクト、生活の気づきを、あとから検索できる記録として残す場所です。',
+    introLabel: 'Content hub',
+    introTitle: '動画をメモに。メモをプロジェクトに。',
     body:
-      '長めの記事やケーススタディは、内容をきちんと整えてから公開します。準備ができるまでは、このページはシンプルな案内だけにしています。'
+      'SoraJPNZのブログは、発信の裏側にある静かなアーカイブです。YouTubeや短尺SNSで出した内容の中から、役に立つものを整理して残していきます。',
+    categories: [
+      {
+        icon: 'ri-youtube-line',
+        title: 'Video Notes',
+        description:
+          'YouTubeやShortsで話した内容を、あとから読み返せる形で整理するカテゴリです。',
+        themes: ['動画の要約', '撮影・編集の裏側', '参考リンク']
+      },
+      {
+        icon: 'ri-home-heart-line',
+        title: 'New Zealand Life',
+        description:
+          'Aucklandでの生活、住まい、移動、食費、日常の気づきを扱うカテゴリです。',
+        themes: ['オークランド生活', '移住と生活の立ち上げ', '生活費メモ']
+      },
+      {
+        icon: 'ri-sailboat-line',
+        title: 'Ocean & Fishing',
+        description:
+          '岸釣り、スピアフィッシング、海の安全、道具、釣行記録を扱うカテゴリです。',
+        themes: ['スピアフィッシング記録', '道具と安全', '釣行メモ']
+      },
+      {
+        icon: 'ri-briefcase-4-line',
+        title: 'Work & Money',
+        description:
+          '仕事探し、ビザ、生活費、投資、NZで生きるためのお金の現実を扱うカテゴリです。',
+        themes: ['キャリア記録', 'ビザと仕事探し', 'お金の現実']
+      },
+      {
+        icon: 'ri-database-2-line',
+        title: 'Data & Tools',
+        description:
+          'AI、Webサイト、アクセス分析、ダッシュボード、発信改善の裏側を扱うカテゴリです。',
+        themes: ['GA4とSearch Console', 'ダッシュボード', 'AI活用ワークフロー']
+      }
+    ],
+    nextTitle: '今後の流れ',
+    nextItems: [
+      '短いSNS投稿からYouTubeのテーマを作る。',
+      'YouTubeの内容をブログ記事として整理する。',
+      'ブログ記事からプロジェクト、サービス、将来の商品へ発展させる。'
+    ]
+  }
+} as const;
+
+export const linksPage = {
+  en: {
+    title: 'SoraJPNZ Links',
+    eyebrow: 'SoraJPNZ',
+    intro:
+      'New Zealand life, ocean and fishing, work, money, data projects, and small tools from Auckland.',
+    primaryNote: 'Start here',
+    secondaryNote: 'Explore the site',
+    youtubeCta: 'Watch on YouTube',
+    blogCta: 'Read the Blog',
+    projectsCta: 'View Projects',
+    servicesCta: 'Light Services',
+    contactCta: 'Contact',
+    footer: 'This page is the lightweight SoraJPNZ link-in-bio hub.'
+  },
+  ja: {
+    title: 'SoraJPNZ リンク',
+    eyebrow: 'SoraJPNZ',
+    intro:
+      'オークランドから、NZ生活、海・釣り、仕事、お金、データ活用、小さな制作を発信しています。',
+    primaryNote: 'まずはこちら',
+    secondaryNote: 'サイトを見る',
+    youtubeCta: 'YouTubeを見る',
+    blogCta: 'ブログを読む',
+    projectsCta: 'プロジェクトを見る',
+    servicesCta: '軽いサービス相談',
+    contactCta: 'お問い合わせ',
+    footer: 'SNSプロフィール用の、SoraJPNZ公式リンク入口です。'
   }
 } as const;
 

@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { Locale, siteUrl } from './content';
+import { Locale, siteUrl, socialLinks } from './content';
 
 type MetaConfig = {
   locale: Locale;
@@ -115,7 +115,7 @@ export function pageJsonLd(locale: Locale, path: string, title: string, descript
         sameAs: [
           'https://www.linkedin.com/in/soraoya/',
           'https://github.com/sora-nz',
-          'https://www.youtube.com/@yurufuwa_life'
+          ...socialLinks.filter((item) => item.href).map((item) => item.href)
         ]
       },
       {

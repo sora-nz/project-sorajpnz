@@ -1,7 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
-import { assets, common, home, links, Locale, projects, seo } from '../lib/content';
+import { assets, common, home, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
@@ -17,6 +17,9 @@ export function Home({ locale, path }: HomeProps) {
   const p = projects[locale];
   const meta = seo[locale].home;
   const base = localize(locale);
+  const visibleSocialChannels = socialLinks.filter((channel) => channel.href);
+  const primarySocial = visibleSocialChannels.find((channel) => channel.id === 'youtube');
+  const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
 
   useReveal();
   useMeta({
@@ -45,14 +48,64 @@ export function Home({ locale, path }: HomeProps) {
               <p className="hero-tagline">{h.tagline}</p>
               <p className="hero-description">{h.description}</p>
               <div className="button-row">
-                <a className="button primary" href={`${base}/contact`}>
+                <a className="button primary" href={links.youtube} target="_blank" rel="noopener noreferrer">
                   <span>{h.primaryCta}</span>
-                  <i className="ri-arrow-right-line" />
+                  <i className="ri-youtube-fill" />
                 </a>
-                <a className="button secondary" href={`${base}/projects`}>
+                <a className="button secondary" href={`${base}/blog`}>
                   <span>{h.contactCta}</span>
-                  <i className="ri-folder-chart-line" />
+                  <i className="ri-article-line" />
                 </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section className="content-section social-channel-section">
+          <div className="section-inner social-channel-layout">
+            <div className="section-heading social-channel-heading reveal-on-scroll">
+              <p className="eyebrow">{h.socialEyebrow}</p>
+              <h2>{h.socialTitle}</h2>
+              <p>{h.socialSubtitle}</p>
+              <a className="button secondary small" href={`${base}/links`}>
+                <span>{h.allLinksCta}</span>
+                <i className="ri-links-line" />
+              </a>
+            </div>
+
+            <div className="social-channel-cards">
+              {primarySocial && (
+                <a
+                  className={`social-primary-card ${primarySocial.tone} reveal-on-scroll`}
+                  href={primarySocial.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <span className="social-card-label">{h.socialPrimaryLabel}</span>
+                  <span className="social-card-icon" aria-hidden="true">
+                    <i className={primarySocial.icon} />
+                  </span>
+                  <strong>{primarySocial.label}</strong>
+                  <span>{primarySocial.role[locale]}</span>
+                </a>
+              )}
+
+              <div className="social-card-grid">
+                {secondarySocial.map((channel) => (
+                  <a
+                    className={`social-mini-card ${channel.tone} reveal-on-scroll`}
+                    href={channel.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    key={channel.id}
+                  >
+                    <span className="social-card-icon" aria-hidden="true">
+                      <i className={channel.icon} />
+                    </span>
+                    <strong>{channel.label}</strong>
+                    <span>{channel.role[locale]}</span>
+                  </a>
+                ))}
               </div>
             </div>
           </div>

@@ -1,0 +1,11 @@
+/en/blog
+  X-Robots-Tag: noindex, follow
+
+/ja/blog
+  X-Robots-Tag: noindex, follow
+
+/en/links
+  X-Robots-Tag: noindex, follow
+
+/ja/links
+  X-Robots-Tag: noindex, follow
