@@ -115,7 +115,7 @@ export function LinksPage({ locale, path }: LinksPageProps) {
       label: l.servicesCta,
       href: `${base}/services`,
       icon: 'ri-service-line',
-      note: c.services
+      note: l.servicesNote
     }
   ];
 

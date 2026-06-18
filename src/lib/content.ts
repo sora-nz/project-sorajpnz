@@ -10,7 +10,13 @@ export const assets = {
   profileBg: '/assets/homepage3.jpg',
   dashboard: '/assets/nz-relocation-dashboard.png',
   rentRadar: '/assets/rentradar.png',
-  avatar: '/assets/sora-avatar.png'
+  avatar: '/assets/sora-avatar.png',
+  blogHero: '/assets/blog/thea-fishing-rocks.jpg',
+  blogOceanFloat: '/assets/blog/ocean-float.jpg',
+  blogSpearfishing: '/assets/blog/ocean-spearfishing-octopus.jpg',
+  blogSnapperWharf: '/assets/blog/thea-snapper-wharf.jpg',
+  blogHobbiton: '/assets/blog/hobbiton-couple.jpg',
+  blogTaranaki: '/assets/blog/taranaki-track-couple.jpg'
 };
 
 export const links = {
@@ -89,8 +95,8 @@ export const socialLinks = [
     showInHeader: false,
     showInFooter: true,
     role: {
-      en: 'NZ life and local community updates',
-      ja: 'NZ生活とローカル向けの補助導線'
+      en: 'NZ life updates and community posts',
+      ja: 'NZ生活の更新やコミュニティ向け投稿'
     }
   },
   {
@@ -206,9 +212,9 @@ export const seo = {
         'An early Power BI rental dashboard prototype showing BI layout, mock rental indicators, filters, and comparison-focused dashboard design.'
     },
     blog: {
-      title: 'Blog Hub | SoraJPNZ',
+      title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        'SoraJPNZ blog hub for video notes, New Zealand life, ocean and fishing, work and money, and data tools.'
+        'Field notes from New Zealand life, ocean days, work, money, and practical data projects by SoraJPNZ.'
     },
     links: {
       title: 'Links | SoraJPNZ',
@@ -248,9 +254,9 @@ export const seo = {
         '架空データを使い、家賃情報の整理、比較、フィルター設計を試した初期Power BIダッシュボードプロトタイプです。'
     },
     blog: {
-      title: 'ブログHub | SoraJPNZ',
+      title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        '動画メモ、NZ生活、海と釣り、仕事とお金、データとツールを整理するSoraJPNZのブログHubです。'
+        'NZ生活、海、仕事、お金、データ活用を動画・ブログ・プロジェクトとして残すSoraJPNZの記録ページです。'
     },
     links: {
       title: 'リンク | SoraJPNZ',
@@ -925,17 +931,16 @@ export const rentRadar = {
 
 export const blog = {
   en: {
-    title: 'Blog Hub',
+    title: 'SoraJPNZ Notes',
     subtitle:
-      'A place where videos, short posts, projects, and real-life notes become searchable records.',
+      'Field notes from New Zealand life, ocean days, work, money, and practical data projects.',
     introLabel: 'Content hub',
     introTitle: 'Videos become notes. Notes become projects.',
     body:
-      'The blog is the quiet archive behind SoraJPNZ. YouTube and short-form posts create momentum, while this page will hold the useful parts in a slower, more searchable format.',
-    firstNoteLabel: 'Start here',
-    firstNoteTitle: 'First notes to write',
+      'This blog turns YouTube ideas, short social posts, New Zealand life, and ocean notes into something searchable and useful.',
+    firstNoteTitle: 'Start here',
     firstNoteBody:
-      'The first articles should explain why this site exists and give new visitors a simple place to begin before there is a full blog archive.',
+      'The first notes will focus on practical topics from New Zealand life, fishing, ocean days, work, and money.',
     firstNoteItems: [
       'Before starting shore fishing in Auckland, New Zealand',
       'Why SoraJPNZ is documenting New Zealand life and fishing',
@@ -945,58 +950,46 @@ export const blog = {
       {
         icon: 'ri-youtube-line',
         title: 'Video Notes',
-        description:
-          'Readable notes from YouTube videos, Shorts, and social clips so the useful ideas can be revisited later.',
+        description: 'Readable notes from YouTube videos, Shorts, and useful social clips.',
         themes: ['Video summaries', 'Behind-the-scenes notes', 'Links and references']
       },
       {
         icon: 'ri-home-heart-line',
         title: 'New Zealand Life',
-        description:
-          'Auckland living, housing, transport, food costs, daily observations, and the small realities of building a life in New Zealand.',
+        description: 'Auckland living, housing, transport, food costs, and everyday observations.',
         themes: ['Auckland life', 'Moving and settling', 'Cost-of-living notes']
       },
       {
         icon: 'ri-sailboat-line',
         title: 'Ocean & Fishing',
-        description:
-          'Shore fishing, spearfishing, ocean safety, gear, trip notes, and the lessons that come from spending time near the water.',
+        description: 'Shore fishing, spearfishing, ocean safety, gear, and trip notes.',
         themes: ['Spearfishing logs', 'Gear and safety', 'Trip notes']
       },
       {
         icon: 'ri-briefcase-4-line',
         title: 'Work & Money',
-        description:
-          'Career building, visa context, living costs, investing, and the practical money side of trying to build a stable life in New Zealand.',
+        description: 'Career building, visa context, living costs, investing, and money reality checks.',
         themes: ['Career notes', 'Visa and job search context', 'Money reality checks']
       },
       {
         icon: 'ri-database-2-line',
         title: 'Data & Tools',
-        description:
-          'AI, website analytics, dashboards, content performance, and the data experiments behind the public projects.',
+        description: 'AI, analytics, dashboards, content performance, and data experiments.',
         themes: ['GA4 and Search Console', 'Dashboards', 'AI-assisted workflows']
       }
-    ],
-    nextTitle: 'What will come later',
-    nextItems: [
-      'Short social posts can become YouTube topics.',
-      'YouTube topics can become blog notes.',
-      'Blog notes can become projects, services, or future lightweight products.'
     ]
   },
   ja: {
-    title: 'ブログHub',
+    title: 'SoraJPNZ Notes',
     subtitle:
-      '動画、短文投稿、プロジェクト、生活の気づきを、あとから検索できる記録として残す場所です。',
+      'NZ生活、海、仕事、お金、データ活用を、動画・ブログ・プロジェクトとして残していきます。',
     introLabel: 'Content hub',
     introTitle: '動画をメモに。メモをプロジェクトに。',
     body:
-      'SoraJPNZのブログは、発信の裏側にある静かなアーカイブです。YouTubeや短尺SNSで出した内容の中から、役に立つものを整理して残していきます。',
-    firstNoteLabel: 'Start here',
-    firstNoteTitle: '最初に書く予定の記事',
+      'SoraJPNZのブログは、YouTubeやSNSで出した内容、NZ生活の気づき、海や釣りの記録を、あとから読み返せる形で残す場所です。',
+    firstNoteTitle: 'まずここから',
     firstNoteBody:
-      'まだ記事が少ない段階でも、SoraJPNZが何を記録していく場所なのか分かる入口を用意しておきます。',
+      '最初は、NZ生活・釣り・海・仕事・お金の中から、実体験として残しやすいテーマをまとめていきます。',
     firstNoteItems: [
       'NZオークランドで岸釣りを始める前に知っておくこと',
       'ニュージーランド生活と釣りをSoraJPNZで記録する理由',
@@ -1006,44 +999,33 @@ export const blog = {
       {
         icon: 'ri-youtube-line',
         title: 'Video Notes',
-        description:
-          'YouTubeやShortsで話した内容を、あとから読み返せる形で整理するカテゴリです。',
+        description: 'YouTubeやShortsで話した内容を、あとから読み返せる形で整理します。',
         themes: ['動画の要約', '撮影・編集の裏側', '参考リンク']
       },
       {
         icon: 'ri-home-heart-line',
         title: 'New Zealand Life',
-        description:
-          'Aucklandでの生活、住まい、移動、食費、日常の気づきを扱うカテゴリです。',
+        description: 'Aucklandでの生活、住まい、移動、食費、日常の気づきを扱います。',
         themes: ['オークランド生活', '移住と生活の立ち上げ', '生活費メモ']
       },
       {
         icon: 'ri-sailboat-line',
         title: 'Ocean & Fishing',
-        description:
-          '岸釣り、スピアフィッシング、海の安全、道具、釣行記録を扱うカテゴリです。',
+        description: '岸釣り、スピアフィッシング、海の安全、道具、釣行記録を扱います。',
         themes: ['スピアフィッシング記録', '道具と安全', '釣行メモ']
       },
       {
         icon: 'ri-briefcase-4-line',
         title: 'Work & Money',
-        description:
-          '仕事探し、ビザ、生活費、投資、NZで生きるためのお金の現実を扱うカテゴリです。',
+        description: '仕事探し、ビザ、生活費、投資、NZで生きるためのお金の現実を扱います。',
         themes: ['キャリア記録', 'ビザと仕事探し', 'お金の現実']
       },
       {
         icon: 'ri-database-2-line',
         title: 'Data & Tools',
-        description:
-          'AI、Webサイト、アクセス分析、ダッシュボード、発信改善の裏側を扱うカテゴリです。',
+        description: 'AI、Webサイト、アクセス分析、ダッシュボード、発信改善の裏側を扱います。',
         themes: ['GA4とSearch Console', 'ダッシュボード', 'AI活用ワークフロー']
       }
-    ],
-    nextTitle: '今後の流れ',
-    nextItems: [
-      '短いSNS投稿からYouTubeのテーマを作る。',
-      'YouTubeの内容をブログ記事として整理する。',
-      'ブログ記事からプロジェクト、サービス、将来の商品へ発展させる。'
     ]
   }
 } as const;
@@ -1052,26 +1034,28 @@ export const linksPage = {
   en: {
     title: 'SoraJPNZ Links',
     eyebrow: 'SoraJPNZ',
-    intro: 'NZ life, ocean, work, money, and data notes from Auckland.',
+    intro: 'Documenting New Zealand life, ocean stories, work, money, and practical data projects from Auckland.',
     primaryNote: 'Start here',
     secondaryNote: 'Explore the site',
     youtubeCta: 'Watch on YouTube',
     blogCta: 'Read the Blog',
     projectsCta: 'View Projects',
-    servicesCta: 'Light Services',
+    servicesCta: 'Small projects and support',
+    servicesNote: 'Website analytics, portfolio feedback, and data organization',
     contactCta: 'Contact',
     footer: 'This page is the lightweight SoraJPNZ link-in-bio hub.'
   },
   ja: {
     title: 'SoraJPNZ リンク',
     eyebrow: 'SoraJPNZ',
-    intro: 'オークランドから、NZ生活、海、仕事、お金、データ活用を記録しています。',
+    intro: 'Aucklandで暮らしながら、NZ生活・海・仕事・お金・データ活用を記録しています。',
     primaryNote: 'まずはこちら',
     secondaryNote: 'サイトを見る',
     youtubeCta: 'YouTubeを見る',
     blogCta: 'ブログを読む',
     projectsCta: 'プロジェクトを見る',
-    servicesCta: '軽いサービス相談',
+    servicesCta: '制作・相談について',
+    servicesNote: 'サイト分析、ポートフォリオ、データ整理など',
     contactCta: 'お問い合わせ',
     footer: 'SNSプロフィール用の、SoraJPNZ公式リンク入口です。'
   }

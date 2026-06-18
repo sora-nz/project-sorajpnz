@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { blog, links, Locale, seo } from '../lib/content';
+import { assets, blog, links, Locale, seo } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
@@ -29,14 +29,29 @@ export function Blog({ locale, path }: BlogProps) {
     <div className="page">
       <Header locale={locale} path={path} />
       <main>
-        <section className="subhero">
-          <div className="section-inner narrow">
-            <p className="eyebrow">Notes</p>
+        <section className="blog-hero">
+          <img
+            className="blog-hero-image animate-hero-pan"
+            src={assets.blogHero}
+            alt=""
+            fetchPriority="high"
+            decoding="async"
+          />
+          <div className="blog-hero-overlay" aria-hidden="true" />
+          <div className="section-inner blog-hero-inner animate-slide-up">
+            <p className="blog-hero-kicker">Notes from Auckland</p>
             <h1>{b.title}</h1>
             <p>{b.subtitle}</p>
+            <span className="blog-scroll-cue" aria-hidden="true">
+              <span>Scroll</span>
+              <i className="ri-arrow-down-line" />
+            </span>
           </div>
         </section>
         <section className="content-section blog-hub-section">
+          <div className="blog-ambient-image" aria-hidden="true">
+            <img src={assets.blogOceanFloat} alt="" loading="lazy" decoding="async" />
+          </div>
           <div className="section-inner blog-hub-inner">
             <div className="blog-intro-card">
               <span className="legacy-card-index">{b.introLabel}</span>
@@ -55,7 +70,6 @@ export function Blog({ locale, path }: BlogProps) {
             </div>
 
             <div className="blog-first-note-card reveal-on-scroll">
-              <span className="legacy-card-index">{b.firstNoteLabel}</span>
               <h2>{b.firstNoteTitle}</h2>
               <p>{b.firstNoteBody}</p>
               <div className="blog-idea-list">
@@ -85,15 +99,6 @@ export function Blog({ locale, path }: BlogProps) {
                   </div>
                 </article>
               ))}
-            </div>
-
-            <div className="blog-system-card soft reveal-on-scroll">
-              <h2>{b.nextTitle}</h2>
-              <ol className="blog-step-list">
-                {b.nextItems.map((item) => (
-                  <li key={item}>{item}</li>
-                ))}
-              </ol>
             </div>
           </div>
         </section>
