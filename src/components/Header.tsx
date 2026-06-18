@@ -12,6 +12,13 @@ export function Header({ locale, path }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const t = common[locale];
   const base = routeKey(path);
+  const menuLabel = open
+    ? locale === 'ja'
+      ? 'メニューを閉じる'
+      : 'Close menu'
+    : locale === 'ja'
+      ? 'メニューを開く'
+      : 'Open menu';
   const nav = [
     { label: t.home, href: localize(locale), match: '/' },
     { label: t.blog, href: localize(locale, '/blog'), match: '/blog' },
@@ -47,13 +54,20 @@ export function Header({ locale, path }: HeaderProps) {
           </a>
         </div>
 
-        <button className="menu-button" type="button" aria-label="Toggle menu" onClick={() => setOpen(!open)}>
+        <button
+          className="menu-button"
+          type="button"
+          aria-label={menuLabel}
+          aria-controls="mobile-menu"
+          aria-expanded={open}
+          onClick={() => setOpen(!open)}
+        >
           <i className={open ? 'ri-close-line' : 'ri-menu-line'} />
         </button>
       </div>
 
       {open && (
-        <div className="mobile-menu">
+        <div className="mobile-menu" id="mobile-menu">
           {nav.map((item) => (
             <a key={item.href} href={item.href} onClick={() => setOpen(false)}>
               {item.label}
@@ -61,7 +75,7 @@ export function Header({ locale, path }: HeaderProps) {
           ))}
           <div className="mobile-menu-bottom">
             <SocialLinks compact placement="header" />
-            <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')}>
+            <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={t.language}>
               <i className="ri-global-line" />
               <span>{locale === 'en' ? 'EN' : 'JA'}</span>
             </a>
