@@ -219,7 +219,7 @@ export const seo = {
     links: {
       title: 'Links | SoraJPNZ',
       description:
-        'Quick links to SoraJPNZ YouTube, blog, Instagram, TikTok, projects, contact, Facebook, and light services.'
+        'Quick links to SoraJPNZ YouTube, blog, Instagram, TikTok, projects, contact, and Facebook.'
     },
     contact: {
       title: 'Contact | SoraJPNZ',
@@ -261,7 +261,7 @@ export const seo = {
     links: {
       title: 'リンク | SoraJPNZ',
       description:
-        'SoraJPNZのYouTube、ブログ、Instagram、TikTok、プロジェクト、お問い合わせ、Facebook、軽いサービス相談への入口です。'
+        'SoraJPNZのYouTube、ブログ、Instagram、TikTok、プロジェクト、お問い合わせ、Facebookへの入口です。'
     },
     contact: {
       title: 'お問い合わせ | SoraJPNZ',
@@ -957,6 +957,9 @@ export const blog = {
       'Why SoraJPNZ is documenting New Zealand life and fishing',
       'Why I am recording ocean, work, money, and data while living in Auckland'
     ],
+    categoryTitle: "Topics I'm building",
+    categoryBody:
+      'Videos and daily notes will be organized into themes that can be revisited later.',
     categories: [
       {
         icon: 'ri-youtube-line',
@@ -1017,6 +1020,9 @@ export const blog = {
       'ニュージーランド生活と釣りをSoraJPNZで記録する理由',
       'Aucklandで暮らしながら、海・仕事・お金・データを記録していく理由'
     ],
+    categoryTitle: '記録していくテーマ',
+    categoryBody:
+      '動画や日々の記録を、あとから読み返せるテーマごとに整理していきます。',
     categories: [
       {
         icon: 'ri-youtube-line',

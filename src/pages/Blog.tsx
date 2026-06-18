@@ -58,7 +58,7 @@ export function Blog({ locale, path }: BlogProps) {
         </section>
         <section className="content-section blog-hub-section">
           <div className="section-inner blog-hub-inner">
-            <section className="blog-field-card reveal-on-scroll" aria-labelledby="blog-field-title">
+            <section className="blog-field-card" aria-labelledby="blog-field-title">
               <div className="blog-field-copy">
                 <span className="legacy-card-index">Field notes</span>
                 <h2 id="blog-field-title">{b.fieldTitle}</h2>
@@ -101,6 +101,11 @@ export function Blog({ locale, path }: BlogProps) {
                   </div>
                 ))}
               </div>
+            </div>
+
+            <div className="blog-category-intro reveal-on-scroll">
+              <h2>{b.categoryTitle}</h2>
+              <p>{b.categoryBody}</p>
             </div>
 
             <div className="blog-category-grid">

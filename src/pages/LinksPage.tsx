@@ -109,14 +109,7 @@ export function LinksPage({ locale, path }: LinksPageProps) {
             note: facebook.role[locale]
           }
         ]
-      : []),
-    {
-      key: 'services',
-      label: l.servicesCta,
-      href: `${base}/services`,
-      icon: 'ri-service-line',
-      note: l.servicesNote
-    }
+      : [])
   ];
 
   useMeta({
