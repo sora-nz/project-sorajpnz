@@ -14,6 +14,14 @@ export function Blog({ locale, path }: BlogProps) {
   const b = blog[locale];
   const meta = seo[locale].blog;
   const base = localize(locale);
+  const fieldPhotos = [
+    { src: assets.blogHero, caption: b.fieldCaptions[0], className: 'wide shore' },
+    { src: assets.blogSpearfishing, caption: b.fieldCaptions[1], className: 'tall spearfishing' },
+    { src: assets.blogOceanFloat, caption: b.fieldCaptions[2], className: 'small ocean' },
+    { src: assets.blogSnapperWharf, caption: b.fieldCaptions[3], className: 'small snapper' },
+    { src: assets.blogHobbiton, caption: b.fieldCaptions[4], className: 'small hobbiton' },
+    { src: assets.blogTaranaki, caption: b.fieldCaptions[5], className: 'tall taranaki' }
+  ];
 
   useReveal();
   useMeta({
@@ -49,10 +57,23 @@ export function Blog({ locale, path }: BlogProps) {
           </div>
         </section>
         <section className="content-section blog-hub-section">
-          <div className="blog-ambient-image" aria-hidden="true">
-            <img src={assets.blogOceanFloat} alt="" loading="lazy" decoding="async" />
-          </div>
           <div className="section-inner blog-hub-inner">
+            <section className="blog-field-card reveal-on-scroll" aria-labelledby="blog-field-title">
+              <div className="blog-field-copy">
+                <span className="legacy-card-index">Field notes</span>
+                <h2 id="blog-field-title">{b.fieldTitle}</h2>
+                <p>{b.fieldBody}</p>
+              </div>
+              <div className="blog-photo-strip" aria-label={b.fieldTitle}>
+                {fieldPhotos.map((photo) => (
+                  <figure className={`blog-photo-tile reveal-on-scroll ${photo.className}`} key={photo.src}>
+                    <img src={photo.src} alt={photo.caption} loading="lazy" decoding="async" />
+                    <figcaption>{photo.caption}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+
             <div className="blog-intro-card">
               <span className="legacy-card-index">{b.introLabel}</span>
               <h2>{b.introTitle}</h2>

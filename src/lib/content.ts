@@ -938,6 +938,17 @@ export const blog = {
     introTitle: 'Videos become notes. Notes become projects.',
     body:
       'This blog turns YouTube ideas, short social posts, New Zealand life, and ocean notes into something searchable and useful.',
+    fieldTitle: 'From the field',
+    fieldBody:
+      'Real moments from ocean days, fishing, spearfishing, New Zealand life, and small trips that will become future notes and projects.',
+    fieldCaptions: [
+      'Shore fishing days',
+      'Spearfishing notes',
+      'Ocean markers',
+      'Small catches',
+      'NZ life and trips',
+      'Field notes from Auckland'
+    ],
     firstNoteTitle: 'Start here',
     firstNoteBody:
       'The first notes will focus on practical topics from New Zealand life, fishing, ocean days, work, and money.',
@@ -987,6 +998,17 @@ export const blog = {
     introTitle: '動画をメモに。メモをプロジェクトに。',
     body:
       'SoraJPNZのブログは、YouTubeやSNSで出した内容、NZ生活の気づき、海や釣りの記録を、あとから読み返せる形で残す場所です。',
+    fieldTitle: '現地の記録',
+    fieldBody:
+      '海、釣り、スピアフィッシング、NZ生活、日帰り旅の実体験を、これから動画・ブログ・プロジェクトとして残していきます。',
+    fieldCaptions: [
+      '岸釣りの日',
+      'スピアフィッシング記録',
+      '海の記録',
+      '小さな釣果',
+      'NZ生活と日帰り旅',
+      'Aucklandからの記録'
+    ],
     firstNoteTitle: 'まずここから',
     firstNoteBody:
       '最初は、NZ生活・釣り・海・仕事・お金の中から、実体験として残しやすいテーマをまとめていきます。',
