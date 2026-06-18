@@ -21,7 +21,7 @@ type LinkItem = {
 };
 
 function channel(id: SocialId) {
-  return socialLinks.find((item) => item.id === id && item.href);
+  return socialLinks.find((item) => item.id === id && item.href && item.showOnLinks);
 }
 
 export function LinksPage({ locale, path }: LinksPageProps) {
@@ -33,9 +33,7 @@ export function LinksPage({ locale, path }: LinksPageProps) {
   const youtube = channel('youtube');
   const instagram = channel('instagram');
   const tiktok = channel('tiktok');
-  const threads = channel('threads');
   const facebook = channel('facebook');
-  const x = channel('x');
 
   const items: LinkItem[] = [
     ...(youtube
@@ -93,32 +91,12 @@ export function LinksPage({ locale, path }: LinksPageProps) {
       note: c.projects
     },
     {
-      key: 'services',
-      label: l.servicesCta,
-      href: `${base}/services`,
-      icon: 'ri-service-line',
-      note: c.services
-    },
-    {
       key: 'contact',
       label: l.contactCta,
       href: `${base}/contact`,
       icon: 'ri-mail-line',
       note: c.contact
     },
-    ...(threads
-      ? [
-          {
-            key: 'threads',
-            label: threads.label,
-            href: threads.href,
-            icon: threads.icon,
-            external: true,
-            tone: threads.tone,
-            note: threads.role[locale]
-          }
-        ]
-      : []),
     ...(facebook
       ? [
           {
@@ -132,19 +110,13 @@ export function LinksPage({ locale, path }: LinksPageProps) {
           }
         ]
       : []),
-    ...(x
-      ? [
-          {
-            key: 'x',
-            label: x.label,
-            href: x.href,
-            icon: x.icon,
-            external: true,
-            tone: x.tone,
-            note: x.role[locale]
-          }
-        ]
-      : [])
+    {
+      key: 'services',
+      label: l.servicesCta,
+      href: `${base}/services`,
+      icon: 'ri-service-line',
+      note: c.services
+    }
   ];
 
   useMeta({

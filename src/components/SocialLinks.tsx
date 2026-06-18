@@ -1,26 +1,24 @@
-import { links } from '../lib/content';
+import { socialLinks } from '../lib/content';
 
 type SocialLinksProps = {
   compact?: boolean;
   dark?: boolean;
+  placement?: 'header' | 'footer';
 };
 
-export function SocialLinks({ compact = false, dark = false }: SocialLinksProps) {
-  const items = [
-    { href: links.linkedin, label: 'LinkedIn', icon: 'ri-linkedin-fill', tone: 'linkedin' },
-    { href: links.github, label: 'GitHub', icon: 'ri-github-fill', tone: 'github' },
-    { href: links.youtube, label: 'YouTube', icon: 'ri-youtube-fill', tone: 'youtube' },
-    { href: links.email, label: 'Email', icon: 'ri-mail-line', tone: 'email' }
-  ];
+export function SocialLinks({ compact = false, dark = false, placement = 'header' }: SocialLinksProps) {
+  const items = socialLinks.filter((item) =>
+    placement === 'header' ? item.href && item.showInHeader : item.href && item.showInFooter
+  );
 
   return (
     <div className={compact ? 'social compact' : 'social'}>
       {items.map((item) => (
         <a
-          key={item.label}
+          key={item.id}
           href={item.href}
-          target={item.href.startsWith('http') ? '_blank' : undefined}
-          rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+          target="_blank"
+          rel="noopener noreferrer"
           aria-label={item.label}
           className={`social-link ${item.tone} ${dark ? 'dark' : ''}`}
         >

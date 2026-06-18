@@ -14,9 +14,9 @@ export function Header({ locale, path }: HeaderProps) {
   const base = routeKey(path);
   const nav = [
     { label: t.home, href: localize(locale), match: '/' },
-    { label: t.services, href: localize(locale, '/services'), match: '/services' },
+    { label: t.blog, href: localize(locale, '/blog'), match: '/blog' },
     { label: t.projects, href: localize(locale, '/projects'), match: '/projects' },
-    { label: t.blog, href: localize(locale, '/blog'), match: '/blog' }
+    { label: t.links, href: localize(locale, '/links'), match: '/links' }
   ];
 
   return (
@@ -40,7 +40,7 @@ export function Header({ locale, path }: HeaderProps) {
         </nav>
 
         <div className="header-actions">
-          <SocialLinks compact />
+          <SocialLinks compact placement="header" />
           <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={t.language}>
             <i className="ri-global-line" />
             <span>{locale === 'en' ? 'EN' : 'JA'}</span>
@@ -60,7 +60,7 @@ export function Header({ locale, path }: HeaderProps) {
             </a>
           ))}
           <div className="mobile-menu-bottom">
-            <SocialLinks compact />
+            <SocialLinks compact placement="header" />
             <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')}>
               <i className="ri-global-line" />
               <span>{locale === 'en' ? 'EN' : 'JA'}</span>

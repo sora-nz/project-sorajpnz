@@ -39,6 +39,10 @@ export const socialLinks = [
     href: links.youtube,
     icon: 'ri-youtube-fill',
     tone: 'youtube',
+    showOnHome: true,
+    showOnLinks: true,
+    showInHeader: true,
+    showInFooter: true,
     role: {
       en: 'Long-form videos and main video archive',
       ja: '長尺動画とメインの動画アーカイブ'
@@ -50,31 +54,13 @@ export const socialLinks = [
     href: 'https://www.instagram.com/sorajpnz',
     icon: 'ri-instagram-line',
     tone: 'instagram',
+    showOnHome: true,
+    showOnLinks: true,
+    showInHeader: true,
+    showInFooter: true,
     role: {
       en: 'Short clips, ocean moments, and daily updates',
       ja: '短尺動画、海の記録、日々の更新'
-    }
-  },
-  {
-    id: 'threads',
-    label: 'Threads',
-    href: 'https://www.threads.com/@sorajpnz',
-    icon: 'ri-threads-line',
-    tone: 'threads',
-    role: {
-      en: 'Short thoughts and lightweight updates',
-      ja: '短い考えや軽い更新'
-    }
-  },
-  {
-    id: 'facebook',
-    label: 'Facebook',
-    href: 'https://www.facebook.com/sorajpnz',
-    icon: 'ri-facebook-circle-fill',
-    tone: 'facebook',
-    role: {
-      en: 'NZ life and local community updates',
-      ja: 'NZ生活とローカル向けの補助導線'
     }
   },
   {
@@ -83,9 +69,43 @@ export const socialLinks = [
     href: 'https://www.tiktok.com/@sorajpnz',
     icon: 'ri-tiktok-fill',
     tone: 'tiktok',
+    showOnHome: true,
+    showOnLinks: true,
+    showInHeader: true,
+    showInFooter: true,
     role: {
       en: 'Short-form discovery and quick stories',
       ja: '短尺動画と認知拡大'
+    }
+  },
+  {
+    id: 'facebook',
+    label: 'Facebook',
+    href: 'https://www.facebook.com/sorajpnz',
+    icon: 'ri-facebook-circle-fill',
+    tone: 'facebook',
+    showOnHome: true,
+    showOnLinks: true,
+    showInHeader: false,
+    showInFooter: true,
+    role: {
+      en: 'NZ life and local community updates',
+      ja: 'NZ生活とローカル向けの補助導線'
+    }
+  },
+  {
+    id: 'threads',
+    label: 'Threads',
+    href: 'https://www.threads.com/@sorajpnz',
+    icon: 'ri-threads-line',
+    tone: 'threads',
+    showOnHome: false,
+    showOnLinks: false,
+    showInHeader: false,
+    showInFooter: false,
+    role: {
+      en: 'Short thoughts and lightweight updates',
+      ja: '短い考えや軽い更新'
     }
   },
   {
@@ -94,6 +114,10 @@ export const socialLinks = [
     href: 'https://x.com/sorajpnz',
     icon: 'ri-twitter-x-fill',
     tone: 'x',
+    showOnHome: false,
+    showOnLinks: false,
+    showInHeader: false,
+    showInFooter: false,
     role: {
       en: 'Work, AI, data, migration, and update notes',
       ja: '仕事、AI、データ、移住、更新告知'
@@ -109,6 +133,7 @@ export const common = {
     services: 'Services',
     projects: 'Projects',
     blog: 'Blog',
+    links: 'Links',
     contact: 'Contact',
     privacy: 'Privacy Policy',
     terms: 'Terms of Use',
@@ -133,6 +158,7 @@ export const common = {
     services: 'サービス',
     projects: 'プロジェクト',
     blog: 'ブログ',
+    links: 'リンク',
     contact: 'お問い合わせ',
     privacy: 'プライバシーポリシー',
     terms: '利用規約',
@@ -162,12 +188,12 @@ export const seo = {
     services: {
       title: 'Services | SoraJPNZ',
       description:
-        'Practical SoraJPNZ services for dashboards, BI reporting, web analytics setup, and clear data storytelling for small teams and early projects.'
+        'Light SoraJPNZ support for small dashboards, website analytics, portfolio feedback, content notes, and practical project organization.'
     },
     projects: {
-      title: 'Data Analytics Projects | SoraJPNZ',
+      title: 'Projects | SoraJPNZ',
       description:
-        'Explore practical analytics projects covering New Zealand relocation affordability, rent dashboards, public data, Tableau, and Power BI.'
+        'Explore SoraJPNZ projects across New Zealand life, relocation, ocean notes, work, money, content experiments, and practical data tools.'
     },
     relocation: {
       title: 'NZ Relocation Affordability Dashboard | SoraJPNZ',
@@ -187,7 +213,7 @@ export const seo = {
     links: {
       title: 'Links | SoraJPNZ',
       description:
-        'Quick links to SoraJPNZ YouTube, blog, projects, services, contact, and social channels.'
+        'Quick links to SoraJPNZ YouTube, blog, Instagram, TikTok, projects, contact, Facebook, and light services.'
     },
     contact: {
       title: 'Contact | SoraJPNZ',
@@ -204,12 +230,12 @@ export const seo = {
     services: {
       title: 'サービス | SoraJPNZ',
       description:
-        'SoraJPNZのサービスページです。ダッシュボード制作、BIレポーティング、Web分析設定、データストーリーテリングを小さく実用的に支援します。'
+        'SoraJPNZの軽いサポートページです。小さなダッシュボード、Web分析、ポートフォリオ相談、発信内容の整理、実用的な制作を扱います。'
     },
     projects: {
-      title: 'データ分析プロジェクト | SoraJPNZ',
+      title: 'プロジェクト | SoraJPNZ',
       description:
-        'ニュージーランド移住向け家賃負担、家賃ダッシュボード、公的データ、Tableau、Power BIを使った分析プロジェクトです。'
+        'NZ生活、移住、海、仕事、お金、発信活動、データ活用を、あとから使える形にしていくSoraJPNZのプロジェクトです。'
     },
     relocation: {
       title: 'NZ移住向け家賃負担ダッシュボード | SoraJPNZ',
@@ -229,7 +255,7 @@ export const seo = {
     links: {
       title: 'リンク | SoraJPNZ',
       description:
-        'SoraJPNZのYouTube、ブログ、プロジェクト、サービス、お問い合わせ、各SNSへの入口です。'
+        'SoraJPNZのYouTube、ブログ、Instagram、TikTok、プロジェクト、お問い合わせ、Facebook、軽いサービス相談への入口です。'
     },
     contact: {
       title: 'お問い合わせ | SoraJPNZ',
@@ -242,10 +268,11 @@ export const seo = {
 export const home = {
   en: {
     title: 'SoraJPNZ',
-    role: 'New Zealand life, ocean stories, work, money, and data projects',
-    tagline: 'A practical record of living, learning, and building in New Zealand.',
+    role: 'Videos, blog notes, and practical projects from New Zealand',
+    tagline:
+      'SoraJPNZ is a personal media hub documenting New Zealand life, ocean stories, work, money, and practical data projects through videos, blog notes, and projects.',
     description:
-      'SoraJPNZ brings together videos, blog notes, dashboards, and small tools about Auckland life, ocean and fishing, work, money, and how data can make everyday decisions clearer.',
+      'Follow the journey through YouTube, short-form social posts, blog notes, and practical projects.',
     primaryCta: 'Watch on YouTube',
     contactCta: 'Read the Blog',
     socialEyebrow: 'Social Channels',
@@ -255,24 +282,26 @@ export const home = {
     socialPrimaryLabel: 'Main channel',
     socialSecondaryLabel: 'Short clips and updates',
     allLinksCta: 'Open all links',
-    servicesTitle: 'Small ways I can help',
+    servicesEyebrow: 'Now building',
+    servicesTitle: 'From content to projects',
     servicesSubtitle:
-      'Light support that grows naturally from the content, projects, and analytics work on this site.',
+      'The site starts with videos and notes, then turns useful ideas into projects, data experiments, and small support when it makes sense.',
+    servicesCta: 'See light support options',
     services: [
       {
-        icon: 'ri-dashboard-3-line',
-        title: 'Dashboard Starter',
-        body: 'A focused Power BI or Tableau dashboard for one question, one audience, or one small project.'
+        icon: 'ri-youtube-line',
+        title: 'Video & Blog Notes',
+        body: 'YouTube and short-form ideas become notes that can be searched, shared, and improved later.'
       },
       {
-        icon: 'ri-line-chart-line',
-        title: 'Analytics Setup',
-        body: 'GA4, Search Console, and simple tracking foundations for a website, portfolio, or content project.'
+        icon: 'ri-compass-3-line',
+        title: 'Practical Projects',
+        body: 'New Zealand life, relocation, ocean, work, money, and data ideas are shaped into useful public projects.'
       },
       {
-        icon: 'ri-file-chart-line',
-        title: 'Data Storytelling',
-        body: 'Clear write-ups that turn data, experience, or a project into something people can understand.'
+        icon: 'ri-hand-heart-line',
+        title: 'Light Support',
+        body: 'Portfolio feedback, website analytics, dashboard organization, and small practical conversations stay available when needed.'
       }
     ],
     projectsTitle: 'Projects',
@@ -285,10 +314,11 @@ export const home = {
   },
   ja: {
     title: 'SoraJPNZ',
-    role: 'NZ生活・海・仕事・お金・データ活用の発信と記録',
-    tagline: 'ニュージーランドで暮らし、学び、作っていく過程を残す場所。',
+    role: 'NZ生活・海・仕事・お金・データの記録',
+    tagline:
+      'SoraJPNZは、ニュージーランドでの生活、海、仕事、お金、データ活用を、動画・ブログ・プロジェクトとして記録する個人メディアです。',
     description:
-      'SoraJPNZは、オークランドでの生活、海・釣り、仕事、お金、そしてデータ活用を、動画・ブログ・プロジェクトとして整理していく個人ブランドの発信母艦です。',
+      'YouTube、短尺SNS、ブログ、プロジェクトをつなげながら、あとから使える記録として残していきます。',
     primaryCta: 'YouTubeを見る',
     contactCta: 'ブログを読む',
     socialEyebrow: 'Social Channels',
@@ -298,24 +328,26 @@ export const home = {
     socialPrimaryLabel: 'メインチャンネル',
     socialSecondaryLabel: '短尺動画と更新',
     allLinksCta: 'リンク一覧を見る',
-    servicesTitle: '小さく手伝えること',
+    servicesEyebrow: 'Now building',
+    servicesTitle: '発信からプロジェクトへ',
     servicesSubtitle:
-      '発信、Webサイト、ポートフォリオ、データ整理から自然につながる軽いサポートです。',
+      '動画やメモから始めて、役に立つ内容をプロジェクト、データ実験、必要なときの軽い相談へ育てていきます。',
+    servicesCta: '軽いサポート内容を見る',
     services: [
       {
-        icon: 'ri-dashboard-3-line',
-        title: 'Dashboard Starter',
-        body: 'ひとつの問い、ひとつの読者、ひとつの小さなプロジェクトに絞ったダッシュボードを作ります。'
+        icon: 'ri-youtube-line',
+        title: '動画とブログメモ',
+        body: 'YouTubeや短尺SNSで出した内容を、あとから探せて共有できるメモとして整理します。'
       },
       {
-        icon: 'ri-line-chart-line',
-        title: 'Analytics Setup',
-        body: 'GA4、Search Console、簡単な計測設計など、サイトや発信の土台を整えます。'
+        icon: 'ri-compass-3-line',
+        title: '実用プロジェクト',
+        body: 'NZ生活、移住、海、仕事、お金、データ活用を、あとから使える制作物や公開プロジェクトにしていきます。'
       },
       {
-        icon: 'ri-file-chart-line',
-        title: 'Data Storytelling',
-        body: 'データ、経験、プロジェクトを、あとから読み返せる分かりやすい文章に整理します。'
+        icon: 'ri-hand-heart-line',
+        title: '軽い相談・サポート',
+        body: 'ポートフォリオ相談、Web分析、ダッシュボード整理など、必要があれば小さく相談できる形にしています。'
       }
     ],
     projectsTitle: 'プロジェクト',
@@ -900,6 +932,15 @@ export const blog = {
     introTitle: 'Videos become notes. Notes become projects.',
     body:
       'The blog is the quiet archive behind SoraJPNZ. YouTube and short-form posts create momentum, while this page will hold the useful parts in a slower, more searchable format.',
+    firstNoteLabel: 'Start here',
+    firstNoteTitle: 'First notes to write',
+    firstNoteBody:
+      'The first articles should explain why this site exists and give new visitors a simple place to begin before there is a full blog archive.',
+    firstNoteItems: [
+      'Before starting shore fishing in Auckland, New Zealand',
+      'Why SoraJPNZ is documenting New Zealand life and fishing',
+      'Why I am recording ocean, work, money, and data while living in Auckland'
+    ],
     categories: [
       {
         icon: 'ri-youtube-line',
@@ -952,6 +993,15 @@ export const blog = {
     introTitle: '動画をメモに。メモをプロジェクトに。',
     body:
       'SoraJPNZのブログは、発信の裏側にある静かなアーカイブです。YouTubeや短尺SNSで出した内容の中から、役に立つものを整理して残していきます。',
+    firstNoteLabel: 'Start here',
+    firstNoteTitle: '最初に書く予定の記事',
+    firstNoteBody:
+      'まだ記事が少ない段階でも、SoraJPNZが何を記録していく場所なのか分かる入口を用意しておきます。',
+    firstNoteItems: [
+      'NZオークランドで岸釣りを始める前に知っておくこと',
+      'ニュージーランド生活と釣りをSoraJPNZで記録する理由',
+      'Aucklandで暮らしながら、海・仕事・お金・データを記録していく理由'
+    ],
     categories: [
       {
         icon: 'ri-youtube-line',
@@ -1002,8 +1052,7 @@ export const linksPage = {
   en: {
     title: 'SoraJPNZ Links',
     eyebrow: 'SoraJPNZ',
-    intro:
-      'New Zealand life, ocean and fishing, work, money, data projects, and small tools from Auckland.',
+    intro: 'NZ life, ocean, work, money, and data notes from Auckland.',
     primaryNote: 'Start here',
     secondaryNote: 'Explore the site',
     youtubeCta: 'Watch on YouTube',
@@ -1016,8 +1065,7 @@ export const linksPage = {
   ja: {
     title: 'SoraJPNZ リンク',
     eyebrow: 'SoraJPNZ',
-    intro:
-      'オークランドから、NZ生活、海・釣り、仕事、お金、データ活用、小さな制作を発信しています。',
+    intro: 'オークランドから、NZ生活、海、仕事、お金、データ活用を記録しています。',
     primaryNote: 'まずはこちら',
     secondaryNote: 'サイトを見る',
     youtubeCta: 'YouTubeを見る',

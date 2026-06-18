@@ -10,9 +10,9 @@ export function Footer({ locale }: FooterProps) {
   const t = common[locale];
   const nav = [
     { label: t.home, href: localize(locale) },
-    { label: t.services, href: localize(locale, '/services') },
+    { label: t.blog, href: localize(locale, '/blog') },
     { label: t.projects, href: localize(locale, '/projects') },
-    { label: t.blog, href: localize(locale, '/blog') }
+    { label: t.links, href: localize(locale, '/links') }
   ];
   const legal = [
     { label: t.privacy, href: localize(locale, '/privacy') },
@@ -56,7 +56,7 @@ export function Footer({ locale }: FooterProps) {
         </div>
         <div>
           <h2>{t.connect}</h2>
-          <SocialLinks dark />
+          <SocialLinks dark placement="footer" />
         </div>
       </div>
       <div className="section-inner footer-bottom">

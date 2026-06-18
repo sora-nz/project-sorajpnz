@@ -17,7 +17,7 @@ export function Home({ locale, path }: HomeProps) {
   const p = projects[locale];
   const meta = seo[locale].home;
   const base = localize(locale);
-  const visibleSocialChannels = socialLinks.filter((channel) => channel.href);
+  const visibleSocialChannels = socialLinks.filter((channel) => channel.href && channel.showOnHome);
   const primarySocial = visibleSocialChannels.find((channel) => channel.id === 'youtube');
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
 
@@ -114,7 +114,7 @@ export function Home({ locale, path }: HomeProps) {
         <section className="content-section services-section">
           <div className="section-inner">
             <div className="section-heading reveal-on-scroll">
-              <p className="eyebrow">Services</p>
+              <p className="eyebrow">{h.servicesEyebrow}</p>
               <h2>{h.servicesTitle}</h2>
               <p>{h.servicesSubtitle}</p>
             </div>
@@ -128,6 +128,12 @@ export function Home({ locale, path }: HomeProps) {
                   <p>{service.body}</p>
                 </article>
               ))}
+            </div>
+            <div className="button-row soft-link-row">
+              <a className="button secondary small" href={`${base}/services`}>
+                <span>{h.servicesCta}</span>
+                <i className="ri-arrow-right-line" />
+              </a>
             </div>
           </div>
         </section>

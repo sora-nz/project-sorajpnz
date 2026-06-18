@@ -54,6 +54,20 @@ export function Blog({ locale, path }: BlogProps) {
               </div>
             </div>
 
+            <div className="blog-first-note-card reveal-on-scroll">
+              <span className="legacy-card-index">{b.firstNoteLabel}</span>
+              <h2>{b.firstNoteTitle}</h2>
+              <p>{b.firstNoteBody}</p>
+              <div className="blog-idea-list">
+                {b.firstNoteItems.map((item) => (
+                  <div className="blog-idea-item" key={item}>
+                    <i className="ri-arrow-right-circle-line" aria-hidden="true" />
+                    <span>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
             <div className="blog-category-grid">
               {b.categories.map((category) => (
                 <article className="blog-category-card reveal-on-scroll" key={category.title}>
