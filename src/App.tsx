@@ -9,6 +9,7 @@ import { Projects } from './pages/Projects';
 import { RelocationProject } from './pages/RelocationProject';
 import { RentRadarProject } from './pages/RentRadarProject';
 import { Services } from './pages/Services';
+import { ShoreFishingStarterArticle } from './pages/ShoreFishingStarterArticle';
 import { trackPageView } from './lib/analytics';
 import { getLocale, routeKey } from './lib/routes';
 
@@ -62,6 +63,7 @@ export function App() {
   if (key === '/projects/nz-japan-relocation') return <RelocationProject locale={locale} path={path} />;
   if (key === '/projects/rent-radar' || key === '/project') return <RentRadarProject locale={locale} path={path} />;
   if (key === '/blog') return <Blog locale={locale} path={path} />;
+  if (key === '/blog/auckland-shore-fishing-starter') return <ShoreFishingStarterArticle locale={locale} path={path} />;
   if (key === '/contact') return <Contact locale={locale} path={path} />;
   if (key === '/privacy') return <LegalPage locale={locale} path={path} kind="privacy" />;
   if (key === '/terms') return <LegalPage locale={locale} path={path} kind="terms" />;

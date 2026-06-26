@@ -953,10 +953,15 @@ export const blog = {
     firstNoteBody:
       'The first notes will focus on practical topics from New Zealand life, fishing, ocean days, work, and money.',
     firstNoteItems: [
-      'Before starting shore fishing in Auckland, New Zealand',
+      'How SoraJPNZ will record Auckland ocean and fishing notes',
       'Why SoraJPNZ is documenting New Zealand life and fishing',
       'Why I am recording ocean, work, money, and data while living in Auckland'
     ],
+    firstNoteDraft: {
+      label: 'Draft: Before You Start Shore Fishing in Auckland',
+      href: '/blog/auckland-shore-fishing-starter',
+      note: 'A working note with rule-check reminders before it becomes a full guide.'
+    },
     categoryTitle: "Topics I'm building",
     categoryBody:
       'Videos and daily notes will be organized into themes that can be revisited later.',
@@ -1016,10 +1021,15 @@ export const blog = {
     firstNoteBody:
       '最初は、NZ生活・釣り・海・仕事・お金の中から、実体験として残しやすいテーマをまとめていきます。',
     firstNoteItems: [
-      'NZオークランドで岸釣りを始める前に知っておくこと',
+      'Aucklandでの海・釣り記録をどう残していくか',
       'ニュージーランド生活と釣りをSoraJPNZで記録する理由',
       'Aucklandで暮らしながら、海・仕事・お金・データを記録していく理由'
     ],
+    firstNoteDraft: {
+      label: '下書き: NZオークランドで岸釣りを始める前に知っておくこと',
+      href: '/blog/auckland-shore-fishing-starter',
+      note: '公式情報の確認メモを残しながら作成中です。'
+    },
     categoryTitle: '記録していくテーマ',
     categoryBody:
       '動画や日々の記録を、あとから読み返せるテーマごとに整理していきます。',
@@ -1055,6 +1065,208 @@ export const blog = {
         themes: ['GA4とSearch Console', 'ダッシュボード', 'AI活用ワークフロー']
       }
     ]
+  }
+} as const;
+
+
+export const shoreFishingStarterArticle = {
+  en: {
+    title: 'Before You Start Shore Fishing in Auckland, New Zealand',
+    eyebrow: 'Draft field note',
+    draftLabel: 'Draft / first note',
+    statusLabel: 'Working draft',
+    description:
+      'A draft starter note for people who want to begin shore fishing around Auckland, covering places, gear, safety, rule checking, and how SoraJPNZ records real trips.',
+    heroAlt: 'A shore fishing moment near Auckland with a snapper by the water',
+    intro:
+      'A draft starter note for people who want to begin shore fishing around Auckland, covering places, gear, safety, rule checking, and how SoraJPNZ records real trips.',
+    tocTitle: 'Table of contents',
+    sections: [
+      {
+        id: 'premise',
+        title: 'The premise of this article',
+        body: [
+          'This is not a finished public guide yet. It is a field-note draft that will become more useful as I add real trips, photos, video notes, and confirmed references.',
+          'The goal is simple: help a beginner think through the first fishing day before buying too much gear or choosing a random spot.'
+        ]
+      },
+      {
+        id: 'first-things',
+        title: 'Start with the day, not just the spot',
+        body: [
+          'Around Auckland, shore fishing can feel very different depending on the tide, weather, wind, swell, access, and how comfortable you are moving around rocks or wharves.',
+          'For a first trip, I would rather choose a calm, easy-to-leave place than chase the most exciting looking location. A good beginner day is one where you can learn, stay safe, and come home with useful notes.'
+        ]
+      },
+      {
+        id: 'gear',
+        title: 'Minimum gear to prepare',
+        body: [
+          'You do not need to turn the first trip into a full gear project. A simple rod and reel setup, suitable line, basic tackle, a small bag, sun protection, drinking water, and something warm can already teach you a lot.',
+          'The details depend on the style of fishing, the location, and the species you are targeting, so this section needs more confirmed local references before it becomes a full checklist.'
+        ],
+        note: 'TODO: Add a beginner gear checklist after checking local shop advice and official safety references.'
+      },
+      {
+        id: 'location',
+        title: 'Choosing a place',
+        body: [
+          'I want this article to eventually compare beginner-friendly situations, such as wharf access, rock access, beach access, parking, toilets, mobile reception, and how easy it is to leave if conditions change.',
+          'For now, the safest wording is this: choose a place you can understand before you fish. Check access, weather, tide, swell, daylight, and whether the area has special rules or restrictions.'
+        ],
+        note: 'TODO: Add official links and only mention specific locations after checking current access and rule information.'
+      },
+      {
+        id: 'safety',
+        title: 'Safety comes first',
+        body: [
+          'Auckland fishing can look relaxed from photos, but wet rocks, changing swell, wind, darkness, and unfamiliar access can turn a simple trip into a stressful one.',
+          'Beginner trips are easier when you go with someone, tell someone where you are going, keep an exit plan, avoid pushing conditions, and treat the ocean as stronger than your schedule.'
+        ]
+      },
+      {
+        id: 'rules',
+        title: 'Always check the official fishing rules',
+        body: [
+          'Fishing rules, size limits, closed areas, and catch limits can change. I do not want this page to become a place where outdated information gives someone the wrong idea.',
+          'Before fishing, check official New Zealand sources and any current local notices. This draft intentionally avoids giving exact limits or legal instructions until the official references are reviewed.'
+        ],
+        note: 'TODO: Confirm the latest official Fisheries New Zealand / MPI pages before adding links or specific rule summaries.'
+      },
+      {
+        id: 'records',
+        title: 'Photos, video, and trip notes',
+        body: [
+          'SoraJPNZ is not only about catching fish. I want to record the full context: what the day looked like, what I tried, what I learned, how conditions felt, and what I would do differently next time.',
+          'Over time, these notes can become YouTube videos, short clips, blog posts, and simple data projects about trips, conditions, gear, and learning curves.'
+        ]
+      },
+      {
+        id: 'next',
+        title: 'What I want to write next',
+        body: [
+          'Next, I want to turn this draft into a practical starter note with confirmed links, a beginner gear list, a simple trip log template, and examples from real Auckland fishing days.',
+          'The public version should stay useful without pretending to be official advice.'
+        ]
+      }
+    ],
+    noticeTitle: 'Rule check note',
+    noticeBody:
+      'Fishing rules, size limits, closed areas, and catch limits can change. This article is a personal field note, not official advice. Always check official New Zealand sources before fishing.',
+    factCheckTitle: 'Fact-check TODO',
+    factCheckItems: [
+      'Confirm the current official Fisheries New Zealand / MPI recreational fishing pages.',
+      'Add official links for area rules, temporary closures, and any relevant local notices.',
+      'Review safety references before turning this draft into a public guide.'
+    ],
+    ctaTitle: 'Keep exploring',
+    ctaBody: 'This draft will become clearer as more real trips, photos, videos, and notes are added.',
+    ctas: {
+      blog: 'Back to Blog Hub',
+      youtube: 'Watch YouTube',
+      instagram: 'Instagram',
+      contact: 'Contact',
+      projects: 'Projects'
+    }
+  },
+  ja: {
+    title: 'NZオークランドで岸釣りを始める前に知っておくこと',
+    eyebrow: '下書きフィールドノート',
+    draftLabel: 'Draft / 下書き',
+    statusLabel: '作成中の下書き',
+    description:
+      'Aucklandで岸釣りを始めたい人向けに、最初に考えるべき場所、道具、安全、ルール確認、記録の残し方を、自分の実体験ベースで整理する下書きです。',
+    heroAlt: 'Auckland周辺の岸釣りで釣れた魚を水辺で持っている様子',
+    intro:
+      'Aucklandで岸釣りを始めたい人向けに、最初に考えるべき場所、道具、安全、ルール確認、記録の残し方を、自分の実体験ベースで整理する下書きです。',
+    tocTitle: '目次',
+    sections: [
+      {
+        id: 'premise',
+        title: 'この記事の前提',
+        body: [
+          'これはまだ完成版の公開ガイドではありません。実際の釣行、写真、動画メモ、確認済みの参考リンクを足しながら育てていくための下書きです。',
+          '目的はシンプルで、初めてAuckland周辺で岸釣りをする人が、道具を買いすぎたり、なんとなく場所を選んだりする前に、最初の一日をどう考えるか整理することです。'
+        ]
+      },
+      {
+        id: 'first-things',
+        title: 'Aucklandの岸釣りは、場所選びでかなり変わる',
+        body: [
+          'Auckland周辺の岸釣りは、潮、天気、風、波、足場、アクセス、岩場や桟橋に慣れているかどうかで体験が大きく変わります。',
+          '最初の釣行では、いきなり一番よさそうな場所を狙うより、落ち着いて帰れる場所を選ぶ方がいいと思っています。初心者にとって良い日は、釣果だけでなく、安全に学んで、次に活かせるメモを残せる日です。'
+        ]
+      },
+      {
+        id: 'gear',
+        title: '最初にそろえる道具',
+        body: [
+          '最初から道具を完璧にそろえる必要はありません。シンプルなロッドとリール、用途に合うライン、基本的な仕掛け、小さなバッグ、日焼け対策、水、少し暖かい服があるだけでも学べることは多いです。',
+          'ただし、具体的な道具は釣り方、場所、狙う魚によって変わるので、このセクションはローカル情報と安全情報を確認してから、公開版でチェックリスト化したいです。'
+        ],
+        note: 'TODO: ローカルの釣具店情報と安全情報を確認してから、初心者用の道具リストを追加する。'
+      },
+      {
+        id: 'location',
+        title: '場所選び',
+        body: [
+          '将来的には、桟橋、岩場、ビーチ、駐車場、トイレ、電波、天候が変わったときの帰りやすさなどを、初心者目線で整理したいです。',
+          '現時点で安全に言えるのは、釣る前にその場所を理解することです。アクセス、天気、潮、波、明るさ、特別なルールや制限がないかを確認してから行くようにします。'
+        ],
+        note: 'TODO: 具体的な場所を出す前に、最新のアクセス情報と公式ルールを確認してリンクを追加する。'
+      },
+      {
+        id: 'safety',
+        title: '安全面で気をつけること',
+        body: [
+          '写真で見ると穏やかに見えても、濡れた岩、変わる波、風、暗さ、慣れない足場はかなり負担になります。',
+          '最初のうちは誰かと一緒に行く、行き先を人に伝える、帰る判断を早めにする、無理なコンディションで粘らない、海は自分の予定より強いものとして扱う、くらい慎重でちょうどいいと思っています。'
+        ]
+      },
+      {
+        id: 'rules',
+        title: '釣りルールは必ず公式情報で確認する',
+        body: [
+          '釣りのルール、サイズ制限、禁止エリア、持ち帰り制限などは変わる可能性があります。古い情報が残って誰かを誤解させる場所にはしたくありません。',
+          '釣りに行く前には、New Zealandの公式情報と、その時点のローカルな注意情報を確認してください。この下書きでは、公式情報を確認するまで具体的な制限や法的な説明は書かない方針にしています。'
+        ],
+        note: 'TODO: MPI / Fisheries New Zealand の最新公式ページを確認してから、リンクやルール概要を追加する。'
+      },
+      {
+        id: 'records',
+        title: 'SoraJPNZでは釣行記録も残していく',
+        body: [
+          'SoraJPNZで残したいのは、釣果だけではありません。その日の雰囲気、試したこと、学んだこと、コンディション、次に変えたいことまで含めて記録していきたいです。',
+          '少しずつ、YouTube、短尺動画、ブログ、釣行メモ、シンプルなデータプロジェクトにつなげていく予定です。'
+        ]
+      },
+      {
+        id: 'next',
+        title: '次にまとめたいこと',
+        body: [
+          '次は、確認済みの公式リンク、初心者向け道具リスト、簡単な釣行ログテンプレート、実際のAuckland周辺での釣行例を足して、より実用的な記事にしていきたいです。',
+          '公開版にするときも、公式情報の代わりではなく、実体験ベースの入口として役立つ形に留めます。'
+        ]
+      }
+    ],
+    noticeTitle: '公式情報確認メモ',
+    noticeBody:
+      '釣りのルール、サイズ制限、禁止エリア、持ち帰り制限などは変わる可能性があります。この記事は個人の実体験メモであり、最終判断には必ずNew Zealandの公式情報を確認してください。',
+    factCheckTitle: '確認TODO',
+    factCheckItems: [
+      'MPI / Fisheries New Zealand の最新公式ページを確認してリンクを追加する。',
+      'エリア別ルール、一時的な閉鎖情報、ローカルな注意情報を公式ページで確認する。',
+      '公開版にする前に、安全情報の参照元を確認する。'
+    ],
+    ctaTitle: '続きもゆっくり整えていく',
+    ctaBody: '実際の釣行、写真、動画、メモが増えたら、この記事も少しずつ実用的にしていきます。',
+    ctas: {
+      blog: 'Blog Hubへ戻る',
+      youtube: 'YouTubeを見る',
+      instagram: 'Instagram',
+      contact: 'お問い合わせ',
+      projects: 'Projectsを見る'
+    }
   }
 } as const;
 
