@@ -14,7 +14,6 @@ export function Blog({ locale, path }: BlogProps) {
   const b = blog[locale];
   const meta = seo[locale].blog;
   const base = localize(locale);
-  const draftHref = `${base}${b.firstNoteDraft.href}`;
   const fieldPhotos = [
     { src: assets.blogHero, caption: b.fieldCaptions[0], className: 'wide shore' },
     { src: assets.blogSpearfishing, caption: b.fieldCaptions[1], className: 'tall spearfishing' },
@@ -94,12 +93,6 @@ export function Blog({ locale, path }: BlogProps) {
             <div className="blog-first-note-card reveal-on-scroll">
               <h2>{b.firstNoteTitle}</h2>
               <p>{b.firstNoteBody}</p>
-              <a className="blog-draft-link" href={draftHref}>
-                <span className="blog-draft-badge">{locale === 'ja' ? '下書き' : 'Draft'}</span>
-                <strong>{b.firstNoteDraft.label}</strong>
-                <span>{b.firstNoteDraft.note}</span>
-                <i className="ri-arrow-right-line" aria-hidden="true" />
-              </a>
               <div className="blog-idea-list">
                 {b.firstNoteItems.map((item) => (
                   <div className="blog-idea-item" key={item}>
