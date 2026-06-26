@@ -953,7 +953,7 @@ export const blog = {
     firstNoteBody:
       'The first notes will focus on practical topics from New Zealand life, fishing, ocean days, work, and money.',
     firstNoteItems: [
-      'Before starting shore fishing in Auckland, New Zealand',
+      'How SoraJPNZ will record Auckland ocean and fishing notes',
       'Why SoraJPNZ is documenting New Zealand life and fishing',
       'Why I am recording ocean, work, money, and data while living in Auckland'
     ],
@@ -1021,7 +1021,7 @@ export const blog = {
     firstNoteBody:
       '最初は、NZ生活・釣り・海・仕事・お金の中から、実体験として残しやすいテーマをまとめていきます。',
     firstNoteItems: [
-      'NZオークランドで岸釣りを始める前に知っておくこと',
+      'Aucklandでの海・釣り記録をどう残していくか',
       'ニュージーランド生活と釣りをSoraJPNZで記録する理由',
       'Aucklandで暮らしながら、海・仕事・お金・データを記録していく理由'
     ],
