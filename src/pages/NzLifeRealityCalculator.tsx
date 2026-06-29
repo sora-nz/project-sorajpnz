@@ -1,4 +1,4 @@
-import { useMemo, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import { useEffect, useMemo, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { assets, links, Locale } from '../lib/content';
@@ -19,6 +19,7 @@ type NzLifeRealityCalculatorProps = {
 };
 
 type RangeControlProps = {
+  testId?: string;
   label: string;
   value: number;
   min: number;
@@ -69,7 +70,110 @@ function updateInput(setInputs: Dispatch<SetStateAction<CalculatorInputs>>, patc
   setInputs((current) => ({ ...current, ...patch }));
 }
 
-function RangeControl({ label, value, min, max, step, suffix, helper, onChange }: RangeControlProps) {
+function formatNumberForInput(value: number, step: number) {
+  if (step < 1) {
+    return value.toFixed(2);
+  }
+
+  return String(Math.round(value));
+}
+
+function normalizeIntegerDraft(rawValue: string) {
+  const digits = rawValue.replace(/\D/g, '');
+  if (!digits) return '';
+  return digits.replace(/^0+(?=\d)/, '') || '0';
+}
+
+function normalizeDecimalDraft(rawValue: string) {
+  const decimalIndex = rawValue.indexOf('.');
+  const hasDecimal = decimalIndex >= 0;
+  const integerPart = (hasDecimal ? rawValue.slice(0, decimalIndex) : rawValue).replace(/\D/g, '');
+  const decimalPart = hasDecimal ? rawValue.slice(decimalIndex + 1).replace(/\D/g, '') : '';
+  const normalizedInteger = integerPart.replace(/^0+(?=\d)/, '') || (hasDecimal ? '0' : integerPart ? '0' : '');
+
+  return hasDecimal ? `${normalizedInteger}.${decimalPart}` : normalizedInteger;
+}
+
+function parseDraftValue(value: string) {
+  if (!value || value === '.') return null;
+  const parsed = Number(value);
+  return Number.isFinite(parsed) ? parsed : null;
+}
+
+function normalizeCommittedValue(value: string, min: number, max: number, step: number) {
+  const parsed = parseDraftValue(value);
+  const nextValue = parsed ?? min;
+  const rounded = step < 1 ? nextValue : Math.round(nextValue);
+  return clamp(rounded, min, max);
+}
+
+function CalculatorNumberInput({
+  testId,
+  label,
+  value,
+  min,
+  max,
+  step,
+  onChange
+}: {
+  testId?: string;
+  label: string;
+  value: number;
+  min: number;
+  max: number;
+  step: number;
+  onChange: (value: number) => void;
+}) {
+  const allowsDecimal = step < 1;
+  const [isEditing, setIsEditing] = useState(false);
+  const [displayValue, setDisplayValue] = useState(() => formatNumberForInput(value, step));
+
+  useEffect(() => {
+    if (!isEditing) {
+      setDisplayValue(formatNumberForInput(value, step));
+    }
+  }, [isEditing, step, value]);
+
+  const handleChange = (rawValue: string) => {
+    const nextDisplayValue = allowsDecimal ? normalizeDecimalDraft(rawValue) : normalizeIntegerDraft(rawValue);
+    setDisplayValue(nextDisplayValue);
+
+    const parsed = parseDraftValue(nextDisplayValue);
+    if (parsed !== null) {
+      const nextValue = allowsDecimal ? parsed : Math.round(parsed);
+      onChange(clamp(nextValue, min, max));
+    }
+  };
+
+  const handleBlur = () => {
+    const normalizedValue = normalizeCommittedValue(displayValue, min, max, step);
+    setIsEditing(false);
+    setDisplayValue(formatNumberForInput(normalizedValue, step));
+    onChange(normalizedValue);
+  };
+
+  return (
+    <input
+      className="calculator-number-input"
+      type="text"
+      inputMode={allowsDecimal ? 'decimal' : 'numeric'}
+      pattern={allowsDecimal ? '[0-9]*[.]?[0-9]*' : '[0-9]*'}
+      min={min}
+      max={max}
+      value={displayValue}
+      onFocus={(event) => {
+        setIsEditing(true);
+        event.currentTarget.select();
+      }}
+      onChange={(event) => handleChange(event.currentTarget.value)}
+      onBlur={handleBlur}
+      aria-label={`${label} の数値入力`}
+      data-testid={testId ? `${testId}-number` : undefined}
+    />
+  );
+}
+
+function RangeControl({ testId, label, value, min, max, step, suffix, helper, onChange }: RangeControlProps) {
   const handleChange = (nextValue: number) => onChange(clamp(nextValue, min, max));
 
   return (
@@ -91,16 +195,16 @@ function RangeControl({ label, value, min, max, step, suffix, helper, onChange }
         step={step}
         value={value}
         onChange={(event) => handleChange(Number(event.currentTarget.value))}
+        data-testid={testId ? `${testId}-range` : undefined}
       />
-      <input
-        className="calculator-number-input"
-        type="number"
+      <CalculatorNumberInput
+        testId={testId}
+        label={label}
+        value={value}
         min={min}
         max={max}
         step={step}
-        value={value}
-        onChange={(event) => handleChange(Number(event.currentTarget.value))}
-        aria-label={`${label} の数値入力`}
+        onChange={handleChange}
       />
       {helper && <span className="calculator-helper">{helper}</span>}
     </label>
@@ -241,6 +345,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   ))}
                 </div>
                 <RangeControl
+                  testId="hourly-wage"
                   label="時給"
                   value={inputs.hourlyWage}
                   min={23.95}
@@ -251,6 +356,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   onChange={(value) => updateInput(setInputs, { hourlyWage: value })}
                 />
                 <RangeControl
+                  testId="weekly-work-hours"
                   label="週の勤務時間"
                   value={inputs.workHoursPerWeek}
                   min={10}
@@ -273,6 +379,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 </p>
                 {inputs.incomeMode === 'manual' && (
                   <RangeControl
+                    testId="manual-monthly-take-home"
                     label="月の手取り収入"
                     value={inputs.manualMonthlyTakeHome}
                     min={0}
@@ -288,6 +395,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
               <fieldset className="calculator-fieldset">
                 <legend>毎週かかる生活費</legend>
                 <RangeControl
+                  testId="weekly-rent"
                   label="家賃"
                   value={inputs.weeklyRent}
                   min={150}
@@ -297,6 +405,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   onChange={(value) => updateInput(setInputs, { weeklyRent: value })}
                 />
                 <RangeControl
+                  testId="weekly-food"
                   label="食費"
                   value={inputs.weeklyFood}
                   min={50}
@@ -306,6 +415,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   onChange={(value) => updateInput(setInputs, { weeklyFood: value })}
                 />
                 <RangeControl
+                  testId="weekly-transport"
                   label="交通費"
                   value={inputs.weeklyTransport}
                   min={0}
@@ -329,6 +439,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 {inputs.ownsCar && (
                   <div className="calculator-nested-grid">
                     <RangeControl
+                      testId="weekly-fuel"
                       label="燃料"
                       value={inputs.weeklyFuel}
                       min={0}
@@ -338,6 +449,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                       onChange={(value) => updateInput(setInputs, { weeklyFuel: value })}
                     />
                     <RangeControl
+                      testId="weekly-parking"
                       label="駐車場"
                       value={inputs.weeklyParking}
                       min={0}
@@ -347,6 +459,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                       onChange={(value) => updateInput(setInputs, { weeklyParking: value })}
                     />
                     <RangeControl
+                      testId="monthly-car-insurance"
                       label="車の保険"
                       value={inputs.monthlyCarInsurance}
                       min={0}
@@ -356,6 +469,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                       onChange={(value) => updateInput(setInputs, { monthlyCarInsurance: value })}
                     />
                     <RangeControl
+                      testId="monthly-car-maintenance"
                       label="整備・WOF・rego積立"
                       value={inputs.monthlyCarMaintenance}
                       min={0}
@@ -372,6 +486,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <legend>毎月かかる固定費</legend>
                 <div className="calculator-nested-grid">
                   <RangeControl
+                    testId="monthly-phone-internet"
                     label="電話・インターネット"
                     value={inputs.monthlyPhoneInternet}
                     min={0}
@@ -381,6 +496,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                     onChange={(value) => updateInput(setInputs, { monthlyPhoneInternet: value })}
                   />
                   <RangeControl
+                    testId="monthly-insurance"
                     label="保険"
                     value={inputs.monthlyInsurance}
                     min={0}
@@ -390,6 +506,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                     onChange={(value) => updateInput(setInputs, { monthlyInsurance: value })}
                   />
                   <RangeControl
+                    testId="monthly-subscriptions"
                     label="サブスク"
                     value={inputs.monthlySubscriptions}
                     min={0}
@@ -399,6 +516,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                     onChange={(value) => updateInput(setInputs, { monthlySubscriptions: value })}
                   />
                   <RangeControl
+                    testId="monthly-other-fixed"
                     label="その他固定費"
                     value={inputs.monthlyOtherFixed}
                     min={0}
@@ -413,6 +531,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
               <fieldset className="calculator-fieldset">
                 <legend>貯金と緊急資金</legend>
                 <RangeControl
+                  testId="monthly-savings-target"
                   label="月の貯金目標"
                   value={inputs.monthlySavingsTarget}
                   min={0}
@@ -422,6 +541,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   onChange={(value) => updateInput(setInputs, { monthlySavingsTarget: value })}
                 />
                 <RangeControl
+                  testId="emergency-buffer-months"
                   label="緊急資金の目標"
                   value={inputs.emergencyBufferMonths}
                   min={1}
