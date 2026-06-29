@@ -397,6 +397,60 @@ img {
   background: linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
 }
 
+.home-tool-section {
+  padding: 54px 0;
+  background:
+    radial-gradient(circle at 84% 12%, rgba(22, 127, 143, 0.08), transparent 28%),
+    linear-gradient(180deg, #f8fbff 0%, #ffffff 100%);
+}
+
+.home-tool-card {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 24px;
+  align-items: center;
+  padding: 30px;
+  border: 1px solid rgba(15, 23, 42, 0.09);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(10, 132, 255, 0.08), rgba(255, 255, 255, 0.94) 42%),
+    #ffffff;
+  box-shadow: var(--shadow-soft);
+}
+
+.home-tool-copy {
+  min-width: 0;
+}
+
+.home-tool-copy h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 30px;
+  line-height: 1.22;
+  font-weight: 740;
+  letter-spacing: 0;
+}
+
+.home-tool-copy p:not(.eyebrow) {
+  margin: 12px 0 0;
+  max-width: 720px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.home-tool-copy .home-tool-disclaimer {
+  display: inline-flex;
+  max-width: 100%;
+  padding: 8px 10px;
+  border: 1px solid rgba(10, 132, 255, 0.16);
+  border-radius: 8px;
+  color: #315475;
+  background: rgba(234, 244, 255, 0.76);
+  font-size: 13px;
+  line-height: 1.5;
+}
+
 .social-channel-section {
   background:
     radial-gradient(circle at 8% 12%, rgba(10, 132, 255, 0.08), transparent 30%),
@@ -2782,6 +2836,7 @@ img {
   .blog-photo-tile,
   .blog-photo-tile img,
   .blog-category-card,
+  .home-tool-card,
   .calculator-preset,
   .calculator-toggle,
   .social-link,
@@ -2940,8 +2995,13 @@ img {
   .contact-layout,
   .calculator-layout,
   .calculator-scenario-grid,
-  .calculator-insight-grid {
+  .calculator-insight-grid,
+  .home-tool-card {
     grid-template-columns: 1fr;
+  }
+
+  .home-tool-card .button {
+    justify-self: flex-start;
   }
 
   .calculator-results-panel {
@@ -3193,6 +3253,7 @@ img {
   }
 
   .project-card-body,
+  .home-tool-card,
   .service-card,
   .social-primary-card,
   .social-mini-card,
@@ -3213,6 +3274,18 @@ img {
   .calculator-disclaimer,
   .calculator-scenario-card {
     padding: 22px;
+  }
+
+  .home-tool-section {
+    padding: 42px 0;
+  }
+
+  .home-tool-copy h2 {
+    font-size: 25px;
+  }
+
+  .home-tool-card .button {
+    justify-self: stretch;
   }
 
   .calculator-fieldset,

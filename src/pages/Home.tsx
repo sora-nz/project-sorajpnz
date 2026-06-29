@@ -20,6 +20,7 @@ export function Home({ locale, path }: HomeProps) {
   const visibleSocialChannels = socialLinks.filter((channel) => channel.href && channel.showOnHome);
   const primarySocial = visibleSocialChannels.find((channel) => channel.id === 'youtube');
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
+  const featuredTool = h.featuredTool;
 
   useReveal();
   useMeta({
@@ -110,6 +111,25 @@ export function Home({ locale, path }: HomeProps) {
             </div>
           </div>
         </section>
+
+        {featuredTool && (
+          <section className="content-section home-tool-section" aria-labelledby="home-featured-tool-title">
+            <div className="section-inner">
+              <article className="home-tool-card reveal-on-scroll">
+                <div className="home-tool-copy">
+                  <p className="eyebrow">{featuredTool.eyebrow}</p>
+                  <h2 id="home-featured-tool-title">{featuredTool.title}</h2>
+                  <p>{featuredTool.body}</p>
+                  <p className="home-tool-disclaimer">{featuredTool.disclaimer}</p>
+                </div>
+                <a className="button primary" href={featuredTool.href}>
+                  <span>{featuredTool.cta}</span>
+                  <i className="ri-calculator-line" />
+                </a>
+              </article>
+            </div>
+          </section>
+        )}
 
         <section className="content-section services-section">
           <div className="section-inner">
