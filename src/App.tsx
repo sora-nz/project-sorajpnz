@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { LegalPage } from './pages/LegalPage';
 import { LinksPage } from './pages/LinksPage';
 import { NotFound } from './pages/NotFound';
+import { NzLifeRealityCalculator } from './pages/NzLifeRealityCalculator';
 import { Projects } from './pages/Projects';
 import { RelocationProject } from './pages/RelocationProject';
 import { RentRadarProject } from './pages/RentRadarProject';
@@ -66,6 +67,9 @@ export function App() {
   if (key === '/privacy') return <LegalPage locale={locale} path={path} kind="privacy" />;
   if (key === '/terms') return <LegalPage locale={locale} path={path} kind="terms" />;
   if (key === '/disclaimer') return <LegalPage locale={locale} path={path} kind="disclaimer" />;
+  if (locale === 'ja' && key === '/tools/nz-life-reality-calculator') {
+    return <NzLifeRealityCalculator locale={locale} path={path} />;
+  }
 
   return <NotFound locale={locale} path={path} />;
 }

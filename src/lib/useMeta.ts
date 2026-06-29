@@ -8,6 +8,7 @@ type MetaConfig = {
   description: string;
   image?: string;
   noIndex?: boolean;
+  alternates?: boolean;
   jsonLd?: unknown;
 };
 
@@ -49,7 +50,11 @@ export function canonicalizePath(path: string) {
   return clean;
 }
 
-export function useMeta({ locale, path, title, description, image, noIndex = false, jsonLd }: MetaConfig) {
+function clearAlternateLinks() {
+  document.querySelectorAll<HTMLLinkElement>('link[rel="alternate"][hreflang]').forEach((node) => node.remove());
+}
+
+export function useMeta({ locale, path, title, description, image, noIndex = false, alternates = true, jsonLd }: MetaConfig) {
   useEffect(() => {
     const canonicalPath = canonicalizePath(path);
     const canonicalUrl = `${siteUrl}${canonicalPath}`;
@@ -71,9 +76,12 @@ export function useMeta({ locale, path, title, description, image, noIndex = fal
     setMeta('twitter:image', imageUrl);
     setMeta('twitter:image:alt', `${title} preview`);
     setLink('canonical', canonicalUrl);
-    setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'en' });
-    setLink('alternate', `${siteUrl}/ja${alternatePath}`, { hreflang: 'ja' });
-    setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'x-default' });
+    clearAlternateLinks();
+    if (alternates) {
+      setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'en' });
+      setLink('alternate', `${siteUrl}/ja${alternatePath}`, { hreflang: 'ja' });
+      setLink('alternate', `${siteUrl}/en${alternatePath}`, { hreflang: 'x-default' });
+    }
 
     document.querySelectorAll('script[data-managed-jsonld="true"]').forEach((node) => node.remove());
     if (jsonLd) {
@@ -83,7 +91,7 @@ export function useMeta({ locale, path, title, description, image, noIndex = fal
       script.textContent = JSON.stringify(jsonLd);
       document.head.appendChild(script);
     }
-  }, [description, image, jsonLd, locale, noIndex, path, title]);
+  }, [alternates, description, image, jsonLd, locale, noIndex, path, title]);
 }
 
 export function pageJsonLd(locale: Locale, path: string, title: string, description: string) {
