@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-export function useReveal() {
+export function useReveal(refreshKey?: string) {
   useEffect(() => {
     const nodes = Array.from(document.querySelectorAll<HTMLElement>('.reveal-on-scroll'));
     if (!('IntersectionObserver' in window)) {
@@ -22,5 +22,5 @@ export function useReveal() {
 
     nodes.forEach((node) => observer.observe(node));
     return () => observer.disconnect();
-  }, []);
+  }, [refreshKey]);
 }

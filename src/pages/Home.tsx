@@ -22,7 +22,7 @@ export function Home({ locale, path }: HomeProps) {
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
   const featuredTool = h.featuredTool;
 
-  useReveal();
+  useReveal(`${locale}:${path}`);
   useMeta({
     locale,
     path,
@@ -115,7 +115,7 @@ export function Home({ locale, path }: HomeProps) {
         {featuredTool && (
           <section className="content-section home-tool-section" aria-labelledby="home-featured-tool-title">
             <div className="section-inner">
-              <article className="home-tool-card reveal-on-scroll">
+              <article className="home-tool-card">
                 <div className="home-tool-copy">
                   <p className="eyebrow">{featuredTool.eyebrow}</p>
                   <h2 id="home-featured-tool-title">{featuredTool.title}</h2>
