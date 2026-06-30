@@ -310,6 +310,7 @@ export const home = {
         body: 'Portfolio feedback, website analytics, dashboard organization, and small practical conversations stay available when needed.'
       }
     ],
+    featuredTool: null,
     projectsTitle: 'Projects',
     aboutTitle: 'About Me',
     about:
@@ -356,6 +357,14 @@ export const home = {
         body: 'ポートフォリオ相談、Web分析、ダッシュボード整理など、必要があれば小さく相談できる形にしています。'
       }
     ],
+    featuredTool: {
+      eyebrow: 'Practical Tool',
+      title: 'NZ生活リアリティ計算機',
+      body: '時給・労働時間・家賃・車・貯金目標を動かして、ニュージーランド生活の余白を試算できます。',
+      disclaimer: '概算ツールです。ビザ・税務・投資・就職の助言ではありません。',
+      cta: '計算してみる',
+      href: '/ja/tools/nz-life-reality-calculator'
+    },
     projectsTitle: 'プロジェクト',
     aboutTitle: '自己紹介',
     about:
