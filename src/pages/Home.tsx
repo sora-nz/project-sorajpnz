@@ -22,7 +22,7 @@ export function Home({ locale, path }: HomeProps) {
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
   const featuredTool = h.featuredTool;
 
-  useReveal();
+  useReveal(`${locale}:${path}`);
   useMeta({
     locale,
     path,
