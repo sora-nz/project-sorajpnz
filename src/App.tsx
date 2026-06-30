@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Blog } from './pages/Blog';
+import { AucklandLivingCostArticle } from './pages/AucklandLivingCostArticle';
 import { Contact } from './pages/Contact';
 import { Home } from './pages/Home';
 import { LegalPage } from './pages/LegalPage';
@@ -63,6 +64,9 @@ export function App() {
   if (key === '/projects/nz-japan-relocation') return <RelocationProject locale={locale} path={path} />;
   if (key === '/projects/rent-radar' || key === '/project') return <RentRadarProject locale={locale} path={path} />;
   if (key === '/blog') return <Blog locale={locale} path={path} />;
+  if (locale === 'ja' && key === '/blog/auckland-living-cost-hourly-wage') {
+    return <AucklandLivingCostArticle locale={locale} path={path} />;
+  }
   if (key === '/contact') return <Contact locale={locale} path={path} />;
   if (key === '/privacy') return <LegalPage locale={locale} path={path} kind="privacy" />;
   if (key === '/terms') return <LegalPage locale={locale} path={path} kind="terms" />;
