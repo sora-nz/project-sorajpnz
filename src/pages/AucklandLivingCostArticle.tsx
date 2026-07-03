@@ -18,7 +18,13 @@ type AucklandLivingCostArticleProps = {
 
 const articleTitle = 'Auckland生活費の現実：家賃・車・貯金目標を入れると、月いくら残るのか';
 const articleDescription =
-  'Auckland生活を、家賃だけでなく勤務時間、車、固定費、貯金目標、緊急資金、日本円の感覚から考えるSoraJPNZのレビュー中記事です。';
+  'Auckland生活を、勤務時間、家賃、車、固定費、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZのレビュー中記事です。';
+
+const articleMeta = [
+  { label: '作成日', value: '2026-07-04' },
+  { label: '最終更新日', value: '2026-07-04' },
+  { label: '状態', value: 'Review / noindex' }
+];
 
 const tocItems = [
   { href: '#target-reader', label: 'この記事で想定している読者' },
@@ -40,7 +46,7 @@ const officialTodos = [
   'INZの賃金基準: 記事内で触れる場合は、必ずINZ公式情報と日付を確認する。',
   'IRDの手取り計算: 正確な手取りはIRDまたは給与明細・専門家で確認する案内を入れる。',
   '家賃データ: 家賃相場を入れる場合は、Stats NZ、MBIE、Tenancy Servicesなど一次情報で確認する。',
-  'NZD/JPY参考レート: 日本円換算を入れる場合は、固定レートと確認日を明記する。'
+  'NZD/JPY参考換算: 計算機の取得元、更新日、手動上書きの扱いを公開前に再確認する。'
 ];
 
 const referenceItems = [
@@ -203,7 +209,7 @@ function CalculatorCTA({ href }: CalculatorCTAProps) {
     <a className="article-calculator-cta" href={href}>
       <span>
         <strong>NZ生活リアリティ計算機</strong>
-        <small>今はNZD前提で、時給・労働時間・家賃・車・貯金目標を動かして生活の余白を試算できます。日本円の参考表示は今後追加したい改善点です。</small>
+        <small>時給・勤務時間・家賃・車コスト・貯金目標・緊急資金を動かして、NZDと日本円の両方で生活の余白を確認できます。</small>
       </span>
       <i className="ri-calculator-line" aria-hidden="true" />
     </a>
@@ -237,6 +243,14 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             <p className="draft-article-lead">
               「NZは時給が高そうだけど、実際いくら残るのか」。Aucklandで家賃を払って、車や固定費も考えて、少し貯金するならどれくらい余白が残るのかを、生活感に近い形で整理します。
             </p>
+            <dl className="draft-article-meta" aria-label="記事メタ情報">
+              {articleMeta.map((item) => (
+                <div key={item.label}>
+                  <dt>{item.label}</dt>
+                  <dd>{item.value}</dd>
+                </div>
+              ))}
+            </dl>
             <div className="draft-note-box">
               この記事は公開前レビュー中です。数字は説明用の仮定を含みます。公式な生活費・税金・賃金・移民情報ではありません。
             </div>
@@ -364,10 +378,10 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 です。これを日本円でも見ると、「毎月どれくらい重い差なのか」が一気に分かりやすくなります。
               </p>
               <p>
-                ただし、日本円換算は生活感をつかむための参考表示です。税務・会計・送金・投資判断に使うものではありません。この記事ではリアルタイム為替APIは使わず、将来的には計算機側で「参考NZD/JPYレート」を自分で変更できる形にしたいです。
+                SoraJPNZの計算機では、NZDの金額に加えて、日本円の参考換算も表示できます。為替レートは取得できる場合は自動で表示し、必要に応じて手動で変更できます。
               </p>
               <div className="draft-note-box">
-                例: 参考レートを 1NZD = ¥___ と置いた場合、週$50の家賃差は月約 ¥___。公開版では、固定レートと確認日を明記する予定です。
+                日本円換算は、生活感をつかむための参考表示です。税務・会計・送金・投資判断に使うものではありません。為替レートは日々変わるので、厳密な判断ではなく「規模感を見るための補助」として扱います。
               </div>
             </section>
 
@@ -418,10 +432,10 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 <p className="draft-section-label">自分の前提で試算する</p>
                 <h2>自分の前提で試算する</h2>
                 <p>
-                  自分の時給、働けそうな時間、家賃、車の有無、貯金目標を入れると、NZDベースで月の余白を試算できます。これは「答えを出す」ためではなく、自分の前提のどこが強く、どこが脆いかを見るための道具です。
+                  自分の時給、働けそうな時間、家賃、車コスト、貯金目標、緊急資金を入れると、月の余白をNZDと日本円の参考換算で試算できます。これは「答えを出す」ためではなく、自分の前提のどこが強く、どこが脆いかを見るための道具です。
                 </p>
                 <p>
-                  今のMVPはNZDでの生活費整理が中心です。日本円の参考換算は、将来的に編集できる参考レートとして追加したい改善点です。
+                  日本円表示は生活感をつかむための補助です。為替レートは変動するため、税務・会計・送金・投資判断には使わず、NZDベースの前提確認と合わせて見るのが前提です。
                 </p>
                 <CalculatorCTA href={calculatorHref} />
             </section>

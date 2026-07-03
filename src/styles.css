@@ -2988,6 +2988,36 @@ img {
   line-height: 1.9;
 }
 
+.draft-article-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 18px;
+  margin: 20px 0 0;
+  padding: 0;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.draft-article-meta div {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.draft-article-meta dt,
+.draft-article-meta dd {
+  margin: 0;
+}
+
+.draft-article-meta dt {
+  color: #64748b;
+  font-weight: 700;
+}
+
+.draft-article-meta dd {
+  color: #475569;
+}
+
 .draft-note-box {
   margin-top: 22px;
   padding: 14px 16px;
