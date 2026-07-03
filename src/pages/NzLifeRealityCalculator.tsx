@@ -1,7 +1,16 @@
-import { useEffect, useMemo, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
+import { useEffect, useMemo, useRef, useState, type Dispatch, type ReactNode, type SetStateAction } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { assets, links, Locale } from '../lib/content';
+import {
+  convertNzdToJpy,
+  fallbackNzdJpyRate,
+  fetchNzdJpyReferenceRate,
+  formatJpy,
+  formatNzdJpyRate,
+  sanitizeNzdJpyRate,
+  type ReferenceRateResult
+} from '../lib/fxReference';
 import {
   calculateNzLifeReality,
   calculateWithOverrides,
@@ -43,6 +52,8 @@ const sampleCarCosts = {
   monthlyCarInsurance: 80,
   monthlyCarMaintenance: 120
 };
+
+type RateStatus = 'loading' | 'success' | 'fallback' | 'manual';
 
 function clamp(value: number, min: number, max: number) {
   return Math.min(max, Math.max(min, value));
@@ -227,11 +238,12 @@ function ToggleButton({
   );
 }
 
-function MetricCard({ label, value, helper }: { label: string; value: string; helper?: string }) {
+function MetricCard({ label, value, helper, referenceValue }: { label: string; value: string; helper?: string; referenceValue?: string }) {
   return (
     <article className="calculator-metric">
       <span>{label}</span>
       <strong>{value}</strong>
+      {referenceValue && <small className="calculator-reference-value">{referenceValue}</small>}
       {helper && <p>{helper}</p>}
     </article>
   );
@@ -263,10 +275,15 @@ function uniqueNumbers(values: number[]) {
 
 export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculatorProps) {
   const [inputs, setInputs] = useState<CalculatorInputs>(defaultNzLifeInputs);
+  const [referenceRate, setReferenceRate] = useState(fallbackNzdJpyRate);
+  const [rateStatus, setRateStatus] = useState<RateStatus>('loading');
+  const [rateSource, setRateSource] = useState<ReferenceRateResult | null>(null);
+  const manualRateOverrideRef = useRef(false);
   const result = useMemo(() => calculateNzLifeReality(inputs), [inputs]);
   const impacts = useMemo(() => impactEstimates(inputs), [inputs]);
   const monthlyRemainingMax = Math.max(result.monthlyIncomeUsedForCalculation, result.monthlyExpenses, 1);
   const expenseTotal = Math.max(result.monthlyExpenses, 1);
+  const formatReferenceJpy = (value: number) => formatJpy(convertNzdToJpy(value, referenceRate));
   const wageScenarios = uniqueNumbers([23.95, 29.9, 30, 35, inputs.hourlyWage]).map((wage) => ({
     label: `$${wage.toFixed(wage % 1 === 0 ? 0 : 2)}`,
     value: calculateWithOverrides(inputs, { hourlyWage: wage }, true).monthlyRemaining
@@ -285,6 +302,37 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
         { label: '車ありサンプル', value: calculateWithOverrides(inputs, { ownsCar: true, ...sampleCarCosts }).monthlyRemaining }
       ];
   const savingsProgress = Math.min(Math.max(result.savingsAchievementRate, 0), 2);
+
+  useEffect(() => {
+    const controller = new AbortController();
+    setRateStatus('loading');
+
+    fetchNzdJpyReferenceRate(controller.signal)
+      .then((rateResult) => {
+        setRateSource(rateResult);
+
+        if (!manualRateOverrideRef.current) {
+          setReferenceRate(rateResult.rate);
+          setRateStatus('success');
+        }
+      })
+      .catch(() => {
+        if (controller.signal.aborted) return;
+
+        setRateSource(null);
+        if (!manualRateOverrideRef.current) {
+          setRateStatus('fallback');
+        }
+      });
+
+    return () => controller.abort();
+  }, []);
+
+  const handleReferenceRateChange = (value: number) => {
+    manualRateOverrideRef.current = true;
+    setReferenceRate(sanitizeNzdJpyRate(value));
+    setRateStatus('manual');
+  };
 
   useReveal();
   useMeta({
@@ -559,8 +607,84 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <span>判定</span>
                 <strong>{result.statusLabel}</strong>
                 <p>
-                  月の残りは {formatCurrency(result.monthlyRemaining)}。これは完成された判断ではなく、前提を動かすためのスタート地点です。
+                  月の残りは {formatCurrency(result.monthlyRemaining)} / {formatReferenceJpy(result.monthlyRemaining)}。これは完成された判断ではなく、前提を動かすためのスタート地点です。
                 </p>
+              </div>
+
+              <div className="calculator-fx-panel">
+                <div className="calculator-fx-heading">
+                  <h2>日本円参考換算</h2>
+                  <p>NZDの金額を日本円でも感覚的に見たい場合の参考表示です。税務・会計・送金・投資判断には使わないでください。</p>
+                </div>
+                <div className="calculator-fx-rate-card">
+                  <span>
+                    {rateStatus === 'loading'
+                      ? '参考レートを取得中'
+                      : rateStatus === 'success'
+                        ? '取得した参考レート'
+                        : rateStatus === 'manual'
+                          ? '手入力の参考レート'
+                          : '取得できなかったため手入力に切り替え'}
+                  </span>
+                  <strong>1 NZD ≒ {formatNzdJpyRate(referenceRate)}</strong>
+                  {rateSource && rateStatus === 'success' && (
+                    <p>
+                      Source:{' '}
+                      <a href={rateSource.sourceUrl} target="_blank" rel="noopener noreferrer">
+                        {rateSource.source}
+                      </a>
+                      {rateSource.date ? ` / Updated: ${rateSource.date}` : ''}
+                    </p>
+                  )}
+                  {rateSource && rateStatus === 'manual' && (
+                    <p>
+                      取得参考: 1 NZD ≒ {formatNzdJpyRate(rateSource.rate)} / Source:{' '}
+                      <a href={rateSource.sourceUrl} target="_blank" rel="noopener noreferrer">
+                        {rateSource.source}
+                      </a>
+                      {rateSource.date ? ` / Updated: ${rateSource.date}` : ''}
+                    </p>
+                  )}
+                </div>
+                <label className="calculator-fx-input">
+                  <span>手動で参考レートを上書き</span>
+                  <span className="calculator-fx-input-row">
+                    <span>1 NZD =</span>
+                    <CalculatorNumberInput
+                      testId="nzd-jpy-rate"
+                      label="NZD JPY 参考レート"
+                      value={referenceRate}
+                      min={1}
+                      max={300}
+                      step={0.01}
+                      onChange={handleReferenceRateChange}
+                    />
+                    <span>円</span>
+                  </span>
+                </label>
+                <p className="calculator-helper">
+                  日本円換算は生活感をつかむための参考です。為替レートは変動します。税務・会計・送金・投資判断には使用しないでください。
+                </p>
+                <dl className="calculator-fx-summary-list">
+                  <div>
+                    <dt>家賃</dt>
+                    <dd>
+                      {formatCurrency(inputs.weeklyRent)}/週 / {formatReferenceJpy(inputs.weeklyRent)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>月の貯金目標</dt>
+                    <dd>
+                      {formatCurrency(inputs.monthlySavingsTarget)}/月 / {formatReferenceJpy(inputs.monthlySavingsTarget)}
+                    </dd>
+                  </div>
+                  <div>
+                    <dt>緊急資金目標</dt>
+                    <dd>
+                      {formatCurrency(result.emergencyBufferTargetAmount)} / {formatReferenceJpy(result.emergencyBufferTargetAmount)}
+                    </dd>
+                  </div>
+                </dl>
               </div>
 
               <div className="calculator-metric-grid">
@@ -569,9 +693,11 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <MetricCard
                   label="計算に使う月収"
                   value={formatCurrency(result.monthlyIncomeUsedForCalculation)}
+                  referenceValue={formatReferenceJpy(result.monthlyIncomeUsedForCalculation)}
                   helper={inputs.incomeMode === 'manual' ? '手取り入力を使用' : '概算手取りを使用'}
                 />
-                <MetricCard label="月の生活費" value={formatCurrency(result.monthlyExpenses)} />
+                <MetricCard label="月の生活費" value={formatCurrency(result.monthlyExpenses)} referenceValue={formatReferenceJpy(result.monthlyExpenses)} />
+                <MetricCard label="月の残り" value={formatCurrency(result.monthlyRemaining)} referenceValue={formatReferenceJpy(result.monthlyRemaining)} />
               </div>
 
               <div className="calculator-visual-panel">
@@ -614,7 +740,9 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <div>
                   <h2>緊急資金</h2>
                   <strong className="calculator-big-number">{formatMonths(result.emergencyBufferBuildMonths)}</strong>
-                  <p>目標額 {formatCurrency(result.emergencyBufferTargetAmount)}</p>
+                  <p>
+                    目標額 {formatCurrency(result.emergencyBufferTargetAmount)} / {formatReferenceJpy(result.emergencyBufferTargetAmount)}
+                  </p>
                 </div>
               </div>
 
