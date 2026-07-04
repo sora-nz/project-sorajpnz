@@ -16,9 +16,9 @@ type AucklandLivingCostArticleProps = {
   path: string;
 };
 
-const articleTitle = 'Auckland生活費の現実：家賃・車・貯金目標を入れると、月いくら残るのか';
+const articleTitle = 'Auckland生活の出費と貯金の現実';
 const articleDescription =
-  'Auckland生活を、勤務時間、家賃、車、固定費、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZのレビュー中記事です。';
+  'Auckland生活を、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZのレビュー中記事です。';
 
 const articleMeta = [
   { label: '作成日', value: '2026-07-04' },
@@ -28,14 +28,13 @@ const articleMeta = [
 
 const tocItems = [
   { href: '#target-reader', label: 'この記事で想定している読者' },
-  { href: '#premise', label: '最初に考えたいこと' },
-  { href: '#hourly-wage', label: '時給だけでは判断できない' },
-  { href: '#rent', label: '家賃は週額でも月の生活に効く' },
-  { href: '#car', label: '車を持つと見え方が変わる' },
-  { href: '#sora-sense', label: 'Soraの生活感として' },
-  { href: '#jpy-reference', label: '日本円で考えると感覚が変わる' },
+  { href: '#monthly-remaining', label: '時給より月にいくら残るか' },
+  { href: '#rent', label: '家賃は週額でも生活は月で効く' },
+  { href: '#car', label: '車と固定費' },
+  { href: '#sora-sense', label: '私の生活感として' },
+  { href: '#jpy-reference', label: '日本円で見る生活費' },
   { href: '#savings', label: '貯金目標と緊急資金' },
-  { href: '#scenarios', label: '試算シナリオ' },
+  { href: '#scenarios', label: '例としての試算' },
   { href: '#calculator', label: '自分の前提で試算する' },
   { href: '#todos', label: '公開前に確認する一次情報' }
 ];
@@ -241,7 +240,13 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             <p className="draft-article-kicker">SoraJPNZ Notes</p>
             <h1>{articleTitle}</h1>
             <p className="draft-article-lead">
-              「NZは時給が高そうだけど、実際いくら残るのか」。Aucklandで家賃を払って、車や固定費も考えて、少し貯金するならどれくらい余白が残るのかを、生活感に近い形で整理します。
+              「NZは日本より時給が高そう」と感じることがありますよね。でも私自身Aucklandで生活していると、時給が高い＝余裕がある、とはなかなか言えません。
+            </p>
+            <p className="draft-article-lead">
+              家賃は週払い、車があると便利だけど固定費は増える。さらに少しでも貯金したい、急な出費にも備えたいとなると、月に残る金額の見え方はかなり変わります。
+            </p>
+            <p className="draft-article-lead">
+              この記事では、Aucklandで単身または子どもなしカップルとして生活する日本語話者向けに、家賃・車・貯金目標を入れると月にどれくらい余白が残るのかを、SoraJPNZの計算機とつなげて整理します。
             </p>
             <dl className="draft-article-meta" aria-label="記事メタ情報">
               {articleMeta.map((item) => (
@@ -251,9 +256,6 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 </div>
               ))}
             </dl>
-            <div className="draft-note-box">
-              この記事は公開前レビュー中です。数字は説明用の仮定を含みます。公式な生活費・税金・賃金・移民情報ではありません。
-            </div>
             <nav className="draft-inline-toc" aria-label="記事の目次">
               <span>目次</span>
               <ol>
@@ -270,237 +272,217 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             <section className="draft-article-chapter reveal-on-scroll" id="target-reader">
               <h2>この記事で想定している読者</h2>
               <p>
-                この記事は、New Zealandに来るか迷っている人、すでにAucklandで暮らしていて生活の前提を見直したい人に向けたメモです。特に、20代から30代前半くらいで、ワーホリ、学生、Post-study、パートナー、またはキャリア初期の仕事をしながら生活を組み立てている人を想定しています。
+                この記事は、家族移住や住宅購入を前提にしたものではありません。
               </p>
               <p>
-                ひとり暮らし、フラット生活、または子どものいないカップルの生活感に近い内容です。家族移住、住宅購入、本格的な移民戦略、税務・投資の最適化、高所得専門職の移住パッケージを扱う記事ではありません。
+                主に、20代〜30代前半くらいで、ワーホリ、学生、Post-study、パートナー、キャリア初期の仕事をしながら、AucklandやNZでの生活を現実的に考えている人向けに制作しています。
+              </p>
+              <p>
+                ひとり暮らし、フラット生活、または子どものいないカップルの生活感に近い内容です。永住権の取り方、税金の最適化、投資判断、高所得専門職向けの移住パッケージを説明する記事ではありません。
               </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="premise">
-              <h2>最初に考えたいこと</h2>
+            <section className="draft-article-chapter reveal-on-scroll" id="monthly-remaining">
+              <h2>まず見たいのは「時給」より「月にいくら残るか」</h2>
               <p>
-                Auckland生活を考えるとき、最初に出てくる問いはだいたいシンプルです。「時給はいくら必要か」「家賃はいくらまでなら大丈夫か」「日本円で見ると高すぎないか」。でも、生活のきつさはひとつの数字だけでは見えません。
+                日本から見ると、NZの時給は高く見えることがあります。ただ、実際の生活では、時給だけを見てもあまり意味がありません。
               </p>
               <p>
-                実際には、週に何時間働けるか、家賃をどこに置くか、車を持つか、毎月いくら残したいか、緊急資金をどれくらい用意したいかで、同じ時給でも生活の見え方がかなり変わります。
+                同じ時給でも、週40時間働ける人と、授業やシフトの都合で週30時間になる人では、月の手取り感が大きく変わります。さらに、家賃、食費、通信費、車、保険、サブスク、外食、趣味、貯金目標まで入れると、「思ったより残らない」と感じることもあります。
               </p>
-            </section>
-
-            <section className="draft-article-chapter reveal-on-scroll" id="hourly-wage">
-                <h2>時給だけでは判断できない</h2>
-                <p>
-                  日本から見ると、NZの時給は高く見えることがあります。ただ、手取り、勤務時間、家賃、車、食費、通信費を通すと、「思ったほど残らない」と感じることもあります。特にAucklandは、家賃と移動コストの影響が大きいです。
-                </p>
-                <p>
-                  たとえば同じ時給でも、週40時間働ける場合と、授業やシフトの都合で週30時間になる場合では、月の余白が大きく変わります。時給そのものより、「安定して何時間働けるか」と「固定費がどれくらい重いか」を一緒に見た方が現実に近くなります。
-                </p>
-                <ul className="draft-check-list">
-                  <li>週の勤務時間が安定しているか</li>
-                  <li>税引き後の手取りをどれくらいで見るか</li>
-                  <li>家賃を週いくらで置くか</li>
-                  <li>車を持つか、公共交通や徒歩中心で生活するか</li>
-                  <li>毎月の貯金目標を生活費に含めるか</li>
-                </ul>
+              <p>大事なのは、時給そのものよりも、次の前提をまとめて見ることだと思っています。</p>
+              <ul className="draft-check-list">
+                <li>週に何時間働けそうか</li>
+                <li>家賃を週いくらで見るか</li>
+                <li>車を持つか</li>
+                <li>毎月いくら貯金したいか</li>
+                <li>急な出費にどれくらい備えたいか</li>
+              </ul>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="rent">
-                <h2>家賃は週額でも、月の生活に効いてくる</h2>
-                <p>
-                  New Zealandでは家賃を週額で見ることが多いですが、生活全体は月単位で考えると分かりやすくなります。SoraJPNZの計算機では、週額を月額に直すときに
-                  <strong> 52 / 12 </strong>
-                  を使っています。
-                </p>
-                <p>
-                  たとえば、週の家賃が50ドル変わると、月ではおよそ
-                  <strong> {formatCurrency(50 * monthlyFactor)} </strong>
-                  の差になります。これは食費や通信費よりも大きく効くことがあり、生活の余白を考えるときの重要な前提になります。
-                </p>
-                <p>
-                  家賃を抑えると毎月の数字は楽になりますが、通勤時間、治安、買い物、仕事へのアクセス、車が必要になるかどうかも一緒に変わります。安い家賃だけを見て決めると、別の場所でコストやストレスが増えることもあります。
-                </p>
+              <h2>家賃は週額でも、生活は月で効いてくる</h2>
+              <p>
+                NZでは家賃を週額で見ることが多いです。給与もfortnight（2週間）単位で出ることが多いため、日本でのお金回りの感覚と少し違います。
+              </p>
+              <p>
+                でもやはり、生活の余白を考えるときは、少し大きく月単位に直した方が分かりやすいです。SoraJPNZの計算機では、週額を月額に直すときに <strong>52 / 12</strong> を使っています。たとえば、週の家賃が$50変わると、月ではおよそ <strong>{formatCurrency(50 * monthlyFactor)}</strong> の差になります。
+              </p>
+              <p>
+                $50/week と聞くと少しの差に見えますが、月で見ると食費や通信費より大きく効くこともあります。
+              </p>
+              <p>
+                ただし、安い家賃だけを見ればいいわけでもありません。家賃を下げても、通勤時間が増える、車が必要になる、買い物が不便になる、治安や生活ストレスが増えることもあります。Aucklandでは、家賃と移動のバランスを一緒に見る必要があります。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="car">
-                <h2>車を持つと見え方が変わる</h2>
-                <p>
-                  Aucklandで車があると、行ける場所や働ける場所は広がります。買い物、仕事探し、海や釣り、郊外への移動もかなり楽になります。一方で、燃料、保険、整備、rego、WOF、駐車場などが毎月の生活費に乗ってきます。
-                </p>
-                <p>
-                  これは「車は持つべきではない」という話ではありません。仕事、住む場所、釣りや海に行く頻度、生活の自由度まで含めて、車を持つ価値と費用を分けて考える必要があるという話です。
-                </p>
+              <h2>車を持つと、生活の自由度と固定費が一緒に増える</h2>
+              <p>
+                Aucklandで車があると、かなり動きやすくなります。仕事探し、買い物、郊外への移動、海や釣りに行くことも楽になります。
+              </p>
+              <p>
+                一方で、燃料、保険、整備、rego、WOF、駐車場などが毎月の生活費に乗ってきます。
+              </p>
+              <p>
+                これは「車を持つべきではない」という話ではありません。むしろNZでは、車があることで生活の自由度がかなり上がる場面も多いです。
+              </p>
+              <p>
+                ただ、車を持つなら、その自由度に毎月いくら払っているのかは見ておいた方がいいです。特に、仕事の場所、住む場所、買い物、趣味、海に行く頻度まで含めると、車は単なる交通費ではなく、生活スタイルそのものに関わってきます。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="sora-sense">
-              <h2>Soraの生活感として</h2>
+              <h2>私(sora)の生活感として</h2>
               <p>
-                私自身も、NZ生活を考えるときに「収入がいくらか」だけでは足りないと感じています。家賃、車、食費、海に行く移動、将来のための貯金を入れると、残る金額の感覚がかなり変わります。
+                私自身も、Aucklandで生活していて「収入がいくらか」だけでは生活の余裕は判断できないと感じています。
               </p>
               <p>
-                ここは公開前に、自分の生活メモから無理のない範囲で数字を入れたい場所です。正確な家計公開ではなく、「Auckland生活を考えるとき、どんな項目を見ているか」を示すためのメモとして残します。
+                家賃、食費、通信費、車、海や釣りに行く移動費、将来のための貯金を入れると、同じ収入でも月に残る金額の見え方がかなり変わります。
               </p>
-              <div className="article-personal-snapshot" aria-label="Soraの生活費メモのプレースホルダー">
-                <div>
-                  <span>家賃</span>
-                  <strong>週$___</strong>
-                </div>
-                <div>
-                  <span>食費</span>
-                  <strong>週$***〜$***</strong>
-                </div>
-                <div>
-                  <span>車関連</span>
-                  <strong>月$***〜$***</strong>
-                </div>
-                <div>
-                  <span>通信費</span>
-                  <strong>月$___</strong>
-                </div>
-                <div>
-                  <span>その他固定費</span>
-                  <strong>月$___</strong>
-                </div>
-                <div>
-                  <span>趣味・移動・外食</span>
-                  <strong>月$***〜$***</strong>
-                </div>
-              </div>
               <p>
-                これは私の一例であり、正解ではありません。住む場所、車の有無、仕事時間、家族構成によって大きく変わります。
+                特に自分の場合、車や移動費はただの出費ではなく、仕事、買い物、海に行くこと、生活の自由度とつながっています。だからこそ、単純に「車なしの方が安い」「家賃が安い方がいい」とは言い切れません。
               </p>
+              <p>
+                ここは今後、自分が公開してもいい範囲で、実際の生活費メモを少しずつ入れていきたい部分です。正確な家計簿を公開するというより、Auckland生活を考えるときに、どんな項目を見るべきかを残していくつもりです。
+              </p>
+              {/*
+                Internal TODO:
+                Add Sora personal living-cost memo later if comfortable.
+                Possible fields: rent, food, car / transport, phone / internet, insurance,
+                subscriptions, eating out / hobbies / fishing / ocean trips.
+                Do not show empty placeholders to readers.
+              */}
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="jpy-reference">
-              <h2>日本円で考えると、生活費の感覚が変わる</h2>
+              <h2>日本円で見ると、生活費の重さが分かりやすい</h2>
               <p>
-                日本語でNZ生活を考えるとき、NZDだけだと感覚がつかみにくいことがあります。週$50の家賃差は、月ではおよそ
-                <strong> {formatCurrency(50 * monthlyFactor)} </strong>
-                です。これを日本円でも見ると、「毎月どれくらい重い差なのか」が一気に分かりやすくなります。
+                日本語でNZ生活を考えるとき、NZDだけだと感覚がつかみにくいことがあると思います。
+              </p>
+              <p>
+                たとえば、週$50の家賃差は、月ではおよそ <strong>{formatCurrency(50 * monthlyFactor)}</strong> です。これを日本円でも見ると、日本で生活してきた人なら「毎月どれくらい重い差なのか」が一気に分かりやすくなると思います。
               </p>
               <p>
                 SoraJPNZの計算機では、NZDの金額に加えて、日本円の参考換算も表示できます。為替レートは取得できる場合は自動で表示し、必要に応じて手動で変更できます。
               </p>
-              <div className="draft-note-box">
-                日本円換算は、生活感をつかむための参考表示です。税務・会計・送金・投資判断に使うものではありません。為替レートは日々変わるので、厳密な判断ではなく「規模感を見るための補助」として扱います。
-              </div>
+              <p>
+                ただし、日本円換算はあくまで生活感をつかむための参考表示です。税務、会計、送金、投資判断に使うものではありません。為替レートは日々変わるので、厳密な判断ではなく「規模感を見るための補助」として扱うのが前提です。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="savings">
-                <h2>貯金目標と緊急資金を入れると、現実が見えやすい</h2>
-                <p>
-                  生活費を払えるだけなら、表面上は「生活できている」ように見えます。ただ、毎月少しでも貯金したい、次のビザや引っ越しに備えたい、急な出費に耐えたいと考えると、必要な余白は変わります。
-                </p>
-                <p>
-                  特に海外生活では、仕事時間が急に減る、引っ越しが必要になる、車の修理が出る、帰国や家族の事情で大きな出費が出るなど、計画どおりにいかないことがあります。だからこそ、余白を数字で見ておくことが大事です。
-                </p>
+              <h2>貯金目標と緊急資金を入れると、現実が見えやすい</h2>
+              <p>
+                生活費を払えているだけなら、表面上は「生活できている」ように見えます。
+              </p>
+              <p>
+                でも、毎月少しでも貯金したい、次のビザや引っ越しに備えたい、車の修理や急な出費にも耐えたいと考えると、必要な余白は変わります。
+              </p>
+              <p>
+                海外生活では、仕事時間が急に減る、引っ越しが必要になる、車の修理が出る、帰国や家族の事情で大きな出費が出ることもあります。だからこそ、「今月払えるか」だけでなく、「どれくらい余白を作れるか」を見ておくことが大事だと思います。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="scenarios">
-                <p className="draft-section-label">例としての試算</p>
-                <h2>試算シナリオ</h2>
-                <p>
-                  以下は、公式データではなく、NZ生活リアリティ計算機MVPの仮定を使った説明用の例です。おすすめの生活パターンではありません。家賃、勤務時間、車の有無を変えると、月の残りがどのくらい動くかを見るためのサンプルです。
-                </p>
-                <div className="draft-scenario-list">
-                  {scenarios.map((scenario) => (
-                    <div className="draft-scenario-row" key={scenario.title}>
-                      <div>
-                        <span className={`draft-scenario-status ${scenario.result.status}`}>{scenario.result.statusLabel}</span>
-                        <h3>{scenario.title}</h3>
-                        <p>{scenario.body}</p>
-                      </div>
-                      <dl>
-                        <div>
-                          <dt>計算用月収</dt>
-                          <dd>{formatCurrency(scenario.result.monthlyIncomeUsedForCalculation)}</dd>
-                        </div>
-                        <div>
-                          <dt>月の生活費</dt>
-                          <dd>{formatCurrency(scenario.result.monthlyExpenses)}</dd>
-                        </div>
-                        <div>
-                          <dt>月の残り</dt>
-                          <dd>{formatCurrency(scenario.result.monthlyRemaining)}</dd>
-                        </div>
-                      </dl>
-                    </div>
-                  ))}
-                </div>
+              <h2>例としての試算</h2>
+              <p>
+                以下は、公式データではなく、SoraJPNZの計算機MVPを使った説明用の例です。おすすめの生活パターンではありません。
+              </p>
+              <p>
+                見たいのは、「どの生活が正解か」ではなく、家賃、勤務時間、車の有無が変わると、月に残る金額がどれくらい動くかです。
+              </p>
+              <div className="article-scenario-notes">
+                {scenarios.map((scenario) => (
+                  <section key={scenario.title}>
+                    <h3>{scenario.title}</h3>
+                    <p>{scenario.body}</p>
+                    <ul>
+                      <li>計算用月収: {formatCurrency(scenario.result.monthlyIncomeUsedForCalculation)}</li>
+                      <li>月の生活費: {formatCurrency(scenario.result.monthlyExpenses)}</li>
+                      <li>月の残り: {formatCurrency(scenario.result.monthlyRemaining)}</li>
+                    </ul>
+                  </section>
+                ))}
+              </div>
+              <p>
+                この3つを見るだけでも、生活費の問題は「時給が高いか低いか」だけでは決まらないことが分かります。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="calculator">
-                <p className="draft-section-label">自分の前提で試算する</p>
-                <h2>自分の前提で試算する</h2>
-                <p>
-                  自分の時給、働けそうな時間、家賃、車コスト、貯金目標、緊急資金を入れると、月の余白をNZDと日本円の参考換算で試算できます。これは「答えを出す」ためではなく、自分の前提のどこが強く、どこが脆いかを見るための道具です。
-                </p>
-                <p>
-                  日本円表示は生活感をつかむための補助です。為替レートは変動するため、税務・会計・送金・投資判断には使わず、NZDベースの前提確認と合わせて見るのが前提です。
-                </p>
-                <CalculatorCTA href={calculatorHref} />
+              <h2>自分の前提で試算する</h2>
+              <p>
+                自分の時給、働けそうな時間、家賃、車コスト、貯金目標、緊急資金を入れると、月の余白をNZDと日本円の参考換算で試算できます。
+              </p>
+              <p>
+                これは「答えを出す」ためのものではありません。自分の前提のどこが強く、どこが脆いかを見るための道具です。
+              </p>
+              <CalculatorCTA href={calculatorHref} />
             </section>
 
             <section className="draft-article-callout warning reveal-on-scroll">
-                <p className="draft-section-label">注意事項</p>
-                <h2>注意事項</h2>
-                <p>
-                  この記事は、NZ生活を考えるための個人的なフィールドノートです。移民、ビザ、税金、雇用、法律、金融、投資の助言ではありません。
-                  実際の判断には、必ずNew Zealand政府、IRD、INZ、その他公式情報、または資格を持つ専門家の情報を確認してください。
-                </p>
+              <h2>注意事項</h2>
+              <p>
+                この記事は、NZ生活を考えるための個人的なフィールドノートです。移民、ビザ、税金、雇用、法律、金融、投資の助言ではありません。
+              </p>
+              <p>
+                実際の判断には、New Zealand政府、IRD、INZ、その他の公式情報、または資格を持つ専門家の情報を確認してください。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="todos">
-                <h2>公開前に確認する一次情報</h2>
-                <p>
-                  この記事を公開版に近づける前に、以下の情報は一次情報で確認し、必要なら日付と出典を本文に追加します。この確認リストは読者向けの結論ではなく、記事を安全に育てるためのメモです。
-                </p>
-                <ul className="draft-check-list">
-                  {officialTodos.map((todo) => (
-                    <li key={todo}>{todo}</li>
-                  ))}
-                </ul>
-                <div className="article-reference-grid" aria-label="公式情報確認用リンク">
-                  {referenceItems.map((item) => (
-                    <ReferenceCard key={item.url} {...item} />
-                  ))}
-                </div>
+              <h2>公開前に確認する一次情報</h2>
+              <p>
+                この記事を公開版に近づける前に、以下の情報は一次情報で確認し、必要なら日付と出典を本文に追加します。この確認リストは読者向けの結論ではなく、記事を安全に育てるためのメモです。
+              </p>
+              <ul className="draft-check-list">
+                {officialTodos.map((todo) => (
+                  <li key={todo}>{todo}</li>
+                ))}
+              </ul>
+              <div className="article-reference-grid" aria-label="公式情報確認用リンク">
+                {referenceItems.map((item) => (
+                  <ReferenceCard key={item.url} {...item} />
+                ))}
+              </div>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll">
-                <h2>次にまとめたいこと</h2>
-                <ul className="draft-check-list">
-                  {nextTopics.map((topic) => (
-                    <li key={topic}>{topic}</li>
-                  ))}
-                </ul>
+              <h2>次にまとめたいこと</h2>
+              <ul className="draft-check-list">
+                {nextTopics.map((topic) => (
+                  <li key={topic}>{topic}</li>
+                ))}
+              </ul>
             </section>
 
             <section className="draft-article-continue reveal-on-scroll">
-                <h2>SoraJPNZで続けて読む</h2>
-                <p>
-                  生活費の数字だけでなく、実際の生活メモ、データプロジェクト、動画で話した内容も少しずつ整理していきます。
-                </p>
-                <div className="article-personal-links">
+              <h2>SoraJPNZで続けて読む</h2>
+              <p>
+                生活費の数字だけでなく、実際の生活メモ、データプロジェクト、動画で話した内容も少しずつ整理していきます。
+              </p>
+              <div className="article-personal-links">
+                <PersonalPostCard
+                  platform="YouTube"
+                  title="SoraJPNZ YouTube"
+                  url={links.youtube}
+                  note="動画で話した内容を、あとから記事や計算機に整理していきます。"
+                />
+                {instagramHref && (
                   <PersonalPostCard
-                    platform="YouTube"
-                    title="SoraJPNZ YouTube"
-                    url={links.youtube}
-                    note="動画で話した内容を、あとから記事や計算機に整理していきます。"
+                    platform="Instagram"
+                    title="SoraJPNZ Instagram"
+                    url={instagramHref}
+                    note="NZ生活、海、日々の更新を軽く残していく場所です。"
                   />
-                  {instagramHref && (
-                    <PersonalPostCard
-                      platform="Instagram"
-                      title="SoraJPNZ Instagram"
-                      url={instagramHref}
-                      note="NZ生活、海、日々の更新を軽く残していく場所です。"
-                    />
-                  )}
-                </div>
-                <div className="article-simple-links">
-                  <a href={localize(locale, '/blog')}>Blog Hubへ戻る</a>
-                  <a href={localize(locale, '/projects')}>Projectsを見る</a>
-                  <a href={localize(locale, '/contact')}>問い合わせる</a>
-                </div>
+                )}
+              </div>
+              <div className="article-simple-links">
+                <a href={localize(locale, '/blog')}>Blog Hubへ戻る</a>
+                <a href={localize(locale, '/projects')}>Projectsを見る</a>
+                <a href={localize(locale, '/contact')}>問い合わせる</a>
+              </div>
             </section>
           </div>
         </article>
