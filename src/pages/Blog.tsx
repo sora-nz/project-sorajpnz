@@ -2,7 +2,6 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { assets, blog, Locale, seo } from '../lib/content';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
-import { useReveal } from '../lib/useReveal';
 
 type BlogProps = {
   locale: Locale;
@@ -13,7 +12,6 @@ export function Blog({ locale, path }: BlogProps) {
   const b = blog[locale];
   const meta = seo[locale].blog;
 
-  useReveal();
   useMeta({
     locale,
     path,
@@ -29,12 +27,12 @@ export function Blog({ locale, path }: BlogProps) {
       <main>
         <section className="notes-hub-hero">
           <div className="section-inner notes-hub-hero-inner">
-            <div className="notes-hub-heading animate-slide-up">
+            <div className="notes-hub-heading">
               <p className="eyebrow">{b.eyebrow}</p>
               <h1>{b.title}</h1>
               <p>{b.subtitle}</p>
             </div>
-            <div className="notes-hero-side reveal-on-scroll">
+            <div className="notes-hero-side">
               <figure className="notes-hero-photo">
                 <img
                   src={assets.blogOceanFloat}
@@ -55,7 +53,7 @@ export function Blog({ locale, path }: BlogProps) {
         <section className="content-section notes-hub-section">
           <div className="section-inner notes-hub-inner">
             {b.featuredTool ? (
-              <a className="notes-featured-tool reveal-on-scroll" href={b.featuredTool.href}>
+              <a className="notes-featured-tool" href={b.featuredTool.href}>
                 <span className="notes-featured-label">{b.featuredTool.title}</span>
                 <strong>{b.featuredTool.body}</strong>
                 <span className="notes-featured-cta">
@@ -64,13 +62,13 @@ export function Blog({ locale, path }: BlogProps) {
                 </span>
               </a>
             ) : (
-              <div className="notes-featured-tool muted reveal-on-scroll">
+              <div className="notes-featured-tool muted">
                 <span className="notes-featured-label">{b.introTitle}</span>
                 <strong>{b.body}</strong>
               </div>
             )}
 
-            <div className="blog-category-intro reveal-on-scroll">
+            <div className="blog-category-intro">
               <h2>{b.categoryTitle}</h2>
               <p>{b.categoryBody}</p>
             </div>
@@ -79,7 +77,7 @@ export function Blog({ locale, path }: BlogProps) {
               {b.categories.map((category, index) => {
                 const isFieldNote = category.title.includes('Field Notes');
                 return (
-                  <article className={`notes-category-card reveal-on-scroll${isFieldNote ? ' field-note' : ''}`} key={category.title}>
+                  <article className={`notes-category-card${isFieldNote ? ' field-note' : ''}`} key={category.title}>
                     {isFieldNote ? (
                       <figure className="notes-category-image">
                         <img
@@ -106,7 +104,7 @@ export function Blog({ locale, path }: BlogProps) {
               })}
             </div>
 
-            <section className="notes-coming-soon reveal-on-scroll" aria-labelledby="notes-coming-soon-title">
+            <section className="notes-coming-soon" aria-labelledby="notes-coming-soon-title">
               <div>
                 <p className="eyebrow">{locale === 'ja' ? 'Next notes' : 'Coming next'}</p>
                 <h2 id="notes-coming-soon-title">{b.comingSoonTitle}</h2>
