@@ -1315,6 +1315,213 @@ img {
   gap: 24px;
 }
 
+.notes-hub-hero {
+  position: relative;
+  overflow: hidden;
+  padding: 110px 0 54px;
+  border-bottom: 1px solid rgba(15, 23, 42, 0.08);
+  background:
+    linear-gradient(135deg, rgba(10, 132, 255, 0.08), rgba(255, 255, 255, 0.92) 42%, rgba(22, 127, 143, 0.06)),
+    #ffffff;
+}
+
+.notes-hub-hero::after {
+  content: '';
+  position: absolute;
+  right: max(-120px, -8vw);
+  bottom: -180px;
+  width: min(520px, 55vw);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(10, 132, 255, 0.12), transparent 68%);
+  pointer-events: none;
+}
+
+.notes-hub-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(300px, 0.72fr);
+  gap: 36px;
+  align-items: end;
+}
+
+.notes-hub-heading {
+  max-width: 760px;
+}
+
+.notes-hub-heading h1 {
+  margin: 0;
+  color: var(--ink);
+  font-size: clamp(46px, 7vw, 82px);
+  line-height: 0.98;
+  font-weight: 790;
+  letter-spacing: 0;
+}
+
+.notes-hub-heading p:not(.eyebrow) {
+  margin: 20px 0 0;
+  color: #39485d;
+  font-size: clamp(18px, 2vw, 23px);
+  line-height: 1.72;
+  text-wrap: balance;
+}
+
+.notes-featured-tool {
+  display: grid;
+  gap: 13px;
+  padding: 24px;
+  border: 1px solid rgba(10, 132, 255, 0.18);
+  border-radius: 8px;
+  color: var(--ink);
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.075);
+  text-decoration: none;
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.notes-featured-tool:hover {
+  transform: translateY(-3px);
+  border-color: rgba(10, 132, 255, 0.32);
+  box-shadow: 0 22px 52px rgba(15, 23, 42, 0.1);
+}
+
+.notes-featured-tool.muted {
+  border-color: rgba(15, 23, 42, 0.09);
+  background: rgba(255, 255, 255, 0.72);
+  box-shadow: none;
+}
+
+.notes-featured-label {
+  color: var(--blue-strong);
+  font-size: 13px;
+  font-weight: 760;
+}
+
+.notes-featured-tool strong {
+  color: #27364a;
+  font-size: 18px;
+  line-height: 1.66;
+}
+
+.notes-featured-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  width: fit-content;
+  min-height: 40px;
+  margin-top: 4px;
+  padding: 9px 14px;
+  border-radius: 999px;
+  color: #ffffff;
+  background: var(--blue);
+  font-size: 14px;
+  font-weight: 720;
+}
+
+.notes-hub-section {
+  background:
+    linear-gradient(180deg, #ffffff 0%, #f7faff 100%);
+}
+
+.notes-hub-inner {
+  display: grid;
+  gap: 28px;
+}
+
+.notes-category-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.notes-category-card {
+  display: grid;
+  align-content: start;
+  gap: 18px;
+  min-height: 100%;
+  padding: 24px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background: #ffffff;
+  box-shadow: 0 12px 30px rgba(15, 23, 42, 0.055);
+  transition: transform 180ms ease, box-shadow 180ms ease, border-color 180ms ease;
+}
+
+.notes-category-card:hover {
+  transform: translateY(-3px);
+  border-color: rgba(10, 132, 255, 0.2);
+  box-shadow: 0 18px 42px rgba(15, 23, 42, 0.08);
+}
+
+.notes-category-card h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 22px;
+  line-height: 1.22;
+  font-weight: 740;
+}
+
+.notes-category-card p {
+  margin: 0;
+  color: var(--muted);
+  font-size: 15px;
+  line-height: 1.65;
+}
+
+.notes-coming-soon {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(280px, 1.1fr);
+  gap: 28px;
+  align-items: start;
+  padding: 26px;
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 8px;
+  background:
+    linear-gradient(135deg, rgba(10, 132, 255, 0.06), rgba(255, 255, 255, 0.96) 52%, rgba(22, 127, 143, 0.06)),
+    #ffffff;
+}
+
+.notes-coming-soon h2 {
+  margin: 0;
+  color: var(--ink);
+  font-size: 28px;
+  line-height: 1.18;
+  font-weight: 760;
+  letter-spacing: 0;
+}
+
+.notes-coming-soon p {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.72;
+}
+
+.notes-coming-soon ul {
+  display: grid;
+  gap: 11px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.notes-coming-soon li {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: #334155;
+  font-size: 15px;
+  line-height: 1.58;
+}
+
+.notes-coming-soon i {
+  flex: 0 0 auto;
+  margin-top: 2px;
+  color: var(--blue-strong);
+  font-size: 14px;
+}
+
 .blog-field-card {
   display: grid;
   gap: 24px;
@@ -3349,6 +3556,8 @@ img {
   .blog-photo-tile,
   .blog-photo-tile img,
   .blog-category-card,
+  .notes-featured-tool,
+  .notes-category-card,
   .article-calculator-cta,
   .article-link-card,
   .home-tool-card,
@@ -3505,6 +3714,8 @@ img {
   .glance-grid,
   .blog-track-grid,
   .blog-system-grid,
+  .notes-hub-hero-inner,
+  .notes-coming-soon,
   .legacy-grid.two,
   .footer-grid,
   .contact-layout,
@@ -3529,6 +3740,14 @@ img {
 
   .blog-step-list {
     grid-template-columns: 1fr;
+  }
+
+  .notes-hub-hero {
+    padding: 92px 0 48px;
+  }
+
+  .notes-featured-tool {
+    max-width: 560px;
   }
 
   .contact-layout {
@@ -3583,6 +3802,42 @@ img {
 
   .blog-hero {
     min-height: 560px;
+  }
+
+  .notes-hub-hero {
+    padding: 80px 0 40px;
+  }
+
+  .notes-hub-heading h1 {
+    font-size: 42px;
+    line-height: 1.05;
+  }
+
+  .notes-hub-heading p:not(.eyebrow) {
+    font-size: 17px;
+    line-height: 1.7;
+  }
+
+  .notes-featured-tool,
+  .notes-coming-soon {
+    padding: 20px;
+  }
+
+  .notes-featured-tool strong {
+    font-size: 16px;
+  }
+
+  .notes-featured-cta {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .notes-category-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .notes-coming-soon h2 {
+    font-size: 24px;
   }
 
   .blog-hero-image {
@@ -3768,20 +4023,21 @@ img {
   }
 
   .project-card-body,
-  .home-tool-card,
-  .service-card,
-  .social-primary-card,
-  .social-mini-card,
-  .service-detail-card,
+    .home-tool-card,
+    .service-card,
+    .social-primary-card,
+    .social-mini-card,
+    .service-detail-card,
   .process-card,
   .brand-note-panel,
   .info-panel,
-  .article-block,
-  .blog-intro-card,
-  .blog-first-note-card,
-  .blog-category-card,
-  .blog-track-card,
-  .blog-system-card,
+    .article-block,
+    .blog-intro-card,
+    .blog-first-note-card,
+    .blog-category-card,
+    .notes-category-card,
+    .blog-track-card,
+    .blog-system-card,
   .contact-panel,
   .calculator-input-panel,
   .calculator-results-panel,
