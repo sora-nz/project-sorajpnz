@@ -997,53 +997,53 @@ export const blog = {
   ja: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'NZ生活・仕事・お金・日本との比較・海のある暮らしを、数字と実体験で整理していくメモ置き場です。',
-    eyebrow: 'Notes hub',
+      'NZ生活の数字、仕事、お金、海での記録を、あとから読み返せる形で残していく場所です。',
+    eyebrow: 'Notes from Auckland',
     introTitle: '数字と実体験を、あとから使えるメモに。',
     body:
       'SoraJPNZ Notesでは、NZ生活の現実を「なんとなく良さそう」では終わらせず、生活費、仕事、お金、比較、現地での試行錯誤として整理していきます。',
     featuredTool: {
-      title: 'まず数字で見たい人へ',
-      body: '時給・勤務時間・家賃・車コスト・貯金目標を動かして、NZ生活の余白を試算できます。',
+      title: '数字から先に見たい人は',
+      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れると、NZ生活で月にどれくらい余白が残るかを試算できます。',
       cta: 'NZ生活リアリティ計算機を使う',
       href: '/ja/tools/nz-life-reality-calculator'
     },
-    categoryTitle: '整理していくテーマ',
+    categoryTitle: '扱うテーマ',
     categoryBody:
-      '記事が増える前に、まずはSoraJPNZで扱う軸を分かりやすく分けています。',
+      '派手な成功談ではなく、Aucklandで暮らしながら気になった数字、判断、生活感をノートにしていきます。',
     categories: [
       {
         icon: 'ri-home-5-line',
         title: 'NZ生活費',
-        description: '家賃、車、貯金、生活の余白',
-        themes: ['家賃', '車コスト', '貯金目標']
+        description: '家賃、車、貯金、生活の余白。Aucklandで実際に暮らすときの数字を整理します。',
+        themes: ['家賃', '車', '貯金']
       },
       {
         icon: 'ri-briefcase-4-line',
         title: '仕事・キャリア',
-        description: '仕事探し、働き方、キャリア初期の現実',
-        themes: ['仕事探し', '働き方', 'キャリア初期']
+        description: '仕事探し、働き方、キャリア初期の現実。まだ途中だからこそ、迷いや前提も残します。',
+        themes: ['仕事探し', '働き方']
       },
       {
         icon: 'ri-coins-line',
         title: 'お金・投資メモ',
-        description: '投資プラットフォーム、通貨、生活拠点とお金',
-        themes: ['投資メモ', '通貨', '生活拠点']
+        description: '投資プラットフォーム、通貨、生活拠点とお金。NZDと日本円の感覚も一緒に見ます。',
+        themes: ['投資メモ', '通貨']
       },
       {
         icon: 'ri-scales-3-line',
         title: 'NZ vs 日本',
-        description: '住みやすさ、物価、働き方、幸せの感じ方',
-        themes: ['住みやすさ', '物価', '働き方']
+        description: '住みやすさ、物価、働き方、幸せの感じ方。どちらが正解かではなく、何が違うのかを考えます。',
+        themes: ['住みやすさ', '物価']
       },
       {
         icon: 'ri-sailboat-line',
         title: 'Field Notes / 海・釣り',
-        description: '釣り、spearfishing、海況、道具、現地で学んだこと',
-        themes: ['釣り', 'spearfishing', '海況']
+        description: '釣り、spearfishing、海況、道具、現地で学んだこと。生活費や仕事の記事とは別に、NZで暮らしている実感として残します。',
+        themes: ['釣り', '海況']
       }
     ],
-    comingSoonTitle: 'これから整理する予定のテーマ',
+    comingSoonTitle: '次に書きたいノート',
     comingSoonBody:
       'まだ公開記事として並べる前に、体験・数字・一次情報を少しずつ確認していきます。',
     comingSoonItems: [
