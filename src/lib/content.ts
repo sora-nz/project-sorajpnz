@@ -187,9 +187,9 @@ export const common = {
 export const seo = {
   en: {
     home: {
-      title: 'SoraJPNZ | New Zealand Life, Ocean, Work, Money, and Data',
+      title: 'SoraJPNZ | New Zealand Life Decisions, Notes, and Data Projects',
       description:
-        'SoraJPNZ is a New Zealand-based content hub for NZ life, ocean and fishing stories, work, money, practical data projects, and social updates.'
+        'SoraJPNZ helps connect New Zealand life, work, money, field notes, and practical data projects through clear notes and lived experience.'
     },
     services: {
       title: 'Services | SoraJPNZ',
@@ -229,9 +229,9 @@ export const seo = {
   },
   ja: {
     home: {
-      title: 'SoraJPNZ | NZ生活・海・仕事・お金・データ',
+      title: 'SoraJPNZ | NZ生活の選択を数字と実体験で考える',
       description:
-        'SoraJPNZは、NZ生活、海・釣り、仕事、お金、データ活用、SNS発信をまとめる個人ブランドの発信母艦です。'
+        'SoraJPNZは、NZ生活、仕事、お金、日本との比較、海での記録を、数字と実体験で現実的に考えるためのメディア兼ポートフォリオです。'
     },
     services: {
       title: 'サービス | SoraJPNZ',
@@ -273,14 +273,19 @@ export const seo = {
 
 export const home = {
   en: {
-    title: 'SoraJPNZ',
-    role: 'Videos, blog notes, and practical projects from New Zealand',
+    title: 'Make New Zealand life decisions with data and lived experience.',
+    role: 'SoraJPNZ',
     tagline:
-      'SoraJPNZ is a personal media hub documenting New Zealand life, ocean stories, work, money, and practical data projects through videos, blog notes, and projects.',
+      'A practical Japan x New Zealand hub for notes, tools, projects, and field records from real life in Auckland.',
     description:
-      'Follow the journey through YouTube, short-form social posts, blog notes, and practical projects.',
-    primaryCta: 'Watch on YouTube',
-    contactCta: 'Read the Blog',
+      'SoraJPNZ keeps useful questions about work, money, living costs, ocean life, and practical data projects in one place.',
+    primaryCta: 'Read SoraJPNZ Notes',
+    primaryHref: '/en/blog',
+    primaryExternal: false,
+    primaryIcon: 'ri-article-line',
+    contactCta: 'View Projects',
+    contactHref: '/en/projects',
+    contactIcon: 'ri-folder-chart-line',
     socialEyebrow: 'Social Channels',
     socialTitle: 'Follow the journey',
     socialSubtitle:
@@ -288,30 +293,41 @@ export const home = {
     socialPrimaryLabel: 'Main channel',
     socialSecondaryLabel: 'Short clips and updates',
     allLinksCta: 'Open all links',
-    servicesEyebrow: 'Now building',
-    servicesTitle: 'From content to projects',
+    servicesEyebrow: 'Start here',
+    servicesTitle: 'What SoraJPNZ is building',
     servicesSubtitle:
-      'The site starts with videos and notes, then turns useful ideas into projects, data experiments, and small support when it makes sense.',
+      'Use the notes, projects, and field records as entry points into realistic New Zealand decision-making.',
     servicesCta: 'See light support options',
     services: [
       {
-        icon: 'ri-youtube-line',
-        title: 'Video & Blog Notes',
-        body: 'YouTube and short-form ideas become notes that can be searched, shared, and improved later.'
+        icon: 'ri-article-line',
+        title: 'SoraJPNZ Notes',
+        body: 'Living costs, work, money, Japan comparisons, and field notes are organized into calm notes that can be revisited later.',
+        href: '/en/blog',
+        cta: 'Open Notes'
+      },
+      {
+        icon: 'ri-folder-chart-line',
+        title: 'Projects',
+        body: 'Small calculators, dashboards, and data organization projects turn practical questions into visible proof-of-work.',
+        href: '/en/projects',
+        cta: 'View Projects'
       },
       {
         icon: 'ri-compass-3-line',
-        title: 'Practical Projects',
-        body: 'New Zealand life, relocation, ocean, work, money, and data ideas are shaped into useful public projects.'
-      },
-      {
-        icon: 'ri-hand-heart-line',
-        title: 'Light Support',
-        body: 'Portfolio feedback, website analytics, dashboard organization, and small practical conversations stay available when needed.'
+        title: 'Field Notes / Ocean Life',
+        body: 'Ocean days, fishing, spearfishing, tools, and local lessons stay as lived context rather than the whole identity of the site.',
+        href: '/en/blog',
+        cta: 'Read the Notes',
+        image: assets.blogOceanFloat
       }
     ],
     featuredTool: null,
     projectsTitle: 'Projects',
+    projectsEyebrow: 'Proof of work',
+    projectsIntro:
+      'Practical tools, dashboards, and data organization projects are where SoraJPNZ turns notes into something testable.',
+    projectsCta: 'Open Projects',
     aboutTitle: 'About Me',
     about:
       'I use SoraJPNZ as a public record of what I am learning and building in New Zealand. The work still includes data analysis, dashboards, and practical reporting, but it now sits alongside content about life, ocean activities, career building, money, and small experiments.',
@@ -320,14 +336,19 @@ export const home = {
       'For hiring, interviews, collaborations, portfolio feedback, or small project conversations, please get in touch.'
   },
   ja: {
-    title: 'SoraJPNZ',
-    role: 'NZ生活・海・仕事・お金・データの記録',
+    title: 'NZ生活の選択を、数字と実体験で現実的に考える。',
+    role: 'SoraJPNZ',
     tagline:
-      'SoraJPNZは、ニュージーランドでの生活、海、仕事、お金、データ活用を、動画・ブログ・プロジェクトとして記録する個人メディアです。',
+      'NZ生活、仕事、お金、海での記録を、数字と実体験で整理していく場所です。',
     description:
-      'YouTube、短尺SNS、ブログ、プロジェクトをつなげながら、あとから使える記録として残していきます。',
-    primaryCta: 'YouTubeを見る',
-    contactCta: 'ブログを読む',
+      '生活費の前提を動かせる計算機、あとから読めるNotes、データ整理のProjectsをつなげて、現実的に考える入口にしています。',
+    primaryCta: 'NZ生活リアリティ計算機を使う',
+    primaryHref: '/ja/tools/nz-life-reality-calculator',
+    primaryExternal: false,
+    primaryIcon: 'ri-calculator-line',
+    contactCta: 'SoraJPNZ Notesを見る',
+    contactHref: '/ja/blog',
+    contactIcon: 'ri-article-line',
     socialEyebrow: 'Social Channels',
     socialTitle: '発信をフォローする',
     socialSubtitle:
@@ -335,37 +356,48 @@ export const home = {
     socialPrimaryLabel: 'メインチャンネル',
     socialSecondaryLabel: '短尺動画と更新',
     allLinksCta: 'リンク一覧を見る',
-    servicesEyebrow: 'Now building',
-    servicesTitle: '発信からプロジェクトへ',
+    servicesEyebrow: 'Start here',
+    servicesTitle: 'SoraJPNZで見られるもの',
     servicesSubtitle:
-      '動画やメモから始めて、役に立つ内容をプロジェクト、データ実験、必要なときの軽い相談へ育てていきます。',
+      'NZ生活の数字、仕事、お金、日本との比較、海での記録を、NotesとProjectsに整理していきます。',
     servicesCta: '軽いサポート内容を見る',
     services: [
       {
-        icon: 'ri-youtube-line',
-        title: '動画とブログメモ',
-        body: 'YouTubeや短尺SNSで出した内容を、あとから探せて共有できるメモとして整理します。'
+        icon: 'ri-article-line',
+        title: 'SoraJPNZ Notes',
+        body: 'NZ生活費、仕事、お金、日本との比較、海での記録をあとから読み返せる形で整理しています。',
+        href: '/ja/blog',
+        cta: 'Notes Hubを見る'
+      },
+      {
+        icon: 'ri-folder-chart-line',
+        title: 'Projects',
+        body: '計算機やデータ整理、生活判断に使える小さなプロジェクトを作っていきます。',
+        href: '/ja/projects',
+        cta: 'プロジェクトを見る'
       },
       {
         icon: 'ri-compass-3-line',
-        title: '実用プロジェクト',
-        body: 'NZ生活、移住、海、仕事、お金、データ活用を、あとから使える制作物や公開プロジェクトにしていきます。'
-      },
-      {
-        icon: 'ri-hand-heart-line',
-        title: '軽い相談・サポート',
-        body: 'ポートフォリオ相談、Web分析、ダッシュボード整理など、必要があれば小さく相談できる形にしています。'
+        title: 'Field Notes / 海・釣り',
+        body: '釣り、spearfishing、海況、道具、現地で学んだことも、NZで暮らしている実感として残していきます。',
+        href: '/ja/blog',
+        cta: 'Notesに残していく',
+        image: assets.blogOceanFloat
       }
     ],
     featuredTool: {
       eyebrow: 'Practical Tool',
       title: 'NZ生活リアリティ計算機',
-      body: '時給・労働時間・家賃・車・貯金目標を動かして、ニュージーランド生活の余白を試算できます。',
+      body: '時給・勤務時間・家賃・車コスト・貯金目標を動かして、NZDと日本円の参考換算を見ながら、ニュージーランド生活の余白を試算できます。',
       disclaimer: '概算ツールです。ビザ・税務・投資・就職の助言ではありません。',
       cta: '計算してみる',
       href: '/ja/tools/nz-life-reality-calculator'
     },
     projectsTitle: 'プロジェクト',
+    projectsEyebrow: 'Proof of work',
+    projectsIntro:
+      '計算機やデータ整理、生活判断に使える小さなプロジェクトを作っていきます。Notesで出てきた問いを、あとから使える形に変えていく場所です。',
+    projectsCta: 'プロジェクト一覧を見る',
     aboutTitle: '自己紹介',
     about:
       'SoraJPNZは、ニュージーランドで暮らしながら学び、作り、発信していく過程を残す場所です。データ分析、ダッシュボード、レポート制作の強みは残しつつ、生活、海、仕事、お金、AI活用、発信活動も一緒に扱っていきます。',

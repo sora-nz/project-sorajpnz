@@ -21,6 +21,7 @@ export function Home({ locale, path }: HomeProps) {
   const primarySocial = visibleSocialChannels.find((channel) => channel.id === 'youtube');
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
   const featuredTool = h.featuredTool;
+  const primaryRel = h.primaryExternal ? 'noopener noreferrer' : undefined;
 
   useReveal(`${locale}:${path}`);
   useMeta({
@@ -49,15 +50,74 @@ export function Home({ locale, path }: HomeProps) {
               <p className="hero-tagline">{h.tagline}</p>
               <p className="hero-description">{h.description}</p>
               <div className="button-row">
-                <a className="button primary" href={links.youtube} target="_blank" rel="noopener noreferrer">
+                <a className="button primary" href={h.primaryHref} target={h.primaryExternal ? '_blank' : undefined} rel={primaryRel}>
                   <span>{h.primaryCta}</span>
-                  <i className="ri-youtube-fill" />
+                  <i className={h.primaryIcon} />
                 </a>
-                <a className="button secondary" href={`${base}/blog`}>
+                <a className="button secondary" href={h.contactHref}>
                   <span>{h.contactCta}</span>
-                  <i className="ri-article-line" />
+                  <i className={h.contactIcon} />
                 </a>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {featuredTool && (
+          <section className="content-section home-tool-section" aria-labelledby="home-featured-tool-title">
+            <div className="section-inner">
+              <article className="home-tool-card">
+                <div className="home-tool-copy">
+                  <p className="eyebrow">{featuredTool.eyebrow}</p>
+                  <h2 id="home-featured-tool-title">{featuredTool.title}</h2>
+                  <p>{featuredTool.body}</p>
+                  <p className="home-tool-disclaimer">{featuredTool.disclaimer}</p>
+                </div>
+                <a className="button primary" href={featuredTool.href}>
+                  <span>{featuredTool.cta}</span>
+                  <i className="ri-calculator-line" />
+                </a>
+              </article>
+            </div>
+          </section>
+        )}
+
+        <section className="content-section services-section home-entry-section">
+          <div className="section-inner">
+            <div className="section-heading reveal-on-scroll">
+              <p className="eyebrow">{h.servicesEyebrow}</p>
+              <h2>{h.servicesTitle}</h2>
+              <p>{h.servicesSubtitle}</p>
+            </div>
+            <div className="service-grid">
+              {h.services.map((service) => (
+                <a
+                  className={`service-card home-entry-card reveal-on-scroll ${'image' in service ? 'has-image' : ''}`}
+                  href={service.href}
+                  key={service.title}
+                >
+                  {'image' in service && (
+                    <span className="service-card-media" aria-hidden="true">
+                      <img src={service.image} alt="" loading="lazy" decoding="async" />
+                    </span>
+                  )}
+                  <span className="service-icon" aria-hidden="true">
+                    <i className={service.icon} />
+                  </span>
+                  <h3>{service.title}</h3>
+                  <p>{service.body}</p>
+                  <span className="service-card-action">
+                    {service.cta}
+                    <i className="ri-arrow-right-line" />
+                  </span>
+                </a>
+              ))}
+            </div>
+            <div className="button-row soft-link-row">
+              <a className="button secondary small" href={`${base}/services`}>
+                <span>{h.servicesCta}</span>
+                <i className="ri-arrow-right-line" />
+              </a>
             </div>
           </div>
         </section>
@@ -112,52 +172,6 @@ export function Home({ locale, path }: HomeProps) {
           </div>
         </section>
 
-        {featuredTool && (
-          <section className="content-section home-tool-section" aria-labelledby="home-featured-tool-title">
-            <div className="section-inner">
-              <article className="home-tool-card">
-                <div className="home-tool-copy">
-                  <p className="eyebrow">{featuredTool.eyebrow}</p>
-                  <h2 id="home-featured-tool-title">{featuredTool.title}</h2>
-                  <p>{featuredTool.body}</p>
-                  <p className="home-tool-disclaimer">{featuredTool.disclaimer}</p>
-                </div>
-                <a className="button primary" href={featuredTool.href}>
-                  <span>{featuredTool.cta}</span>
-                  <i className="ri-calculator-line" />
-                </a>
-              </article>
-            </div>
-          </section>
-        )}
-
-        <section className="content-section services-section">
-          <div className="section-inner">
-            <div className="section-heading reveal-on-scroll">
-              <p className="eyebrow">{h.servicesEyebrow}</p>
-              <h2>{h.servicesTitle}</h2>
-              <p>{h.servicesSubtitle}</p>
-            </div>
-            <div className="service-grid">
-              {h.services.map((service) => (
-                <article className="service-card reveal-on-scroll" key={service.title}>
-                  <span className="service-icon" aria-hidden="true">
-                    <i className={service.icon} />
-                  </span>
-                  <h3>{service.title}</h3>
-                  <p>{service.body}</p>
-                </article>
-              ))}
-            </div>
-            <div className="button-row soft-link-row">
-              <a className="button secondary small" href={`${base}/services`}>
-                <span>{h.servicesCta}</span>
-                <i className="ri-arrow-right-line" />
-              </a>
-            </div>
-          </div>
-        </section>
-
         <section className="image-band">
           <div className="motion-layer">
             <img className="motion-image animate-projects-drift" src={assets.projectsBg} alt="" loading="lazy" decoding="async" />
@@ -165,8 +179,9 @@ export function Home({ locale, path }: HomeProps) {
           </div>
           <div className="section-inner">
             <div className="section-heading reveal-on-scroll">
-              <p className="eyebrow">{locale === 'ja' ? 'Selected Work' : 'Selected Work'}</p>
+              <p className="eyebrow">{h.projectsEyebrow}</p>
               <h2>{h.projectsTitle}</h2>
+              <p>{h.projectsIntro}</p>
             </div>
             <div className="project-grid">
               <ProjectCard
@@ -186,6 +201,12 @@ export function Home({ locale, path }: HomeProps) {
                 href={`${base}/projects/rent-radar`}
                 action={c.viewProject}
               />
+            </div>
+            <div className="button-row soft-link-row">
+              <a className="button secondary small" href={`${base}/projects`}>
+                <span>{h.projectsCta}</span>
+                <i className="ri-arrow-right-line" />
+              </a>
             </div>
           </div>
         </section>
