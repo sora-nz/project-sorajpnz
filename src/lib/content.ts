@@ -214,7 +214,7 @@ export const seo = {
     blog: {
       title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        'Field notes from New Zealand life, ocean days, work, money, and practical data projects by SoraJPNZ.'
+        'SoraJPNZ Notes organizes New Zealand living costs, work, money, Japan comparisons, field notes, and practical tools.'
     },
     links: {
       title: 'Links | SoraJPNZ',
@@ -256,7 +256,7 @@ export const seo = {
     blog: {
       title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        'NZ生活、海、仕事、お金、データ活用を動画・ブログ・プロジェクトとして残すSoraJPNZの記録ページです。'
+        'NZ生活費、仕事、お金、日本との比較、Field Notes、実用ツールを数字と実体験で整理するSoraJPNZ Notesです。'
     },
     links: {
       title: 'リンク | SoraJPNZ',
@@ -942,127 +942,116 @@ export const blog = {
   en: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'Field notes from New Zealand life, ocean days, work, money, and practical data projects.',
-    introLabel: 'Content hub',
-    introTitle: 'Videos become notes. Notes become projects.',
+      'A notes hub for New Zealand living costs, work, money, Japan comparisons, field notes, and practical tools.',
+    eyebrow: 'Notes hub',
+    introTitle: 'Practical notes are being organized.',
     body:
-      'This blog turns YouTube ideas, short social posts, New Zealand life, and ocean notes into something searchable and useful.',
-    fieldTitle: 'From the field',
-    fieldBody:
-      'Real moments from ocean days, fishing, spearfishing, New Zealand life, and small trips that will become future notes and projects.',
-    fieldCaptions: [
-      'Shore fishing days',
-      'Spearfishing notes',
-      'Ocean markers',
-      'Small catches',
-      'NZ life and trips',
-      'Field notes from Auckland'
-    ],
-    firstNoteTitle: 'Start here',
-    firstNoteBody:
-      'The first notes will focus on practical topics from New Zealand life, fishing, ocean days, work, and money.',
-    firstNoteItems: [
-      'Before starting shore fishing in Auckland, New Zealand',
-      'Why SoraJPNZ is documenting New Zealand life and fishing',
-      'Why I am recording ocean, work, money, and data while living in Auckland'
-    ],
-    categoryTitle: "Topics I'm building",
+      'SoraJPNZ Notes is being shaped around realistic Japan x New Zealand decision-making. English article links are not published here yet.',
+    featuredTool: null,
+    categoryTitle: 'Core themes',
     categoryBody:
-      'Videos and daily notes will be organized into themes that can be revisited later.',
+      'Notes will be grouped around practical questions first, with field notes kept as lived context rather than the whole identity of the site.',
     categories: [
       {
-        icon: 'ri-youtube-line',
-        title: 'Video Notes',
-        description: 'Readable notes from YouTube videos, Shorts, and useful social clips.',
-        themes: ['Video summaries', 'Behind-the-scenes notes', 'Links and references']
-      },
-      {
-        icon: 'ri-home-heart-line',
-        title: 'New Zealand Life',
-        description: 'Auckland living, housing, transport, food costs, and everyday observations.',
-        themes: ['Auckland life', 'Moving and settling', 'Cost-of-living notes']
-      },
-      {
-        icon: 'ri-sailboat-line',
-        title: 'Ocean & Fishing',
-        description: 'Shore fishing, spearfishing, ocean safety, gear, and trip notes.',
-        themes: ['Spearfishing logs', 'Gear and safety', 'Trip notes']
+        icon: 'ri-home-5-line',
+        title: 'NZ Living Costs',
+        description: 'Rent, cars, savings targets, and the monthly space left after core costs.',
+        themes: ['Rent', 'Car costs', 'Savings buffer']
       },
       {
         icon: 'ri-briefcase-4-line',
-        title: 'Work & Money',
-        description: 'Career building, visa context, living costs, investing, and money reality checks.',
-        themes: ['Career notes', 'Visa and job search context', 'Money reality checks']
+        title: 'Work & Career',
+        description: 'Job search, early-career choices, work patterns, and realistic tradeoffs.',
+        themes: ['Job search', 'Work style', 'Career notes']
       },
       {
-        icon: 'ri-database-2-line',
-        title: 'Data & Tools',
-        description: 'AI, analytics, dashboards, content performance, and data experiments.',
-        themes: ['GA4 and Search Console', 'Dashboards', 'AI-assisted workflows']
+        icon: 'ri-coins-line',
+        title: 'Money & Investing Notes',
+        description: 'Platforms, currency, budgeting, and money decisions while living between countries.',
+        themes: ['Currency', 'Platforms', 'Budgeting']
+      },
+      {
+        icon: 'ri-scales-3-line',
+        title: 'NZ vs Japan',
+        description: 'Living comfort, prices, work culture, and how daily life feels across both places.',
+        themes: ['Prices', 'Work culture', 'Life choices']
+      },
+      {
+        icon: 'ri-sailboat-line',
+        title: 'Field Notes / Ocean & Fishing',
+        description: 'Fishing, spearfishing, ocean conditions, gear, and what real days outside teach.',
+        themes: ['Fishing', 'Spearfishing', 'Ocean notes']
       }
+    ],
+    comingSoonTitle: 'Notes being organized',
+    comingSoonBody:
+      'The first public notes will be added when the assumptions and sources are ready.',
+    comingSoonItems: [
+      'The real cost of living in Auckland',
+      'New Zealand or Japan: which feels easier to live in?',
+      'Thinking about happiness after years in New Zealand',
+      'Money and investing notes from a New Zealand resident',
+      'Auckland ocean notes'
     ]
   },
   ja: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'NZ生活、海、仕事、お金、データ活用を、動画・ブログ・プロジェクトとして残していきます。',
-    introLabel: 'Content hub',
-    introTitle: '動画をメモに。メモをプロジェクトに。',
+      'NZ生活の数字、仕事、お金、海での記録を、あとから読み返せる形で残していく場所です。',
+    eyebrow: 'Notes from Auckland',
+    introTitle: '数字と実体験を、あとから使えるメモに。',
     body:
-      'SoraJPNZのブログは、YouTubeやSNSで出した内容、NZ生活の気づき、海や釣りの記録を、あとから読み返せる形で残す場所です。',
-    fieldTitle: '現地の記録',
-    fieldBody:
-      '海、釣り、スピアフィッシング、NZ生活、日帰り旅の実体験を、これから動画・ブログ・プロジェクトとして残していきます。',
-    fieldCaptions: [
-      '岸釣りの日',
-      'スピアフィッシング記録',
-      '海の記録',
-      '小さな釣果',
-      'NZ生活と日帰り旅',
-      'Aucklandからの記録'
-    ],
-    firstNoteTitle: 'まずここから',
-    firstNoteBody:
-      '最初は、NZ生活・釣り・海・仕事・お金の中から、実体験として残しやすいテーマをまとめていきます。',
-    firstNoteItems: [
-      'NZオークランドで岸釣りを始める前に知っておくこと',
-      'ニュージーランド生活と釣りをSoraJPNZで記録する理由',
-      'Aucklandで暮らしながら、海・仕事・お金・データを記録していく理由'
-    ],
-    categoryTitle: '記録していくテーマ',
+      'SoraJPNZ Notesでは、NZ生活の現実を「なんとなく良さそう」では終わらせず、生活費、仕事、お金、比較、現地での試行錯誤として整理していきます。',
+    featuredTool: {
+      title: '数字から先に見たい人は',
+      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れると、NZ生活で月にどれくらい余白が残るかを試算できます。',
+      cta: 'NZ生活リアリティ計算機を使う',
+      href: '/ja/tools/nz-life-reality-calculator'
+    },
+    categoryTitle: '扱うテーマ',
     categoryBody:
-      '動画や日々の記録を、あとから読み返せるテーマごとに整理していきます。',
+      '派手な成功談ではなく、Aucklandで暮らしながら気になった数字、判断、生活感をノートにしていきます。',
     categories: [
       {
-        icon: 'ri-youtube-line',
-        title: 'Video Notes',
-        description: 'YouTubeやShortsで話した内容を、あとから読み返せる形で整理します。',
-        themes: ['動画の要約', '撮影・編集の裏側', '参考リンク']
-      },
-      {
-        icon: 'ri-home-heart-line',
-        title: 'New Zealand Life',
-        description: 'Aucklandでの生活、住まい、移動、食費、日常の気づきを扱います。',
-        themes: ['オークランド生活', '移住と生活の立ち上げ', '生活費メモ']
-      },
-      {
-        icon: 'ri-sailboat-line',
-        title: 'Ocean & Fishing',
-        description: '岸釣り、スピアフィッシング、海の安全、道具、釣行記録を扱います。',
-        themes: ['スピアフィッシング記録', '道具と安全', '釣行メモ']
+        icon: 'ri-home-5-line',
+        title: 'NZ生活費',
+        description: '家賃、車、貯金、生活の余白。Aucklandで実際に暮らすときの数字を整理します。',
+        themes: ['家賃', '車', '貯金']
       },
       {
         icon: 'ri-briefcase-4-line',
-        title: 'Work & Money',
-        description: '仕事探し、ビザ、生活費、投資、NZで生きるためのお金の現実を扱います。',
-        themes: ['キャリア記録', 'ビザと仕事探し', 'お金の現実']
+        title: '仕事・キャリア',
+        description: '仕事探し、働き方、キャリア初期の現実。まだ途中だからこそ、迷いや前提も残します。',
+        themes: ['仕事探し', '働き方']
       },
       {
-        icon: 'ri-database-2-line',
-        title: 'Data & Tools',
-        description: 'AI、Webサイト、アクセス分析、ダッシュボード、発信改善の裏側を扱います。',
-        themes: ['GA4とSearch Console', 'ダッシュボード', 'AI活用ワークフロー']
+        icon: 'ri-coins-line',
+        title: 'お金・投資メモ',
+        description: '投資プラットフォーム、通貨、生活拠点とお金。NZDと日本円の感覚も一緒に見ます。',
+        themes: ['投資メモ', '通貨']
+      },
+      {
+        icon: 'ri-scales-3-line',
+        title: 'NZ vs 日本',
+        description: '住みやすさ、物価、働き方、幸せの感じ方。どちらが正解かではなく、何が違うのかを考えます。',
+        themes: ['住みやすさ', '物価']
+      },
+      {
+        icon: 'ri-sailboat-line',
+        title: 'Field Notes / 海・釣り',
+        description: '釣り、spearfishing、海況、道具、現地で学んだこと。生活費や仕事の記事とは別に、NZで暮らしている実感として残します。',
+        themes: ['釣り', '海況']
       }
+    ],
+    comingSoonTitle: '次に書きたいノート',
+    comingSoonBody:
+      'まだ公開記事として並べる前に、体験・数字・一次情報を少しずつ確認していきます。',
+    comingSoonItems: [
+      'Auckland生活費のリアル',
+      'NZと日本、どちらが住みやすいのか',
+      'NZに7年以上住んで考える幸せ',
+      'NZ在住者のお金・投資メモ',
+      'Auckland海メモ'
     ]
   }
 } as const;
