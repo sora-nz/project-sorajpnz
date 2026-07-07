@@ -570,8 +570,8 @@ img {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: saturate(0.9) contrast(0.96);
-  opacity: 0.16;
+  filter: saturate(0.94) contrast(0.98);
+  opacity: 0.34;
   transform: scale(1.04) translate3d(0, 0, 0);
   animation: home-bg-drift 26s ease-in-out infinite;
 }
@@ -589,8 +589,8 @@ img {
   z-index: 0;
   pointer-events: none;
   background:
-    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.42), transparent 30%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(248, 251, 255, 0.86));
+    radial-gradient(circle at 18% 22%, rgba(255, 255, 255, 0.28), transparent 30%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(248, 251, 255, 0.72));
 }
 
 .home-entry-section::before {
@@ -607,28 +607,28 @@ img {
 .trust-section::before {
   background-image: url("/assets/home/west-coast-rocks.jpg");
   background-position: center 52%;
-  opacity: 0.13;
+  opacity: 0.28;
   animation-duration: 30s;
 }
 
 .projects-proof-section::before {
   background-image: url("/assets/blog/taranaki-track-couple.jpg");
   background-position: center 38%;
-  opacity: 0.14;
+  opacity: 0.3;
   animation-name: home-bg-drift-alt;
 }
 
 .field-notes-section::before {
   background-image: url("/assets/blog/ocean-spearfishing-octopus.jpg");
   background-position: center 56%;
-  opacity: 0.15;
+  opacity: 0.32;
   animation-duration: 28s;
 }
 
 .home-social-section::before {
   background-image: url("/assets/blog/hobbiton-couple.jpg");
   background-position: center 42%;
-  opacity: 0.13;
+  opacity: 0.26;
   animation-name: home-bg-drift-alt;
   animation-duration: 32s;
 }
@@ -636,14 +636,14 @@ img {
 .home-about-section::before {
   background-image: url("/assets/blog/thea-snapper-wharf.jpg");
   background-position: center 45%;
-  opacity: 0.14;
+  opacity: 0.3;
   animation-duration: 34s;
 }
 
 .field-notes-section::after {
   background:
-    radial-gradient(circle at 18% 20%, rgba(232, 247, 250, 0.48), transparent 32%),
-    linear-gradient(180deg, rgba(255, 255, 255, 0.76), rgba(248, 251, 255, 0.84));
+    radial-gradient(circle at 18% 20%, rgba(232, 247, 250, 0.28), transparent 32%),
+    linear-gradient(180deg, rgba(255, 255, 255, 0.54), rgba(248, 251, 255, 0.68));
 }
 
 .home-tool-section {
@@ -4437,11 +4437,11 @@ img {
   .projects-proof-section::before,
   .home-social-section::before,
   .home-about-section::before {
-    opacity: 0.08;
+    opacity: 0.18;
   }
 
   .field-notes-section::before {
-    opacity: 0.12;
+    opacity: 0.22;
   }
 }
 
