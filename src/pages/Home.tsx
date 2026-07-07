@@ -58,7 +58,7 @@ export function Home({ locale, path }: HomeProps) {
             </div>
             <div className="hero-proof-panel" aria-label={locale === 'ja' ? 'SoraJPNZで使える入口' : 'SoraJPNZ entry points'}>
               <article className="hero-proof-card calculator-proof-card">
-                <span className="proof-label">{locale === 'ja' ? 'Calculator preview' : 'Calculator preview'}</span>
+                <span className="proof-label">{locale === 'ja' ? '表示例' : 'Example'}</span>
                 <strong>{locale === 'ja' ? '月の余白を見る' : 'Check monthly room'}</strong>
                 <div className="proof-metrics" aria-hidden="true">
                   <span>
@@ -147,8 +147,8 @@ export function Home({ locale, path }: HomeProps) {
                 </div>
                 <div className="calculator-preview-card" aria-hidden="true">
                   <div className="calculator-preview-top">
-                    <span>NZD</span>
-                    <span>JPY ref.</span>
+                    <span className="calculator-preview-sample-label">{locale === 'ja' ? '表示例' : 'Example'}</span>
+                    <span>NZD / JPY ref.</span>
                   </div>
                   <div className="calculator-preview-row">
                     <small>{locale === 'ja' ? '時給' : 'Wage'}</small>

@@ -276,9 +276,9 @@ export const home = {
     title: 'Start with the numbers behind New Zealand life.',
     role: '',
     tagline:
-      'Living in Auckland can look very different depending on wage, rent, transport, and savings assumptions. SoraJPNZ organizes tools, notes, and projects that make those choices easier to think through.',
+      'When you live in Auckland, a good hourly wage can still feel different once rent, transport, car costs, and savings goals are included. SoraJPNZ keeps those questions in tools, notes, and small projects that can be revisited later.',
     description:
-      'A practical place for connecting numbers, lived experience, and clear thinking instead of relying on one-sided advice.',
+      'A place to move between numbers and lived experience without pretending either one is the whole answer.',
     primaryCta: 'Read SoraJPNZ Notes',
     primaryHref: '/en/blog',
     primaryExternal: false,
@@ -289,34 +289,34 @@ export const home = {
     socialEyebrow: 'Social Channels',
     socialTitle: 'Follow the journey',
     socialSubtitle:
-      'YouTube is the main archive. Short clips, updates, and lightweight notes live across the other channels, then the useful parts become blog posts and projects here.',
+      'YouTube and social channels are for videos, quick updates, and ocean records. Anything worth revisiting gets organized back into Notes or Projects.',
     socialPrimaryLabel: 'Main channel',
     socialSecondaryLabel: 'Short clips and updates',
     allLinksCta: 'Open all links',
     servicesEyebrow: 'Start here',
     servicesTitle: 'Start here',
     servicesSubtitle:
-      'A few simple entry points for understanding what SoraJPNZ is building.',
+      'If you are not sure where to start, begin with these entry points.',
     servicesCta: 'See light support options',
     services: [
       {
         icon: 'ri-article-line',
         title: 'Read the Notes',
-        body: 'New Zealand living costs, work, money, Japan comparisons, and field records are organized into notes that can be revisited later.',
+        body: 'Living costs, work, money, Japan comparisons, and ocean notes are kept in a form that is easy to return to.',
         href: '/en/blog',
         cta: 'Open Notes'
       },
       {
         icon: 'ri-folder-chart-line',
         title: 'Projects',
-        body: 'Small calculators, dashboards, and data organization projects turn practical questions into visible proof-of-work.',
+        body: 'Calculators, dashboards, and small tools turn recurring questions into something you can test.',
         href: '/en/projects',
         cta: 'View Projects'
       },
       {
         icon: 'ri-compass-3-line',
         title: 'Field Notes / Ocean Life',
-        body: 'Ocean days, fishing, spearfishing, tools, and local lessons stay as lived context rather than the whole identity of the site.',
+        body: 'Ocean days and local lessons stay as part of the lived context, not the whole identity of the site.',
         href: '/en/blog',
         cta: 'Read the Notes',
         image: assets.blogOceanFloat
@@ -327,27 +327,27 @@ export const home = {
     trustTitle: 'Careful by design',
     trustItems: [
       {
-        title: 'Show the assumptions',
-        body: 'Numbers are only useful when the assumptions behind them are visible.'
+        title: 'Read numbers with their assumptions',
+        body: 'Wage, hours, rent, transport, car costs, and savings goals are easier to understand when the assumptions stay visible.'
       },
       {
-        title: 'Do not overstate lived experience',
-        body: 'Personal notes are treated as context, not universal advice.'
+        title: "Do not turn one person's experience into a rule",
+        body: 'Lived experience matters, but it should not be stretched into advice that claims to fit everyone.'
       },
       {
         title: 'Keep formal advice separate',
-        body: 'Visa, tax, employment, investment, and legal decisions should be checked against official sources or qualified professionals.'
+        body: 'SoraJPNZ organizes decision material. Visa, tax, employment, investment, and legal decisions still need official sources or qualified professionals.'
       }
     ],
     fieldNotesEyebrow: 'Field Notes',
     fieldNotesTitle: 'Life context, not the whole brand',
     fieldNotesBody:
-      'Ocean days, fishing, spearfishing, weather, gear, and small local lessons stay as evidence of real life in New Zealand. They support the site, but the main focus remains practical decision-making.',
+      'Fishing, spearfishing, ocean conditions, tools, and local lessons also stay here. They capture the feeling of living in New Zealand that does not fit into numbers or work notes.',
     fieldNotesCta: 'Read Notes',
     projectsTitle: 'Projects',
     projectsEyebrow: 'Proof of work',
     projectsIntro:
-      'Notes become useful when they turn into calculators, dashboards, and small public projects that can be checked and improved.',
+      'Questions from Notes become small calculators, dashboards, and data projects that can be checked later.',
     projectsCta: 'Open Projects',
     aboutTitle: 'About Me',
     about:
@@ -360,9 +360,9 @@ export const home = {
     title: 'NZ生活、月にいくら残るかから考える。',
     role: '',
     tagline:
-      'Aucklandで暮らすと、時給・家賃・車・貯金の前提で、生活の見え方は大きく変わります。SoraJPNZでは、計算機・Notes・Projectsを使って、NZ生活の判断材料を少しずつ整理しています。',
+      'Aucklandで暮らしていると、時給が高く見えても、家賃・車・貯金まで入れると月に残るお金は思ったより変わります。SoraJPNZでは、計算機・Notes・Projectsを使って、NZ生活で迷ったことをあとから見返せる形で残しています。',
     description:
-      '数字だけでも、体験談だけでもなく、両方をつなげて現実的に考えるための場所です。',
+      '数字と実体験を行き来しながら、現実的に考えるための場所です。',
     primaryCta: '生活費を試算する',
     primaryHref: '/ja/tools/nz-life-reality-calculator',
     primaryExternal: false,
@@ -373,34 +373,34 @@ export const home = {
     socialEyebrow: 'Social Channels',
     socialTitle: '発信をフォローする',
     socialSubtitle:
-      'YouTubeをメインの動画アーカイブにしつつ、短尺動画や軽い更新は各SNSに出していきます。役に立つ内容はブログやプロジェクトとして、このサイトに残していきます。',
+      'YouTubeやSNSでは、動画・短い更新・海の記録を出しています。あとから見返したい内容は、NotesやProjectsに整理していきます。',
     socialPrimaryLabel: 'メインチャンネル',
     socialSecondaryLabel: '短尺動画と更新',
     allLinksCta: 'リンク一覧を見る',
     servicesEyebrow: 'Start here',
     servicesTitle: 'まずここから',
     servicesSubtitle:
-      'NZ生活を考えるときに、最初に使いやすい入口をまとめています。',
+      '何から見ればいいか迷ったら、まずはこの3つから。',
     servicesCta: '軽いサポート内容を見る',
     services: [
       {
         icon: 'ri-calculator-line',
         title: '生活費を試算する',
-        body: '時給・勤務時間・家賃・車コスト・貯金目標を入れて、月にどれくらい余白が残るかを見ます。',
+        body: '時給・勤務時間・家賃・車コストを入れて、月にどれくらい残るかをざっくり見ます。',
         href: '/ja/tools/nz-life-reality-calculator',
         cta: '計算機を使う'
       },
       {
         icon: 'ri-article-line',
         title: 'Notesを読む',
-        body: 'NZ生活費、仕事、お金、日本との比較、海での記録をあとから読み返せる形で整理しています。',
+        body: 'NZ生活費、仕事、お金、日本との比較、海での記録を、あとから読み返せる形で残しています。',
         href: '/ja/blog',
         cta: 'Notes Hubを見る'
       },
       {
         icon: 'ri-folder-chart-line',
         title: 'Projectsを見る',
-        body: '計算機やダッシュボードなど、生活判断に使える小さなプロジェクトを作っています。',
+        body: '計算機やダッシュボードなど、気になったことを実際に試せる形にしています。',
         href: '/ja/projects',
         cta: 'プロジェクトを見る'
       }
@@ -408,7 +408,7 @@ export const home = {
     featuredTool: {
       eyebrow: 'Practical Tool',
       title: 'NZ生活リアリティ計算機',
-      body: '時給・勤務時間・家賃・車コスト・貯金目標を動かして、NZDと日本円の参考換算を見ながら、ニュージーランド生活の余白を試算できます。',
+      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れて、月にどれくらい残るかをNZDと日本円の両方で見られます。',
       disclaimer: '概算ツールです。ビザ・税務・投資・就職の助言ではありません。',
       cta: '計算してみる',
       href: '/ja/tools/nz-life-reality-calculator'
@@ -417,27 +417,27 @@ export const home = {
     trustTitle: 'このサイトで大事にしていること',
     trustItems: [
       {
-        title: '数字を出すときは、前提を見せる',
+        title: '数字は、前提と一緒に見る',
         body: '時給、勤務時間、家賃、車、貯金目標など、どの前提で見ているのかを分けて考えます。'
       },
       {
-        title: '体験談だけで断定しない',
-        body: '自分の生活感は大事にしつつ、それだけで全員に当てはまる話にはしません。'
+        title: '自分の体験だけで決めつけない',
+        body: '生活感は大事にしつつ、それだけで全員に当てはまる話にはしません。'
       },
       {
-        title: 'ビザ・税金・投資は助言にしない',
-        body: '公式情報や専門家確認を前提にし、SoraJPNZでは判断材料として整理します。'
+        title: 'ビザ・税金・投資は、公式情報と専門家確認を前提にする',
+        body: 'SoraJPNZでは判断材料として整理します。助言が必要な内容は、公式情報や専門家確認を前提にします。'
       }
     ],
     fieldNotesEyebrow: 'Field Notes',
     fieldNotesTitle: '海での記録も、NZ生活の一部として残す',
     fieldNotesBody:
-      '釣り、spearfishing、海況、道具、現地で学んだことも、NZで暮らしている実感として残していきます。生活費や仕事の話とは別に、SoraJPNZの人間味を支える記録です。',
+      '釣り、spearfishing、海況、道具、現地で学んだことも残していきます。数字や仕事の話だけでは残らない、NZで暮らしている感覚もここに置いていきます。',
     fieldNotesCta: 'Notesで読む',
     projectsTitle: 'プロジェクト',
     projectsEyebrow: 'Proof of work',
     projectsIntro:
-      'Notesで出てきた問いを、あとから使える形にする場所です。計算機やダッシュボードなど、生活判断に使える小さなプロジェクトを作っていきます。',
+      '気になったことを、計算機やダッシュボードとして試せる形にしています。生活費や家賃、為替など、あとから見返せる小さなプロジェクトを作っています。',
     projectsCta: 'プロジェクト一覧を見る',
     aboutTitle: '自己紹介',
     about:
