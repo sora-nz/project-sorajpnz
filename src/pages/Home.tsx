@@ -38,6 +38,10 @@ export function Home({ locale, path }: HomeProps) {
       <Header locale={locale} path={path} />
       <main>
         <section className="hero-section">
+          <div className="motion-layer" aria-hidden="true">
+            <img className="motion-image animate-hero-pan" src={assets.hero} alt="" fetchPriority="high" decoding="async" />
+            <div className="image-wash" />
+          </div>
           <div className="section-inner hero-inner">
             <div className="hero-copy animate-slide-up">
               <p className="eyebrow">AUCKLAND, NEW ZEALAND</p>
