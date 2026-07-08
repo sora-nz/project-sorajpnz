@@ -22,12 +22,13 @@ const articleDescription =
 
 const articleMeta = [
   { label: '作成日', value: '2026-07-04' },
-  { label: '最終更新日', value: '2026-07-04' },
+  { label: '最終更新日', value: '2026-07-08' },
   { label: '状態', value: 'Review / noindex' }
 ];
 
 const tocItems = [
   { href: '#try-first', label: '先に、自分の数字で試す' },
+  { href: '#source-note', label: 'この記事の数字について' },
   { href: '#target-reader', label: 'この記事で想定している読者' },
   { href: '#monthly-remaining', label: '月にいくら残るか' },
   { href: '#rent', label: '週の家賃差' },
@@ -37,6 +38,7 @@ const tocItems = [
   { href: '#savings', label: '貯金目標と緊急資金' },
   { href: '#scenarios', label: '例としての試算' },
   { href: '#calculator', label: '自分の条件で試す' },
+  { href: '#sources', label: '参照する主な一次情報' },
   { href: '#notes', label: '注意事項' },
   { href: '#next', label: '次にまとめたいこと' }
 ];
@@ -127,6 +129,45 @@ const scenarioDisplayValues = [
   }
 ];
 
+const sourceReferences = [
+  {
+    title: '最低賃金',
+    source: 'Employment New Zealand',
+    url: 'https://www.employment.govt.nz/pay-and-hours/pay-and-wages/minimum-wage',
+    note: '2026年4月1日から adult minimum wage は $23.95/hour、starting-out/training minimum wage は $19.16/hour。確認日: 2026-07-08。'
+  },
+  {
+    title: 'Living Wage',
+    source: 'Living Wage Movement Aotearoa New Zealand',
+    url: 'https://www.livingwage.org.nz/lw24_25',
+    note: '2025/26 Living Wage は $28.95/hour。2026/27 Living Wage は $29.90/hourで、適用期間は2026年9月1日から2027年8月31日。確認日: 2026-07-08。'
+  },
+  {
+    title: '税金・手取り確認',
+    source: 'Inland Revenue',
+    url: 'https://www.ird.govt.nz/income-tax/income-tax-for-individuals/how-income-is-taxed',
+    note: '税コード、PAYE、KiwiSaver、student loan、控除など、正確な手取り確認の参照先。確認日: 2026-07-08。'
+  },
+  {
+    title: 'Market Rent / rental bond data',
+    source: 'Tenancy Services',
+    url: 'https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/',
+    note: '家賃例を入れる場合は、地域、物件タイプ、対象期間を確認するための一次情報候補。確認日: 2026-07-08。'
+  },
+  {
+    title: 'NZD/JPY参考換算',
+    source: 'Frankfurter',
+    url: 'https://frankfurter.dev/',
+    note: '計算機のNZD/JPY参考換算に使う公開API。取得できない場合は手動入力に戻す設計。確認日: 2026-07-08。'
+  },
+  {
+    title: '為替データの公式統計確認候補',
+    source: 'Reserve Bank of New Zealand',
+    url: 'https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates',
+    note: '為替レートの公式統計を確認したい場合の参照候補。記事公開前に必要に応じて確認する。確認日: 2026-07-08。'
+  }
+];
+
 function formatCurrency(value: number) {
   const rounded = Math.round(value);
   const sign = rounded < 0 ? '-' : '';
@@ -144,6 +185,23 @@ export function PersonalPostCard({ platform, title, url, note }: PersonalPostCar
   return (
     <a className="article-link-card personal" href={url} target="_blank" rel="noopener noreferrer">
       <span className="article-link-label">{platform}</span>
+      <strong>{title}</strong>
+      <p>{note}</p>
+    </a>
+  );
+}
+
+type ReferenceCardProps = {
+  title: string;
+  source: string;
+  url: string;
+  note: string;
+};
+
+function ReferenceCard({ title, source, url, note }: ReferenceCardProps) {
+  return (
+    <a className="article-link-card reference" href={url} target="_blank" rel="noopener noreferrer">
+      <span className="article-link-label">{source}</span>
       <strong>{title}</strong>
       <p>{note}</p>
     </a>
@@ -241,6 +299,16 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               <CalculatorCTA href={calculatorHref} buttonLabel="NZ生活リアリティ計算機を使ってみる" />
             </section>
 
+            <section className="draft-article-chapter reveal-on-scroll" id="source-note">
+              <h2>この記事の数字について</h2>
+              <p>
+                この記事では、NZ生活の感覚をつかむために、最低賃金、Living Wage、家賃、為替などの情報も参照します。
+              </p>
+              <p>
+                ただし、これらの数字は日付や地域、働き方によって変わります。公開前レビュー版として、公式情報を確認しながら、断定しすぎない形で整理しています。
+              </p>
+            </section>
+
             <section className="draft-article-chapter reveal-on-scroll" id="target-reader">
               <h2>この記事で想定している読者</h2>
               <p>
@@ -279,6 +347,21 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 <li>毎月いくら貯金したいか</li>
                 <li>急な出費にどれくらい備えたいか</li>
               </ul>
+              <p>
+                時給を見るときは、Employment New Zealandの最低賃金や、Living Wage Movement Aotearoa New ZealandのLiving Wageも参考になります。
+              </p>
+              <p>
+                ただ、Auckland生活では時給だけで余裕があるかは判断しにくいです。勤務時間、家賃、車、貯金目標まで入れると、同じ時給でも月に残る金額はかなり変わります。
+              </p>
+              <p>
+                Employment New Zealandでは、2026年4月1日からadult minimum wageが <strong>$23.95/hour</strong>、starting-out/training minimum wageが <strong>$19.16/hour</strong> とされています（確認日: 2026-07-08）。
+              </p>
+              <p>
+                Living Wage Movement Aotearoa New Zealandでは、2025/26のLiving Wageが <strong>$28.95/hour</strong>、2026/27は <strong>$29.90/hour</strong> と公表されています。2026/27の適用期間は2026年9月1日から2027年8月31日なので、今の数字として読むときは期間に注意が必要です（確認日: 2026-07-08）。
+              </p>
+              <p>
+                正確な手取りは、税コード、KiwiSaver、student loan、控除、個人の状況で変わります。この記事と計算機では生活感をつかむための概算として扱い、正確な税額や手取りはIRD、給与明細、または専門家で確認する前提です。
+              </p>
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="rent">
@@ -306,6 +389,9 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </p>
               <p>
                 Aucklandでは、家賃と移動のバランスを一緒に見る必要があります。
+              </p>
+              <p>
+                家賃はAuckland全体で一つの数字にするより、エリアや部屋タイプごとに見た方が現実に近いです。公開版にする前には、Tenancy ServicesのMarket Rentやrental bond dataで、対象期間とエリアを確認してから例を入れる予定です。
               </p>
             </section>
 
@@ -381,7 +467,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 SoraJPNZの計算機では、NZDの金額に加えて、日本円の参考換算も表示できます。
               </p>
               <p>
-                為替レートは取得できる場合は自動で表示し、必要に応じて手動で変更できます。
+                為替レートは取得できる場合はFrankfurterのNZD/JPY参考レートを使って自動で表示し、必要に応じて手動で変更できます（確認日: 2026-07-08）。
               </p>
               <p>
                 ただし、日本円換算はあくまで生活感をつかむための参考表示です。
@@ -414,6 +500,9 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </p>
               <p>
                 見たいのは、「どの生活が正解か」ではなく、家賃、勤務時間、車の有無が変わると、月に残る金額がどれくらい動くかです。
+              </p>
+              <p>
+                この下書きでは、説明用の時給としてLiving Wage Movement Aotearoa New Zealandが公表している2026/27 Living Wageの <strong>$29.90/hour</strong> を使っています（適用期間: 2026年9月1日から2027年8月31日、確認日: 2026-07-08）。将来の公表値なので、今の収入見込みとしてそのまま使うものではありません。
               </p>
               <div className="article-scenario-notes">
                 {scenarios.map((scenario, index) => {
@@ -452,6 +541,18 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 自分の時給、働けそうな時間、家賃、車コスト、貯金目標、緊急資金を入れて、自分の前提で一度見てみるのが一番分かりやすいと思います。
               </p>
               <CalculatorCTA href={calculatorHref} buttonLabel="自分の前提で試算してみる" />
+            </section>
+
+            <section className="draft-article-chapter reveal-on-scroll" id="sources">
+              <h2>参照する主な一次情報</h2>
+              <p>
+                本文を重くしすぎないため、確認先はここにまとめます。公開版に近づける前に、日付、対象期間、地域、前提をもう一度確認します。
+              </p>
+              <div className="article-reference-grid">
+                {sourceReferences.map((reference) => (
+                  <ReferenceCard key={reference.title} {...reference} />
+                ))}
+              </div>
             </section>
 
             <section className="draft-article-callout warning reveal-on-scroll" id="notes">
@@ -506,11 +607,12 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
             {/*
               Internal publishing checklist before linking this article publicly:
-              - Confirm latest minimum wage and effective date from official sources.
-              - Confirm Living Wage values and explanation if referenced.
+              - Confirm whether to keep 2026/27 Living Wage as the scenario wage or switch to the current-applied 2025/26 rate before public linking.
+              - Reconfirm latest minimum wage and effective date from Employment New Zealand.
+              - Reconfirm Living Wage values, effective periods, and source page.
               - Confirm INZ wage thresholds before mentioning visa-related income rules.
               - Confirm IRD/take-home calculation guidance before discussing net pay.
-              - Confirm rent data with Stats NZ, MBIE, or Tenancy Services if adding market figures.
+              - Confirm rent data with Tenancy Services Market Rent / rental bond data if adding market figures.
               - Reconfirm NZD/JPY reference conversion source and manual override behavior.
             */}
           </div>
