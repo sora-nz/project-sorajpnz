@@ -30,15 +30,16 @@ const tocItems = [
   { href: '#try-first', label: '先に、自分の数字で試す' },
   { href: '#source-note', label: 'この記事の数字について' },
   { href: '#target-reader', label: 'この記事で想定している読者' },
-  { href: '#monthly-remaining', label: '月にいくら残るか' },
-  { href: '#rent', label: '週の家賃差' },
+  { href: '#monthly-remaining', label: '時給だけでは見えないこと' },
+  { href: '#rent', label: '家賃と車の重さ' },
   { href: '#car', label: '車と固定費' },
   { href: '#sora-sense', label: '生活費を見るときに気にしていること' },
-  { href: '#jpy-reference', label: '日本円で見る生活費' },
-  { href: '#savings', label: '貯金目標と緊急資金' },
+  { href: '#jpy-reference', label: '日本円で考える生活費' },
+  { href: '#savings', label: '貯金できるか' },
   { href: '#scenarios', label: '例としての試算' },
   { href: '#calculator', label: '自分の条件で試す' },
-  { href: '#sources', label: '参照する主な一次情報' },
+  { href: '#sora-conclusion', label: 'Soraの結論' },
+  { href: '#sources', label: '数字の根拠' },
   { href: '#notes', label: '注意事項' },
   { href: '#next', label: '次にまとめたいこと' }
 ];
@@ -48,6 +49,21 @@ const nextTopics = [
   '車なし生活と車あり生活で、毎月の余白がどれくらい変わるか',
   'NZDと日本円の両方で、生活費の重さをどう見せると分かりやすいか',
   'NZ生活リアリティ計算機の前提を、実際の生活メモから少しずつ改善する'
+];
+
+const keyTakeaways = [
+  {
+    title: '生活の入口',
+    body: 'まず見るべきなのは時給ではなく、月にいくら固定費で消えるかです。'
+  },
+  {
+    title: '重い支出',
+    body: 'Aucklandでは家賃、車、食費がかなり効きます。ここを甘く見ると、収入があっても残りません。'
+  },
+  {
+    title: '結論',
+    body: '「稼げるか」より先に、「残せる生活設計か」を見た方が現実に近いです。'
+  }
 ];
 
 const scenarioInputs: Array<{
@@ -267,6 +283,15 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             <p className="draft-article-lead">
               この記事では、Aucklandで単身または子どものいないカップルとして生活する日本語話者向けに、「実際に月いくら残るのか」を生活感ベースで整理します。
             </p>
+            <div className="article-link-card">
+              <span className="article-link-label" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                <img src={assets.logoMark} alt="" width="30" height="30" style={{ borderRadius: '50%' }} />
+                Soraメモ
+              </span>
+              <p>
+                Aucklandは「時給が高いから余裕」ではなく、「家賃と車で一気に削られる街」です。数字だけを見るとそこそこ暮らせそうに見えますが、実際には固定費でかなり差が出ます。
+              </p>
+            </div>
             <dl className="draft-article-meta" aria-label="記事メタ情報">
               {articleMeta.map((item) => (
                 <div key={item.label}>
@@ -275,6 +300,22 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 </div>
               ))}
             </dl>
+            <div className="article-link-card">
+              <span className="article-link-label">この記事でわかること</span>
+              <ul className="draft-check-list">
+                <li>Aucklandで生活費を考えるとき、どこからお金が消えやすいか</li>
+                <li>最低賃金やLiving Wageを見ても、それだけでは判断できない理由</li>
+                <li>家賃、車、食費、貯金を含めて、どのくらい現実的に見ればいいか</li>
+              </ul>
+            </div>
+            <div className="article-reference-grid" aria-label="記事の要点">
+              {keyTakeaways.map((item) => (
+                <div className="article-link-card" key={item.title}>
+                  <span className="article-link-label">{item.title}</span>
+                  <p>{item.body}</p>
+                </div>
+              ))}
+            </div>
             <nav className="draft-inline-toc" aria-label="記事の目次">
               <span>目次</span>
               <ol>
@@ -326,7 +367,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="monthly-remaining">
-              <h2>時給より「月にいくら残るか」を見たい</h2>
+              <h2>Auckland生活費は、時給だけ見ると勘違いする</h2>
               <p>
                 日本から見ると、NZの時給は高く見えることがあります。
               </p>
@@ -365,7 +406,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="rent">
-              <h2>週の家賃差は、月に直すとかなり効く</h2>
+              <h2>家賃でまず削られる。車を持つとさらに削られる</h2>
               <p>
                 NZでは家賃を週額で見ることが多いです。給与も fortnight、つまり2週間単位で出ることがあるので、日本の月給ベースの感覚とは少し違います。
               </p>
@@ -456,7 +497,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="jpy-reference">
-              <h2>日本円で見ると、生活費の重さがつかみやすい</h2>
+              <h2>日本円で考えると、生活費の見え方が変わる</h2>
               <p>
                 日本語でNZ生活を考えるとき、NZDだけだと感覚がつかみにくいことがあります。
               </p>
@@ -478,7 +519,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="savings">
-              <h2>貯金目標と緊急資金を入れると、見え方が変わる</h2>
+              <h2>貯金できるかは、給料より固定費でほぼ決まる</h2>
               <p>
                 生活費を払えているだけなら、表面上は「生活できている」ように見えます。
               </p>
@@ -527,7 +568,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
 
             <section className="draft-article-chapter reveal-on-scroll" id="calculator">
-              <h2>ここまで読んだら、自分の条件でも一度試してみる</h2>
+              <h2>結局、Aucklandで暮らせるかは「残るお金」で決まる</h2>
               <p>
                 Auckland生活がきついかどうかは、人によってかなり違います。
               </p>
@@ -543,10 +584,22 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               <CalculatorCTA href={calculatorHref} buttonLabel="自分の前提で試算してみる" />
             </section>
 
+            <section className="draft-article-chapter reveal-on-scroll" id="sora-conclusion">
+              <div className="article-link-card">
+                <span className="article-link-label">Soraの結論</span>
+                <p>
+                  Aucklandで生活費を考えるなら、時給よりも先に「家賃・車・食費・送金・貯金」を見た方がいいです。最低賃金やLiving Wageは参考になりますが、実際に余るかどうかは固定費でほぼ決まります。
+                </p>
+                <p>
+                  「給料はいくらか」だけで判断すると、現実より少し甘く見えます。Aucklandでは、稼ぐ力と同じくらい、生活を小さく作る力も大事です。
+                </p>
+              </div>
+            </section>
+
             <section className="draft-article-chapter reveal-on-scroll" id="sources">
-              <h2>参照する主な一次情報</h2>
+              <h2>数字の根拠として見たもの</h2>
               <p>
-                本文を重くしすぎないため、確認先はここにまとめます。公開版に近づける前に、日付、対象期間、地域、前提をもう一度確認します。
+                本文を重くしすぎないため、確認先はここにまとめます。これは記事を安全に育てるためのメモで、公開版に近づける前に、日付、対象期間、地域、前提をもう一度確認します。
               </p>
               <div className="article-reference-grid">
                 {sourceReferences.map((reference) => (
