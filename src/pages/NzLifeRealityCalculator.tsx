@@ -50,7 +50,7 @@ const upcomingLivingWageReference = getUpcomingLivingWageReference();
 const wagePresets = [
   { label: '最低賃金', value: adultMinimumWageReference.value },
   {
-    label: activeLivingWageReference ? 'Living Wage（現行）' : 'Living Wage（要更新）',
+    label: activeLivingWageReference ? '現行LW' : 'LW（要更新）',
     value: displayedLivingWageReference.value
   },
   ...(upcomingLivingWageReference
@@ -61,8 +61,8 @@ const wagePresets = [
         }
       ]
     : []),
-  { label: '30ドル', value: 30 },
-  { label: 'Median Wage', value: 35 }
+  { label: '$30', value: 30 },
+  { label: '$35', value: 35 }
 ];
 
 const sampleCarCosts = {
@@ -334,7 +334,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
       ];
   const savingsProgress = Math.min(Math.max(result.savingsAchievementRate, 0), 2);
   const minimumWageSummary = `最低賃金 $${adultMinimumWageReference.value.toFixed(2)}（${formatReferenceDate(adultMinimumWageReference.effectiveFrom)}〜）`;
-  const livingWageSummary = `${activeLivingWageReference ? '現行' : '最新掲載'}Living Wage $${displayedLivingWageReference.value.toFixed(2)}（${formatReferenceDate(displayedLivingWageReference.effectiveFrom)}〜${formatReferenceDate(displayedLivingWageReference.effectiveTo)}）`;
+  const livingWageSummary = `${activeLivingWageReference ? '現行の' : '最新掲載の'}Living Wage $${displayedLivingWageReference.value.toFixed(2)}（${formatReferenceDate(displayedLivingWageReference.effectiveFrom)}〜${formatReferenceDate(displayedLivingWageReference.effectiveTo)}）`;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -426,13 +426,16 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   ))}
                 </div>
                 <p className="calculator-helper">
-                  {minimumWageSummary}・{livingWageSummary}。
+                  {minimumWageSummary} ／ {livingWageSummary}。
+                  <br />
                   {upcomingLivingWageReference && (
                     <>
                       次期Living Wage ${upcomingLivingWageReference.value.toFixed(2)}は
-                      {formatReferenceDate(upcomingLivingWageReference.effectiveFrom)}からです。{' '}
+                      {formatReferenceDate(upcomingLivingWageReference.effectiveFrom)}からです。
+                      <br />
                     </>
                   )}
+                  公式:{' '}
                   <a href={adultMinimumWageReference.sourceUrl} target="_blank" rel="noopener noreferrer">
                     Employment New Zealand
                   </a>{' '}
