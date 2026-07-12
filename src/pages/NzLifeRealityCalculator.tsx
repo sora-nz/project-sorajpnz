@@ -12,10 +12,14 @@ import {
   type ReferenceRateResult
 } from '../lib/fxReference';
 import {
+  adultMinimumWageReference,
   calculateNzLifeReality,
   calculateWithOverrides,
   CalculatorInputs,
   defaultNzLifeInputs,
+  getActiveLivingWageReference,
+  getDefaultLivingWageReference,
+  getUpcomingLivingWageReference,
   impactEstimates,
   roughTakeHomeRate
 } from '../lib/nzLifeRealityCalculator';
@@ -39,9 +43,24 @@ type RangeControlProps = {
   onChange: (value: number) => void;
 };
 
+const activeLivingWageReference = getActiveLivingWageReference();
+const displayedLivingWageReference = getDefaultLivingWageReference();
+const upcomingLivingWageReference = getUpcomingLivingWageReference();
+
 const wagePresets = [
-  { label: '最低賃金', value: 23.95 },
-  { label: 'Living Wage', value: 29.9 },
+  { label: '最低賃金', value: adultMinimumWageReference.value },
+  {
+    label: activeLivingWageReference ? 'Living Wage（現行）' : 'Living Wage（要更新）',
+    value: displayedLivingWageReference.value
+  },
+  ...(upcomingLivingWageReference
+    ? [
+        {
+          label: `次期LW（${Number(upcomingLivingWageReference.effectiveFrom.slice(5, 7))}月〜）`,
+          value: upcomingLivingWageReference.value
+        }
+      ]
+    : []),
   { label: '30ドル', value: 30 },
   { label: 'Median Wage', value: 35 }
 ];
@@ -75,6 +94,12 @@ function formatMonths(value: number) {
   if (value <= 0) return '0か月';
   if (value < 1) return '1か月未満';
   return `約${Math.ceil(value)}か月`;
+}
+
+function formatReferenceDate(value?: string) {
+  if (!value) return '';
+  const [year, month, day] = value.split('-').map(Number);
+  return `${year}年${month}月${day}日`;
 }
 
 function updateInput(setInputs: Dispatch<SetStateAction<CalculatorInputs>>, patch: Partial<CalculatorInputs>) {
@@ -284,7 +309,13 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
   const monthlyRemainingMax = Math.max(result.monthlyIncomeUsedForCalculation, result.monthlyExpenses, 1);
   const expenseTotal = Math.max(result.monthlyExpenses, 1);
   const formatReferenceJpy = (value: number) => formatJpy(convertNzdToJpy(value, referenceRate));
-  const wageScenarios = uniqueNumbers([23.95, 29.9, 30, 35, inputs.hourlyWage]).map((wage) => ({
+  const wageScenarios = uniqueNumbers([
+    adultMinimumWageReference.value,
+    displayedLivingWageReference.value,
+    30,
+    35,
+    inputs.hourlyWage
+  ]).map((wage) => ({
     label: `$${wage.toFixed(wage % 1 === 0 ? 0 : 2)}`,
     value: calculateWithOverrides(inputs, { hourlyWage: wage }, true).monthlyRemaining
   }));
@@ -302,6 +333,8 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
         { label: '車ありサンプル', value: calculateWithOverrides(inputs, { ownsCar: true, ...sampleCarCosts }).monthlyRemaining }
       ];
   const savingsProgress = Math.min(Math.max(result.savingsAchievementRate, 0), 2);
+  const minimumWageSummary = `最低賃金 $${adultMinimumWageReference.value.toFixed(2)}（${formatReferenceDate(adultMinimumWageReference.effectiveFrom)}〜）`;
+  const livingWageSummary = `${activeLivingWageReference ? '現行' : '最新掲載'}Living Wage $${displayedLivingWageReference.value.toFixed(2)}（${formatReferenceDate(displayedLivingWageReference.effectiveFrom)}〜${formatReferenceDate(displayedLivingWageReference.effectiveTo)}）`;
 
   useEffect(() => {
     const controller = new AbortController();
@@ -392,15 +425,41 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                     </button>
                   ))}
                 </div>
+                <p className="calculator-helper">
+                  {minimumWageSummary}・{livingWageSummary}。
+                  {upcomingLivingWageReference && (
+                    <>
+                      次期Living Wage ${upcomingLivingWageReference.value.toFixed(2)}は
+                      {formatReferenceDate(upcomingLivingWageReference.effectiveFrom)}からです。{' '}
+                    </>
+                  )}
+                  <a href={adultMinimumWageReference.sourceUrl} target="_blank" rel="noopener noreferrer">
+                    Employment New Zealand
+                  </a>{' '}
+                  /{' '}
+                  <a href={displayedLivingWageReference.sourceUrl} target="_blank" rel="noopener noreferrer">
+                    Living Wage Movement
+                  </a>
+                  {upcomingLivingWageReference && (
+                    <>
+                      {' '}
+                      /{' '}
+                      <a href={upcomingLivingWageReference.sourceUrl} target="_blank" rel="noopener noreferrer">
+                        次期rate
+                      </a>
+                    </>
+                  )}
+                  （確認日: {formatReferenceDate(displayedLivingWageReference.checkedAt)}）
+                </p>
                 <RangeControl
                   testId="hourly-wage"
                   label="時給"
                   value={inputs.hourlyWage}
-                  min={23.95}
+                  min={adultMinimumWageReference.value}
                   max={60}
                   step={0.05}
                   suffix="/h"
-                  helper="最低賃金・Living Wage・Median Wageなどは必ず最新情報で確認してください。"
+                  helper="制度上のrateは変わるため、適用期間と公式情報を確認してください。"
                   onChange={(value) => updateInput(setInputs, { hourlyWage: value })}
                 />
                 <RangeControl

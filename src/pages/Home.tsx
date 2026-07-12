@@ -3,6 +3,7 @@ import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
 import { assets, common, home, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
+import { getDefaultLivingWageReference } from '../lib/nzLifeRealityCalculator';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
 
@@ -22,6 +23,8 @@ export function Home({ locale, path }: HomeProps) {
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
   const featuredTool = h.featuredTool;
   const primaryRel = h.primaryExternal ? 'noopener noreferrer' : undefined;
+  const defaultLivingWageReference = getDefaultLivingWageReference();
+  const defaultLivingWage = `$${defaultLivingWageReference.value.toFixed(2)}`;
 
   useReveal(`${locale}:${path}`);
   useMeta({
@@ -66,8 +69,8 @@ export function Home({ locale, path }: HomeProps) {
                 <strong>{locale === 'ja' ? '月の余白を見る' : 'Check monthly room'}</strong>
                 <div className="proof-metrics" aria-hidden="true">
                   <span>
-                    <small>{locale === 'ja' ? '時給' : 'Wage'}</small>
-                    <b>$29.90</b>
+                    <small>{locale === 'ja' ? '時給例' : 'Example wage'}</small>
+                    <b>{defaultLivingWage}</b>
                   </span>
                   <span>
                     <small>{locale === 'ja' ? '家賃' : 'Rent'}</small>
@@ -155,8 +158,8 @@ export function Home({ locale, path }: HomeProps) {
                     <span>NZD / JPY ref.</span>
                   </div>
                   <div className="calculator-preview-row">
-                    <small>{locale === 'ja' ? '時給' : 'Wage'}</small>
-                    <strong>$29.90</strong>
+                    <small>{locale === 'ja' ? '時給例' : 'Example wage'}</small>
+                    <strong>{defaultLivingWage}</strong>
                   </div>
                   <div className="calculator-preview-row">
                     <small>{locale === 'ja' ? '家賃' : 'Rent'}</small>

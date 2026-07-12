@@ -52,11 +52,75 @@ export type CalculatorResult = {
   notes: string[];
 };
 
+export type WageReference = {
+  label: string;
+  value: number;
+  effectiveFrom: string;
+  effectiveTo?: string;
+  checkedAt: string;
+  sourceUrl: string;
+};
+
 export const monthlyFactor = 52 / 12;
 export const roughTakeHomeRate = 0.82;
 
+export const adultMinimumWageReference: WageReference = {
+  label: '最低賃金',
+  value: 23.95,
+  effectiveFrom: '2026-04-01',
+  checkedAt: '2026-07-11',
+  sourceUrl: 'https://www.employment.govt.nz/pay-and-hours/pay-and-wages/minimum-wage/minimum-wage-rates-and-types'
+};
+
+export const livingWageReferences: WageReference[] = [
+  {
+    label: 'Living Wage 2025/26',
+    value: 28.95,
+    effectiveFrom: '2025-09-01',
+    effectiveTo: '2026-08-31',
+    checkedAt: '2026-07-11',
+    sourceUrl: 'https://www.livingwage.org.nz/lw25_2895'
+  },
+  {
+    label: 'Living Wage 2026/27',
+    value: 29.9,
+    effectiveFrom: '2026-09-01',
+    effectiveTo: '2027-08-31',
+    checkedAt: '2026-07-11',
+    sourceUrl: 'https://www.livingwage.org.nz/'
+  }
+];
+
+function dateInAuckland(date: Date) {
+  const parts = new Intl.DateTimeFormat('en-NZ', {
+    timeZone: 'Pacific/Auckland',
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit'
+  }).formatToParts(date);
+  const values = Object.fromEntries(parts.map((part) => [part.type, part.value]));
+
+  return `${values.year}-${values.month}-${values.day}`;
+}
+
+export function getActiveLivingWageReference(date = new Date()) {
+  const currentDate = dateInAuckland(date);
+  return livingWageReferences.find(
+    (reference) => reference.effectiveFrom <= currentDate && (!reference.effectiveTo || currentDate <= reference.effectiveTo)
+  );
+}
+
+export function getUpcomingLivingWageReference(date = new Date()) {
+  const currentDate = dateInAuckland(date);
+  return livingWageReferences.find((reference) => reference.effectiveFrom > currentDate);
+}
+
+export function getDefaultLivingWageReference(date = new Date()) {
+  return getActiveLivingWageReference(date) ?? livingWageReferences[livingWageReferences.length - 1];
+}
+
 export const defaultNzLifeInputs: CalculatorInputs = {
-  hourlyWage: 29.9,
+  hourlyWage: getDefaultLivingWageReference().value,
   workHoursPerWeek: 40,
   weeklyRent: 300,
   weeklyFood: 120,
