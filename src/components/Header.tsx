@@ -6,12 +6,14 @@ import { SocialLinks } from './SocialLinks';
 type HeaderProps = {
   locale: Locale;
   path: string;
+  languageSwitchHref?: string;
 };
 
-export function Header({ locale, path }: HeaderProps) {
+export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const t = common[locale];
   const base = routeKey(path);
+  const alternateLocaleHref = languageSwitchHref ?? swapLocale(path, locale === 'en' ? 'ja' : 'en');
   const menuLabel = open
     ? locale === 'ja'
       ? 'メニューを閉じる'
@@ -48,7 +50,7 @@ export function Header({ locale, path }: HeaderProps) {
 
         <div className="header-actions">
           <SocialLinks compact placement="header" />
-          <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={t.language}>
+          <a className="language-pill" href={alternateLocaleHref} aria-label={t.language}>
             <i className="ri-global-line" />
             <span>{locale === 'en' ? 'EN' : 'JA'}</span>
           </a>
@@ -75,7 +77,7 @@ export function Header({ locale, path }: HeaderProps) {
           ))}
           <div className="mobile-menu-bottom">
             <SocialLinks compact placement="header" />
-            <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={t.language}>
+            <a className="language-pill" href={alternateLocaleHref} aria-label={t.language}>
               <i className="ri-global-line" />
               <span>{locale === 'en' ? 'EN' : 'JA'}</span>
             </a>

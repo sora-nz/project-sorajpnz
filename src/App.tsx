@@ -34,6 +34,7 @@ export function App() {
       const anchor = target?.closest('a');
       if (!anchor || anchor.target || anchor.origin !== window.location.origin) return;
       if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey) return;
+      if (anchor.pathname === window.location.pathname && anchor.hash) return;
       event.preventDefault();
       const nextPath = normalizePath(anchor.pathname);
       window.history.pushState({}, '', nextPath);

@@ -19,12 +19,12 @@ type AucklandLivingCostArticleProps = {
 
 const articleTitle = 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？';
 const articleDescription =
-  'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZのレビュー中記事です。';
+  'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZの記事です。';
 
 const articleMeta = [
   { label: '作成日', value: '2026-07-04' },
-  { label: '最終更新日', value: '2026-08-27' },
-  { label: '状態', value: 'Review / noindex' }
+  { label: '最終更新日', value: '2026-08-28' },
+  { label: '状態', value: '公開記事' }
 ];
 
 const tocItems = [
@@ -212,17 +212,17 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
     title: `${articleTitle} | SoraJPNZ`,
     description: articleDescription,
     image: assets.blogSnapperWharf,
-    noIndex: true,
+    noIndex: false,
     alternates: false
   });
 
   return (
     <div className="page draft-article-page">
-      <Header locale={locale} path={path} />
+      <Header locale={locale} path={path} languageSwitchHref="/en/blog" />
       <main>
         <article className="section-inner draft-article-shell">
           <header className="draft-article-header animate-slide-up">
-            <span className="draft-pill">レビュー中 / noindex</span>
+            <span className="draft-pill">生活費ノート</span>
             <p className="draft-article-kicker">SoraJPNZ Notes</p>
             <h1>{articleTitle}</h1>
             <p className="draft-article-lead">
@@ -568,7 +568,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </div>
             </section>
             {/*
-              Internal maintenance checklist before linking this article publicly:
+              Internal maintenance checklist:
               - Reconfirm the Living Wage value on or after 2026-09-01.
               - Reconfirm the latest minimum wage and effective date from Employment New Zealand.
               - Confirm INZ wage thresholds before mentioning visa-related income rules.
