@@ -17,6 +17,7 @@ import {
   CalculatorInputs,
   defaultNzLifeInputs,
   impactEstimates,
+  referenceWages,
   roughTakeHomeRate
 } from '../lib/nzLifeRealityCalculator';
 import { useMeta } from '../lib/useMeta';
@@ -40,10 +41,10 @@ type RangeControlProps = {
 };
 
 const wagePresets = [
-  { label: '最低賃金', value: 23.95 },
-  { label: 'Living Wage', value: 29.9 },
+  { label: '最低賃金（2026年4月〜）', value: referenceWages.adultMinimum },
+  { label: 'Living Wage 2025/26', value: referenceWages.livingWage },
   { label: '30ドル', value: 30 },
-  { label: 'Median Wage', value: 35 }
+  { label: '35ドル', value: 35 }
 ];
 
 const sampleCarCosts = {
@@ -284,7 +285,13 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
   const monthlyRemainingMax = Math.max(result.monthlyIncomeUsedForCalculation, result.monthlyExpenses, 1);
   const expenseTotal = Math.max(result.monthlyExpenses, 1);
   const formatReferenceJpy = (value: number) => formatJpy(convertNzdToJpy(value, referenceRate));
-  const wageScenarios = uniqueNumbers([23.95, 29.9, 30, 35, inputs.hourlyWage]).map((wage) => ({
+  const wageScenarios = uniqueNumbers([
+    referenceWages.adultMinimum,
+    referenceWages.livingWage,
+    30,
+    35,
+    inputs.hourlyWage
+  ]).map((wage) => ({
     label: `$${wage.toFixed(wage % 1 === 0 ? 0 : 2)}`,
     value: calculateWithOverrides(inputs, { hourlyWage: wage }, true).monthlyRemaining
   }));
@@ -396,11 +403,11 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   testId="hourly-wage"
                   label="時給"
                   value={inputs.hourlyWage}
-                  min={23.95}
+                  min={referenceWages.adultMinimum}
                   max={60}
                   step={0.05}
                   suffix="/h"
-                  helper="最低賃金・Living Wage・Median Wageなどは必ず最新情報で確認してください。"
+                  helper="最低賃金・Living Wageなどは時期によって変わるため、必ず最新の公式情報で確認してください。"
                   onChange={(value) => updateInput(setInputs, { hourlyWage: value })}
                 />
                 <RangeControl
