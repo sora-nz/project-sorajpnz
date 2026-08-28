@@ -10,7 +10,7 @@ import {
   roughTakeHomeRate
 } from '../lib/nzLifeRealityCalculator';
 import type { CalculatorInputs } from '../lib/nzLifeRealityCalculator';
-import { useMeta } from '../lib/useMeta';
+import { articleJsonLd, useMeta } from '../lib/useMeta';
 
 type AucklandLivingCostArticleProps = {
   locale: Locale;
@@ -211,9 +211,18 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
     path,
     title: `${articleTitle} | SoraJPNZ`,
     description: articleDescription,
-    image: assets.blogSnapperWharf,
+    image: assets.aucklandHarbour,
     noIndex: false,
-    alternates: false
+    alternates: false,
+    jsonLd: articleJsonLd({
+      locale,
+      path,
+      title: articleTitle,
+      description: articleDescription,
+      image: assets.aucklandHarbour,
+      datePublished: '2026-08-28',
+      dateModified: '2026-08-28'
+    })
   });
 
   return (

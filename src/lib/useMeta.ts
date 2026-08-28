@@ -137,3 +137,135 @@ export function pageJsonLd(locale: Locale, path: string, title: string, descript
     ]
   };
 }
+
+type BlogPostJsonLd = {
+  path: string;
+  title: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified: string;
+};
+
+function absoluteAssetUrl(path: string) {
+  return path.startsWith('http') ? path : `${siteUrl}${path}`;
+}
+
+export function blogJsonLd(
+  locale: Locale,
+  path: string,
+  title: string,
+  description: string,
+  image: string,
+  latestPost?: BlogPostJsonLd
+) {
+  const canonicalUrl = `${siteUrl}${canonicalizePath(path)}`;
+  const authorId = `${siteUrl}/#sora`;
+  const websiteId = `${siteUrl}/#website`;
+  const blogId = `${canonicalUrl}#blog`;
+  const graph: Array<Record<string, unknown>> = [
+    {
+      '@type': 'WebSite',
+      '@id': websiteId,
+      name: 'SoraJPNZ',
+      url: siteUrl,
+      inLanguage: ['ja', 'en']
+    },
+    {
+      '@type': 'Person',
+      '@id': authorId,
+      name: 'Sora Oya',
+      url: siteUrl,
+      image: absoluteAssetUrl('/assets/sora-avatar.png')
+    },
+    {
+      '@type': 'Blog',
+      '@id': blogId,
+      name: title,
+      url: canonicalUrl,
+      description,
+      inLanguage: locale,
+      image: absoluteAssetUrl(image),
+      author: { '@id': authorId },
+      isPartOf: { '@id': websiteId }
+    }
+  ];
+
+  if (latestPost) {
+    graph.push({
+      '@type': 'BlogPosting',
+      '@id': `${siteUrl}${canonicalizePath(latestPost.path)}#article`,
+      headline: latestPost.title,
+      description: latestPost.description,
+      url: `${siteUrl}${canonicalizePath(latestPost.path)}`,
+      mainEntityOfPage: `${siteUrl}${canonicalizePath(latestPost.path)}`,
+      image: absoluteAssetUrl(latestPost.image),
+      datePublished: latestPost.datePublished,
+      dateModified: latestPost.dateModified,
+      inLanguage: locale,
+      author: { '@id': authorId },
+      publisher: { '@id': authorId },
+      isPartOf: { '@id': blogId }
+    });
+  }
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': graph
+  };
+}
+
+type ArticleJsonLdConfig = {
+  locale: Locale;
+  path: string;
+  title: string;
+  description: string;
+  image: string;
+  datePublished: string;
+  dateModified: string;
+};
+
+export function articleJsonLd({
+  locale,
+  path,
+  title,
+  description,
+  image,
+  datePublished,
+  dateModified
+}: ArticleJsonLdConfig) {
+  const canonicalUrl = `${siteUrl}${canonicalizePath(path)}`;
+  const authorId = `${siteUrl}/#sora`;
+
+  return {
+    '@context': 'https://schema.org',
+    '@graph': [
+      {
+        '@type': 'Person',
+        '@id': authorId,
+        name: 'Sora Oya',
+        url: siteUrl,
+        image: absoluteAssetUrl('/assets/sora-avatar.png')
+      },
+      {
+        '@type': 'BlogPosting',
+        '@id': `${canonicalUrl}#article`,
+        headline: title,
+        description,
+        url: canonicalUrl,
+        mainEntityOfPage: canonicalUrl,
+        image: absoluteAssetUrl(image),
+        datePublished,
+        dateModified,
+        inLanguage: locale,
+        author: { '@id': authorId },
+        publisher: { '@id': authorId },
+        isPartOf: {
+          '@type': 'Blog',
+          name: 'SoraJPNZ Notes',
+          url: `${siteUrl}/${locale}/blog`
+        }
+      }
+    ]
+  };
+}

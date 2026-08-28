@@ -8,6 +8,8 @@ export const assets = {
   hero: '/assets/homepage1.jpg',
   projectsBg: '/assets/homepage2.jpg',
   profileBg: '/assets/homepage3.jpg',
+  aucklandHarbour: '/assets/home/auckland-harbour-view.jpg',
+  westCoastRocks: '/assets/home/west-coast-rocks.jpg',
   dashboard: '/assets/nz-relocation-dashboard.png',
   rentRadar: '/assets/rentradar.png',
   avatar: '/assets/sora-avatar.png',
@@ -1015,12 +1017,13 @@ export const blog = {
   en: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'A notes hub for New Zealand living costs, work, money, Japan comparisons, field notes, and practical tools.',
+      'Notes from Auckland on living costs, work, money, Japan comparisons, and the everyday context behind New Zealand life.',
     eyebrow: 'Notes hub',
     introTitle: 'Practical notes are being organized.',
     body:
       'SoraJPNZ Notes is being shaped around realistic Japan x New Zealand decision-making. English article links are not published here yet.',
     featuredTool: null,
+    latestNote: null,
     categoryTitle: 'Core themes',
     categoryBody:
       'Notes will be grouped around practical questions first, with field notes kept as lived context rather than the whole identity of the site.',
@@ -1065,21 +1068,40 @@ export const blog = {
       'Thinking about happiness after years in New Zealand',
       'Money and investing notes from a New Zealand resident',
       'Auckland ocean notes'
-    ]
+    ],
+    editorNote: {
+      label: 'Written from Auckland',
+      title: 'Still figuring it out, and documenting what helps.',
+      body:
+        'SoraJPNZ connects practical data with lived experience in New Zealand. Unfinished questions stay visible instead of being turned into easy answers.'
+    }
   },
   ja: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'NZ生活の数字、仕事、お金、海での記録を、あとから読み返せる形で残していく場所です。',
+      'Aucklandで暮らしながら、生活費、仕事、お金、日本との違いを、数字と自分の経験で整理しています。海や釣りの記録も、NZで暮らす背景として残します。',
     eyebrow: 'Notes from Auckland',
     introTitle: '数字と実体験を、あとから使えるメモに。',
     body:
       'SoraJPNZ Notesでは、NZ生活の現実を「なんとなく良さそう」では終わらせず、生活費、仕事、お金、比較、現地での試行錯誤として整理していきます。',
     featuredTool: {
-      title: '数字から先に見たい人は',
-      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れると、NZ生活で月にどれくらい余白が残るかを試算できます。',
+      title: '生活費を自分の数字で見る',
+      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れて、NZ生活で月にどれくらい残るかを試算できます。',
       cta: 'NZ生活リアリティ計算機を使う',
       href: '/ja/tools/nz-life-reality-calculator'
+    },
+    latestNote: {
+      label: '最新のノート',
+      category: 'NZ生活費',
+      date: '2026-08-28',
+      dateLabel: '2026年8月28日 更新',
+      title: 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？',
+      excerpt:
+        '時給は高く見えても、家賃と車を入れると残るお金は変わります。最低賃金、Living Wage、家賃、貯金の前提をAucklandでの生活感と一緒に整理しました。',
+      cta: 'ノートを読む',
+      href: '/ja/blog/auckland-living-cost-hourly-wage',
+      image: assets.aucklandHarbour,
+      imageAlt: '海越しに見たAucklandの街並み'
     },
     categoryTitle: '扱うテーマ',
     categoryBody:
@@ -1124,7 +1146,13 @@ export const blog = {
       'NZに7年以上住んで考える幸せ',
       'NZ在住者のお金・投資メモ',
       'Auckland海メモ'
-    ]
+    ],
+    editorNote: {
+      label: 'Aucklandから',
+      title: 'まだ途中だから、迷ったことも残します。',
+      body:
+        '日本からNZへ移り住み、仕事や生活費で迷ったことを、数字と現地での経験の両方から整理しています。答えが出ていないことも、分かったふりをせずNotesに残します。'
+    }
   }
 } as const;
 
