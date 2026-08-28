@@ -3,6 +3,7 @@ import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
 import { assets, common, home, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
+import { referenceWages } from '../lib/nzLifeRealityCalculator';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
 
@@ -67,7 +68,7 @@ export function Home({ locale, path }: HomeProps) {
                 <div className="proof-metrics" aria-hidden="true">
                   <span>
                     <small>{locale === 'ja' ? '時給' : 'Wage'}</small>
-                    <b>$29.90</b>
+                    <b>${referenceWages.livingWage.toFixed(2)}</b>
                   </span>
                   <span>
                     <small>{locale === 'ja' ? '家賃' : 'Rent'}</small>
@@ -156,7 +157,7 @@ export function Home({ locale, path }: HomeProps) {
                   </div>
                   <div className="calculator-preview-row">
                     <small>{locale === 'ja' ? '時給' : 'Wage'}</small>
-                    <strong>$29.90</strong>
+                    <strong>${referenceWages.livingWage.toFixed(2)}</strong>
                   </div>
                   <div className="calculator-preview-row">
                     <small>{locale === 'ja' ? '家賃' : 'Rent'}</small>

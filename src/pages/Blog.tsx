@@ -17,7 +17,8 @@ export function Blog({ locale, path }: BlogProps) {
     path,
     title: meta.title,
     description: meta.description,
-    noIndex: true,
+    noIndex: locale === 'en',
+    alternates: false,
     jsonLd: pageJsonLd(locale, path, meta.title, meta.description)
   });
 
@@ -67,6 +68,24 @@ export function Blog({ locale, path }: BlogProps) {
                 <strong>{b.body}</strong>
               </div>
             )}
+
+            {locale === 'ja' ? (
+              <section className="notes-latest-note" aria-labelledby="notes-latest-title">
+                <div>
+                  <p className="eyebrow">Latest note</p>
+                  <h2 id="notes-latest-title">
+                    Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？
+                  </h2>
+                  <p>
+                    時給だけでは見えにくいAuckland生活の余白を、家賃、車、食費、貯金目標と一緒に整理しました。
+                  </p>
+                </div>
+                <a href="/ja/blog/auckland-living-cost-hourly-wage">
+                  記事を読む
+                  <i className="ri-arrow-right-line" aria-hidden="true" />
+                </a>
+              </section>
+            ) : null}
 
             <div className="blog-category-intro">
               <h2>{b.categoryTitle}</h2>

@@ -73,4 +73,10 @@
     <xhtml:link rel="alternate" hreflang="ja" href="https://sorajpnz.com/ja/contact" />
     <xhtml:link rel="alternate" hreflang="x-default" href="https://sorajpnz.com/en/contact" />
   </url>
+  <url>
+    <loc>https://sorajpnz.com/ja/blog</loc>
+  </url>
+  <url>
+    <loc>https://sorajpnz.com/ja/blog/auckland-living-cost-hourly-wage</loc>
+  </url>
 </urlset>

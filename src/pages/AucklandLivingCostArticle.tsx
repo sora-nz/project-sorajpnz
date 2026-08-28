@@ -5,11 +5,12 @@ import { localize } from '../lib/routes';
 import {
   calculateNzLifeReality,
   defaultNzLifeInputs,
-  monthlyFactor
+  monthlyFactor,
+  referenceWages,
+  roughTakeHomeRate
 } from '../lib/nzLifeRealityCalculator';
 import type { CalculatorInputs } from '../lib/nzLifeRealityCalculator';
 import { useMeta } from '../lib/useMeta';
-import { useReveal } from '../lib/useReveal';
 
 type AucklandLivingCostArticleProps = {
   locale: Locale;
@@ -18,27 +19,23 @@ type AucklandLivingCostArticleProps = {
 
 const articleTitle = 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？';
 const articleDescription =
-  'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZのレビュー中記事です。';
+  'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZの記事です。';
 
 const articleMeta = [
   { label: '作成日', value: '2026-07-04' },
-  { label: '最終更新日', value: '2026-07-04' },
-  { label: '状態', value: 'Review / noindex' }
+  { label: '最終更新日', value: '2026-08-28' },
+  { label: '状態', value: '公開記事' }
 ];
 
 const tocItems = [
-  { href: '#try-first', label: '先に、自分の数字で試す' },
-  { href: '#target-reader', label: 'この記事で想定している読者' },
-  { href: '#monthly-remaining', label: '月にいくら残るか' },
-  { href: '#rent', label: '週の家賃差' },
-  { href: '#car', label: '車と固定費' },
-  { href: '#sora-sense', label: '生活費を見るときに気にしていること' },
+  { href: '#monthly-remaining', label: '時給だけでは見えないこと' },
+  { href: '#rent', label: '家賃と車の重さ' },
+  { href: '#car', label: '車を持つということ' },
+  { href: '#sora-sense', label: '私が生活費を見るときに気にしていること' },
   { href: '#jpy-reference', label: '日本円で見る生活費' },
-  { href: '#savings', label: '貯金目標と緊急資金' },
-  { href: '#scenarios', label: '例としての試算' },
-  { href: '#calculator', label: '自分の条件で試す' },
-  { href: '#notes', label: '注意事項' },
-  { href: '#next', label: '次にまとめたいこと' }
+  { href: '#savings', label: '貯金できるか' },
+  { href: '#scenarios', label: '3つの生活費試算' },
+  { href: '#sora-conclusion', label: 'Soraの結論' }
 ];
 
 const nextTopics = [
@@ -58,7 +55,7 @@ const scenarioInputs: Array<{
     body: '家賃と移動費を抑えて、まず毎月の余白を作りやすくする例です。車がない分、住む場所と通勤のしやすさがかなり大事になります。',
     inputs: {
       ...defaultNzLifeInputs,
-      hourlyWage: 29.9,
+      hourlyWage: referenceWages.livingWage,
       workHoursPerWeek: 40,
       weeklyRent: 280,
       weeklyFood: 120,
@@ -72,7 +69,7 @@ const scenarioInputs: Array<{
     body: '仕事、買い物、海や郊外への移動は楽になります。ただし燃料、保険、整備、rego/WOF積立が月の生活費に乗ってきます。',
     inputs: {
       ...defaultNzLifeInputs,
-      hourlyWage: 29.9,
+      hourlyWage: referenceWages.livingWage,
       workHoursPerWeek: 40,
       weeklyRent: 300,
       weeklyFood: 120,
@@ -90,7 +87,7 @@ const scenarioInputs: Array<{
     body: '時給が同じでも、シフトや授業、体調、仕事探しの状況で勤務時間が少ないと、月の残りは一気に小さくなります。',
     inputs: {
       ...defaultNzLifeInputs,
-      hourlyWage: 29.9,
+      hourlyWage: referenceWages.livingWage,
       workHoursPerWeek: 30,
       weeklyRent: 300,
       weeklyFood: 120,
@@ -106,24 +103,42 @@ const scenarios = scenarioInputs.map((scenario) => ({
   result: calculateNzLifeReality(scenario.inputs)
 }));
 
-const scenarioDisplayValues = [
+const sourceReferences = [
   {
-    title: '家賃を抑えて車なし',
-    income: '$4,250',
-    expenses: '$2,200',
-    remaining: '$2,050'
+    title: '最低賃金',
+    source: 'Employment New Zealand',
+    url: 'https://www.employment.govt.nz/pay-and-hours/pay-and-wages/minimum-wage/minimum-wage-rates-and-types',
+    note: '2026年4月1日からadult minimum wageは$23.95/hour、starting-out/training minimum wageは$19.16/hour。確認日: 2026-08-27。'
   },
   {
-    title: '車ありで行動範囲を広げる',
-    income: '$4,250',
-    expenses: '$2,810',
-    remaining: '$1,440'
+    title: 'Living Wage',
+    source: 'Living Wage Movement Aotearoa New Zealand',
+    url: 'https://www.livingwage.org.nz/lw25',
+    note: '2025/26 Living Wageは$28.95/hour。2025年9月1日から適用されている値で、2026年9月以降は再確認が必要。確認日: 2026-08-27。'
   },
   {
-    title: '勤務時間が少ないケース',
-    income: '$3,187',
-    expenses: '$2,287',
-    remaining: '$901'
+    title: '税金・手取り確認',
+    source: 'Inland Revenue',
+    url: 'https://www.ird.govt.nz/income-tax/income-tax-for-individuals/types-of-individual-income/earning-salary-and-wages',
+    note: 'PAYEは税コード、KiwiSaver、student loanなどで変わるため、正確な手取り確認に使う公式情報。確認日: 2026-08-27。'
+  },
+  {
+    title: 'Market Rent / rental bond data',
+    source: 'Tenancy Services',
+    url: 'https://www.tenancy.govt.nz/rent-bond-and-bills/market-rent/',
+    note: '直近6か月のbond dataをもとに毎月更新される参考値。地域、物件タイプ、対象期間を分けて見る必要がある。確認日: 2026-08-27。'
+  },
+  {
+    title: 'NZD/JPY参考換算',
+    source: 'Frankfurter',
+    url: 'https://frankfurter.dev/',
+    note: '計算機のNZD/JPY参考換算に使う公開API。取得できない場合は手動入力に戻す設計。確認日: 2026-08-27。'
+  },
+  {
+    title: '為替データの公式統計確認候補',
+    source: 'Reserve Bank of New Zealand',
+    url: 'https://www.rbnz.govt.nz/statistics/series/exchange-and-interest-rates',
+    note: '為替レートの公式統計を確認したい場合の参照先。確認日: 2026-08-27。'
   }
 ];
 
@@ -150,6 +165,23 @@ export function PersonalPostCard({ platform, title, url, note }: PersonalPostCar
   );
 }
 
+type ReferenceCardProps = {
+  title: string;
+  source: string;
+  url: string;
+  note: string;
+};
+
+function ReferenceCard({ title, source, url, note }: ReferenceCardProps) {
+  return (
+    <a className="article-link-card reference" href={url} target="_blank" rel="noopener noreferrer">
+      <span className="article-link-label">{source}</span>
+      <strong>{title}</strong>
+      <p>{note}</p>
+    </a>
+  );
+}
+
 type CalculatorCTAProps = {
   href: string;
   buttonLabel: string;
@@ -160,7 +192,7 @@ function CalculatorCTA({ href, buttonLabel }: CalculatorCTAProps) {
     <a className="article-calculator-cta" href={href}>
       <span>
         <strong>NZ生活リアリティ計算機</strong>
-        <small>時給・勤務時間・家賃・車コスト・貯金目標・緊急資金を動かして、NZDと日本円の両方で生活の余白を確認できます。</small>
+        <small>時給・勤務時間・家賃・車・貯金目標を入れて、月に残る金額をNZDと日本円で確認できます。</small>
       </span>
       <em>
         {buttonLabel}
@@ -174,41 +206,47 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
   const calculatorHref = '/ja/tools/nz-life-reality-calculator';
   const instagramHref = socialLinks.find((item) => item.id === 'instagram')?.href;
 
-  useReveal();
   useMeta({
     locale,
     path,
     title: `${articleTitle} | SoraJPNZ`,
     description: articleDescription,
     image: assets.blogSnapperWharf,
-    noIndex: true,
+    noIndex: false,
     alternates: false
   });
 
   return (
     <div className="page draft-article-page">
-      <Header locale={locale} path={path} />
+      <Header locale={locale} path={path} languageSwitchHref="/en/blog" />
       <main>
         <article className="section-inner draft-article-shell">
           <header className="draft-article-header animate-slide-up">
-            <span className="draft-pill">レビュー中 / noindex</span>
+            <span className="draft-pill">生活費ノート</span>
             <p className="draft-article-kicker">SoraJPNZ Notes</p>
             <h1>{articleTitle}</h1>
             <p className="draft-article-lead">
-              NZは日本より時給が高く見えるので、「ちゃんと働けばそれなりに余裕があるのでは」と思いがちです。
+              NZは日本より時給が高く見えるので、「ちゃんと働けば、それなりに余裕があるのでは」と思いがちです。
             </p>
             <p className="draft-article-lead">
-              でも、実際にAucklandで生活していると、時給の高さだけで楽かどうかは決まりません。
+              でもAucklandでは、家賃、車、食費、貯金まで入れると、同じ時給でも月に残る金額はかなり変わります。時給だけを見ていると、実際の生活より少し余裕があるように見えてしまいます。
             </p>
             <p className="draft-article-lead">
-              家賃は週払いで見えるし、車があると便利だけど固定費は増えます。さらに、少しでも貯金したい、急な出費にも備えたいと考えると、月に残るお金の見え方はかなり変わります。
+              この記事では、Aucklandで単身、フラット生活、または子どものいないカップルとして暮らす場合に、月の余白をどう考えればよいか整理します。
             </p>
-            <p className="draft-article-lead">
-              この感覚を自分でも整理したくて、家賃・車・貯金目標まで入れて見られる <strong>NZ生活リアリティ計算機</strong> を作りました。
+            <p>
+              主に、ワーホリ、学生、Post-study visa、キャリア初期など、20代〜30代前半の生活を想定しています。
             </p>
-            <p className="draft-article-lead">
-              この記事では、Aucklandで単身または子どものいないカップルとして生活する日本語話者向けに、「実際に月いくら残るのか」を生活感ベースで整理します。
-            </p>
+            <div className="article-link-card">
+              <span className="article-link-label" style={{ display: 'inline-flex', alignItems: 'center', gap: 10 }}>
+                <img src={assets.logoMark} alt="" width="30" height="30" style={{ borderRadius: '50%' }} />
+                Soraメモ
+              </span>
+              <p>
+                Aucklandで暮らしていて感じるのは、時給より家賃と車の方が生活の余裕を左右することです。給料だけを見ると暮らせそうでも、固定費まで入れると見え方がかなり変わります。
+              </p>
+            </div>
+            <CalculatorCTA href={calculatorHref} buttonLabel="NZ生活リアリティ計算機を使ってみる" />
             <dl className="draft-article-meta" aria-label="記事メタ情報">
               {articleMeta.map((item) => (
                 <div key={item.label}>
@@ -217,6 +255,14 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 </div>
               ))}
             </dl>
+            <div className="article-link-card">
+              <span className="article-link-label">この記事でわかること</span>
+              <ul className="draft-check-list">
+                <li>Aucklandで生活費を考えるとき、どこからお金が消えやすいか</li>
+                <li>最低賃金やLiving Wageを見ても、それだけでは判断できない理由</li>
+                <li>家賃、車、食費、貯金を含めて、どのくらい現実的に見ればいいか</li>
+              </ul>
+            </div>
             <nav className="draft-inline-toc" aria-label="記事の目次">
               <span>目次</span>
               <ol>
@@ -230,35 +276,8 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
           </header>
 
           <div className="draft-article-body">
-            <section className="draft-article-chapter reveal-on-scroll" id="try-first">
-              <h2>先に、自分の数字でざっくり試してみる</h2>
-              <p>
-                時給、勤務時間、家賃、車の有無、貯金目標を入れると、Auckland生活で月にどれくらい残るかを、NZDと日本円の両方で確認できます。
-              </p>
-              <p>
-                この記事は、その数字をどう読めばいいかを整理するための補足です。読む前に一度触ってもいいし、読み終わってから自分の前提で試してもいいと思います。
-              </p>
-              <CalculatorCTA href={calculatorHref} buttonLabel="NZ生活リアリティ計算機を使ってみる" />
-            </section>
-
-            <section className="draft-article-chapter reveal-on-scroll" id="target-reader">
-              <h2>この記事で想定している読者</h2>
-              <p>
-                この記事は、家族移住や住宅購入を前提にしたものではありません。
-              </p>
-              <p>
-                主に、20代〜30代前半くらいで、ワーホリ、学生、Post-study、パートナー、キャリア初期の仕事をしながら、AucklandやNZでの生活を現実的に考えている人向けです。
-              </p>
-              <p>
-                ひとり暮らし、フラット生活、または子どものいないカップルの生活感に近い内容です。
-              </p>
-              <p>
-                永住権の取り方、税金の最適化、投資判断、高所得専門職向けの移住パッケージを説明する記事ではありません。
-              </p>
-            </section>
-
-            <section className="draft-article-chapter reveal-on-scroll" id="monthly-remaining">
-              <h2>時給より「月にいくら残るか」を見たい</h2>
+            <section className="draft-article-chapter" id="monthly-remaining">
+              <h2>Auckland生活費は、時給だけ見ると勘違いする</h2>
               <p>
                 日本から見ると、NZの時給は高く見えることがあります。
               </p>
@@ -279,10 +298,25 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 <li>毎月いくら貯金したいか</li>
                 <li>急な出費にどれくらい備えたいか</li>
               </ul>
+              <p>
+                時給を見るときは、Employment New Zealandの最低賃金や、Living Wage Movement Aotearoa New ZealandのLiving Wageも参考になります。
+              </p>
+              <p>
+                ただ、Auckland生活では時給だけで余裕があるかは判断しにくいです。勤務時間、家賃、車、貯金目標まで入れると、同じ時給でも月に残る金額はかなり変わります。
+              </p>
+              <p>
+                Employment New Zealandでは、2026年4月1日からadult minimum wageが <strong>${referenceWages.adultMinimum.toFixed(2)}/hour</strong>、starting-out/training minimum wageが <strong>$19.16/hour</strong> とされています（確認日: 2026-08-27）。
+              </p>
+              <p>
+                Living Wage Movement Aotearoa New Zealandでは、2025/26のLiving Wageが <strong>${referenceWages.livingWage.toFixed(2)}/hour</strong> とされています。2025年9月1日から適用されている値なので、2026年9月以降に読む場合は最新値を確認してください（確認日: 2026-08-27）。
+              </p>
+              <p>
+                正確な手取りは、税コード、KiwiSaver、student loan、控除、個人の状況で変わります。この記事の試算では生活感を見るために総収入の約{Math.round(roughTakeHomeRate * 100)}%を概算手取りとして使っていますが、正確な税額や手取りはIRD、給与明細、または専門家で確認する前提です。
+              </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="rent">
-              <h2>週の家賃差は、月に直すとかなり効く</h2>
+            <section className="draft-article-chapter" id="rent">
+              <h2>家賃でまず削られる</h2>
               <p>
                 NZでは家賃を週額で見ることが多いです。給与も fortnight、つまり2週間単位で出ることがあるので、日本の月給ベースの感覚とは少し違います。
               </p>
@@ -307,10 +341,13 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               <p>
                 Aucklandでは、家賃と移動のバランスを一緒に見る必要があります。
               </p>
+              <p>
+                家賃はAuckland全体で一つの数字にするより、エリアや部屋タイプごとに見た方が現実に近いです。相場を確認するときは、Tenancy ServicesのMarket Rentで対象期間、エリア、物件タイプを分けて見るようにしています。
+              </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="car">
-              <h2>車があると、自由度と固定費が一緒に増える</h2>
+            <section className="draft-article-chapter" id="car">
+              <h2>車を持つと、自由度と固定費が増える</h2>
               <p>
                 Aucklandで車があると、かなり動きやすくなります。仕事探し、買い物、郊外への移動、海や釣りに行くことも楽になります。
               </p>
@@ -328,7 +365,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="sora-sense">
+            <section className="draft-article-chapter" id="sora-sense">
               <h2>私が生活費を見るときに気にしていること</h2>
               <p>
                 私自身も、Aucklandで生活していて「収入がいくらか」だけでは生活の余裕は判断できないと感じています。
@@ -369,8 +406,8 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               */}
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="jpy-reference">
-              <h2>日本円で見ると、生活費の重さがつかみやすい</h2>
+            <section className="draft-article-chapter" id="jpy-reference">
+              <h2>日本円で考えると、生活費の見え方が変わる</h2>
               <p>
                 日本語でNZ生活を考えるとき、NZDだけだと感覚がつかみにくいことがあります。
               </p>
@@ -381,7 +418,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 SoraJPNZの計算機では、NZDの金額に加えて、日本円の参考換算も表示できます。
               </p>
               <p>
-                為替レートは取得できる場合は自動で表示し、必要に応じて手動で変更できます。
+                為替レートは取得できる場合はFrankfurterのNZD/JPY参考レートを使って自動で表示し、必要に応じて手動で変更できます（確認日: 2026-08-27）。
               </p>
               <p>
                 ただし、日本円換算はあくまで生活感をつかむための参考表示です。
@@ -391,8 +428,8 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="savings">
-              <h2>貯金目標と緊急資金を入れると、見え方が変わる</h2>
+            <section className="draft-article-chapter" id="savings">
+              <h2>貯金できるかは、給料より固定費でほぼ決まる</h2>
               <p>
                 生活費を払えているだけなら、表面上は「生活できている」ように見えます。
               </p>
@@ -407,38 +444,37 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="scenarios">
-              <h2>例としての試算</h2>
+            <section className="draft-article-chapter" id="scenarios">
+              <h2>3つの生活費試算</h2>
               <p>
                 以下は、公式データではなく、SoraJPNZの計算機MVPを使った説明用の例です。おすすめの生活パターンではありません。
               </p>
               <p>
                 見たいのは、「どの生活が正解か」ではなく、家賃、勤務時間、車の有無が変わると、月に残る金額がどれくらい動くかです。
               </p>
+              <p>
+                説明用の時給には、確認日時点で適用されている2025/26 Living Wageの <strong>${referenceWages.livingWage.toFixed(2)}/hour</strong> を使っています（確認日: 2026-08-27）。月収は計算機と同じく、総収入の約{Math.round(roughTakeHomeRate * 100)}%を概算手取りとして扱った値です。
+              </p>
               <div className="article-scenario-notes">
-                {scenarios.map((scenario, index) => {
-                  const display = scenarioDisplayValues[index];
-
-                  return (
+                {scenarios.map((scenario) => (
                   <section key={scenario.title}>
                     <h3>{scenario.title}</h3>
                     <p>{scenario.body}</p>
                     <ul>
-                      <li>計算用月収: {display.income}</li>
-                      <li>月の生活費: {display.expenses}</li>
-                      <li>月の残り: {display.remaining}</li>
+                      <li>概算手取り月収: {formatCurrency(scenario.result.monthlyIncomeUsedForCalculation)}</li>
+                      <li>月の生活費: {formatCurrency(scenario.result.monthlyExpenses)}</li>
+                      <li>月の残り: {formatCurrency(scenario.result.monthlyRemaining)}</li>
                     </ul>
                   </section>
-                  );
-                })}
+                ))}
               </div>
               <p>
                 この3つを見るだけでも、生活費の問題は「時給が高いか低いか」だけでは決まらないことが分かります。
               </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="calculator">
-              <h2>ここまで読んだら、自分の条件でも一度試してみる</h2>
+            <section className="draft-article-chapter" id="calculator">
+              <h2>結局、Aucklandで暮らせるかは「残るお金」で決まる</h2>
               <p>
                 Auckland生活がきついかどうかは、人によってかなり違います。
               </p>
@@ -454,7 +490,31 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               <CalculatorCTA href={calculatorHref} buttonLabel="自分の前提で試算してみる" />
             </section>
 
-            <section className="draft-article-callout warning reveal-on-scroll" id="notes">
+            <section className="draft-article-chapter" id="sora-conclusion">
+              <div className="article-link-card">
+                <span className="article-link-label">Soraの結論</span>
+                <p>
+                  Aucklandで生活費を考えるなら、時給よりも先に「家賃・車・食費・送金・貯金」を見た方がいいです。最低賃金やLiving Wageは参考になりますが、実際に余るかどうかは固定費でほぼ決まります。
+                </p>
+                <p>
+                  「給料はいくらか」だけで判断すると、現実より少し甘く見えます。Aucklandでは、稼ぐ力と同じくらい、生活を小さく作る力も大事です。
+                </p>
+              </div>
+            </section>
+
+            <section className="draft-article-chapter" id="sources">
+              <h2>参考にした公式情報</h2>
+              <p>
+                最低賃金、Living Wage、家賃、為替などは、以下の情報を参考にしています。数字は時期や条件によって変わるため、公開時点の確認日と対象期間を併記しています。
+              </p>
+              <div className="article-reference-grid">
+                {sourceReferences.map((reference) => (
+                  <ReferenceCard key={reference.title} {...reference} />
+                ))}
+              </div>
+            </section>
+
+            <section className="draft-article-callout warning" id="notes">
               <h2>注意事項</h2>
               <p>
                 この記事は、NZ生活を考えるための個人的なフィールドノートです。
@@ -463,11 +523,14 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 移民、ビザ、税金、雇用、法律、金融、投資の助言ではありません。
               </p>
               <p>
+                家族移住、住宅購入、高所得専門職向けの生活設計を扱う記事でもありません。
+              </p>
+              <p>
                 実際の判断には、New Zealand政府、IRD、INZ、その他の公式情報、または資格を持つ専門家の情報を確認してください。
               </p>
             </section>
 
-            <section className="draft-article-chapter reveal-on-scroll" id="next">
+            <section className="draft-article-chapter" id="next">
               <h2>次にまとめたいこと</h2>
               <p>このテーマは、まだ整理したいことがいくつかあります。</p>
               <ul className="draft-check-list">
@@ -477,7 +540,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </ul>
             </section>
 
-            <section className="draft-article-continue reveal-on-scroll">
+            <section className="draft-article-continue">
               <h2>SoraJPNZで続けて読む</h2>
               <p>
                 生活費の数字だけでなく、実際の生活メモ、データプロジェクト、動画で話した内容も少しずつ整理していきます。
@@ -505,12 +568,12 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
               </div>
             </section>
             {/*
-              Internal publishing checklist before linking this article publicly:
-              - Confirm latest minimum wage and effective date from official sources.
-              - Confirm Living Wage values and explanation if referenced.
+              Internal maintenance checklist:
+              - Reconfirm the Living Wage value on or after 2026-09-01.
+              - Reconfirm the latest minimum wage and effective date from Employment New Zealand.
               - Confirm INZ wage thresholds before mentioning visa-related income rules.
               - Confirm IRD/take-home calculation guidance before discussing net pay.
-              - Confirm rent data with Stats NZ, MBIE, or Tenancy Services if adding market figures.
+              - Confirm rent data with Tenancy Services Market Rent / rental bond data if adding market figures.
               - Reconfirm NZD/JPY reference conversion source and manual override behavior.
             */}
           </div>
