@@ -3,7 +3,6 @@ import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
 import { assets, common, home, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
-import { referenceWages } from '../lib/nzLifeRealityCalculator';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
 
@@ -21,7 +20,6 @@ export function Home({ locale, path }: HomeProps) {
   const visibleSocialChannels = socialLinks.filter((channel) => channel.href && channel.showOnHome);
   const primarySocial = visibleSocialChannels.find((channel) => channel.id === 'youtube');
   const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
-  const featuredTool = h.featuredTool;
   const primaryRel = h.primaryExternal ? 'noopener noreferrer' : undefined;
 
   useReveal(`${locale}:${path}`);
@@ -61,44 +59,32 @@ export function Home({ locale, path }: HomeProps) {
                 </a>
               </div>
             </div>
-            <div className="hero-proof-panel" aria-label={locale === 'ja' ? 'SoraJPNZで使える入口' : 'SoraJPNZ entry points'}>
-              <article className="hero-proof-card calculator-proof-card">
-                <span className="proof-label">{locale === 'ja' ? '表示例' : 'Example'}</span>
-                <strong>{locale === 'ja' ? '月の余白を見る' : 'Check monthly room'}</strong>
-                <div className="proof-metrics" aria-hidden="true">
-                  <span>
-                    <small>{locale === 'ja' ? '時給' : 'Wage'}</small>
-                    <b>${referenceWages.livingWage.toFixed(2)}</b>
-                  </span>
-                  <span>
-                    <small>{locale === 'ja' ? '家賃' : 'Rent'}</small>
-                    <b>$320/w</b>
-                  </span>
-                  <span>
-                    <small>{locale === 'ja' ? '月の残り' : 'Left monthly'}</small>
-                    <b>$1,440</b>
-                  </span>
-                </div>
-                <p>{locale === 'ja' ? 'NZD / 約¥参考表示つき' : 'NZD / approximate JPY reference'}</p>
-              </article>
-
-              <a className="hero-proof-card notes-proof-card" href={`${base}/blog`}>
-                <span className="proof-label">Notes</span>
-                <strong>{locale === 'ja' ? '生活費・仕事・お金のメモ' : 'Life, work, and money notes'}</strong>
-                <p>{locale === 'ja' ? '読んで考え直せる形に整理。' : 'Organized so the ideas can be revisited.'}</p>
-              </a>
-
-              <figure className="hero-proof-photo">
-                <img src={assets.blogOceanFloat} alt="" loading="lazy" decoding="async" />
-                <figcaption>{locale === 'ja' ? 'Aucklandの海も、生活の文脈として。' : 'Auckland ocean life as lived context.'}</figcaption>
+            <aside className="home-context-panel" aria-label={locale === 'ja' ? 'SoraJPNZについて' : 'About SoraJPNZ'}>
+              <figure className="home-context-photo">
+                <img
+                  src={assets.aucklandHarbour}
+                  alt={locale === 'ja' ? '海越しに見たAucklandの街並み' : 'Auckland skyline seen across the harbour'}
+                  decoding="async"
+                />
+                <figcaption>{h.heroContextCaption}</figcaption>
               </figure>
-            </div>
+              <div className="home-context-copy">
+                <p className="eyebrow">{h.heroContextEyebrow}</p>
+                <h2>{h.heroContextTitle}</h2>
+                <p>{h.heroContextBody}</p>
+                <ul className="home-context-paths" aria-label={locale === 'ja' ? '主なコンテンツ' : 'Main content formats'}>
+                  <li>Notes</li>
+                  <li>Tools</li>
+                  <li>Projects</li>
+                </ul>
+              </div>
+            </aside>
           </div>
         </section>
 
         <section className="content-section services-section home-entry-section">
           <div className="section-inner">
-            <div className="section-heading reveal-on-scroll">
+            <div className="section-heading">
               <p className="eyebrow">{h.servicesEyebrow}</p>
               <h2>{h.servicesTitle}</h2>
               <p>{h.servicesSubtitle}</p>
@@ -132,65 +118,6 @@ export function Home({ locale, path }: HomeProps) {
                 <span>{h.servicesCta}</span>
                 <i className="ri-arrow-right-line" />
               </a>
-            </div>
-          </div>
-        </section>
-
-        {featuredTool && (
-          <section className="content-section home-tool-section" aria-labelledby="home-featured-tool-title">
-            <div className="section-inner">
-              <article className="home-tool-card">
-                <div className="home-tool-copy">
-                  <p className="eyebrow">{featuredTool.eyebrow}</p>
-                  <h2 id="home-featured-tool-title">{featuredTool.title}</h2>
-                  <p>{featuredTool.body}</p>
-                  <p className="home-tool-disclaimer">{featuredTool.disclaimer}</p>
-                  <a className="button primary" href={featuredTool.href}>
-                    <span>{featuredTool.cta}</span>
-                    <i className="ri-calculator-line" />
-                  </a>
-                </div>
-                <div className="calculator-preview-card" aria-hidden="true">
-                  <div className="calculator-preview-top">
-                    <span className="calculator-preview-sample-label">{locale === 'ja' ? '表示例' : 'Example'}</span>
-                    <span>NZD / JPY ref.</span>
-                  </div>
-                  <div className="calculator-preview-row">
-                    <small>{locale === 'ja' ? '時給' : 'Wage'}</small>
-                    <strong>${referenceWages.livingWage.toFixed(2)}</strong>
-                  </div>
-                  <div className="calculator-preview-row">
-                    <small>{locale === 'ja' ? '家賃' : 'Rent'}</small>
-                    <strong>$320/w</strong>
-                  </div>
-                  <div className="calculator-preview-row">
-                    <small>{locale === 'ja' ? '車コスト' : 'Car costs'}</small>
-                    <strong>$420/mo</strong>
-                  </div>
-                  <div className="calculator-preview-result">
-                    <small>{locale === 'ja' ? '月の残り' : 'Monthly room'}</small>
-                    <strong>$1,440</strong>
-                    <span>{locale === 'ja' ? '約¥129,600' : 'approx. ¥129,600'}</span>
-                  </div>
-                </div>
-              </article>
-            </div>
-          </section>
-        )}
-
-        <section className="content-section trust-section">
-          <div className="section-inner">
-            <div className="section-heading reveal-on-scroll">
-              <p className="eyebrow">{h.trustEyebrow}</p>
-              <h2>{h.trustTitle}</h2>
-            </div>
-            <div className="trust-grid">
-              {h.trustItems.map((item) => (
-                <article className="trust-card reveal-on-scroll" key={item.title}>
-                  <h3>{item.title}</h3>
-                  <p>{item.body}</p>
-                </article>
-              ))}
             </div>
           </div>
         </section>
@@ -244,6 +171,27 @@ export function Home({ locale, path }: HomeProps) {
                 <i className="ri-arrow-right-line" />
               </a>
             </div>
+          </div>
+        </section>
+
+        <section className="content-section trust-section home-principles-section">
+          <div className="section-inner home-principles">
+            <div className="home-principles-heading">
+              <p className="eyebrow">{h.trustEyebrow}</p>
+              <h2>{h.trustTitle}</h2>
+              <p>{h.trustIntro}</p>
+            </div>
+            <ol className="home-principles-list">
+              {h.trustItems.map((item, index) => (
+                <li key={item.title}>
+                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                  <div>
+                    <h3>{item.title}</h3>
+                    <p>{item.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
           </div>
         </section>
 

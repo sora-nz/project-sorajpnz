@@ -275,12 +275,12 @@ export const seo = {
 
 export const home = {
   en: {
-    title: 'Start with the numbers behind New Zealand life.',
+    title: 'Make New Zealand life decisions with data and lived experience.',
     role: '',
     tagline:
-      'When you live in Auckland, a good hourly wage can still feel different once rent, transport, car costs, and savings goals are included. SoraJPNZ keeps those questions in tools, notes, and small projects that can be revisited later.',
+      'SoraJPNZ organizes practical questions about living costs, work, money, Japan comparisons, and everyday life in New Zealand.',
     description:
-      'A place to move between numbers and lived experience without pretending either one is the whole answer.',
+      'Notes, tools, and data projects from Auckland, built without pretending there is one answer for everyone.',
     primaryCta: 'Read SoraJPNZ Notes',
     primaryHref: '/en/blog',
     primaryExternal: false,
@@ -288,6 +288,11 @@ export const home = {
     contactCta: 'View Projects',
     contactHref: '/en/projects',
     contactIcon: 'ri-folder-chart-line',
+    heroContextEyebrow: 'From Auckland',
+    heroContextTitle: 'Questions first. Useful forms second.',
+    heroContextBody:
+      'A question may become a note, a calculator, or a data project. Ocean and outdoor records stay as part of the life behind the work.',
+    heroContextCaption: 'Auckland life is the context, not a sales story.',
     socialEyebrow: 'Social Channels',
     socialTitle: 'Follow the journey',
     socialSubtitle:
@@ -324,9 +329,10 @@ export const home = {
         image: assets.blogOceanFloat
       }
     ],
-    featuredTool: null,
     trustEyebrow: 'How this site works',
     trustTitle: 'Careful by design',
+    trustIntro:
+      'The aim is to make decisions easier to examine, not to turn one person\'s experience into a universal answer.',
     trustItems: [
       {
         title: 'Read numbers with their assumptions',
@@ -359,19 +365,24 @@ export const home = {
       'For hiring, interviews, collaborations, portfolio feedback, or small project conversations, please get in touch.'
   },
   ja: {
-    title: 'NZ生活、月にいくら残るかから考える。',
+    title: 'NZ生活の選択を、数字と実体験で現実的に考える。',
     role: '',
     tagline:
-      'Aucklandで暮らしていると、時給が高く見えても、家賃・車・貯金まで入れると月に残るお金は思ったより変わります。SoraJPNZでは、計算機・Notes・Projectsを使って、NZ生活で迷ったことをあとから見返せる形で残しています。',
+      '生活費、仕事、お金、日本との違い、海のある暮らし。Aucklandで迷ったことを、Notes・Tools・Projectsとして整理しています。',
     description:
-      '数字と実体験を行き来しながら、現実的に考えるための場所です。',
-    primaryCta: '生活費を試算する',
-    primaryHref: '/ja/tools/nz-life-reality-calculator',
+      '答えを決めつけるのではなく、数字と実体験を行き来しながら考えるための場所です。',
+    primaryCta: 'SoraJPNZ Notesを見る',
+    primaryHref: '/ja/blog',
     primaryExternal: false,
-    primaryIcon: 'ri-calculator-line',
-    contactCta: 'Notesを読む',
-    contactHref: '/ja/blog',
-    contactIcon: 'ri-article-line',
+    primaryIcon: 'ri-article-line',
+    contactCta: '生活費を試算する',
+    contactHref: '/ja/tools/nz-life-reality-calculator',
+    contactIcon: 'ri-calculator-line',
+    heroContextEyebrow: 'Aucklandから',
+    heroContextTitle: '迷ったことを、使える形に残す。',
+    heroContextBody:
+      '気になったことを文章で整理し、数字で試し、必要なら小さなプロジェクトにします。海での記録も、その生活の背景として残します。',
+    heroContextCaption: 'Aucklandで暮らしながら考えていること。',
     socialEyebrow: 'Social Channels',
     socialTitle: '発信をフォローする',
     socialSubtitle:
@@ -386,18 +397,18 @@ export const home = {
     servicesCta: '軽いサポート内容を見る',
     services: [
       {
-        icon: 'ri-calculator-line',
-        title: '生活費を試算する',
-        body: '時給・勤務時間・家賃・車コストを入れて、月にどれくらい残るかをざっくり見ます。',
-        href: '/ja/tools/nz-life-reality-calculator',
-        cta: '計算機を使う'
-      },
-      {
         icon: 'ri-article-line',
         title: 'Notesを読む',
         body: 'NZ生活費、仕事、お金、日本との比較、海での記録を、あとから読み返せる形で残しています。',
         href: '/ja/blog',
         cta: 'Notes Hubを見る'
+      },
+      {
+        icon: 'ri-calculator-line',
+        title: '生活費を試算する',
+        body: '時給・勤務時間・家賃・車コストを入れて、月にどれくらい残るかをざっくり見ます。',
+        href: '/ja/tools/nz-life-reality-calculator',
+        cta: '計算機を使う'
       },
       {
         icon: 'ri-folder-chart-line',
@@ -407,16 +418,10 @@ export const home = {
         cta: 'プロジェクトを見る'
       }
     ],
-    featuredTool: {
-      eyebrow: 'Practical Tool',
-      title: 'NZ生活リアリティ計算機',
-      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れて、月にどれくらい残るかをNZDと日本円の両方で見られます。',
-      disclaimer: '概算ツールです。ビザ・税務・投資・就職の助言ではありません。',
-      cta: '計算してみる',
-      href: '/ja/tools/nz-life-reality-calculator'
-    },
     trustEyebrow: 'Careful Notes',
     trustTitle: 'このサイトで大事にしていること',
+    trustIntro:
+      '一人の体験を正解にせず、どの前提で考えたのかが分かる形で残します。',
     trustItems: [
       {
         title: '数字は、前提と一緒に見る',
@@ -427,8 +432,8 @@ export const home = {
         body: '生活感は大事にしつつ、それだけで全員に当てはまる話にはしません。'
       },
       {
-        title: 'ビザ・税金・投資は、公式情報と専門家確認を前提にする',
-        body: 'SoraJPNZでは判断材料として整理します。助言が必要な内容は、公式情報や専門家確認を前提にします。'
+        title: '公式情報と、個人の経験を分ける',
+        body: 'ビザ・税金・投資などは判断材料まで。必要な内容は公式情報や専門家確認を前提にします。'
       }
     ],
     fieldNotesEyebrow: 'Field Notes',
