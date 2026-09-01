@@ -56,7 +56,7 @@ export const monthlyFactor = 52 / 12;
 export const roughTakeHomeRate = 0.82;
 export const referenceWages = {
   adultMinimum: 23.95,
-  livingWage: 28.95
+  livingWage: 29.9
 } as const;
 
 export const defaultNzLifeInputs: CalculatorInputs = {

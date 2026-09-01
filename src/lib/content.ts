@@ -12,6 +12,8 @@ export const assets = {
   westCoastRocks: '/assets/home/west-coast-rocks.jpg',
   dashboard: '/assets/nz-relocation-dashboard.png',
   rentRadar: '/assets/rentradar.png',
+  calculator: '/assets/nz-life-reality-calculator.png',
+  calculatorJa: '/assets/nz-life-reality-calculator-ja.png',
   avatar: '/assets/sora-avatar.png',
   blogHero: '/assets/blog/thea-fishing-rocks.jpg',
   blogOceanFloat: '/assets/blog/ocean-float.jpg',
@@ -657,6 +659,12 @@ export const projects = {
     subtitle:
       'Practical projects that connect public data, New Zealand life, content experiments, and analytics into something useful.',
     featured: 'Featured',
+    calculatorBadge: 'Interactive tool',
+    calculatorTitle: 'NZ Life Reality Calculator',
+    calculatorDescription:
+      'A browser-based decision-support tool for testing how hourly wage, work hours, weekly rent, car costs, savings goals, and emergency-buffer assumptions affect the estimated amount left each month in NZD and approximate JPY.',
+    calculatorTags: ['React', 'TypeScript', 'Decision Support', 'Business Analysis', 'Browser-side'],
+    calculatorAction: 'Try the calculator',
     relocationTitle: 'New Zealand Relocation Affordability Dashboard',
     relocationDescription:
       'An end-to-end public-data dashboard combining MBIE/Tenancy Services rent data, RBNZ NZD/JPY exchange rates, and Stats NZ Food Price Index data to support relocation affordability comparison for Japanese-speaking users considering New Zealand.',
@@ -670,6 +678,12 @@ export const projects = {
     subtitle:
       '公的データ、NZ生活、発信活動、分析の実験を、あとから使える形にしていくプロジェクトです。',
     featured: '注目',
+    calculatorBadge: '実用ツール',
+    calculatorTitle: 'NZ生活リアリティ計算機',
+    calculatorDescription:
+      '時給、勤務時間、週家賃、車コスト、貯金目標、緊急資金の前提を動かし、月の余白をNZDと日本円の参考換算で確認できるブラウザ上の意思決定支援ツールです。',
+    calculatorTags: ['React', 'TypeScript', '意思決定支援', '業務分析', 'ブラウザ計算'],
+    calculatorAction: '計算機を使う',
     relocationTitle: 'ニュージーランド移住向け 家賃負担ダッシュボード',
     relocationDescription:
       'MBIE/Tenancy Servicesの家賃データ、RBNZのNZD/JPY為替レート、Stats NZのFood Price Indexを組み合わせ、ニュージーランド移住を検討する日本語話者向けに、移住に向けた家賃負担の比較を支援する公的データダッシュボードです。',

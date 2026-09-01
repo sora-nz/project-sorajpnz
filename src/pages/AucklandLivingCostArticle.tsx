@@ -23,7 +23,7 @@ const articleDescription =
 
 const articleMeta = [
   { label: '作成日', value: '2026-07-04' },
-  { label: '最終更新日', value: '2026-08-28' },
+  { label: '最終更新日', value: '2026-09-01' },
   { label: '状態', value: '公開記事' }
 ];
 
@@ -113,8 +113,8 @@ const sourceReferences = [
   {
     title: 'Living Wage',
     source: 'Living Wage Movement Aotearoa New Zealand',
-    url: 'https://www.livingwage.org.nz/lw25',
-    note: '2025/26 Living Wageは$28.95/hour。2025年9月1日から適用されている値で、2026年9月以降は再確認が必要。確認日: 2026-08-27。'
+    url: 'https://www.livingwage.org.nz/lwr_faq',
+    note: '2026/27 Living Wageは$29.90/hour。2026年9月1日から適用される任意基準で、法定最低賃金とは異なる。確認日: 2026-09-01。'
   },
   {
     title: '税金・手取り確認',
@@ -317,7 +317,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 Employment New Zealandでは、2026年4月1日からadult minimum wageが <strong>${referenceWages.adultMinimum.toFixed(2)}/hour</strong>、starting-out/training minimum wageが <strong>$19.16/hour</strong> とされています（確認日: 2026-08-27）。
               </p>
               <p>
-                Living Wage Movement Aotearoa New Zealandでは、2025/26のLiving Wageが <strong>${referenceWages.livingWage.toFixed(2)}/hour</strong> とされています。2025年9月1日から適用されている値なので、2026年9月以降に読む場合は最新値を確認してください（確認日: 2026-08-27）。
+                Living Wage Movement Aotearoa New Zealandでは、2026/27のLiving Wageが <strong>${referenceWages.livingWage.toFixed(2)}/hour</strong> とされています。2026年9月1日から適用される任意基準で、法定最低賃金とは異なります（確認日: 2026-09-01）。
               </p>
               <p>
                 正確な手取りは、税コード、KiwiSaver、student loan、控除、個人の状況で変わります。この記事の試算では生活感を見るために総収入の約{Math.round(roughTakeHomeRate * 100)}%を概算手取りとして使っていますが、正確な税額や手取りはIRD、給与明細、または専門家で確認する前提です。
@@ -462,7 +462,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
                 見たいのは、「どの生活が正解か」ではなく、家賃、勤務時間、車の有無が変わると、月に残る金額がどれくらい動くかです。
               </p>
               <p>
-                説明用の時給には、確認日時点で適用されている2025/26 Living Wageの <strong>${referenceWages.livingWage.toFixed(2)}/hour</strong> を使っています（確認日: 2026-08-27）。月収は計算機と同じく、総収入の約{Math.round(roughTakeHomeRate * 100)}%を概算手取りとして扱った値です。
+                説明用の時給には、2026年9月1日から適用される2026/27 Living Wageの <strong>${referenceWages.livingWage.toFixed(2)}/hour</strong> を使っています（確認日: 2026-09-01）。月収は計算機と同じく、総収入の約{Math.round(roughTakeHomeRate * 100)}%を概算手取りとして扱った値です。
               </p>
               <div className="article-scenario-notes">
                 {scenarios.map((scenario) => (
@@ -578,7 +578,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
             </section>
             {/*
               Internal maintenance checklist:
-              - Reconfirm the Living Wage value on or after 2026-09-01.
+              - Reconfirm the Living Wage value after the next annual announcement.
               - Reconfirm the latest minimum wage and effective date from Employment New Zealand.
               - Confirm INZ wage thresholds before mentioning visa-related income rules.
               - Confirm IRD/take-home calculation guidance before discussing net pay.
