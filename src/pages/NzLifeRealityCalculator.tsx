@@ -343,7 +343,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
       label: t('最低賃金（2026年4月〜）', 'Adult minimum wage (from April 2026)'),
       value: referenceWages.adultMinimum
     },
-    { label: 'Living Wage 2025/26', value: referenceWages.livingWage },
+    { label: 'Living Wage 2026/27', value: referenceWages.livingWage },
     { label: t('30ドル', '$30'), value: 30 },
     { label: t('35ドル', '$35'), value: 35 }
   ];
