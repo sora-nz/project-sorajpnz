@@ -41,6 +41,15 @@ export function Projects({ locale, path }: ProjectsProps) {
         <section className="content-section">
           <div className="section-inner project-grid">
             <ProjectCard
+              image={locale === 'ja' ? assets.calculatorJa : assets.calculator}
+              title={p.calculatorTitle}
+              description={p.calculatorDescription}
+              tags={p.calculatorTags}
+              href={`${base}/tools/nz-life-reality-calculator`}
+              action={p.calculatorAction}
+              featured={p.calculatorBadge}
+            />
+            <ProjectCard
               image={assets.dashboard}
               title={p.relocationTitle}
               description={p.relocationDescription}

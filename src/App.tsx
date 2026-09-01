@@ -72,7 +72,7 @@ export function App() {
   if (key === '/privacy') return <LegalPage locale={locale} path={path} kind="privacy" />;
   if (key === '/terms') return <LegalPage locale={locale} path={path} kind="terms" />;
   if (key === '/disclaimer') return <LegalPage locale={locale} path={path} kind="disclaimer" />;
-  if (locale === 'ja' && key === '/tools/nz-life-reality-calculator') {
+  if (key === '/tools/nz-life-reality-calculator') {
     return <NzLifeRealityCalculator locale={locale} path={path} />;
   }
 
