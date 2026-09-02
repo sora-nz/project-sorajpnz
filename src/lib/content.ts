@@ -191,9 +191,9 @@ export const common = {
 export const seo = {
   en: {
     home: {
-      title: 'SoraJPNZ | New Zealand Life Decisions, Notes, and Data Projects',
+      title: 'SoraJPNZ | Business Systems, Data, and Decision-Support Projects',
       description:
-        'SoraJPNZ helps connect New Zealand life, work, money, field notes, and practical data projects through clear notes and lived experience.'
+        'Auckland-based portfolio by Sora Oya, showing practical business analysis, data, AI-enabled process improvement, and decision-support tools built from real New Zealand questions.'
     },
     services: {
       title: 'Services | SoraJPNZ',
@@ -277,24 +277,24 @@ export const seo = {
 
 export const home = {
   en: {
-    title: 'Make New Zealand life decisions with data and lived experience.',
+    title: 'Practical systems and data work, grounded in real New Zealand questions.',
     role: '',
     tagline:
-      'SoraJPNZ organizes practical questions about living costs, work, money, Japan comparisons, and everyday life in New Zealand.',
+      'SoraJPNZ is my Auckland-based portfolio for business analysis, data, AI-enabled process improvement, and decision-support tools.',
     description:
-      'Notes, tools, and data projects from Auckland, built without pretending there is one answer for everyone.',
-    primaryCta: 'Read SoraJPNZ Notes',
-    primaryHref: '/en/blog',
+      'I use real questions about living costs, rent, work, and everyday decisions to show how I structure problems, make assumptions visible, and build useful outputs.',
+    primaryCta: 'Try the NZ Life Reality Calculator',
+    primaryHref: '/en/tools/nz-life-reality-calculator',
     primaryExternal: false,
-    primaryIcon: 'ri-article-line',
+    primaryIcon: 'ri-calculator-line',
     contactCta: 'View Projects',
     contactHref: '/en/projects',
     contactIcon: 'ri-folder-chart-line',
-    heroContextEyebrow: 'From Auckland',
-    heroContextTitle: 'Questions first. Useful forms second.',
+    heroContextEyebrow: 'How I work',
+    heroContextTitle: 'From an unclear question to something people can use.',
     heroContextBody:
-      'A question may become a note, a calculator, or a data project. Ocean and outdoor records stay as part of the life behind the work.',
-    heroContextCaption: 'Auckland life is the context, not a sales story.',
+      'Each project starts with a real decision or workflow problem, then moves through requirements, assumptions, data, and a working tool or dashboard.',
+    heroContextCaption: 'Auckland life provides the context. The work shows the method.',
     socialEyebrow: 'Social Channels',
     socialTitle: 'Follow the journey',
     socialSubtitle:
@@ -302,51 +302,50 @@ export const home = {
     socialPrimaryLabel: 'Main channel',
     socialSecondaryLabel: 'Short clips and updates',
     allLinksCta: 'Open all links',
-    servicesEyebrow: 'Start here',
-    servicesTitle: 'Start here',
+    servicesEyebrow: 'Explore the work',
+    servicesTitle: 'Start with something working',
     servicesSubtitle:
-      'If you are not sure where to start, begin with these entry points.',
-    servicesCta: 'See light support options',
+      'Try the calculator first, then review the projects and notes behind the approach.',
+    servicesCta: 'See collaboration and support',
     services: [
       {
-        icon: 'ri-article-line',
-        title: 'Read the Notes',
-        body: 'Living costs, work, money, Japan comparisons, and ocean notes are kept in a form that is easy to return to.',
-        href: '/en/blog',
-        cta: 'Open Notes'
+        icon: 'ri-calculator-line',
+        title: 'Try the NZ Life Reality Calculator',
+        body: 'Adjust wage, work hours, weekly rent, car costs, and savings goals to test a New Zealand living-cost scenario in NZD and approximate JPY.',
+        href: '/en/tools/nz-life-reality-calculator',
+        cta: 'Open the calculator'
       },
       {
         icon: 'ri-folder-chart-line',
-        title: 'Projects',
-        body: 'Calculators, dashboards, and small tools turn recurring questions into something you can test.',
+        title: 'Review the Projects',
+        body: 'Dashboards and decision-support tools show how I frame questions, document assumptions, and turn data into usable outputs.',
         href: '/en/projects',
         cta: 'View Projects'
       },
       {
-        icon: 'ri-compass-3-line',
-        title: 'Field Notes / Ocean Life',
-        body: 'Ocean days and local lessons stay as part of the lived context, not the whole identity of the site.',
+        icon: 'ri-article-line',
+        title: 'Read the Notes',
+        body: 'Longer notes explain the real context, trade-offs, and source checks behind the tools and projects.',
         href: '/en/blog',
-        cta: 'Read the Notes',
-        image: assets.blogOceanFloat
+        cta: 'Open Notes'
       }
     ],
-    trustEyebrow: 'How this site works',
-    trustTitle: 'Careful by design',
+    trustEyebrow: 'Working approach',
+    trustTitle: 'How I approach the work',
     trustIntro:
-      'The aim is to make decisions easier to examine, not to turn one person\'s experience into a universal answer.',
+      'The same habits run through the tools, dashboards, and notes on this site.',
     trustItems: [
       {
-        title: 'Read numbers with their assumptions',
-        body: 'Wage, hours, rent, transport, car costs, and savings goals are easier to understand when the assumptions stay visible.'
+        title: 'Structure the problem before choosing the tool',
+        body: 'I separate the decision, users, assumptions, constraints, and useful output before building.'
       },
       {
-        title: "Do not turn one person's experience into a rule",
-        body: 'Lived experience matters, but it should not be stretched into advice that claims to fit everyone.'
+        title: 'Make the data and limitations visible',
+        body: 'Sources, estimates, and gaps stay clear so a result can be questioned and improved.'
       },
       {
-        title: 'Keep formal advice separate',
-        body: 'SoraJPNZ organizes decision material. Visa, tax, employment, investment, and legal decisions still need official sources or qualified professionals.'
+        title: 'Build something practical, then iterate',
+        body: 'A small working calculator or dashboard creates a clearer basis for feedback than an abstract idea alone.'
       }
     ],
     fieldNotesEyebrow: 'Field Notes',
@@ -354,17 +353,17 @@ export const home = {
     fieldNotesBody:
       'Fishing, spearfishing, ocean conditions, tools, and local lessons also stay here. They capture the feeling of living in New Zealand that does not fit into numbers or work notes.',
     fieldNotesCta: 'Read Notes',
-    projectsTitle: 'Projects',
+    projectsTitle: 'Selected projects',
     projectsEyebrow: 'Proof of work',
     projectsIntro:
-      'Questions from Notes become small calculators, dashboards, and data projects that can be checked later.',
+      'These projects show how I turn ambiguous real-life questions into browser tools, public-data dashboards, and documented analysis.',
     projectsCta: 'Open Projects',
     aboutTitle: 'About Me',
     about:
-      'SoraJPNZ is a personal project I am building while living in New Zealand. I use my data analysis and dashboard experience to organize practical questions about life, work, money, and the small decisions that shape a long-term path here.',
+      'I am an Auckland-based analyst building toward Business Systems, Business Analysis, Data, and AI-enabled process improvement roles. SoraJPNZ is where I turn real questions into working tools, dashboards, and clear documentation while continuing to build my New Zealand career.',
     contactTitle: 'Contact',
     contact:
-      'For hiring, interviews, collaborations, portfolio feedback, or small project conversations, please get in touch.'
+      'For Business Systems Analyst, Business Analyst, Data Analyst, or AI and process-improvement opportunities, interviews, and project conversations, please get in touch.'
   },
   ja: {
     title: 'NZ生活の選択を、数字と実体験で現実的に考える。',
