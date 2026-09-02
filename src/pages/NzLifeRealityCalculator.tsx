@@ -418,7 +418,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
       '時給、勤務時間、家賃、車コスト、貯金目標を動かしながら、NZ生活の現実感と脆さを確認するSoraJPNZの試算ツールです。',
       'Test how wage, work hours, rent, car costs, savings goals, and an emergency buffer affect the realism of a New Zealand living setup.'
     ),
-    image: assets.projectsBg,
+    image: locale === 'ja' ? assets.calculatorJa : assets.calculator,
     noIndex: true
   });
 

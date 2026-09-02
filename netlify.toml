@@ -76,6 +76,18 @@
   status = 301
 
 [[redirects]]
+  from = "/en/tools/nz-life-reality-calculator"
+  to = "/en/tools/nz-life-reality-calculator/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
+  from = "/ja/tools/nz-life-reality-calculator"
+  to = "/ja/tools/nz-life-reality-calculator/index.html"
+  status = 200
+  force = true
+
+[[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200

@@ -92,15 +92,10 @@ export function Home({ locale, path }: HomeProps) {
             <div className="service-grid">
               {h.services.map((service) => (
                 <a
-                  className={`service-card home-entry-card reveal-on-scroll ${'image' in service ? 'has-image' : ''}`}
+                  className="service-card home-entry-card reveal-on-scroll"
                   href={service.href}
                   key={service.title}
                 >
-                  {'image' in service && (
-                    <span className="service-card-media" aria-hidden="true">
-                      <img src={service.image} alt="" loading="lazy" decoding="async" />
-                    </span>
-                  )}
                   <span className="service-icon" aria-hidden="true">
                     <i className={service.icon} />
                   </span>
@@ -130,6 +125,17 @@ export function Home({ locale, path }: HomeProps) {
               <p>{h.projectsIntro}</p>
             </div>
             <div className="project-grid">
+              {locale === 'en' && (
+                <ProjectCard
+                  image={assets.calculator}
+                  title={p.calculatorTitle}
+                  description={p.calculatorDescription}
+                  tags={p.calculatorTags}
+                  href={`${base}/tools/nz-life-reality-calculator`}
+                  action={p.calculatorAction}
+                  featured={p.calculatorBadge}
+                />
+              )}
               <ProjectCard
                 image={assets.dashboard}
                 title={p.relocationTitle}
