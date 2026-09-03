@@ -124,6 +124,17 @@ Tone should be:
 
 Japanese writing should be natural and readable. Do not make it sound like a direct machine translation from English. Prefer clear Japanese sentences over clever marketing copy.
 
+### Japanese Content Workflow
+
+For public-facing Japanese copy, articles, metadata, and tool explanations:
+
+1. Read `.agents/skills/sorajpnz-japanese/SKILL.md`.
+2. Read `docs/content/SORAJPNZ_JAPANESE_STYLE.md`.
+3. For articles, also read `docs/content/SORAJPNZ_EDITORIAL_WORKFLOW.md`.
+4. Use the upstream `natural-japanese` skill for a generic readability check when it is available.
+
+The order of priority is: verified facts and safety boundaries, the user's supplied wording and lived experience, the SoraJPNZ voice guide, then generic lint suggestions. Do not mechanically rewrite every sentence to satisfy a style checker. Preserve useful irregularity, personal details the user has approved, product names, source wording, and legal meaning.
+
 Sora is still building his own New Zealand career and long-term pathway. The site should not pretend he has already "made it." It should show a person thinking carefully, building useful tools, and documenting the process with evidence.
 
 Avoid:
@@ -190,4 +201,3 @@ Do not:
 - expose private personal details or exact sensitive locations
 - make large design changes when the request is for strategy, copy, or light iteration
 - push to `main` or merge PRs unless the user explicitly asks
-
