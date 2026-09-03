@@ -415,7 +415,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
     path,
     title: t('NZ生活リアリティ計算機 | SoraJPNZ', 'NZ Life Reality Calculator | SoraJPNZ'),
     description: t(
-      '時給、勤務時間、家賃、車コスト、貯金目標を動かしながら、NZ生活の現実感と脆さを確認するSoraJPNZの試算ツールです。',
+      '時給、勤務時間、家賃、車、貯金目標を入力し、NZ生活で月に残りそうな金額をNZDと日本円で試算するSoraJPNZの無料ツールです。',
       'Test how wage, work hours, rent, car costs, savings goals, and an emergency buffer affect the realism of a New Zealand living setup.'
     ),
     image: locale === 'ja' ? assets.calculatorJa : assets.calculator,
@@ -435,12 +435,12 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
             <p className="eyebrow">SoraJPNZ Tools</p>
             <h1>{t('NZ生活リアリティ計算機', 'NZ Life Reality Calculator')}</h1>
             <p>{t(
-              '時給、勤務時間、家賃、車コスト、貯金目標を動かしながら、ニュージーランド生活がどれくらい現実的か、どこが脆くなりやすいかを見るための試算ツールです。',
+              '時給、勤務時間、家賃、車、貯金目標を変えながら、NZ生活で月にいくら残りそうかを確認する概算ツールです。条件を変えると、余裕が少なくなるポイントも見えてきます。',
               'Adjust hourly wage, work hours, rent, car costs, and savings goals to see how realistic or fragile a New Zealand living setup may be.'
             )}</p>
             <div className="calculator-notice">
               {t(
-                'これは個人の判断を助ける概算メモです。税務、移民、雇用、法律、投資、金融の助言ではありません。',
+                '入力した数字から生活費の目安を出すもので、個別の税務、移民、雇用、法律、投資、金融の助言ではありません。',
                 'This is a rough decision-support estimate, not tax, immigration, employment, legal, investment, or financial advice.'
               )}
             </div>
@@ -451,10 +451,10 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
           <div className="section-inner calculator-layout">
             <form className="calculator-input-panel reveal-on-scroll" onSubmit={(event) => event.preventDefault()}>
               <div className="calculator-panel-heading">
-                <p className="eyebrow">Inputs</p>
-                <h2>{t('前提を動かす', 'Test your assumptions')}</h2>
+                <p className="eyebrow">{t('入力', 'Inputs')}</p>
+                <h2>{t('自分の数字を入れる', 'Test your assumptions')}</h2>
                 <p>{t(
-                  '数字はこのブラウザ上で試算するだけで、保存されません。最低賃金など制度上の数字は変わるため、必ず公式情報で確認してください。',
+                  '入力した数字はこのブラウザ内で計算し、保存しません。最低賃金など制度に関わる数字は変わるため、最新の公式情報も確認してください。',
                   'The numbers are calculated in this browser and are not stored. Wage rules and other official figures can change, so always check current official sources.'
                 )}</p>
               </div>
@@ -531,7 +531,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
               </fieldset>
 
               <fieldset className="calculator-fieldset">
-                <legend>{t('毎週かかる生活費', 'Weekly living costs')}</legend>
+                <legend>{t('週ごとの生活費', 'Weekly living costs')}</legend>
                 <RangeControl
                   testId="weekly-rent"
                   label={t('家賃', 'Weekly rent')}
@@ -621,7 +621,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
               </fieldset>
 
               <fieldset className="calculator-fieldset">
-                <legend>{t('毎月かかる固定費', 'Monthly fixed costs')}</legend>
+                <legend>{t('月ごとの固定費', 'Monthly fixed costs')}</legend>
                 <div className="calculator-nested-grid">
                   <RangeControl
                     testId="monthly-phone-internet"
@@ -687,7 +687,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                   step={1}
                   suffix={t('か月分', ' months')}
                   helper={t(
-                    '生活必需費を何か月分持っておきたいか。現在の貯金額は0として積み上げ期間を見ます。',
+                    '生活必需費を何か月分持っておきたいかを選びます。現在の緊急資金を0として、目標までの期間を試算します。',
                     'Choose how many months of essential costs you want to hold. Build time is estimated from zero current savings.'
                   )}
                   onChange={(value) => updateInput(setInputs, { emergencyBufferMonths: value })}
@@ -701,7 +701,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <strong>{statusLabels[locale][result.status]}</strong>
                 <p>
                   {t(
-                    `月の残りは ${formatCurrency(result.monthlyRemaining)} / ${formatReferenceJpy(result.monthlyRemaining)}。これは完成された判断ではなく、前提を動かすためのスタート地点です。`,
+                    `月に残る見込みは ${formatCurrency(result.monthlyRemaining)} / ${formatReferenceJpy(result.monthlyRemaining)} です。表示された判定は、入力した条件を比べるための目安です。`,
                     `The estimated amount left per month is ${formatCurrency(result.monthlyRemaining)} / ${formatReferenceJpy(result.monthlyRemaining)}. This is a starting point for testing assumptions, not a final answer.`
                   )}
                 </p>
@@ -711,42 +711,42 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <div className="calculator-fx-heading">
                   <h2>{t('日本円参考換算', 'JPY reference conversion')}</h2>
                   <p>{t(
-                    'NZDの金額を日本円でも感覚的に見たい場合の参考表示です。税務・会計・送金・投資判断には使わないでください。',
+                    'NZDだけでは金額の感覚がつかみにくいときの参考表示です。税務・会計・送金・投資の判断には使わないでください。',
                     'Use this only to understand the scale of NZD amounts in Japanese yen. Do not use it for tax, accounting, remittance, or investment decisions.'
                   )}</p>
                 </div>
                 <div className="calculator-fx-rate-card">
                   <span>
                     {rateStatus === 'loading'
-                      ? t('参考レートを取得中', 'Loading reference rate')
+                      ? t('参考レートを取得しています', 'Loading reference rate')
                       : rateStatus === 'success'
-                        ? t('取得した参考レート', 'Fetched reference rate')
+                        ? t('自動取得した参考レート', 'Fetched reference rate')
                         : rateStatus === 'manual'
-                          ? t('手入力の参考レート', 'Manual reference rate')
-                          : t('取得できなかったため手入力に切り替え', 'Rate unavailable: using manual fallback')}
+                          ? t('手動で設定した参考レート', 'Manual reference rate')
+                          : t('取得できなかったため、手動入力を使います', 'Rate unavailable: using manual fallback')}
                   </span>
                   <strong>1 NZD ≒ {formatNzdJpyRate(referenceRate)}</strong>
                   {rateSource && rateStatus === 'success' && (
                     <p>
-                      Source:{' '}
+                      {t('取得元', 'Source')}:{' '}
                       <a href={rateSource.sourceUrl} target="_blank" rel="noopener noreferrer">
                         {rateSource.source}
                       </a>
-                      {rateSource.date ? ` / Updated: ${rateSource.date}` : ''}
+                      {rateSource.date ? ` / ${t('更新日', 'Updated')}: ${rateSource.date}` : ''}
                     </p>
                   )}
                   {rateSource && rateStatus === 'manual' && (
                     <p>
-                      {t('取得参考', 'Fetched reference')}: 1 NZD ≒ {formatNzdJpyRate(rateSource.rate)} / Source:{' '}
+                      {t('自動取得したレート', 'Fetched reference')}: 1 NZD ≒ {formatNzdJpyRate(rateSource.rate)} / {t('取得元', 'Source')}:{' '}
                       <a href={rateSource.sourceUrl} target="_blank" rel="noopener noreferrer">
                         {rateSource.source}
                       </a>
-                      {rateSource.date ? ` / Updated: ${rateSource.date}` : ''}
+                      {rateSource.date ? ` / ${t('更新日', 'Updated')}: ${rateSource.date}` : ''}
                     </p>
                   )}
                 </div>
                 <label className="calculator-fx-input">
-                  <span>{t('手動で参考レートを上書き', 'Override the reference rate manually')}</span>
+                  <span>{t('参考レートを手動で変更する', 'Override the reference rate manually')}</span>
                   <span className="calculator-fx-input-row">
                     <span>1 NZD =</span>
                     <CalculatorNumberInput
@@ -763,7 +763,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 </label>
                 <p className="calculator-helper">
                   {t(
-                    '日本円換算は生活感をつかむための参考です。為替レートは変動します。税務・会計・送金・投資判断には使用しないでください。',
+                    '日本円表示は、生活費の大きさをつかむための参考です。為替は変動するため、税務・会計・送金・投資の判断には使わないでください。',
                     'The JPY conversion is a lifestyle reference only. Exchange rates change, so do not use it for tax, accounting, remittance, or investment decisions.'
                   )}
                 </p>
@@ -863,10 +863,10 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
         <section className="calculator-section soft">
           <div className="section-inner calculator-scenario-layout">
             <div className="section-heading left reveal-on-scroll">
-              <p className="eyebrow">Scenarios</p>
-              <h2>{t('前提を変えるとどうなるか', 'What changes when the assumptions change?')}</h2>
+              <p className="eyebrow">{t('比較', 'Scenarios')}</p>
+              <h2>{t('条件を変えると、残る金額はどう動くか', 'What changes when the assumptions change?')}</h2>
               <p>{t(
-                'ここでは「どの数字が効くか」を見るために、同じ生活費のまま時給、勤務時間、車コストだけを動かしています。手取り入力モードでも、時給・時間比較は概算手取り率で表示します。',
+                '生活費はそのままにして、時給、勤務時間、車コストだけを変えて比べます。手取りを直接入力している場合も、時給と勤務時間の比較には概算手取り率を使います。',
                 'These comparisons keep other living costs the same and change only wage, work hours, or car costs. Wage and hours scenarios use the rough take-home rate even when manual income mode is selected.'
               )}</p>
             </div>
@@ -882,34 +882,34 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
         <section className="calculator-section">
           <div className="section-inner calculator-insight-grid">
             <div className="calculator-insight-card reveal-on-scroll">
-              <p className="eyebrow">Levers</p>
-              <h2>{t('どこを変えると効くか', 'What moves the result?')}</h2>
+              <p className="eyebrow">{t('見直しポイント', 'Levers')}</p>
+              <h2>{t('どの数字が月の残りに効くか', 'What moves the result?')}</h2>
               <ul className="calculator-impact-list">
                 <li>
                   <strong>{t('時給 +$1', 'Hourly wage +$1')}</strong>
                   <span>{t(
-                    `月の手取り目安が約 ${formatCurrency(impacts.hourlyWageImpact)} 増える想定`,
+                    `時給が$1上がると、月の手取り目安は約 ${formatCurrency(impacts.hourlyWageImpact)} 増えます`,
                     `Indicative monthly take-home increases by about ${formatCurrency(impacts.hourlyWageImpact)}`
                   )}</span>
                 </li>
                 <li>
                   <strong>{t('週 +5時間', '+5 hours per week')}</strong>
                   <span>{t(
-                    `月の手取り目安が約 ${formatCurrency(impacts.fiveHoursImpact)} 増える想定`,
+                    `週の勤務が5時間増えると、月の手取り目安は約 ${formatCurrency(impacts.fiveHoursImpact)} 増えます`,
                     `Indicative monthly take-home increases by about ${formatCurrency(impacts.fiveHoursImpact)}`
                   )}</span>
                 </li>
                 <li>
                   <strong>{t('家賃 -$50/週', 'Rent -$50/week')}</strong>
                   <span>{t(
-                    `月の余力が約 ${formatCurrency(impacts.rentFiftyImpact)} 変わる想定`,
+                    `家賃が週$50下がると、月に残る金額は約 ${formatCurrency(impacts.rentFiftyImpact)} 増えます`,
                     `The amount left per month changes by about ${formatCurrency(impacts.rentFiftyImpact)}`
                   )}</span>
                 </li>
                 <li>
                   <strong>{t('車コスト', 'Car costs')}</strong>
                   <span>{t(
-                    `サンプルでは月に約 ${formatCurrency(impacts.carImpact)} の差になりやすい`,
+                    `今のサンプルでは、車の有無で月に約 ${formatCurrency(impacts.carImpact)} の差が出ます`,
                     `The sample car setup changes the monthly result by about ${formatCurrency(impacts.carImpact)}`
                   )}</span>
                 </li>
@@ -917,7 +917,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
             </div>
 
             <div className="calculator-disclaimer reveal-on-scroll">
-              <p className="eyebrow">Important</p>
+              <p className="eyebrow">{t('必ず確認してください', 'Important')}</p>
               <h2>{t('注意事項', 'Things to keep in mind')}</h2>
               <p>{t(
                 'この計算機は概算です。税務、移民、雇用、法律、金融、投資の助言ではありません。正確なPAYE、税コード、KiwiSaver、Student Loan、ACC、控除はIRDまたは資格のある専門家で確認してください。',
@@ -937,9 +937,9 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
 
         <section className="next-section calculator-next">
           <div className="section-inner next-inner">
-            <h2>{t('次に準備しているもの', 'What is next')}</h2>
+            <h2>{t('次に作りたいもの', 'What is next')}</h2>
             <p>{t(
-              '次は、NZ生活費テンプレートと仕事探し管理シートを準備中です。',
+              'NZ生活費のテンプレートと、仕事探しを記録するシートを検討しています。',
               'A New Zealand living-cost template and job-search tracker are planned next.'
             )}</p>
             <div className="button-row left">

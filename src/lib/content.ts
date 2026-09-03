@@ -235,7 +235,7 @@ export const seo = {
     home: {
       title: 'SoraJPNZ | NZ生活の選択を数字と実体験で考える',
       description:
-        'SoraJPNZは、NZ生活、仕事、お金、日本との比較、海での記録を、数字と実体験で現実的に考えるためのメディア兼ポートフォリオです。'
+        'Aucklandで実際に迷った生活費、仕事、お金のことを、Notes、計算機、データプロジェクトとして残しているSoraJPNZの個人サイトです。'
     },
     services: {
       title: 'サービス | SoraJPNZ',
@@ -245,7 +245,7 @@ export const seo = {
     projects: {
       title: 'プロジェクト | SoraJPNZ',
       description:
-        'NZ生活、移住、海、仕事、お金、発信活動、データ活用を、あとから使える形にしていくSoraJPNZのプロジェクトです。'
+        'NZ生活で気になった家賃、為替、生活費を、計算機やダッシュボードで確かめられる形にしたSoraJPNZのプロジェクトです。'
     },
     relocation: {
       title: 'NZ移住向け家賃負担ダッシュボード | SoraJPNZ',
@@ -260,7 +260,7 @@ export const seo = {
     blog: {
       title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        'NZ生活費、仕事、お金、日本との比較、Field Notes、実用ツールを数字と実体験で整理するSoraJPNZ Notesです。'
+        'Aucklandで暮らして気づいたNZ生活費、仕事、お金、日本との違いを、数字や一次情報と一緒に書き残すSoraJPNZ Notesです。'
     },
     links: {
       title: 'リンク | SoraJPNZ',
@@ -369,9 +369,9 @@ export const home = {
     title: 'NZ生活の選択を、数字と実体験で現実的に考える。',
     role: '',
     tagline:
-      '生活費、仕事、お金、日本との違い、海のある暮らし。Aucklandで迷ったことを、Notes・Tools・Projectsとして整理しています。',
+      '生活費、仕事、お金、日本との違い、海のある暮らし。Aucklandで実際に迷ったことを、Notes・Tools・Projectsにまとめています。',
     description:
-      '答えを決めつけるのではなく、数字と実体験を行き来しながら考えるための場所です。',
+      '自分の経験だけで決めつけず、数字や一次情報も確かめながら、あとで見返せる形にしています。',
     primaryCta: 'SoraJPNZ Notesを見る',
     primaryHref: '/ja/blog',
     primaryExternal: false,
@@ -380,14 +380,14 @@ export const home = {
     contactHref: '/ja/tools/nz-life-reality-calculator',
     contactIcon: 'ri-calculator-line',
     heroContextEyebrow: 'Aucklandから',
-    heroContextTitle: '迷ったことを、使える形に残す。',
+    heroContextTitle: '迷ったことを、次に使える形へ。',
     heroContextBody:
-      '気になったことを文章で整理し、数字で試し、必要なら小さなプロジェクトにします。海での記録も、その生活の背景として残します。',
+      '生活の疑問はNotesに書き、数字で確かめたいものは計算機やダッシュボードにします。海で過ごした日も、NZで暮らす日常として残します。',
     heroContextCaption: 'Aucklandで暮らしながら考えていること。',
     socialEyebrow: 'Social Channels',
-    socialTitle: '発信をフォローする',
+    socialTitle: '動画と日々の記録',
     socialSubtitle:
-      'YouTubeやSNSでは、動画・短い更新・海の記録を出しています。あとから見返したい内容は、NotesやProjectsに整理していきます。',
+      'YouTubeではVlogや海の動画、SNSでは短い更新を出しています。あとから読み返したい内容は、NotesやProjectsにまとめます。',
     socialPrimaryLabel: 'メインチャンネル',
     socialSecondaryLabel: '短尺動画と更新',
     allLinksCta: 'リンク一覧を見る',
@@ -400,21 +400,21 @@ export const home = {
       {
         icon: 'ri-article-line',
         title: 'Notesを読む',
-        body: 'NZ生活費、仕事、お金、日本との比較、海での記録を、あとから読み返せる形で残しています。',
+        body: 'Aucklandでの生活費、仕事、お金、日本との違い、海での出来事を書き残しています。',
         href: '/ja/blog',
         cta: 'Notes Hubを見る'
       },
       {
         icon: 'ri-calculator-line',
         title: '生活費を試算する',
-        body: '時給・勤務時間・家賃・車コストを入れて、月にどれくらい残るかをざっくり見ます。',
+        body: '時給・勤務時間・家賃・車コストを入れて、月に残りそうな金額をざっくり確認できます。',
         href: '/ja/tools/nz-life-reality-calculator',
         cta: '計算機を使う'
       },
       {
         icon: 'ri-folder-chart-line',
         title: 'Projectsを見る',
-        body: '計算機やダッシュボードなど、気になったことを実際に試せる形にしています。',
+        body: '生活の疑問を計算機やダッシュボードにして、実際に試せるようにしています。',
         href: '/ja/projects',
         cta: 'プロジェクトを見る'
       }
@@ -422,34 +422,34 @@ export const home = {
     trustEyebrow: 'Careful Notes',
     trustTitle: 'このサイトで大事にしていること',
     trustIntro:
-      '一人の体験を正解にせず、どの前提で考えたのかが分かる形で残します。',
+      '私自身の生活感と、数字や一次情報の違いが分かるように書くことを大切にしています。',
     trustItems: [
       {
         title: '数字は、前提と一緒に見る',
-        body: '時給、勤務時間、家賃、車、貯金目標など、どの前提で見ているのかを分けて考えます。'
+        body: '時給や家賃だけで結論を出さず、勤務時間、車、貯金目標まで含めて見ます。'
       },
       {
         title: '自分の体験だけで決めつけない',
-        body: '生活感は大事にしつつ、それだけで全員に当てはまる話にはしません。'
+        body: 'Aucklandでの実感は書きますが、それを全員に当てはまる正解にはしません。'
       },
       {
         title: '公式情報と、個人の経験を分ける',
-        body: 'ビザ・税金・投資などは判断材料まで。必要な内容は公式情報や専門家確認を前提にします。'
+        body: 'ビザ、税金、投資などは公式情報と分けて扱い、助言が必要な内容は専門家への確認を案内します。'
       }
     ],
     fieldNotesEyebrow: 'Field Notes',
-    fieldNotesTitle: '海での記録も、NZ生活の一部として残す',
+    fieldNotesTitle: '海で過ごした日も、NZ生活の記録です',
     fieldNotesBody:
-      '釣り、spearfishing、海況、道具、現地で学んだことも残していきます。数字や仕事の話だけでは残らない、NZで暮らしている感覚もここに置いていきます。',
+      '釣り、スピアフィッシング、海況、道具、現地で覚えたことも書いていきます。生活費や仕事の数字だけでは伝わらない、Aucklandで暮らす日々の一部です。',
     fieldNotesCta: 'Notesで読む',
     projectsTitle: 'プロジェクト',
     projectsEyebrow: 'Proof of work',
     projectsIntro:
-      '気になったことを、計算機やダッシュボードとして試せる形にしています。生活費や家賃、為替など、あとから見返せる小さなプロジェクトを作っています。',
+      '生活費や家賃、為替で気になったことを、計算機やダッシュボードとして試せる形にしています。作って終わりにせず、あとから前提やデータを見直せるように残しています。',
     projectsCta: 'プロジェクト一覧を見る',
     aboutTitle: '自己紹介',
     about:
-      'SoraJPNZは、ニュージーランドで暮らしながら、生活・仕事・お金・海での経験を記録していく個人プロジェクトです。データ分析やダッシュボード制作の経験も使いながら、NZ生活の判断材料を自分の言葉で整理しています。',
+      'Aucklandで暮らす私が、NZ生活で実際に迷ったことを記録している個人サイトです。データ分析やダッシュボード制作の経験を生かし、生活費や仕事の疑問を自分で確かめられる形にしています。海や釣りの記録も、こちらでの暮らしの一部として残しています。',
     contactTitle: 'お問い合わせ',
     contact:
       '採用、面談、コラボレーション、ポートフォリオへのフィードバック、小さなプロジェクト相談などはこちらからお願いします。'
@@ -675,19 +675,19 @@ export const projects = {
   ja: {
     title: 'プロジェクト',
     subtitle:
-      '公的データ、NZ生活、発信活動、分析の実験を、あとから使える形にしていくプロジェクトです。',
+      'NZ生活で気になった家賃、為替、生活費を、計算機やダッシュボードとして実際に試せる形にしています。',
     featured: '注目',
     calculatorBadge: '実用ツール',
     calculatorTitle: 'NZ生活リアリティ計算機',
     calculatorDescription:
-      '時給、勤務時間、週家賃、車コスト、貯金目標、緊急資金の前提を動かし、月の余白をNZDと日本円の参考換算で確認できるブラウザ上の意思決定支援ツールです。',
+      '時給、勤務時間、週の家賃、車、貯金目標を変えながら、月に残りそうな金額をNZDと日本円で見られる計算機です。入力した数字はブラウザ内で計算し、保存しません。',
     calculatorTags: ['React', 'TypeScript', '意思決定支援', '業務分析', 'ブラウザ計算'],
     calculatorAction: '計算機を使う',
     relocationTitle: 'ニュージーランド移住向け 家賃負担ダッシュボード',
     relocationDescription:
-      'MBIE/Tenancy Servicesの家賃データ、RBNZのNZD/JPY為替レート、Stats NZのFood Price Indexを組み合わせ、ニュージーランド移住を検討する日本語話者向けに、移住に向けた家賃負担の比較を支援する公的データダッシュボードです。',
+      'Tenancy Services / MBIEの家賃、RBNZのNZD/JPY為替、Stats NZの食品価格指数を一つにまとめました。NZで暮らす場所や予算を考えるときに、地域ごとの家賃負担を比べるためのダッシュボードです。',
     rentRadarTitle: 'Rent Radar (Power BI)',
-    rentRadarDescription: '架空サンプルデータを使用した、家賃ダッシュボード設計の初期BIプロトタイプです。',
+    rentRadarDescription: '架空のサンプルデータで、家賃情報の見せ方やフィルターを試した初期のPower BIプロトタイプです。',
     tags: ['Python', 'SQL', 'Tableau', '公的データ', '業務分析', 'データ検証'],
     rentTags: ['Power BI', 'ダッシュボード設計', 'サンプルデータ']
   }
@@ -1097,14 +1097,14 @@ export const blog = {
   ja: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'Aucklandで暮らしながら、生活費、仕事、お金、日本との違いを、数字と自分の経験で整理しています。海や釣りの記録も、NZで暮らす背景として残します。',
+      'Aucklandで暮らしていて気になった生活費、仕事、お金、日本との違いを、数字と自分の経験で書き残しています。海や釣りの話も、こちらで暮らす日々の一部です。',
     eyebrow: 'Notes from Auckland',
-    introTitle: '数字と実体験を、あとから使えるメモに。',
+    introTitle: 'Aucklandで迷ったことを、あとから読み返せるノートに。',
     body:
-      'SoraJPNZ Notesでは、NZ生活の現実を「なんとなく良さそう」では終わらせず、生活費、仕事、お金、比較、現地での試行錯誤として整理していきます。',
+      '生活費や仕事、お金のことは、感覚だけでは見えにくい部分があります。自分の経験に数字や一次情報を重ねながら、少しずつ書いています。',
     featuredTool: {
-      title: '生活費を自分の数字で見る',
-      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れて、NZ生活で月にどれくらい残るかを試算できます。',
+      title: '先に、自分の数字で試してみる',
+      body: '時給・勤務時間・家賃・車コスト・貯金目標を入れて、NZ生活で月にいくら残りそうかを試算できます。',
       cta: 'NZ生活リアリティ計算機を使う',
       href: '/ja/tools/nz-life-reality-calculator'
     },
@@ -1115,7 +1115,7 @@ export const blog = {
       dateLabel: '2026年8月28日 更新',
       title: 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？',
       excerpt:
-        '時給は高く見えても、家賃と車を入れると残るお金は変わります。最低賃金、Living Wage、家賃、貯金の前提をAucklandでの生活感と一緒に整理しました。',
+        '時給が高く見えても、家賃や車まで入れると月に残る金額は大きく変わります。最低賃金、Living Wage、家賃、貯金をAucklandでの生活感と一緒に見直しました。',
       cta: 'ノートを読む',
       href: '/ja/blog/auckland-living-cost-hourly-wage',
       image: assets.aucklandHarbour,
@@ -1123,42 +1123,42 @@ export const blog = {
     },
     categoryTitle: '扱うテーマ',
     categoryBody:
-      '派手な成功談ではなく、Aucklandで暮らしながら気になった数字、判断、生活感をノートにしていきます。',
+      'Aucklandで暮らしていて実際に迷ったことを、五つのテーマに分けて書いています。うまくいった話だけでなく、まだ答えの出ていないことも残します。',
     categories: [
       {
         icon: 'ri-home-5-line',
         title: 'NZ生活費',
-        description: '家賃、車、貯金、生活の余白。Aucklandで実際に暮らすときの数字を整理します。',
+        description: '家賃、車、食費、貯金。Aucklandで月にいくら出ていき、何が残るのかを見ます。',
         themes: ['家賃', '車', '貯金']
       },
       {
         icon: 'ri-briefcase-4-line',
         title: '仕事・キャリア',
-        description: '仕事探し、働き方、キャリア初期の現実。まだ途中だからこそ、迷いや前提も残します。',
+        description: '仕事探しや働き方について、実際に試したことを書きます。自分のキャリアも途中なので、分かったことと分からないことを分けて残します。',
         themes: ['仕事探し', '働き方']
       },
       {
         icon: 'ri-coins-line',
         title: 'お金・投資メモ',
-        description: '投資プラットフォーム、通貨、生活拠点とお金。NZDと日本円の感覚も一緒に見ます。',
+        description: 'NZDと日本円、投資サービス、国をまたぐお金のこと。自分で確認したことを個人メモとして残します。',
         themes: ['投資メモ', '通貨']
       },
       {
         icon: 'ri-scales-3-line',
         title: 'NZ vs 日本',
-        description: '住みやすさ、物価、働き方、幸せの感じ方。どちらが正解かではなく、何が違うのかを考えます。',
+        description: '物価や働き方、暮らしやすさは、条件によって見え方が変わります。優劣を決めるより、違いを具体的に見ます。',
         themes: ['住みやすさ', '物価']
       },
       {
         icon: 'ri-sailboat-line',
         title: 'Field Notes / 海・釣り',
-        description: '釣り、spearfishing、海況、道具、現地で学んだこと。生活費や仕事の記事とは別に、NZで暮らしている実感として残します。',
+        description: '釣り、スピアフィッシング、海況、道具、現地で覚えたこと。Aucklandで暮らす日々の記録として残します。',
         themes: ['釣り', '海況']
       }
     ],
     comingSoonTitle: '次に書きたいノート',
     comingSoonBody:
-      '次のノートも、体験・数字・一次情報を少しずつ確認しながら整理していきます。',
+      '次に自分が書きたいテーマです。体験を書き出し、必要な数字や一次情報を確かめてから公開します。',
     comingSoonItems: [
       'NZと日本、どちらが住みやすいのか',
       'NZに7年以上住んで考える幸せ',
@@ -1167,9 +1167,9 @@ export const blog = {
     ],
     editorNote: {
       label: 'Aucklandから',
-      title: 'まだ途中だから、迷ったことも残します。',
+      title: 'まだ答えが出ていないことも書きます。',
       body:
-        '日本からNZへ移り住み、仕事や生活費で迷ったことを、数字と現地での経験の両方から整理しています。答えが出ていないことも、分かったふりをせずNotesに残します。'
+        '日本からNZへ移り、生活費や仕事で迷ったことを、数字や一次情報と一緒に書いています。まだ分からないことは、分かったふりをせずそのまま残します。'
     }
   }
 } as const;
