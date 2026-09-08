@@ -108,12 +108,6 @@ export function Home({ locale, path }: HomeProps) {
                 </a>
               ))}
             </div>
-            <div className="button-row soft-link-row">
-              <a className="button secondary small" href={`${base}/services`}>
-                <span>{h.servicesCta}</span>
-                <i className="ri-arrow-right-line" />
-              </a>
-            </div>
           </div>
         </section>
 
@@ -125,9 +119,9 @@ export function Home({ locale, path }: HomeProps) {
               <p>{h.projectsIntro}</p>
             </div>
             <div className="project-grid">
-              {locale === 'en' && (
                 <ProjectCard
-                  image={assets.calculator}
+                  image={locale === 'ja' ? assets.calculatorJa : assets.calculator}
+                  headingLevel={3}
                   title={p.calculatorTitle}
                   description={p.calculatorDescription}
                   tags={p.calculatorTags}
@@ -135,9 +129,9 @@ export function Home({ locale, path }: HomeProps) {
                   action={p.calculatorAction}
                   featured={p.calculatorBadge}
                 />
-              )}
               <ProjectCard
                 image={assets.dashboard}
+                headingLevel={3}
                 title={p.relocationTitle}
                 description={p.relocationDescription}
                 tags={p.tags}
@@ -147,6 +141,7 @@ export function Home({ locale, path }: HomeProps) {
               />
               <ProjectCard
                 image={assets.rentRadar}
+                headingLevel={3}
                 title={p.rentRadarTitle}
                 description={p.rentRadarDescription}
                 tags={p.rentTags}
@@ -172,10 +167,16 @@ export function Home({ locale, path }: HomeProps) {
               <p className="eyebrow">{h.fieldNotesEyebrow}</p>
               <h2>{h.fieldNotesTitle}</h2>
               <p>{h.fieldNotesBody}</p>
+              <div className="button-row left">
+              <a className="button primary small" href={links.youtube} target="_blank" rel="noopener noreferrer">
+                <i className="ri-youtube-line" aria-hidden="true" />
+                <span>{locale === 'ja' ? 'YouTubeで見る' : 'Watch on YouTube'}</span>
+              </a>
               <a className="button secondary small" href={`${base}/blog`}>
                 <span>{h.fieldNotesCta}</span>
                 <i className="ri-arrow-right-line" />
               </a>
+              </div>
             </div>
           </div>
         </section>

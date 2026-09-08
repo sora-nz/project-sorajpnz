@@ -1,7 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
-import { assets, common, Locale, projects, seo } from '../lib/content';
+import { assets, common, links, Locale, projects, seo } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
@@ -66,6 +66,16 @@ export function Projects({ locale, path }: ProjectsProps) {
               href={`${base}/projects/rent-radar`}
               action={c.viewProject}
             />
+          </div>
+        </section>
+        <section className="content-section project-next-steps">
+          <div className="section-inner">
+            <h2>{locale === 'ja' ? '作ったものについて話す' : 'Talk about the work'}</h2>
+            <p>{locale === 'ja' ? 'これらは個人制作です。採用・面談のご連絡や、設計・前提へのフィードバックを歓迎します。' : 'These are independent projects. I welcome recruitment conversations and questions about the requirements, assumptions, and implementation.'}</p>
+            <div className="button-row left">
+              <a className="button primary small" href={`${base}/contact`}>{c.contact}</a>
+              <a className="button secondary small" href={links.github} target="_blank" rel="noopener noreferrer">GitHub<i className="ri-external-link-line" aria-hidden="true" /></a>
+            </div>
           </div>
         </section>
       </main>

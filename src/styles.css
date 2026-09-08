@@ -461,7 +461,7 @@ img {
 
 .button.primary {
   color: var(--white);
-  background: var(--blue);
+  background: var(--blue-strong);
   box-shadow: 0 12px 26px rgba(10, 132, 255, 0.22);
 }
 
@@ -1119,7 +1119,7 @@ img {
   padding: 5px 10px;
   border-radius: 999px;
   color: var(--white);
-  background: rgba(10, 132, 255, 0.92);
+  background: var(--blue-strong);
   font-size: 12px;
   font-weight: 700;
 }
@@ -1132,7 +1132,8 @@ img {
   padding: 24px;
 }
 
-.project-card-body h2 {
+.project-card-body h2,
+.project-card-body h3 {
   margin: 0;
   font-size: 23px;
   line-height: 1.25;
@@ -3716,10 +3717,15 @@ img {
   animation: slide-up 760ms ease-out both;
 }
 
+.contact-privacy-note a, .project-next-steps a:not(.button) { color: var(--blue-strong); text-decoration: underline; text-underline-offset: 3px; }
+.contact-privacy-note { color: #46545c; font-size: 14px; line-height: 1.8; }
+.project-next-steps { border-top: 1px solid var(--line); }
+.project-next-steps p { max-width: 700px; color: var(--muted); line-height: 1.8; }
+
 .reveal-on-scroll {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 700ms ease, transform 700ms ease;
+  /* Essential content stays readable even if an observer misses a route update. */
+  opacity: 1;
+  transform: none;
 }
 
 .reveal-on-scroll.is-visible {
@@ -4014,7 +4020,7 @@ img {
   padding: 0 14px;
   border-radius: 999px;
   color: #ffffff;
-  background: var(--blue);
+  background: var(--blue-strong);
   font-size: 13px;
   font-style: normal;
   font-weight: 760;

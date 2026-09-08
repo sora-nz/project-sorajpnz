@@ -1,5 +1,11 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { resolve } from 'node:path';
+import ts from 'typescript';
+
+// Read the same self-contained content module used by the UI, without a second copy of SEO text.
+const contentSource = await readFile(resolve('src/lib/content.ts'), 'utf8');
+const contentJs = ts.transpileModule(contentSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
+const { seo, assets, legal, aucklandLivingCostMeta } = await import(`data:text/javascript;base64,${Buffer.from(contentJs).toString('base64')}`);
 
 const siteUrl = 'https://sorajpnz.com';
 const outputDirectory = resolve('out');
@@ -25,6 +31,28 @@ const routes = [
     imageAlt: 'NZ生活リアリティ計算機のプレビュー'
   }
 ];
+
+routes.forEach((route) => { route.noIndex = true; });
+const pagePaths = { home: '', services: '/services', projects: '/projects', relocation: '/projects/nz-japan-relocation', rentRadar: '/projects/rent-radar', blog: '/blog', links: '/links', contact: '/contact' };
+for (const locale of ['en', 'ja']) {
+  for (const [key, suffix] of Object.entries(pagePaths)) {
+    const image = key === 'projects' || key === 'relocation' ? assets.dashboard
+      : key === 'rentRadar' ? assets.rentRadar
+      : key === 'blog' ? assets.westCoastRocks : assets.aucklandHarbour;
+    routes.push({ locale, path: `/${locale}${suffix}`, ...seo[locale][key], image,
+      imageAlt: seo[locale][key].title,
+      noIndex: key === 'links' || (key === 'blog' && locale === 'en'),
+      alternates: key !== 'blog',
+      preload: key === 'home' ? assets.hero : undefined });
+  }
+  for (const [kind, translations] of Object.entries(legal)) {
+    const copy = translations[locale];
+    routes.push({ locale, path: `/${locale}/${kind}`, title: `${copy.title} - SoraJPNZ`,
+      description: copy.body, image: assets.logoFull, imageAlt: 'SoraJPNZ' });
+  }
+}
+routes.push({ locale: 'ja', ...aucklandLivingCostMeta, title: `${aucklandLivingCostMeta.title} | SoraJPNZ`,
+  image: assets.aucklandHarbour, imageAlt: 'Auckland', alternates: false });
 
 function escapeAttribute(value) {
   return value
@@ -72,7 +100,7 @@ function renderRouteHtml(route) {
 
   html = replaceRequired(html, /<html lang="[^"]*">/, `<html lang="${route.locale}">`, 'html language');
   html = replaceMeta(html, 'name', 'description', route.description);
-  html = replaceMeta(html, 'name', 'robots', 'noindex, follow');
+  html = replaceMeta(html, 'name', 'robots', route.noIndex ? 'noindex, follow' : 'index, follow');
   html = replaceMeta(html, 'property', 'og:title', route.title);
   html = replaceMeta(html, 'property', 'og:description', route.description);
   html = replaceMeta(html, 'property', 'og:url', canonicalUrl);
@@ -86,13 +114,14 @@ function renderRouteHtml(route) {
   html = replaceLink(html, 'alternate', `${siteUrl}/en${alternatePath}`, 'en');
   html = replaceLink(html, 'alternate', `${siteUrl}/ja${alternatePath}`, 'ja');
   html = replaceLink(html, 'alternate', `${siteUrl}/en${alternatePath}`, 'x-default');
+  if (route.alternates === false) html = html.replace(/<link\s+rel="alternate"[^>]*>\s*/g, '');
   html = replaceRequired(
     html,
     /<link rel="preload" as="image" href="[^"]*" fetchpriority="high" \/>/,
-    '<link rel="preload" as="image" href="/assets/homepage2.jpg" fetchpriority="high" />',
+    route.preload ? `<link rel="preload" as="image" href="${escapeAttribute(route.preload)}" fetchpriority="high" />` : '',
     'hero preload'
   );
-  html = replaceRequired(html, /<title>[^<]*<\/title>/, `<title>${route.title}</title>`, 'document title');
+  html = replaceRequired(html, /<title>[^<]*<\/title>/, `<title>${escapeAttribute(route.title)}</title>`, 'document title');
 
   return html;
 }
