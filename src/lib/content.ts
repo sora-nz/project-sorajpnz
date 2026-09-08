@@ -54,8 +54,8 @@ export const socialLinks = [
     showInHeader: true,
     showInFooter: true,
     role: {
-      en: 'Fishing with Thea, spearfishing, and everyday NZ vlogs',
-      ja: 'Theaとの釣り、スピアフィッシング、NZでの日々のVlog'
+      en: 'Everyday life as an international couple in New Zealand, fishing, and spearfishing',
+      ja: 'NZで暮らす国際カップルの日常、釣り、スピアフィッシング'
     }
   },
   {
@@ -159,7 +159,7 @@ export const common = {
     viewProjects: 'View Projects',
     emailMe: 'Email Me',
     backToProjects: 'Back to Projects',
-    footerPrivacyOfficer: 'Privacy Officer: Sora Oya - privacy@sorajpnz.com'
+    footerPrivacyOfficer: 'Privacy enquiries: privacy@sorajpnz.com'
   },
   ja: {
     name: 'SoraJPNZ',
@@ -184,7 +184,7 @@ export const common = {
     viewProjects: 'プロジェクト一覧',
     emailMe: 'メールする',
     backToProjects: 'プロジェクト一覧へ戻る',
-    footerPrivacyOfficer: 'プライバシー担当: Sora Oya - privacy@sorajpnz.com'
+    footerPrivacyOfficer: '個人情報のお問い合わせ: privacy@sorajpnz.com'
   }
 } as const;
 
@@ -196,9 +196,9 @@ export const seo = {
         'Auckland-based portfolio by Sora Oya, showing practical business analysis, data, AI-enabled process improvement, and decision-support tools built from real New Zealand questions.'
     },
     services: {
-      title: 'Japanese Customer Information Pages | SoraJPNZ',
+      title: 'Services | SoraJPNZ',
       description:
-        'A scoped pilot by Sora Oya: turn recurring Japanese customer questions into a clear information page connected to your NZ business website.'
+        'I am not currently taking on client services. You can still explore the calculators and independent projects on SoraJPNZ.'
     },
     projects: {
       title: 'Projects | SoraJPNZ',
@@ -238,9 +238,9 @@ export const seo = {
         'Aucklandで実際に迷った生活費、仕事、お金のことを、Notes、計算機、データプロジェクトとして残しているSoraJPNZの個人サイトです。'
     },
     services: {
-      title: '日本語のお客さん向けの案内ページ制作 | SoraJPNZ',
+      title: 'サービス | SoraJPNZ',
       description:
-        'NZの小規模事業者向けに、日本語のお客さんから届く質問を案内ページにまとめるSoraJPNZの試験制作サービス。範囲と見積もりを確認してから進めます。'
+        '現在、個別の制作サービスは募集していません。公開中の計算機やプロジェクトは引き続きご覧いただけます。'
     },
     projects: {
       title: 'プロジェクト | SoraJPNZ',
@@ -306,7 +306,6 @@ export const home = {
     servicesTitle: 'Start with something working',
     servicesSubtitle:
       'Try the calculator first, then review the projects and notes behind the approach.',
-    servicesCta: 'Japanese customer pages for NZ businesses',
     services: [
       {
         icon: 'ri-calculator-line',
@@ -395,7 +394,6 @@ export const home = {
     servicesTitle: 'まずここから',
     servicesSubtitle:
       '何から見ればいいか迷ったら、まずはこの3つから。',
-    servicesCta: '事業者向けの案内ページ制作について',
     services: [
       {
         icon: 'ri-article-line',

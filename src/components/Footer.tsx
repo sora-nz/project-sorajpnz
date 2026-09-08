@@ -13,8 +13,7 @@ export function Footer({ locale }: FooterProps) {
     { label: t.blog, href: localize(locale, '/blog') },
     { label: t.projects, href: localize(locale, '/projects') },
     { label: t.links, href: localize(locale, '/links') },
-    { label: locale === 'ja' ? '生活費の計算機' : 'Life Reality Calculator', href: localize(locale, '/tools/nz-life-reality-calculator') },
-    { label: t.services, href: localize(locale, '/services') }
+    { label: locale === 'ja' ? '生活費の計算機' : 'Life Reality Calculator', href: localize(locale, '/tools/nz-life-reality-calculator') }
   ];
   const legal = [
     { label: t.privacy, href: localize(locale, '/privacy') },

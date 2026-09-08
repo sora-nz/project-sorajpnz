@@ -75,7 +75,6 @@ export function Projects({ locale, path }: ProjectsProps) {
             <div className="button-row left">
               <a className="button primary small" href={`${base}/contact`}>{c.contact}</a>
               <a className="button secondary small" href={links.github} target="_blank" rel="noopener noreferrer">GitHub<i className="ri-external-link-line" aria-hidden="true" /></a>
-              <a href={`${base}/services`}>{locale === 'ja' ? '事業者向けの制作相談' : 'Small business pilot'}</a>
             </div>
           </div>
         </section>

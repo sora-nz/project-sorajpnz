@@ -124,7 +124,7 @@ export function Contact({ locale, path }: ContactProps) {
               </div>
 
               <p className="contact-privacy-note" id="contact-privacy">
-                {locale === 'ja' ? '制作の相談は、サイトURLと困っていることを一つ添えてください。顧客情報やパスワードは不要です。送信内容は問い合わせ対応のためNetlify経由で受け取ります。' : 'For a project enquiry, include your site URL and one problem to solve. Do not send customer records or passwords. Your message is received through Netlify for handling your enquiry.'}
+                {locale === 'ja' ? 'お問い合わせの内容を簡単にお知らせください。パスワードや、他の方の個人情報は送らないでください。送信内容は問い合わせ対応のためNetlify経由で受け取ります。' : 'Please briefly describe your enquiry. Do not send passwords or other people\'s personal information. Your message is received through Netlify to respond to your enquiry.'}
                 {' '}<a href={localize(locale, '/privacy')}>{locale === 'ja' ? '個人情報の扱い' : 'Privacy policy'}</a>
               </p>
 

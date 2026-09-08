@@ -36,4 +36,19 @@ for (const locale of ['en', 'ja']) {
 const css = await readFile('src/styles.css', 'utf8');
 assert.match(css, /\.reveal-on-scroll\s*\{[^}]*opacity:\s*1;/, 'Observer cannot hide essential content');
 assert.ok(css.includes('prefers-reduced-motion: reduce'));
+const content = await readFile('src/lib/content.ts', 'utf8');
+for (const match of content.matchAll(/footerPrivacyOfficer: '([^']+)'/g)) {
+  assert.ok(match[1].includes('privacy@sorajpnz.com'), 'Privacy email remains available');
+  assert.ok(!match[1].includes('Sora Oya'), 'Privacy contact does not display a personal name');
+}
+assert.ok(content.includes('NZで暮らす国際カップルの日常、釣り、スピアフィッシング'));
+assert.ok(content.includes('Everyday life as an international couple in New Zealand'));
+for (const file of ['src/pages/Home.tsx', 'src/pages/Projects.tsx', 'src/components/Footer.tsx']) {
+  const source = await readFile(file, 'utf8');
+  assert.ok(!source.includes('/services'), `${file}: no service promotion`);
+}
+const services = await readFile('src/pages/Services.tsx', 'utf8');
+assert.ok(!services.includes('servicePilot') && !services.includes('NZ$650'), 'Service offer removed');
+assert.ok(content.includes('現在、個別の制作サービスは募集していません。'));
 console.log(`PASS: ${paths.length} static routes, page-specific SEO, index policy and visibility guardrails`);
+console.log('PASS: privacy contact, bilingual YouTube copy and deferred-service guardrails');

@@ -108,12 +108,6 @@ export function Home({ locale, path }: HomeProps) {
                 </a>
               ))}
             </div>
-            <div className="button-row soft-link-row">
-              <a className="button secondary small" href={`${base}/services`}>
-                <span>{h.servicesCta}</span>
-                <i className="ri-arrow-right-line" />
-              </a>
-            </div>
           </div>
         </section>
 
@@ -285,7 +279,6 @@ export function Home({ locale, path }: HomeProps) {
                 <span>{c.emailMe}</span>
                 <i className="ri-mail-line" />
               </a>
-              <p><a href={`${base}/services`}>{h.servicesCta}</a></p>
             </div>
           </div>
         </section>
