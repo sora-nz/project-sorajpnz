@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { assets, links, Locale, socialLinks } from '../lib/content';
+import { assets, aucklandLivingCostMeta, links, Locale, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import {
   calculateNzLifeReality,
@@ -17,13 +17,12 @@ type AucklandLivingCostArticleProps = {
   path: string;
 };
 
-const articleTitle = 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？';
-const articleDescription =
-  'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZの記事です。';
+const articleTitle = aucklandLivingCostMeta.title;
+const articleDescription = aucklandLivingCostMeta.description;
 
 const articleMeta = [
   { label: '作成日', value: '2026-07-04' },
-  { label: '最終更新日', value: '2026-09-01' },
+  { label: '最終更新日', value: aucklandLivingCostMeta.updated },
   { label: '状態', value: '公開記事' }
 ];
 

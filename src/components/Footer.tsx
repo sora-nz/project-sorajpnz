@@ -12,7 +12,9 @@ export function Footer({ locale }: FooterProps) {
     { label: t.home, href: localize(locale) },
     { label: t.blog, href: localize(locale, '/blog') },
     { label: t.projects, href: localize(locale, '/projects') },
-    { label: t.links, href: localize(locale, '/links') }
+    { label: t.links, href: localize(locale, '/links') },
+    { label: locale === 'ja' ? '生活費の計算機' : 'Life Reality Calculator', href: localize(locale, '/tools/nz-life-reality-calculator') },
+    { label: t.services, href: localize(locale, '/services') }
   ];
   const legal = [
     { label: t.privacy, href: localize(locale, '/privacy') },
@@ -33,7 +35,7 @@ export function Footer({ locale }: FooterProps) {
         </div>
         <div>
           <h2>{t.navigation}</h2>
-          <nav>
+          <nav aria-label={t.navigation}>
             {nav.map((item) => (
               <a key={item.href} href={item.href}>
                 {item.label}
@@ -43,7 +45,7 @@ export function Footer({ locale }: FooterProps) {
         </div>
         <div>
           <h2>{t.legal}</h2>
-          <nav>
+          <nav aria-label={t.legal}>
             {legal.map((item) => (
               <a key={item.href} href={item.href}>
                 {item.label}

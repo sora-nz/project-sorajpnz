@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { assets, common, Locale } from '../lib/content';
 import { localize, routeKey, swapLocale } from '../lib/routes';
 import { SocialLinks } from './SocialLinks';
@@ -11,6 +11,19 @@ type HeaderProps = {
 
 export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
   const [open, setOpen] = useState(false);
+  const menuButton = useRef<HTMLButtonElement>(null);
+  useEffect(() => setOpen(false), [path]);
+  useEffect(() => {
+    if (!open) return;
+    const closeOnEscape = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setOpen(false);
+        menuButton.current?.focus();
+      }
+    };
+    document.addEventListener('keydown', closeOnEscape);
+    return () => document.removeEventListener('keydown', closeOnEscape);
+  }, [open]);
   const t = common[locale];
   const base = routeKey(path);
   const alternateLocaleHref = languageSwitchHref ?? swapLocale(path, locale === 'en' ? 'ja' : 'en');
@@ -32,7 +45,7 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
     <header className="site-header">
       <div className="header-shell">
         <a href={localize(locale)} className="brand" aria-label="SoraJPNZ home">
-          <img src={assets.logoMark} alt="" />
+          <img src={assets.logoMark} alt="" width="32" height="32" decoding="async" />
           <span>{t.name}</span>
         </a>
 
@@ -41,6 +54,7 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
             <a
               key={item.href}
               href={item.href}
+              aria-current={base === item.match || (item.match !== '/' && base.startsWith(item.match)) ? 'page' : undefined}
               className={base === item.match || (item.match !== '/' && base.startsWith(item.match)) ? 'active' : ''}
             >
               {item.label}
@@ -50,13 +64,14 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
 
         <div className="header-actions">
           <SocialLinks compact placement="header" />
-          <a className="language-pill" href={alternateLocaleHref} aria-label={t.language}>
-            <i className="ri-global-line" />
+          <a className="language-pill" href={alternateLocaleHref} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
+            <i className="ri-global-line" aria-hidden="true" />
             <span>{locale === 'en' ? 'EN' : 'JA'}</span>
           </a>
         </div>
 
         <button
+          ref={menuButton}
           className="menu-button"
           type="button"
           aria-label={menuLabel}
@@ -64,7 +79,7 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
           aria-expanded={open}
           onClick={() => setOpen(!open)}
         >
-          <i className={open ? 'ri-close-line' : 'ri-menu-line'} />
+          <i className={open ? 'ri-close-line' : 'ri-menu-line'} aria-hidden="true" />
         </button>
       </div>
 
@@ -77,8 +92,8 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
           ))}
           <div className="mobile-menu-bottom">
             <SocialLinks compact placement="header" />
-            <a className="language-pill" href={alternateLocaleHref} aria-label={t.language}>
-              <i className="ri-global-line" />
+            <a className="language-pill" href={alternateLocaleHref} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
+              <i className="ri-global-line" aria-hidden="true" />
               <span>{locale === 'en' ? 'EN' : 'JA'}</span>
             </a>
           </div>

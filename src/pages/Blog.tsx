@@ -1,6 +1,6 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { assets, blog, Locale, seo } from '../lib/content';
+import { assets, blog, links, Locale, seo } from '../lib/content';
 import { blogJsonLd, useMeta } from '../lib/useMeta';
 
 type BlogProps = {
@@ -18,7 +18,7 @@ export function Blog({ locale, path }: BlogProps) {
         description: b.latestNote.excerpt,
         image: b.latestNote.image,
         datePublished: b.latestNote.date,
-        dateModified: b.latestNote.date
+        dateModified: b.latestNote.updated
       }
     : undefined;
 
@@ -143,6 +143,10 @@ export function Blog({ locale, path }: BlogProps) {
                       <div className="notes-topic-copy">
                         <h3>{category.title}</h3>
                         <p>{category.description}</p>
+                        {isFieldNote && <a className="notes-read-link" href={links.youtube} target="_blank" rel="noopener noreferrer">
+                          {locale === 'ja' ? '釣り・海のVlogはYouTubeへ' : 'Watch the fishing and ocean vlogs'}
+                          <i className="ri-youtube-line" aria-hidden="true" />
+                        </a>}
                       </div>
                       <div className="notes-topic-side">
                         {isFieldNote ? (

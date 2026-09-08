@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc -b && vite build && node scripts/generate-route-meta.mjs",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "check:site": "node scripts/check-site.mjs"
   },
   "dependencies": {
     "@vitejs/plugin-react": "^5.0.0",

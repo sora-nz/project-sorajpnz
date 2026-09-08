@@ -54,8 +54,8 @@ export const socialLinks = [
     showInHeader: true,
     showInFooter: true,
     role: {
-      en: 'Long-form videos and main video archive',
-      ja: '長尺動画とメインの動画アーカイブ'
+      en: 'Fishing with Thea, spearfishing, and everyday NZ vlogs',
+      ja: 'Theaとの釣り、スピアフィッシング、NZでの日々のVlog'
     }
   },
   {
@@ -84,8 +84,8 @@ export const socialLinks = [
     showInHeader: true,
     showInFooter: true,
     role: {
-      en: 'Short-form discovery and quick stories',
-      ja: '短尺動画と認知拡大'
+      en: 'Short moments from fishing trips and NZ life',
+      ja: '釣りやNZでの日々を短い動画で'
     }
   },
   {
@@ -196,9 +196,9 @@ export const seo = {
         'Auckland-based portfolio by Sora Oya, showing practical business analysis, data, AI-enabled process improvement, and decision-support tools built from real New Zealand questions.'
     },
     services: {
-      title: 'Services | SoraJPNZ',
+      title: 'Japanese Customer Information Pages | SoraJPNZ',
       description:
-        'Light SoraJPNZ support for small dashboards, website analytics, portfolio feedback, content notes, and practical project organization.'
+        'A scoped pilot by Sora Oya: turn recurring Japanese customer questions into a clear information page connected to your NZ business website.'
     },
     projects: {
       title: 'Projects | SoraJPNZ',
@@ -238,9 +238,9 @@ export const seo = {
         'Aucklandで実際に迷った生活費、仕事、お金のことを、Notes、計算機、データプロジェクトとして残しているSoraJPNZの個人サイトです。'
     },
     services: {
-      title: 'サービス | SoraJPNZ',
+      title: '日本語のお客さん向けの案内ページ制作 | SoraJPNZ',
       description:
-        'SoraJPNZの軽いサポートページです。小さなダッシュボード、Web分析、ポートフォリオ相談、発信内容の整理、実用的な制作を扱います。'
+        'NZの小規模事業者向けに、日本語のお客さんから届く質問を案内ページにまとめるSoraJPNZの試験制作サービス。範囲と見積もりを確認してから進めます。'
     },
     projects: {
       title: 'プロジェクト | SoraJPNZ',
@@ -280,7 +280,7 @@ export const home = {
     title: 'Practical systems and data work, grounded in real New Zealand questions.',
     role: '',
     tagline:
-      'SoraJPNZ is my Auckland-based portfolio for business analysis, data, AI-enabled process improvement, and decision-support tools.',
+      'I am Sora Oya, based in Auckland and building a career in business systems, data, and process improvement. This is where I share the tools I build and the questions behind them.',
     description:
       'I use real questions about living costs, rent, work, and everyday decisions to show how I structure problems, make assumptions visible, and build useful outputs.',
     primaryCta: 'Try the NZ Life Reality Calculator',
@@ -306,7 +306,7 @@ export const home = {
     servicesTitle: 'Start with something working',
     servicesSubtitle:
       'Try the calculator first, then review the projects and notes behind the approach.',
-    servicesCta: 'See collaboration and support',
+    servicesCta: 'Japanese customer pages for NZ businesses',
     services: [
       {
         icon: 'ri-calculator-line',
@@ -349,9 +349,9 @@ export const home = {
       }
     ],
     fieldNotesEyebrow: 'Field Notes',
-    fieldNotesTitle: 'Life context, not the whole brand',
+    fieldNotesTitle: 'Away from the screen, out by the sea',
     fieldNotesBody:
-      'Fishing, spearfishing, ocean conditions, tools, and local lessons also stay here. They capture the feeling of living in New Zealand that does not fit into numbers or work notes.',
+      'I am making vlogs of fishing trips with Thea and editing spearfishing footage. The videos keep the day as it happened; Notes is where I can return to what I learned. These are personal records, not guided trips or safety training.',
     fieldNotesCta: 'Read Notes',
     projectsTitle: 'Selected projects',
     projectsEyebrow: 'Proof of work',
@@ -395,7 +395,7 @@ export const home = {
     servicesTitle: 'まずここから',
     servicesSubtitle:
       '何から見ればいいか迷ったら、まずはこの3つから。',
-    servicesCta: '軽いサポート内容を見る',
+    servicesCta: '事業者向けの案内ページ制作について',
     services: [
       {
         icon: 'ri-article-line',
@@ -440,7 +440,7 @@ export const home = {
     fieldNotesEyebrow: 'Field Notes',
     fieldNotesTitle: '海で過ごした日も、NZ生活の記録です',
     fieldNotesBody:
-      '釣り、スピアフィッシング、海況、道具、現地で覚えたことも書いていきます。生活費や仕事の数字だけでは伝わらない、Aucklandで暮らす日々の一部です。',
+      'Theaとの釣りのVlogや、撮りためたスピアフィッシングの動画を作っています。その日の様子はYouTubeへ、あとで振り返りたいことはNotesへ。ガイドや安全講習ではなく、私たちがNZで過ごす日々の記録です。',
     fieldNotesCta: 'Notesで読む',
     projectsTitle: 'プロジェクト',
     projectsEyebrow: 'Proof of work',
@@ -449,7 +449,7 @@ export const home = {
     projectsCta: 'プロジェクト一覧を見る',
     aboutTitle: '自己紹介',
     about:
-      'Aucklandで暮らす私が、NZ生活で実際に迷ったことを記録している個人サイトです。データ分析やダッシュボード制作の経験を生かし、生活費や仕事の疑問を自分で確かめられる形にしています。海や釣りの記録も、こちらでの暮らしの一部として残しています。',
+      'Sora Oyaです。Aucklandで暮らしながら、Business Systems・データ分析の仕事につながる制作を続けています。生活費の計算機も、この日英サイトも自分のプロジェクトです。Theaとの釣りや海の動画も、こちらでの暮らしの一部として残しています。',
     contactTitle: 'お問い合わせ',
     contact:
       '採用、面談、コラボレーション、ポートフォリオへのフィードバック、小さなプロジェクト相談などはこちらからお願いします。'
@@ -1031,6 +1031,13 @@ export const rentRadar = {
   }
 } as const;
 
+export const aucklandLivingCostMeta = {
+  title: 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？',
+  description: 'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZの記事です。',
+  path: '/ja/blog/auckland-living-cost-hourly-wage',
+  updated: '2026-09-01'
+} as const;
+
 export const blog = {
   en: {
     title: 'SoraJPNZ Notes',
@@ -1040,7 +1047,12 @@ export const blog = {
     introTitle: 'Practical notes are being organized.',
     body:
       'SoraJPNZ Notes is being shaped around realistic Japan x New Zealand decision-making. English article links are not published here yet.',
-    featuredTool: null,
+    featuredTool: {
+      title: 'Try your own assumptions',
+      body: 'The calculator is available in English. Compare wage, work hours, rent and car costs in NZD with an optional JPY reference.',
+      cta: 'Open the NZ Life Reality Calculator',
+      href: '/en/tools/nz-life-reality-calculator'
+    },
     latestNote: null,
     categoryTitle: 'Core themes',
     categoryBody:
@@ -1112,8 +1124,9 @@ export const blog = {
       label: '最新のノート',
       category: 'NZ生活費',
       date: '2026-08-28',
-      dateLabel: '2026年8月28日 更新',
-      title: 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？',
+      updated: aucklandLivingCostMeta.updated,
+      dateLabel: '2026年9月1日 更新',
+      title: aucklandLivingCostMeta.title,
       excerpt:
         '時給が高く見えても、家賃や車まで入れると月に残る金額は大きく変わります。最低賃金、Living Wage、家賃、貯金をAucklandでの生活感と一緒に見直しました。',
       cta: 'ノートを読む',

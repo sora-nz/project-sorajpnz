@@ -4,6 +4,7 @@ import { Header } from '../components/Header';
 import { contactPage, links, Locale, seo } from '../lib/content';
 import { trackEvent } from '../lib/analytics';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
+import { localize } from '../lib/routes';
 
 type ContactProps = {
   locale: Locale;
@@ -70,13 +71,13 @@ export function Contact({ locale, path }: ContactProps) {
               <div className="contact-methods" aria-label={copy.title}>
                 <a className="contact-method" href={links.email}>
                   <span className="contact-method-icon">
-                    <i className="ri-mail-line" />
+                    <i className="ri-mail-line" aria-hidden="true" />
                   </span>
                   <span>{links.emailText}</span>
                 </a>
                 <a className="contact-method" href={links.privacyEmail}>
                   <span className="contact-method-icon">
-                    <i className="ri-shield-user-line" />
+                    <i className="ri-shield-user-line" aria-hidden="true" />
                   </span>
                   <span>
                     {copy.privacyLabel}: {links.privacyEmailText}
@@ -97,12 +98,12 @@ export function Contact({ locale, path }: ContactProps) {
 
               <div className="contact-form-field">
                 <label htmlFor="contact-name">{copy.nameLabel} *</label>
-                <input id="contact-name" name="name" type="text" placeholder={copy.namePlaceholder} required />
+                <input id="contact-name" name="name" type="text" autoComplete="name" placeholder={copy.namePlaceholder} required />
               </div>
 
               <div className="contact-form-field">
                 <label htmlFor="contact-email">{copy.emailFieldLabel} *</label>
-                <input id="contact-email" name="email" type="email" placeholder={copy.emailPlaceholder} required />
+                <input id="contact-email" name="email" type="email" autoComplete="email" placeholder={copy.emailPlaceholder} required />
               </div>
 
               <div className="contact-form-field">
@@ -112,21 +113,29 @@ export function Contact({ locale, path }: ContactProps) {
                   name="message"
                   placeholder={copy.messagePlaceholder}
                   maxLength={500}
+                  aria-describedby="contact-privacy contact-count"
                   value={message}
                   onChange={(event) => setMessage(event.target.value)}
                   required
                 />
-                <span className="char-counter">
+                <span className="char-counter" id="contact-count">
                   {message.length}/500 {copy.characters}
                 </span>
               </div>
+
+              <p className="contact-privacy-note" id="contact-privacy">
+                {locale === 'ja' ? '制作の相談は、サイトURLと困っていることを一つ添えてください。顧客情報やパスワードは不要です。送信内容は問い合わせ対応のためNetlify経由で受け取ります。' : 'For a project enquiry, include your site URL and one problem to solve. Do not send customer records or passwords. Your message is received through Netlify for handling your enquiry.'}
+                {' '}<a href={localize(locale, '/privacy')}>{locale === 'ja' ? '個人情報の扱い' : 'Privacy policy'}</a>
+              </p>
 
               <button className="button primary contact-submit" type="submit" disabled={status === 'sending'}>
                 {status === 'sending' ? copy.sending : copy.send}
               </button>
 
-              {status === 'success' && <p className="form-status success">{copy.success}</p>}
-              {status === 'error' && <p className="form-status error">{copy.error}</p>}
+              <div role="status" aria-live="polite" aria-atomic="true">
+                {status === 'success' && <p className="form-status success">{copy.success}</p>}
+                {status === 'error' && <p className="form-status error">{copy.error}</p>}
+              </div>
             </form>
           </div>
         </section>
