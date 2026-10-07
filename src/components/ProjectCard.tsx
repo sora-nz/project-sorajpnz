@@ -7,9 +7,11 @@ type ProjectCardProps = {
   action: string;
   featured?: string;
   headingLevel?: 2 | 3;
+  caseStudyHref?: string;
+  caseStudyAction?: string;
 };
 
-export function ProjectCard({ image, title, description, tags, href, action, featured, headingLevel = 2 }: ProjectCardProps) {
+export function ProjectCard({ image, title, description, tags, href, action, featured, headingLevel = 2, caseStudyHref, caseStudyAction }: ProjectCardProps) {
   const Heading = headingLevel === 3 ? 'h3' : 'h2';
   return (
     <article className="project-card">
@@ -25,10 +27,12 @@ export function ProjectCard({ image, title, description, tags, href, action, fea
             <span key={tag}>{tag}</span>
           ))}
         </div>
-        <a className="button primary small" href={href}>
+        <div className="project-card-actions"><a className="button primary small" href={href}>
           <span>{action}</span>
           <i className="ri-arrow-right-line" aria-hidden="true" />
         </a>
+        {caseStudyHref && caseStudyAction && <a className="text-link" href={caseStudyHref}>{caseStudyAction}<i className="ri-arrow-right-line" aria-hidden="true" /></a>}
+        </div>
       </div>
     </article>
   );

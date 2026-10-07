@@ -1,10 +1,12 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { ProjectCard } from '../components/ProjectCard';
+import { VideoFeature } from '../components/VideoFeature';
 import { assets, common, home, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
+import { latestVideo } from '../lib/videos';
 
 type HomeProps = {
   locale: Locale;
@@ -73,6 +75,7 @@ export function Home({ locale, path }: HomeProps) {
                 <h2>{h.heroContextTitle}</h2>
                 <p>{h.heroContextBody}</p>
                 <ul className="home-context-paths" aria-label={locale === 'ja' ? '主なコンテンツ' : 'Main content formats'}>
+                  <li>Videos</li>
                   <li>Notes</li>
                   <li>Tools</li>
                   <li>Projects</li>
@@ -81,6 +84,14 @@ export function Home({ locale, path }: HomeProps) {
             </aside>
           </div>
         </section>
+
+        {locale === 'ja' && (
+          <section className="content-section home-latest-video">
+            <div className="section-inner">
+              <VideoFeature locale={locale} video={latestVideo} headingLevel={2} showNote />
+            </div>
+          </section>
+        )}
 
         <section className="content-section services-section home-entry-section">
           <div className="section-inner">
@@ -128,6 +139,8 @@ export function Home({ locale, path }: HomeProps) {
                   href={`${base}/tools/nz-life-reality-calculator`}
                   action={p.calculatorAction}
                   featured={p.calculatorBadge}
+                  caseStudyHref={`${base}/projects/nz-life-reality-calculator`}
+                  caseStudyAction={locale === 'ja' ? '制作メモ' : 'Read case study'}
                 />
               <ProjectCard
                 image={assets.dashboard}
@@ -158,49 +171,36 @@ export function Home({ locale, path }: HomeProps) {
           </div>
         </section>
 
-        <section className="content-section field-notes-section">
-          <div className="section-inner field-notes-inner">
-            <figure className="field-notes-photo reveal-on-scroll">
-              <img src={assets.blogOceanFloat} alt="" loading="lazy" decoding="async" />
-            </figure>
-            <div className="field-notes-copy reveal-on-scroll">
-              <p className="eyebrow">{h.fieldNotesEyebrow}</p>
-              <h2>{h.fieldNotesTitle}</h2>
-              <p>{h.fieldNotesBody}</p>
-              <div className="button-row left">
-              <a className="button primary small" href={links.youtube} target="_blank" rel="noopener noreferrer">
-                <i className="ri-youtube-line" aria-hidden="true" />
-                <span>{locale === 'ja' ? 'YouTubeで見る' : 'Watch on YouTube'}</span>
-              </a>
-              <a className="button secondary small" href={`${base}/blog`}>
-                <span>{h.fieldNotesCta}</span>
-                <i className="ri-arrow-right-line" />
-              </a>
-              </div>
+        {locale === 'en' && (
+          <section className="content-section field-notes-section home-latest-video">
+            <div className="section-inner">
+              <VideoFeature locale={locale} video={latestVideo} headingLevel={2} />
             </div>
-          </div>
-        </section>
+          </section>
+        )}
 
-        <section className="content-section trust-section home-principles-section">
-          <div className="section-inner home-principles">
-            <div className="home-principles-heading">
-              <p className="eyebrow">{h.trustEyebrow}</p>
-              <h2>{h.trustTitle}</h2>
-              <p>{h.trustIntro}</p>
+        {locale === 'en' && (
+          <section className="content-section trust-section home-principles-section">
+            <div className="section-inner home-principles">
+              <div className="home-principles-heading">
+                <p className="eyebrow">{h.trustEyebrow}</p>
+                <h2>{h.trustTitle}</h2>
+                <p>{h.trustIntro}</p>
+              </div>
+              <ol className="home-principles-list">
+                {h.trustItems.map((item, index) => (
+                  <li key={item.title}>
+                    <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
+                    <div>
+                      <h3>{item.title}</h3>
+                      <p>{item.body}</p>
+                    </div>
+                  </li>
+                ))}
+              </ol>
             </div>
-            <ol className="home-principles-list">
-              {h.trustItems.map((item, index) => (
-                <li key={item.title}>
-                  <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                  <div>
-                    <h3>{item.title}</h3>
-                    <p>{item.body}</p>
-                  </div>
-                </li>
-              ))}
-            </ol>
-          </div>
-        </section>
+          </section>
+        )}
 
         <section className="content-section social-channel-section home-social-section">
           <div className="section-inner social-channel-layout">

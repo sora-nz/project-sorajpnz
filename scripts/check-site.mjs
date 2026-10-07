@@ -4,15 +4,16 @@ import { readFile } from 'node:fs/promises';
 // Run after the production build. Browser rendering is checked separately.
 const paths = [];
 for (const locale of ['ja', 'en']) {
-  for (const suffix of ['', '/blog', '/links', '/projects', '/projects/nz-japan-relocation', '/projects/rent-radar', '/services', '/contact', '/privacy', '/terms', '/disclaimer', '/tools/nz-life-reality-calculator']) {
+  for (const suffix of ['', '/blog', '/links', '/projects', '/projects/nz-life-reality-calculator', '/projects/nz-japan-relocation', '/projects/rent-radar', '/services', '/contact', '/privacy', '/terms', '/disclaimer', '/tools/nz-life-reality-calculator']) {
     paths.push(`/${locale}${suffix}`);
   }
 }
 paths.push('/ja/blog/auckland-living-cost-hourly-wage');
+paths.push('/ja/blog/first-surfcasting-nz');
 const titles = new Set();
 for (const path of paths) {
   const html = await readFile(`out${path}/index.html`, 'utf8');
-  const noIndex = path.endsWith('/links') || path.includes('/tools/') || path === '/en/blog';
+  const noIndex = path.endsWith('/links') || path.includes('/tools/') || path === '/en/blog' || path === '/ja/blog/first-surfcasting-nz';
   assert.ok(html.includes(`content="${noIndex ? 'noindex' : 'index'}, follow"`), `${path}: robots`);
   assert.ok(html.includes(`<link rel="canonical" href="https://sorajpnz.com${path}"`), `${path}: canonical`);
   assert.ok(html.includes(`<meta property="og:url" content="https://sorajpnz.com${path}"`), `${path}: social URL`);
@@ -29,7 +30,10 @@ const sitemap = await readFile('public/sitemap.xml', 'utf8');
 assert.ok(!sitemap.includes('/tools/nz-life-reality-calculator'), 'Calculator stays out of sitemap');
 assert.ok(!sitemap.includes('auckland-shore-fishing'), 'Private draft stays out of sitemap');
 assert.ok(sitemap.includes('/ja/blog/auckland-living-cost-hourly-wage'), 'Existing published note stays included');
+assert.ok(!sitemap.includes('/blog/first-surfcasting-nz'), 'New video note waits for review before indexing');
+for (const locale of ['ja', 'en']) assert.ok(sitemap.includes(`/${locale}/projects/nz-life-reality-calculator`));
 const headers = await readFile('public/_headers', 'utf8');
+assert.ok(headers.includes('/ja/blog/first-surfcasting-nz\n  X-Robots-Tag: noindex, follow'));
 for (const locale of ['en', 'ja']) {
   assert.ok(headers.includes(`/${locale}/tools/nz-life-reality-calculator\n  X-Robots-Tag: noindex, follow`));
 }

@@ -1,5 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { VideoFeature } from '../components/VideoFeature';
+import { latestVideo } from '../lib/videos';
 import { assets, blog, links, Locale, seo } from '../lib/content';
 import { blogJsonLd, useMeta } from '../lib/useMeta';
 
@@ -74,6 +76,9 @@ export function Blog({ locale, path }: BlogProps) {
         </section>
         <section className="content-section notes-hub-section">
           <div className="section-inner notes-hub-inner">
+            <div className="notes-video-entry">
+              <VideoFeature locale={locale} video={latestVideo} headingLevel={2} showNote={locale === 'ja'} />
+            </div>
             <div className="notes-editorial-lead">
               {b.latestNote ? (
                 <a
@@ -93,7 +98,7 @@ export function Blog({ locale, path }: BlogProps) {
                   </figure>
                   <div className="notes-latest-copy">
                     <div className="notes-meta-row">
-                      <span>{b.latestNote.label}</span>
+                      <span>{locale === 'ja' ? '生活費のノート' : b.latestNote.label}</span>
                       <span>{b.latestNote.category}</span>
                       <time dateTime={b.latestNote.date}>{b.latestNote.dateLabel}</time>
                     </div>

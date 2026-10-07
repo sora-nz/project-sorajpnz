@@ -1,6 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Blog } from './pages/Blog';
 import { AucklandLivingCostArticle } from './pages/AucklandLivingCostArticle';
+import { VideoFieldNote } from './pages/VideoFieldNote';
+import { CalculatorProject } from './pages/CalculatorProject';
 import { Contact } from './pages/Contact';
 import { Home } from './pages/Home';
 import { LegalPage } from './pages/LegalPage';
@@ -62,9 +64,11 @@ export function App() {
   if (key === '/services') return <Services locale={locale} path={path} />;
   if (key === '/links') return <LinksPage locale={locale} path={path} />;
   if (key === '/projects') return <Projects locale={locale} path={path} />;
+  if (key === '/projects/nz-life-reality-calculator') return <CalculatorProject locale={locale} path={path} />;
   if (key === '/projects/nz-japan-relocation') return <RelocationProject locale={locale} path={path} />;
   if (key === '/projects/rent-radar' || key === '/project') return <RentRadarProject locale={locale} path={path} />;
   if (key === '/blog') return <Blog locale={locale} path={path} />;
+  if (locale === 'ja' && key === '/blog/first-surfcasting-nz') return <VideoFieldNote path={path} />;
   if (locale === 'ja' && key === '/blog/auckland-living-cost-hourly-wage') {
     return <AucklandLivingCostArticle locale={locale} path={path} />;
   }

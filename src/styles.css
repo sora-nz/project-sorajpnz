@@ -4898,3 +4898,188 @@ img {
     padding: 40px 0;
   }
 }
+
+/* Shared video entry: a local thumbnail, not an auto-loading third-party player. */
+.home-latest-video {
+  padding: 64px 0;
+  background: #f4f8f6;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.video-feature {
+  display: grid;
+  grid-template-columns: minmax(0, 1.08fr) minmax(0, 1fr);
+  align-items: center;
+  gap: 36px;
+}
+
+.video-feature-image {
+  position: relative;
+  display: block;
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  border-radius: 8px;
+  background: #e5ebe8;
+}
+
+.video-feature-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.video-play {
+  position: absolute;
+  right: 16px;
+  bottom: 16px;
+  display: grid;
+  place-items: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  color: #ffffff;
+  background: rgba(17, 24, 39, 0.86);
+  font-size: 25px;
+}
+
+.video-feature-copy { min-width: 0; }
+.video-feature-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+  margin-bottom: 14px;
+  color: #496452;
+  font-size: 13px;
+  font-weight: 650;
+}
+
+.video-feature-copy h2,
+.video-feature-copy h3 {
+  margin: 0;
+  font-size: 27px;
+  line-height: 1.55;
+  letter-spacing: 0;
+  overflow-wrap: anywhere;
+}
+
+.video-feature-copy > p {
+  margin: 16px 0 22px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.9;
+}
+
+.video-feature-actions,
+.project-card-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+}
+
+.video-feature-copy h2 + .video-feature-actions,
+.video-feature-copy h3 + .video-feature-actions { margin-top: 22px; }
+.home-context-paths { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+
+.text-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 44px;
+  color: var(--blue-strong);
+  font-size: 14px;
+  font-weight: 650;
+  text-decoration: underline;
+  text-decoration-color: rgba(0, 102, 204, 0.32);
+  text-underline-offset: 4px;
+}
+
+.video-feature a:hover,
+.text-link:hover { text-decoration: underline; text-underline-offset: 4px; }
+.video-feature a:focus-visible,
+.text-link:focus-visible { outline: 3px solid var(--blue-strong); outline-offset: 5px; }
+
+.notes-video-entry {
+  padding-bottom: 42px;
+  margin-bottom: 42px;
+  border-bottom: 1px solid var(--line);
+}
+
+.video-note-feature {
+  margin-top: 32px;
+}
+
+.video-note-feature .video-feature {
+  grid-template-columns: 1fr;
+  gap: 22px;
+}
+
+.video-note-page .draft-article-header h1 { font-size: 38px; line-height: 1.55; }
+.video-moment-list { list-style: none; padding: 0; margin: 22px 0 0; }
+.video-moment-list li { border-top: 1px solid var(--line); }
+.video-moment-list li:last-child { border-bottom: 1px solid var(--line); }
+.video-moment-list a {
+  display: grid;
+  grid-template-columns: 54px minmax(0, 1fr) 18px;
+  align-items: start;
+  gap: 12px;
+  padding: 16px 0;
+  font-size: 16px;
+  line-height: 1.8;
+}
+.video-moment-list time { color: var(--blue-strong); font-variant-numeric: tabular-nums; }
+.video-note-caution { margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--line); }
+.video-note-caution p { color: var(--muted); font-size: 14px; line-height: 1.9; }
+
+.calculator-project-hero {
+  padding: 52px 0 40px;
+  background: #f6f8fa;
+  text-align: left;
+}
+.calculator-project-hero h1 { margin: 12px 0; font-size: 40px; line-height: 1.3; }
+.calculator-project-hero .back-link { margin-bottom: 28px; }
+.calculator-project-hero .eyebrow { font-size: 13px; }
+.calculator-project-hero .calculator-project-subtitle { font-size: 22px; line-height: 1.6; color: var(--ink); }
+.calculator-project-hero .calculator-project-lead { font-size: 17px; line-height: 1.9; max-width: 760px; }
+.calculator-project-hero .button-row { justify-content: flex-start; margin-top: 26px; }
+.calculator-project-overview { padding-top: 40px; padding-bottom: 0; }
+.calculator-project-summary {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 24px 32px;
+  margin: 0 0 36px;
+}
+.calculator-project-summary div { border-top: 1px solid var(--line); padding-top: 14px; }
+.calculator-project-summary dt { font-size: 13px; font-weight: 650; color: var(--blue-strong); margin-bottom: 8px; }
+.calculator-project-summary dd { margin: 0; font-size: 16px; line-height: 1.8; color: var(--muted); }
+.calculator-project-preview { margin: 0; }
+.calculator-project-preview img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: contain; border: 1px solid var(--line); border-radius: 8px; }
+.calculator-project-preview figcaption { font-size: 13px; line-height: 1.8; color: var(--muted); margin-top: 12px; }
+.calculator-project-list { padding-left: 1.25em; color: var(--muted); font-size: 16px; line-height: 1.9; }
+.calculator-project-list li + li { margin-top: 10px; }
+.calculator-project-flow { list-style: none; padding: 0; counter-reset: flow; }
+.calculator-project-flow li { position: relative; padding: 22px 0 22px 42px; border-bottom: 1px solid var(--line); counter-increment: flow; }
+.calculator-project-flow li::before { content: counter(flow, decimal-leading-zero); position: absolute; left: 0; top: 24px; color: var(--blue-strong); font-size: 13px; font-weight: 650; }
+.calculator-project-flow h3,
+.calculator-project-decisions h3 { font-size: 18px; line-height: 1.6; margin: 0; }
+.calculator-project-flow p,
+.calculator-project-decisions p { margin-top: 8px; }
+.calculator-project-decisions { display: grid; gap: 24px; margin-top: 22px; }
+.calculator-project-note { border-left: 3px solid #88a9a0; padding: 2px 0 2px 20px; margin-top: 28px; }
+.calculator-project-note p { font-size: 14px; }
+.calculator-project-code-links code { display: block; font-size: 12px; color: var(--muted); overflow-wrap: anywhere; }
+.calculator-project-code-links a { background: transparent; border-radius: 0; }
+
+@media (max-width: 768px) {
+  .video-feature { grid-template-columns: 1fr; gap: 24px; }
+  .home-latest-video { padding: 40px 0; }
+  .video-feature-copy h2,
+  .video-feature-copy h3 { font-size: 24px; }
+  .video-note-page .draft-article-header h1 { font-size: 30px; }
+  .calculator-project-hero { padding: 32px 0; }
+  .calculator-project-hero h1 { font-size: 30px; overflow-wrap: anywhere; }
+  .calculator-project-hero .calculator-project-subtitle { font-size: 20px; }
+  .calculator-project-summary { grid-template-columns: 1fr; gap: 18px; }
+  .calculator-project-overview { padding-top: 28px; }
+}
