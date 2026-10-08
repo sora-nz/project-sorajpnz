@@ -40,6 +40,14 @@ for (const locale of ['en', 'ja']) {
 const css = await readFile('src/styles.css', 'utf8');
 assert.match(css, /\.reveal-on-scroll\s*\{[^}]*opacity:\s*1;/, 'Observer cannot hide essential content');
 assert.ok(css.includes('prefers-reduced-motion: reduce'));
+const home = await readFile('src/pages/Home.tsx', 'utf8');
+assert.ok(!home.includes('reveal-on-scroll') && !home.includes('useReveal'), 'Home is visible independently of observer state');
+assert.ok(home.includes('wayfinding-home') && home.includes('assets.aucklandHarbour'), 'Selected Home motif uses the real harbour image');
+for (const locale of ['ja', 'en']) {
+  const html = await readFile(`out/${locale}/index.html`, 'utf8');
+  assert.ok(html.includes('rel="preload" as="image" href="/assets/home/auckland-harbour-view.jpg"'), 'Home preloads its actual hero');
+  assert.ok(!html.includes('/assets/homepage1.jpg'), 'Home does not preload a retired hero');
+}
 const content = await readFile('src/lib/content.ts', 'utf8');
 for (const match of content.matchAll(/footerPrivacyOfficer: '([^']+)'/g)) {
   assert.ok(match[1].includes('privacy@sorajpnz.com'), 'Privacy email remains available');

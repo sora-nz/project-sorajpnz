@@ -1,11 +1,8 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { ProjectCard } from '../components/ProjectCard';
-import { VideoFeature } from '../components/VideoFeature';
-import { assets, common, home, links, Locale, projects, seo, socialLinks } from '../lib/content';
+import { assets, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
-import { useReveal } from '../lib/useReveal';
 import { latestVideo } from '../lib/videos';
 
 type HomeProps = {
@@ -14,273 +11,225 @@ type HomeProps = {
 };
 
 export function Home({ locale, path }: HomeProps) {
-  const h = home[locale];
-  const c = common[locale];
+  const isJapanese = locale === 'ja';
   const p = projects[locale];
   const meta = seo[locale].home;
   const base = localize(locale);
-  const visibleSocialChannels = socialLinks.filter((channel) => channel.href && channel.showOnHome);
-  const primarySocial = visibleSocialChannels.find((channel) => channel.id === 'youtube');
-  const secondarySocial = visibleSocialChannels.filter((channel) => channel.id !== 'youtube');
-  const primaryRel = h.primaryExternal ? 'noopener noreferrer' : undefined;
+  const video = latestVideo[locale];
+  const videoDate = new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-NZ', {
+    year: 'numeric',
+    month: isJapanese ? '2-digit' : 'short',
+    day: '2-digit',
+    timeZone: 'UTC'
+  }).format(new Date(`${latestVideo.date}T00:00:00Z`));
+  const channels = socialLinks.filter((channel) => channel.href && channel.showOnHome);
+  const destinations = [
+    {
+      id: 'video',
+      href: links.youtube,
+      external: true,
+      icon: 'ri-play-fill',
+      label: isJapanese ? '動画を見る' : 'Watch the videos',
+      hint: isJapanese ? 'NZでの暮らしや海の動画' : 'Everyday life and ocean days in NZ'
+    },
+    {
+      id: 'notes',
+      href: `${base}/blog`,
+      external: false,
+      icon: 'ri-article-line',
+      label: isJapanese ? 'Notesを読む' : 'Read the Notes',
+      hint: isJapanese ? '生活のこと、仕事のこと' : 'Living costs, work, and field notes'
+    },
+    {
+      id: 'projects',
+      href: `${base}/projects`,
+      external: false,
+      icon: 'ri-tools-fill',
+      label: isJapanese ? '作ったものを見る' : 'Explore my work',
+      hint: isJapanese ? '使えるツールとプロジェクト' : 'Working tools and data projects'
+    }
+  ];
+  const selectedWork = [
+    {
+      path: 'nz-japan-relocation',
+      image: assets.dashboard,
+      width: 1399,
+      height: 949,
+      title: p.relocationTitle,
+      body: isJapanese ? '家賃、食費、為替を公開データから見るダッシュボード。' : 'A public-data dashboard connecting rent, food prices, and exchange rates.'
+    },
+    {
+      path: 'rent-radar',
+      image: assets.rentRadar,
+      width: 1106,
+      height: 616,
+      title: p.rentRadarTitle,
+      body: isJapanese ? 'エリアごとの家賃を比べ、変化を追う小さなデータプロジェクト。' : 'A small data project for comparing local rents and tracking changes.'
+    }
+  ];
 
-  useReveal(`${locale}:${path}`);
   useMeta({
     locale,
     path,
     title: meta.title,
     description: meta.description,
-    image: assets.hero,
+    image: assets.aucklandHarbour,
     jsonLd: pageJsonLd(locale, path, meta.title, meta.description)
   });
 
+  const renderVideo = (className: string) => (
+    <section className={className} aria-labelledby="way-video-heading">
+      <div className="way-section-heading">
+        <h2 id="way-video-heading">{isJapanese ? '最近の動画' : 'Life behind the projects'}</h2>
+        <a className="way-link" href={links.youtube} target="_blank" rel="noopener noreferrer">
+          {isJapanese ? 'すべての動画を見る' : 'All videos'}
+          <i className="ri-arrow-right-line" aria-hidden="true" />
+        </a>
+      </div>
+      <div className="way-video">
+        <a className="way-video-image" href={latestVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
+          <img src={latestVideo.thumbnail} alt={video.imageAlt} width={1280} height={720} loading="lazy" decoding="async" />
+          <span className="way-play" aria-hidden="true"><i className="ri-play-fill" /></span>
+        </a>
+        <div className="way-video-copy">
+          <h3>
+            <a href={latestVideo.url} target="_blank" rel="noopener noreferrer">{isJapanese ? 'Theaと初めての浜釣り' : video.title}</a>
+          </h3>
+          <time dateTime={latestVideo.date}>{videoDate}</time>
+          <p>{video.description}</p>
+          <div className="way-actions">
+            <a className="way-button way-button-youtube" href={latestVideo.url} target="_blank" rel="noopener noreferrer">
+              <i className="ri-youtube-fill" aria-hidden="true" />
+              {isJapanese ? 'YouTubeで見る' : 'Watch on YouTube'}
+              <i className="ri-arrow-right-line" aria-hidden="true" />
+            </a>
+            {isJapanese && (
+              <a className="way-link way-note-link" href={latestVideo.notePath}>
+                <i className="ri-article-line" aria-hidden="true" />
+                動画の補足ノート
+                <i className="ri-arrow-right-line" aria-hidden="true" />
+              </a>
+            )}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
+  const renderCalculator = (className: string) => (
+    <section className={className} aria-labelledby="way-tool-heading">
+      <div className="way-project-layout">
+        <a className="way-project-image" href={`${base}/tools/nz-life-reality-calculator`} aria-label={isJapanese ? 'NZ生活リアリティ計算機を開く' : 'Open the NZ Life Reality Calculator'}>
+        <img src={isJapanese ? assets.calculatorJa : assets.calculator} alt={isJapanese ? 'NZ生活リアリティ計算機の入力画面と試算結果の表示例' : 'NZ Life Reality Calculator input controls and example results'} width={1280} height={720} loading="lazy" decoding="async" />
+        <span className="way-preview-label">{isJapanese ? '表示例' : 'Example screen'}</span>
+        </a>
+        <div className="way-project-copy">
+          <p className="way-kicker">{isJapanese ? '作ったもの' : 'Featured project'}</p>
+          <h2 id="way-tool-heading">{isJapanese ? 'NZ生活リアリティ計算機' : 'NZ Life Reality Calculator'}</h2>
+          <p>{isJapanese ? '家賃や勤務時間を変えて、月の余白を試す。NZでの生活を考えるときの、シンプルな計算ツールです。' : 'A browser tool for testing how wages, rent, transport, and savings goals affect monthly room in a New Zealand budget.'}</p>
+          <p className="way-tool-note">{isJapanese ? 'NZDと日本円の参考表示に対応。入力内容は保存しません。概算ツールです。' : 'Client-side calculations, adjustable assumptions, and optional JPY reference amounts. Inputs are not stored; results are estimates.'}</p>
+          <div className="way-actions">
+            <a className="way-button way-button-tool" href={`${base}/tools/nz-life-reality-calculator`}>
+              <i className="ri-calculator-line" aria-hidden="true" />
+              {isJapanese ? '計算機を使う' : 'Try the calculator'}
+              <i className="ri-arrow-right-line" aria-hidden="true" />
+            </a>
+            <a className="way-link" href={`${base}/projects/nz-life-reality-calculator`}>
+              <i className="ri-file-text-line" aria-hidden="true" />
+              {isJapanese ? '制作メモ' : 'Read the case study'}
+              <i className="ri-arrow-right-line" aria-hidden="true" />
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+
   return (
-    <div className="page">
+    <div className="page wayfinding-home">
       <Header locale={locale} path={path} />
       <main>
-        <section className="hero-section">
-          <div className="motion-layer" aria-hidden="true">
-            <img className="motion-image animate-hero-pan" src={assets.hero} alt="" fetchPriority="high" decoding="async" />
-            <div className="image-wash" />
-          </div>
-          <div className="section-inner hero-inner">
-            <div className="hero-copy animate-slide-up">
-              <p className="eyebrow">AUCKLAND, NEW ZEALAND</p>
-              <h1>{h.title}</h1>
-              {h.role && <p className="role">{h.role}</p>}
-              <p className="hero-tagline">{h.tagline}</p>
-              <p className="hero-description">{h.description}</p>
-              <div className="button-row">
-                <a className="button primary" href={h.primaryHref} target={h.primaryExternal ? '_blank' : undefined} rel={primaryRel}>
-                  <span>{h.primaryCta}</span>
-                  <i className={h.primaryIcon} />
-                </a>
-                <a className="button secondary" href={h.contactHref}>
-                  <span>{h.contactCta}</span>
-                  <i className={h.contactIcon} />
-                </a>
-              </div>
-            </div>
-            <aside className="home-context-panel" aria-label={locale === 'ja' ? 'SoraJPNZについて' : 'About SoraJPNZ'}>
-              <figure className="home-context-photo">
-                <img
-                  src={assets.aucklandHarbour}
-                  alt={locale === 'ja' ? '海越しに見たAucklandの街並み' : 'Auckland skyline seen across the harbour'}
-                  decoding="async"
-                />
-                <figcaption>{h.heroContextCaption}</figcaption>
-              </figure>
-              <div className="home-context-copy">
-                <p className="eyebrow">{h.heroContextEyebrow}</p>
-                <h2>{h.heroContextTitle}</h2>
-                <p>{h.heroContextBody}</p>
-                <ul className="home-context-paths" aria-label={locale === 'ja' ? '主なコンテンツ' : 'Main content formats'}>
-                  <li>Videos</li>
-                  <li>Notes</li>
-                  <li>Tools</li>
-                  <li>Projects</li>
-                </ul>
-              </div>
-            </aside>
+        <section className="way-hero">
+          <img className="way-hero-image" src={assets.aucklandHarbour} alt={isJapanese ? '木陰の遊歩道から、海越しに見えるAucklandの街並み' : 'Auckland skyline across the harbour, viewed from a tree-lined waterfront path'} width={1024} height={768} loading="eager" fetchPriority="high" decoding="async" />
+          <div className="way-inner way-hero-copy">
+            <h1>SoraJPNZ</h1>
+            <p className="way-hero-subtitle">{isJapanese ? 'NZの日常と、作ったもの。' : 'New Zealand life, and things I build.'}</p>
+            <p className="way-hero-description">{isJapanese ? 'SoraとTheaの日々、海の動画、生活の疑問から作ったツール。' : 'Practical tools and data projects, with videos and notes from life in Auckland.'}</p>
           </div>
         </section>
 
-        {locale === 'ja' && (
-          <section className="content-section home-latest-video">
-            <div className="section-inner">
-              <VideoFeature locale={locale} video={latestVideo} headingLevel={2} showNote />
-            </div>
-          </section>
-        )}
-
-        <section className="content-section services-section home-entry-section">
-          <div className="section-inner">
-            <div className="section-heading">
-              <p className="eyebrow">{h.servicesEyebrow}</p>
-              <h2>{h.servicesTitle}</h2>
-              <p>{h.servicesSubtitle}</p>
-            </div>
-            <div className="service-grid">
-              {h.services.map((service) => (
-                <a
-                  className="service-card home-entry-card reveal-on-scroll"
-                  href={service.href}
-                  key={service.title}
-                >
-                  <span className="service-icon" aria-hidden="true">
-                    <i className={service.icon} />
-                  </span>
-                  <h3>{service.title}</h3>
-                  <p>{service.body}</p>
-                  <span className="service-card-action">
-                    {service.cta}
-                    <i className="ri-arrow-right-line" />
-                  </span>
-                </a>
-              ))}
-            </div>
-          </div>
-        </section>
-
-        <section className="content-section projects-proof-section">
-          <div className="section-inner">
-            <div className="section-heading reveal-on-scroll">
-              <p className="eyebrow">{h.projectsEyebrow}</p>
-              <h2>{h.projectsTitle}</h2>
-              <p>{h.projectsIntro}</p>
-            </div>
-            <div className="project-grid">
-                <ProjectCard
-                  image={locale === 'ja' ? assets.calculatorJa : assets.calculator}
-                  headingLevel={3}
-                  title={p.calculatorTitle}
-                  description={p.calculatorDescription}
-                  tags={p.calculatorTags}
-                  href={`${base}/tools/nz-life-reality-calculator`}
-                  action={p.calculatorAction}
-                  featured={p.calculatorBadge}
-                  caseStudyHref={`${base}/projects/nz-life-reality-calculator`}
-                  caseStudyAction={locale === 'ja' ? '制作メモ' : 'Read case study'}
-                />
-              <ProjectCard
-                image={assets.dashboard}
-                headingLevel={3}
-                title={p.relocationTitle}
-                description={p.relocationDescription}
-                tags={p.tags}
-                href={`${base}/projects/nz-japan-relocation`}
-                action={c.viewProject}
-                featured={p.featured}
-              />
-              <ProjectCard
-                image={assets.rentRadar}
-                headingLevel={3}
-                title={p.rentRadarTitle}
-                description={p.rentRadarDescription}
-                tags={p.rentTags}
-                href={`${base}/projects/rent-radar`}
-                action={c.viewProject}
-              />
-            </div>
-            <div className="button-row soft-link-row">
-              <a className="button secondary small" href={`${base}/projects`}>
-                <span>{h.projectsCta}</span>
-                <i className="ri-arrow-right-line" />
+        <nav className="way-destinations" aria-label={isJapanese ? 'SoraJPNZの主な入口' : 'Explore SoraJPNZ'}>
+          <div className="way-inner way-destination-grid">
+            {destinations.map((destination) => (
+              <a className={`way-destination way-destination-${destination.id}`} href={destination.href} target={destination.external ? '_blank' : undefined} rel={destination.external ? 'noopener noreferrer' : undefined} key={destination.id}>
+                <span className="way-destination-icon" aria-hidden="true"><i className={destination.icon} /></span>
+                <span className="way-destination-text">
+                  <span className="way-destination-label">{destination.label}<i className="ri-arrow-right-line" aria-hidden="true" /></span>
+                  <span className="way-destination-hint">{destination.hint}</span>
+                </span>
               </a>
-            </div>
+            ))}
           </div>
-        </section>
+        </nav>
 
-        {locale === 'en' && (
-          <section className="content-section field-notes-section home-latest-video">
-            <div className="section-inner">
-              <VideoFeature locale={locale} video={latestVideo} headingLevel={2} />
-            </div>
-          </section>
-        )}
-
-        {locale === 'en' && (
-          <section className="content-section trust-section home-principles-section">
-            <div className="section-inner home-principles">
-              <div className="home-principles-heading">
-                <p className="eyebrow">{h.trustEyebrow}</p>
-                <h2>{h.trustTitle}</h2>
-                <p>{h.trustIntro}</p>
-              </div>
-              <ol className="home-principles-list">
-                {h.trustItems.map((item, index) => (
-                  <li key={item.title}>
-                    <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <div>
-                      <h3>{item.title}</h3>
-                      <p>{item.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
-            </div>
-          </section>
-        )}
-
-        <section className="content-section social-channel-section home-social-section">
-          <div className="section-inner social-channel-layout">
-            <div className="section-heading social-channel-heading reveal-on-scroll">
-              <p className="eyebrow">{h.socialEyebrow}</p>
-              <h2>{h.socialTitle}</h2>
-              <p>{h.socialSubtitle}</p>
-              <a className="button secondary small" href={`${base}/links`}>
-                <span>{h.allLinksCta}</span>
-                <i className="ri-links-line" />
+        <div className="way-inner way-content">
+          <aside className="way-about" aria-labelledby="way-about-heading">
+            <h2 id="way-about-heading">{isJapanese ? 'SoraとThea' : 'Sora in Auckland'}</h2>
+            <img className="way-about-image" src={assets.blogTaranaki} alt={isJapanese ? 'NZの山道で撮ったSoraとTheaの写真' : 'Sora and Thea on a New Zealand walking track'} width={1152} height={1536} loading="lazy" decoding="async" />
+            <p>{isJapanese ? 'Aucklandで暮らすSoraです。Theaとの日常や海での記録を動画に。生活していて気になったことは、ノートや計算機にも残しています。' : 'I am Sora, an Auckland-based analyst building practical tools and data projects. This site brings together my work and the New Zealand life behind it.'}</p>
+            <nav className="way-directory" aria-label={isJapanese ? '主なコンテンツ' : 'Tools and professional work'}>
+              <h3>{isJapanese ? '主なコンテンツ' : 'Tools and work'}</h3>
+              <a className="way-directory-link" href={`${base}/tools/nz-life-reality-calculator`}>
+                <i className="ri-calculator-line" aria-hidden="true" />
+                <span><strong>{isJapanese ? 'NZ生活リアリティ計算機' : 'NZ Life Reality Calculator'}</strong><small>{isJapanese ? '家賃や勤務時間から月の余白を試す' : 'Test a monthly budget with your assumptions'}</small></span>
+                <i className="ri-arrow-right-s-line" aria-hidden="true" />
               </a>
-            </div>
-
-            <div className="social-channel-cards">
-              {primarySocial && (
-                <a
-                  className={`social-primary-card ${primarySocial.tone} reveal-on-scroll`}
-                  href={primarySocial.href}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  <span className="social-card-label">{h.socialPrimaryLabel}</span>
-                  <span className="social-card-icon" aria-hidden="true">
-                    <i className={primarySocial.icon} />
-                  </span>
-                  <strong>{primarySocial.label}</strong>
-                  <span>{primarySocial.role[locale]}</span>
+              <a className="way-directory-link" href={`${base}/projects`}>
+                <i className="ri-macbook-line" aria-hidden="true" />
+                <span><strong>{isJapanese ? 'これまでのプロジェクト' : 'Selected projects'}</strong><small>{isJapanese ? '計算機、データ分析、個人開発' : 'Calculators, dashboards, and documented work'}</small></span>
+                <i className="ri-arrow-right-s-line" aria-hidden="true" />
+              </a>
+              {!isJapanese && (
+                <a className="way-directory-link" href={links.linkedin} target="_blank" rel="noopener noreferrer">
+                  <i className="ri-linkedin-box-line" aria-hidden="true" />
+                  <span><strong>LinkedIn</strong><small>Background and professional profile</small></span>
+                  <i className="ri-external-link-line" aria-hidden="true" />
                 </a>
               )}
-
-              <div className="social-card-grid">
-                {secondarySocial.map((channel) => (
-                  <a
-                    className={`social-mini-card ${channel.tone} reveal-on-scroll`}
-                    href={channel.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    key={channel.id}
-                  >
-                    <span className="social-card-icon" aria-hidden="true">
-                      <i className={channel.icon} />
-                    </span>
-                    <strong>{channel.label}</strong>
-                    <span>{channel.role[locale]}</span>
-                  </a>
-                ))}
-              </div>
-            </div>
+            </nav>
+          </aside>
+          <div className="way-feature">
+            {isJapanese ? renderVideo('way-video-feature-main') : renderCalculator('way-project-feature way-project-feature-main')}
           </div>
+        </div>
+
+        {isJapanese ? renderCalculator('way-inner way-project-feature') : renderVideo('way-inner way-video-feature way-video-feature-secondary')}
+
+        <section className="way-inner way-work-list" aria-labelledby="way-work-heading">
+          <div className="way-section-heading">
+            <h2 id="way-work-heading">{isJapanese ? 'ほかに作ったもの' : 'More selected work'}</h2>
+            <a className="way-link" href={`${base}/projects`}>{isJapanese ? 'プロジェクト一覧' : 'All projects'}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
+          </div>
+          {selectedWork.map((work) => (
+            <a className="way-work-row" href={`${base}/projects/${work.path}`} key={work.path}>
+              <img src={work.image} alt="" width={work.width} height={work.height} loading="lazy" decoding="async" />
+              <div><h3>{work.title}</h3><p>{work.body}</p></div>
+              <i className="ri-arrow-right-line" aria-hidden="true" />
+            </a>
+          ))}
         </section>
 
-        <section className="content-section profile-band home-about-section">
-          <div className="section-inner split-grid">
-            <div className="info-panel reveal-on-scroll">
-              <img className="profile-image" src={assets.avatar} alt={locale === 'ja' ? '大谷 空' : 'Sora Oya'} loading="lazy" decoding="async" />
-              <p className="eyebrow">Profile</p>
-              <h2>{h.aboutTitle}</h2>
-              <p>{h.about}</p>
-              <div className="button-row left profile-social-row">
-                <a className="icon-button linkedin" href={links.linkedin} target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
-                  <i className="ri-linkedin-fill" />
-                </a>
-                <a className="icon-button github" href={links.github} target="_blank" rel="noopener noreferrer" aria-label="GitHub">
-                  <i className="ri-github-fill" />
-                </a>
-                <a className="icon-button youtube" href={links.youtube} target="_blank" rel="noopener noreferrer" aria-label="YouTube">
-                  <i className="ri-youtube-fill" />
-                </a>
-              </div>
-            </div>
-            <div className="info-panel reveal-on-scroll">
-              <p className="eyebrow">Contact</p>
-              <h2>{h.contactTitle}</h2>
-              <p>{h.contact}</p>
-              <a className="button primary" href={links.email}>
-                <span>{c.emailMe}</span>
-                <i className="ri-mail-line" />
-              </a>
-            </div>
-          </div>
+        <section className="way-inner way-footer-links" aria-labelledby="way-connect-heading">
+          <h2 id="way-connect-heading">{isJapanese ? '動画・SNSと連絡先' : 'Videos, social, and contact'}</h2>
+          <p>{isJapanese ? '短い更新はSNSに、あとから読み返したいことはNotesに。採用やコラボレーションのご連絡もこちらからどうぞ。' : 'Follow the videos and short updates, or get in touch about analyst roles, projects, and collaboration.'}</p>
+          <nav className="way-social-links" aria-label={isJapanese ? 'SNSと連絡先' : 'Social and contact links'}>
+            {channels.map((channel) => (
+              <a href={channel.href} target="_blank" rel="noopener noreferrer" key={channel.id}><i className={channel.icon} aria-hidden="true" />{channel.label}</a>
+            ))}
+            <a href={links.github} target="_blank" rel="noopener noreferrer"><i className="ri-github-line" aria-hidden="true" />GitHub</a>
+            <a href={links.linkedin} target="_blank" rel="noopener noreferrer"><i className="ri-linkedin-box-line" aria-hidden="true" />LinkedIn</a>
+            <a href={`${base}/contact`}><i className="ri-mail-line" aria-hidden="true" />{isJapanese ? 'お問い合わせ' : 'Contact'}</a>
+          </nav>
         </section>
       </main>
       <Footer locale={locale} />

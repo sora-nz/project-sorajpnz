@@ -51,7 +51,7 @@ for (const locale of ['en', 'ja']) {
       imageAlt: seo[locale][key].title,
       noIndex: key === 'links' || (key === 'blog' && locale === 'en'),
       alternates: key !== 'blog',
-      preload: key === 'home' ? assets.hero : undefined });
+      preload: key === 'home' ? assets.aucklandHarbour : undefined });
   }
   for (const [kind, translations] of Object.entries(legal)) {
     const copy = translations[locale];
