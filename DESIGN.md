@@ -59,6 +59,11 @@ tokens:
 
 ## Design Goal
 
+The Home-specific visual direction selected in October 2026 is **Auckland Wayfinding**.
+Read [the Home motif and motion rules](docs/design/HOME_WAYFINDING.md) before changing Home.
+It uses real Auckland photography, a route-green destination band, and unframed content.
+Keep these overrides scoped to Home; the general tokens below remain the defaults for other pages and tools.
+
 SoraJPNZ should feel like a calm, practical Japan x New Zealand decision-making media site with a strong portfolio and data-tool backbone.
 
 The design should help readers trust the information, scan practical tools, and understand tradeoffs. It should not feel like a flashy AI startup, luxury travel blog, crypto dashboard, or generic influencer site.

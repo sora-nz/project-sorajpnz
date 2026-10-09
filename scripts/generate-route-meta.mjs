@@ -6,6 +6,12 @@ import ts from 'typescript';
 const contentSource = await readFile(resolve('src/lib/content.ts'), 'utf8');
 const contentJs = ts.transpileModule(contentSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
 const { seo, assets, legal, aucklandLivingCostMeta } = await import(`data:text/javascript;base64,${Buffer.from(contentJs).toString('base64')}`);
+const projectSource = await readFile(resolve('src/lib/calculatorProject.ts'), 'utf8');
+const projectJs = ts.transpileModule(projectSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
+const { calculatorProject } = await import(`data:text/javascript;base64,${Buffer.from(projectJs).toString('base64')}`);
+const videoSource = await readFile(resolve('src/lib/videos.ts'), 'utf8');
+const videoJs = ts.transpileModule(videoSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
+const { surfcastingVideo, videoNoteMeta } = await import(`data:text/javascript;base64,${Buffer.from(videoJs).toString('base64')}`);
 
 const siteUrl = 'https://sorajpnz.com';
 const outputDirectory = resolve('out');
@@ -35,6 +41,8 @@ const routes = [
 routes.forEach((route) => { route.noIndex = true; });
 const pagePaths = { home: '', services: '/services', projects: '/projects', relocation: '/projects/nz-japan-relocation', rentRadar: '/projects/rent-radar', blog: '/blog', links: '/links', contact: '/contact' };
 for (const locale of ['en', 'ja']) {
+  routes.push({ locale, path: `/${locale}/projects/nz-life-reality-calculator`, ...calculatorProject[locale].meta,
+    image: locale === 'ja' ? assets.calculatorJa : assets.calculator, imageAlt: calculatorProject[locale].previewAlt });
   for (const [key, suffix] of Object.entries(pagePaths)) {
     const image = key === 'projects' || key === 'relocation' ? assets.dashboard
       : key === 'rentRadar' ? assets.rentRadar
@@ -43,7 +51,7 @@ for (const locale of ['en', 'ja']) {
       imageAlt: seo[locale][key].title,
       noIndex: key === 'links' || (key === 'blog' && locale === 'en'),
       alternates: key !== 'blog',
-      preload: key === 'home' ? assets.hero : undefined });
+      preload: key === 'home' ? assets.aucklandHarbour : undefined });
   }
   for (const [kind, translations] of Object.entries(legal)) {
     const copy = translations[locale];
@@ -53,6 +61,8 @@ for (const locale of ['en', 'ja']) {
 }
 routes.push({ locale: 'ja', ...aucklandLivingCostMeta, title: `${aucklandLivingCostMeta.title} | SoraJPNZ`,
   image: assets.aucklandHarbour, imageAlt: 'Auckland', alternates: false });
+routes.push({ locale: 'ja', ...videoNoteMeta, title: `${videoNoteMeta.title} | SoraJPNZ Notes`,
+  image: surfcastingVideo.thumbnail, imageAlt: surfcastingVideo.ja.imageAlt, alternates: false });
 
 function escapeAttribute(value) {
   return value

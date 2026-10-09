@@ -31,6 +31,7 @@ export const links = {
   linkedin: 'https://www.linkedin.com/in/soraoya/',
   github: 'https://github.com/sora-nz',
   youtube: 'https://www.youtube.com/@sorajpnz',
+  support: 'https://buymeacoffee.com/sorajpnz',
   relocationGithub: 'https://github.com/sora-nz/nz-relocation-affordability-dashboard',
   tableau:
     'https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard',
@@ -233,9 +234,9 @@ export const seo = {
   },
   ja: {
     home: {
-      title: 'SoraJPNZ | NZ生活の選択を数字と実体験で考える',
+      title: 'SoraJPNZ | Aucklandでの暮らし、海の動画、使えるツール',
       description:
-        'Aucklandで実際に迷った生活費、仕事、お金のことを、Notes、計算機、データプロジェクトとして残しているSoraJPNZの個人サイトです。'
+        'SoraとTheaのNZでの日常や釣りのVlog、生活費のNotes、計算機、データプロジェクト。Aucklandで暮らしながら撮ったもの、考えたこと、作ったものをまとめています。'
     },
     services: {
       title: 'サービス | SoraJPNZ',
@@ -260,7 +261,7 @@ export const seo = {
     blog: {
       title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        'Aucklandで暮らして気づいたNZ生活費、仕事、お金、日本との違いを、数字や一次情報と一緒に書き残すSoraJPNZ Notesです。'
+        'NZ生活費のノートと、Theaとの釣りVlogに添える海の記録。Aucklandでの暮らしや、作ったツールにつながる話を書き残しています。'
     },
     links: {
       title: 'リンク | SoraJPNZ',
@@ -365,12 +366,12 @@ export const home = {
       'For Business Systems Analyst, Business Analyst, Data Analyst, or AI and process-improvement opportunities, interviews, and project conversations, please get in touch.'
   },
   ja: {
-    title: 'NZ生活の選択を、数字と実体験で現実的に考える。',
-    role: '',
+    title: 'SoraJPNZ',
+    role: 'NZの日常と、作ったもの。',
     tagline:
-      '生活費、仕事、お金、日本との違い、海のある暮らし。Aucklandで実際に迷ったことを、Notes・Tools・Projectsにまとめています。',
+      'SoraとTheaのNZでの日常や、釣り・スピアフィッシングの動画。生活していて気になったことを、Notesや使えるツールにも残しています。',
     description:
-      '自分の経験だけで決めつけず、数字や一次情報も確かめながら、あとで見返せる形にしています。',
+      '動画を見に来た方も、生活費を調べたい方も、作ったものを見たい方も。気になるところからどうぞ。',
     primaryCta: 'SoraJPNZ Notesを見る',
     primaryHref: '/ja/blog',
     primaryExternal: false,
@@ -379,9 +380,9 @@ export const home = {
     contactHref: '/ja/tools/nz-life-reality-calculator',
     contactIcon: 'ri-calculator-line',
     heroContextEyebrow: 'Aucklandから',
-    heroContextTitle: '迷ったことを、次に使える形へ。',
+    heroContextTitle: '日々の記録と、小さな制作。',
     heroContextBody:
-      '生活の疑問はNotesに書き、数字で確かめたいものは計算機やダッシュボードにします。海で過ごした日も、NZで暮らす日常として残します。',
+      'YouTubeには二人の日常を。Notesにはあとから読み返したい話を。Projectsには計算機やダッシュボードの制作記録をまとめています。',
     heroContextCaption: 'Aucklandで暮らしながら考えていること。',
     socialEyebrow: 'Social Channels',
     socialTitle: '動画と日々の記録',
@@ -1107,7 +1108,7 @@ export const blog = {
   ja: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'Aucklandで暮らしていて気になった生活費、仕事、お金、日本との違いを、数字と自分の経験で書き残しています。海や釣りの話も、こちらで暮らす日々の一部です。',
+      '動画に入りきらなかったこと、暮らしていて気になったこと、ツールを作りながら考えたこと。Aucklandの日々を、あとから読み返せるノートに。',
     eyebrow: 'Notes from Auckland',
     introTitle: 'Aucklandで迷ったことを、あとから読み返せるノートに。',
     body:
@@ -1134,7 +1135,7 @@ export const blog = {
     },
     categoryTitle: '扱うテーマ',
     categoryBody:
-      'Aucklandで暮らしていて実際に迷ったことを、五つのテーマに分けて書いています。うまくいった話だけでなく、まだ答えの出ていないことも残します。',
+      '今あるノートはまだ少し。これから書く話も含めて、五つのテーマで考えています。',
     categories: [
       {
         icon: 'ri-home-5-line',

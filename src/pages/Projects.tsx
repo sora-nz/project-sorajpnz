@@ -48,6 +48,8 @@ export function Projects({ locale, path }: ProjectsProps) {
               href={`${base}/tools/nz-life-reality-calculator`}
               action={p.calculatorAction}
               featured={p.calculatorBadge}
+              caseStudyHref={`${base}/projects/nz-life-reality-calculator`}
+              caseStudyAction={locale === 'ja' ? '制作メモを読む' : 'Read case study'}
             />
             <ProjectCard
               image={assets.dashboard}
