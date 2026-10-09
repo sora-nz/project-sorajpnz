@@ -68,6 +68,8 @@ Additional checks:
 - Local console warnings/errors: none observed. Independent read-only code review found no P1/P2 issues.
 - Upstream requests use fixed URLs, no visitor cookies/auth forwarding, bounded bodies, timeouts and shared cache. No iframe, payment widget, user-input storage or new package was added.
 
-Remaining operational check: confirm the two new functions on the actual Netlify Deploy Preview after this commit is pushed. Feed refresh is cached and not promised to be instantaneous. Hosting-provider usage should be monitored; this implementation does not promise zero hosting cost.
+Deploy Preview verification: Netlify is ready; the thumbnail endpoint serves a valid JPEG. The feed endpoint currently returns the graceful fallback on Netlify even though the identical local handler succeeds. No deterministic runtime defect was found in independent review. Repeated cache-expiry checks did not establish a live Netlify feed. This remains a pre-merge operational issue, not a claimed successful automatic-refresh test. Safe failure categories were added to distinguish a fixed-source HTTP failure from a timeout without exposing visitor data. Desktop/mobile 390px/430px, JA -> EN -> JA and support links work on the actual preview.
+
+Feed refresh is cached and not promised to be instantaneous. Hosting-provider usage should be monitored; this implementation does not promise zero hosting cost.
 
 final result: passed

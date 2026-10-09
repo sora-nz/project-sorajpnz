@@ -61,7 +61,11 @@ try {
     globalThis.fetch = async () => upstream();
     const fallback = await youtubeFeed(new Request(feedEndpoint));
     assert.equal(fallback.status, 200, 'Public-feed failures return a quiet fallback response');
-    assert.deepEqual(await fallback.json(), { available: false });
+    const failure = await fallback.json();
+    assert.equal(failure.available, false);
+    assert.ok(['upstream-status', 'timeout', 'unavailable'].includes(failure.reason));
+    if (failure.upstreamStatus) assert.equal(failure.upstreamStatus, 503);
+    assert.ok(!JSON.stringify(failure).includes('private'), 'Failure details contain no visitor or upstream response data');
     assert.match(fallback.headers.get('Netlify-CDN-Cache-Control'), /max-age=300/);
   }
 
@@ -104,7 +108,7 @@ try {
     youtubeFeed(new Request(feedEndpoint)),
     youtubeThumbnail(new Request(thumbnailEndpoint))
   ]);
-  assert.deepEqual(await timedOutFeed.json(), { available: false });
+  assert.deepEqual(await timedOutFeed.json(), { available: false, reason: 'timeout' });
   assert.equal(timedOutThumbnail.status, 404);
   assert.ok(performance.now() - started < 6500, 'Both requests time out near the five-second limit');
 } finally {

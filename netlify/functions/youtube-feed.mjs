@@ -13,8 +13,10 @@ export default async function youtubeFeed(request) {
       throw new Error('Unexpected public feed');
     }
     return new Response(xml, { headers: cacheHeaders('application/atom+xml; charset=utf-8', 1800) });
-  } catch {
-    return new Response(JSON.stringify({ available: false }), {
+  } catch (error) {
+    const status = error instanceof Error ? error.message.match(/^Public source unavailable \((\d{3})\)$/) : null;
+    const reason = status ? 'upstream-status' : error instanceof Error && error.message === 'Public source timed out' ? 'timeout' : 'unavailable';
+    return new Response(JSON.stringify({ available: false, reason, ...(status ? { upstreamStatus: Number(status[1]) } : {}) }), {
       headers: cacheHeaders('application/json; charset=utf-8', 300)
     });
   }

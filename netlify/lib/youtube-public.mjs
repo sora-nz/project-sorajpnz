@@ -82,7 +82,7 @@ export async function fetchPublicBytes(url, acceptedTypes) {
           credentials: 'omit',
           signal: controller.signal
         });
-        if (response.status !== 200) throw new Error('Public source unavailable');
+        if (response.status !== 200) throw new Error(`Public source unavailable (${response.status})`);
         const contentType = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase();
         if (!contentType || !acceptedTypes.includes(contentType)) throw new Error('Unexpected content type');
         return readBoundedBody(response, controller.signal);

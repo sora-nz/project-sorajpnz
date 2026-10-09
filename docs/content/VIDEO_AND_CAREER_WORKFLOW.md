@@ -28,6 +28,7 @@ The first surfcasting companion is a review version: `noindex, follow`, excluded
 - No API key, database, analytics, browser storage, new package, payment embed or background polling is used.
 - Feed request times out after five seconds on the server and eight seconds in the browser. Invalid or unavailable data leaves checked uploads visible, with a link to the channel.
 - The public feed can be delayed or temporarily unavailable. Site CDN caches successful feeds for 30 minutes, failures for five minutes and thumbnails for a day. Provider usage limits and function costs still apply; caching reduces repeated requests but is not a promise of zero cost.
+- Failure responses expose only a small status category and, when relevant, the fixed public source's HTTP status. No visitor details, upstream body or raw error message is returned.
 - Test with `node scripts/check-youtube-feed.mjs`; production UI verification must also exercise the real browser parser and same-origin endpoints. Plain Vite previews do not run Netlify functions and intentionally fall back.
 
 ## Optional Support
