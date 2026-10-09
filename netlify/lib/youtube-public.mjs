@@ -77,7 +77,7 @@ export async function fetchPublicBytes(url, acceptedTypes) {
       (async () => {
         const response = await fetch(url, {
           method: 'GET',
-          headers: { Accept: acceptedTypes.join(', ') },
+          headers: { Accept: acceptedTypes.join(', '), 'User-Agent': 'SoraJPNZ/1.0 (+https://sorajpnz.com)' },
           redirect: 'error',
           credentials: 'omit',
           signal: controller.signal

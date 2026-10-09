@@ -25,7 +25,8 @@ function assertPublicOptions(options) {
   assert.equal(options.method, 'GET');
   assert.equal(options.redirect, 'error');
   assert.equal(options.credentials, 'omit');
-  assert.deepEqual(Object.keys(options.headers), ['Accept'], 'Only a server-created Accept header is sent upstream');
+  assert.deepEqual(Object.keys(options.headers), ['Accept', 'User-Agent'], 'Only server-created public request headers are sent upstream');
+  assert.equal(options.headers['User-Agent'], 'SoraJPNZ/1.0 (+https://sorajpnz.com)');
   assert.equal(options.body, undefined);
   assert.ok(options.signal instanceof AbortSignal);
 }

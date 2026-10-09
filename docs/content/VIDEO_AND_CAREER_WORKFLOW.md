@@ -25,6 +25,7 @@ The first surfcasting companion is a review version: `noindex, follow`, excluded
 
 - Fixed channel: `UCIDqwDcCJEDbBhgBZW0PDpA`; no arbitrary source URLs accepted.
 - Small Netlify functions fetch the public Atom feed and new thumbnails. Visitors contact this site's endpoints, not a YouTube player. Cookies, authorization, visitor IP headers and calculator inputs are not forwarded upstream.
+- The upstream request identifies itself as SoraJPNZ with a fixed public User-Agent; it does not impersonate a visitor's browser.
 - No API key, database, analytics, browser storage, new package, payment embed or background polling is used.
 - Feed request times out after five seconds on the server and eight seconds in the browser. Invalid or unavailable data leaves checked uploads visible, with a link to the channel.
 - The public feed can be delayed or temporarily unavailable. Site CDN caches successful feeds for 30 minutes, failures for five minutes and thumbnails for a day. Provider usage limits and function costs still apply; caching reduces repeated requests but is not a promise of zero cost.
