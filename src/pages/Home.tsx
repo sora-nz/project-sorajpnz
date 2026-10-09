@@ -14,14 +14,20 @@ type HomeProps = {
 };
 
 function VideoThumbnail({ video, locale }: { video: HomeVideo; locale: Locale }) {
-  const [failed, setFailed] = useState(false);
+  const [failedSources, setFailedSources] = useState<string[]>([]);
   const known = recentVideos.find((item) => item.id === video.id);
+  const sources = [video.thumbnail, known?.thumbnail, assets.logoMark];
+  const src = sources.find((source) => source && !failedSources.includes(source)) ?? assets.logoMark;
+  const isLogo = src === assets.logoMark;
+  const alt = isLogo ? 'SoraJPNZ' : src === known?.thumbnail ? known[locale].imageAlt
+    : locale === 'ja' ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`;
   return (
-    <img className={failed ? 'way-thumbnail-fallback' : undefined}
-      src={failed ? assets.logoMark : known?.thumbnail ?? video.thumbnail}
-      alt={failed ? 'SoraJPNZ' : known?.[locale].imageAlt ?? (locale === 'ja' ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`)}
+    <img className={isLogo ? 'way-thumbnail-fallback' : undefined}
+      src={src} alt={alt}
       width={1280} height={720} loading="lazy" decoding="async"
-      onError={() => setFailed(true)} />
+      onError={() => {
+        if (!isLogo) setFailedSources((failed) => failed.includes(src) ? failed : [...failed, src]);
+      }} />
   );
 }
 
@@ -33,9 +39,9 @@ export function Home({ locale, path }: HomeProps) {
   const { videos, status: videoStatus } = useRecentVideos(homeVideoFallback);
   const featuredVideo = videos[0];
   const knownVideo = recentVideos.find((item) => item.id === featuredVideo.id);
-  const video = knownVideo?.[locale] ?? {
-    title: featuredVideo.title,
-    description: isJapanese ? 'SoraとTheaのNZでの日々を、YouTubeに残しています。' : 'A recent upload from SoraJPNZ. The original YouTube title is shown.'
+  const video = {
+    title: videoStatus === 'live' ? featuredVideo.title : knownVideo?.[locale].title ?? featuredVideo.title,
+    description: knownVideo?.[locale].description ?? (isJapanese ? 'SoraとTheaのNZでの日々を、YouTubeに残しています。' : 'A recent upload from SoraJPNZ. The original YouTube title is shown.')
   };
   const formatVideoDate = (date: string) => new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-NZ', {
     year: 'numeric',
@@ -110,7 +116,7 @@ export function Home({ locale, path }: HomeProps) {
       <p className="way-video-intro">{isJapanese ? 'Theaとの日常、海に出かけた日、短いひとこま。新しい動画も、ここから見られます。' : 'Life with Thea, ocean days, and shorter moments from New Zealand.'}</p>
       <div className="way-video" data-video-source={videoStatus}>
         <a className="way-video-image" href={featuredVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
-          <VideoThumbnail video={featuredVideo} locale={locale} key={featuredVideo.id} />
+          <VideoThumbnail video={featuredVideo} locale={locale} key={`${featuredVideo.id}:${featuredVideo.thumbnail}`} />
           <span className="way-play" aria-hidden="true"><i className="ri-play-fill" /></span>
         </a>
         <div className="way-video-copy">
@@ -140,11 +146,11 @@ export function Home({ locale, path }: HomeProps) {
           <h3>{isJapanese ? 'ほかの動画・ショート' : 'More videos and short moments'}</h3>
           <ul className="way-video-list">
             {videos.slice(1).map((item) => {
-              const title = recentVideos.find((entry) => entry.id === item.id)?.[locale].title ?? item.title;
+              const title = videoStatus === 'live' ? item.title : recentVideos.find((entry) => entry.id === item.id)?.[locale].title ?? item.title;
               return (
                 <li key={item.id}>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <VideoThumbnail video={item} locale={locale} />
+                    <VideoThumbnail video={item} locale={locale} key={`${item.id}:${item.thumbnail}`} />
                     <h4>{title}</h4>
                     <time dateTime={item.date}>{formatVideoDate(item.date)}</time>
                   </a>

@@ -72,7 +72,7 @@ try {
 
   globalThis.fetch = async (url, options) => {
     upstreamCalls += 1;
-    assert.equal(url, `https://i.ytimg.com/vi/${validId}/hqdefault.jpg`);
+    assert.equal(url, `https://i.ytimg.com/vi/${validId}/maxresdefault.jpg`);
     assertPublicOptions(options);
     return new Response(jpeg, { headers: { 'Content-Type': 'image/jpeg', 'Set-Cookie': 'upstream=private' } });
   };
@@ -80,7 +80,7 @@ try {
   assert.equal(thumbnail.status, 200);
   assert.deepEqual(new Uint8Array(await thumbnail.arrayBuffer()), jpeg);
   assert.equal(thumbnail.headers.get('Content-Type'), 'image/jpeg');
-  assert.match(thumbnail.headers.get('Netlify-CDN-Cache-Control'), /max-age=86400/);
+  assert.match(thumbnail.headers.get('Netlify-CDN-Cache-Control'), /max-age=1800/);
   assert.equal(thumbnail.headers.get('Netlify-Vary'), 'query=id');
   assert.equal(thumbnail.headers.get('Set-Cookie'), null);
   const beforeInvalidThumbnail = upstreamCalls;
@@ -89,6 +89,32 @@ try {
   }
   assert.equal((await youtubeThumbnail(new Request(thumbnailEndpoint, { method: 'POST' }))).status, 405);
   assert.equal(upstreamCalls, beforeInvalidThumbnail);
+
+  for (const unavailableMaxres of [
+    () => new Response('Unavailable', { status: 404 }),
+    () => new Response(jpeg, { headers: { 'Content-Type': 'text/html' } }),
+    () => new Response('not a jpeg', { headers: { 'Content-Type': 'image/jpeg' } }),
+    () => new Response(jpeg, { headers: { 'Content-Type': 'image/jpeg', 'Content-Length': String(publicResponseLimit + 1) } }),
+    () => new Response(new Uint8Array(publicResponseLimit + 1), { headers: { 'Content-Type': 'image/jpeg' } })
+  ]) {
+    const attempts = [];
+    globalThis.fetch = async (url, options) => {
+      attempts.push(url);
+      assertPublicOptions(options);
+      if (url.endsWith('/maxresdefault.jpg')) return unavailableMaxres();
+      assert.equal(url, `https://i.ytimg.com/vi/${validId}/hqdefault.jpg`);
+      return new Response(jpeg, { headers: { 'Content-Type': 'image/jpeg', 'Set-Cookie': 'upstream=private' } });
+    };
+    const hqThumbnail = await youtubeThumbnail(new Request(thumbnailEndpoint, { headers: privateHeaders }));
+    assert.equal(hqThumbnail.status, 200, 'Unavailable or invalid max-resolution images fall back to HQ');
+    assert.deepEqual(new Uint8Array(await hqThumbnail.arrayBuffer()), jpeg);
+    assert.deepEqual(attempts, [
+      `https://i.ytimg.com/vi/${validId}/maxresdefault.jpg`,
+      `https://i.ytimg.com/vi/${validId}/hqdefault.jpg`
+    ]);
+    assert.match(hqThumbnail.headers.get('Netlify-CDN-Cache-Control'), /max-age=1800/);
+    assert.equal(hqThumbnail.headers.get('Set-Cookie'), null);
+  }
 
   for (const upstream of [
     () => new Response('Unavailable', { status: 404 }),
@@ -102,8 +128,13 @@ try {
     assert.match(fallback.headers.get('Netlify-CDN-Cache-Control'), /max-age=300/);
   }
 
-  // Use the production five-second limit; both mocks deliberately ignore abort.
-  globalThis.fetch = () => new Promise(() => {});
+  // Both image attempts share five seconds, even if upstream ignores abort.
+  const timedOutImageAttempts = [];
+  globalThis.fetch = (url, options) => {
+    assertPublicOptions(options);
+    if (url.startsWith('https://i.ytimg.com/')) timedOutImageAttempts.push({ url, signal: options.signal });
+    return new Promise(() => {});
+  };
   const started = performance.now();
   const [timedOutFeed, timedOutThumbnail] = await Promise.all([
     youtubeFeed(new Request(feedEndpoint)),
@@ -111,12 +142,17 @@ try {
   ]);
   assert.deepEqual(await timedOutFeed.json(), { available: false, reason: 'timeout' });
   assert.equal(timedOutThumbnail.status, 404);
-  assert.ok(performance.now() - started < 6500, 'Both requests time out near the five-second limit');
+  assert.deepEqual(timedOutImageAttempts.map(({ url }) => url), [
+    `https://i.ytimg.com/vi/${validId}/maxresdefault.jpg`,
+    `https://i.ytimg.com/vi/${validId}/hqdefault.jpg`
+  ], 'The HQ attempt still runs after a max-resolution timeout');
+  assert.ok(timedOutImageAttempts.every(({ signal }) => signal.aborted), 'Both timed-out requests are aborted');
+  assert.ok(performance.now() - started < 6500, 'Thumbnail attempts share one five-second limit, not two');
 } finally {
   globalThis.fetch = originalFetch;
 }
 assert.equal(globalThis.fetch, originalFetch);
-console.log('PASS: fixed-source feed/thumbnail proxies, caching, methods, query validation, privacy, MIME/signatures, size bounds and timeouts');
+console.log('PASS: fixed-source proxies, max-resolution/HQ fallback, 30-minute caching, methods, query validation, privacy, MIME/signatures, size bounds and shared timeouts');
 
 const entry = (id, published, title = 'NZ life video') => ({ id, published, title, channelId });
 const videos = normalizeYoutubeFeedEntries([

@@ -11,7 +11,7 @@ For the next three months, SoraJPNZ supports two priorities: growing YouTube and
 
 ## After a Video Upload
 
-1. Home reads the public YouTube channel feed on page load and shows up to four recent uploads, including Shorts. A new public upload does not require a Home edit or a redeploy. The feed and site cache mean updates are not instantaneous.
+1. Home reads the public YouTube channel feed on page load and shows up to four recent uploads, including Shorts. A new public upload does not require a Home edit or a redeploy. Live titles and thumbnails come from YouTube rather than the checked fallback copy. The feed and 30-minute site cache mean updates are not instantaneous: revisit or reload Home after the cache refreshes; an already-open page does not poll for changes. Private or unlisted videos are not expected in the public channel feed.
 2. Occasionally refresh the checked fallback list in `src/lib/videos.ts`, with real IDs, dates, localized copy and local thumbnails in `public/assets/videos/`. This list also supplies the selected video on Notes Hub. Do not fetch viewer statistics or embed a tracking player by default.
 3. If a note adds something useful, write a short companion. Use the video or Sora's own notes as evidence. Automatic captions can help find a scene, but are not enough to establish fish species, measurements, safety advice, or legal rules.
 4. Ask Sora to review personal reflections, gear names, and any potentially sensitive locations. Do not invent them or publish exact fishing spots by inference.
@@ -19,7 +19,7 @@ For the next three months, SoraJPNZ supports two priorities: growing YouTube and
 
 The first surfcasting companion is a review version: `noindex, follow`, excluded from sitemap, with an English-toggle fallback to `/en/blog`. Its small on-site link supports review; it is not an access restriction. Publishing it for search requires a separate explicit decision.
 
-`surfcastingVideo` pins that companion's video, date, image and scene links. Do not replace it when updating Home's fallback list. New feed entries do not automatically get companion notes or translations; English Home uses the original public title until a reviewed translation is available.
+`surfcastingVideo` pins that companion's video, date, image and scene links. Do not replace it when updating Home's fallback list. New feed entries do not automatically get companion notes or translations. English Home shows original YouTube titles in live mode; its checked fallback has reviewed English titles. Notes Hub remains curated rather than an automatically generated article list.
 
 ## Automatic Feed Boundaries
 
@@ -28,9 +28,12 @@ The first surfcasting companion is a review version: `noindex, follow`, excluded
 - The upstream request identifies itself as SoraJPNZ with a fixed public User-Agent; it does not impersonate a visitor's browser.
 - No API key, database, analytics, browser storage, new package, payment embed or background polling is used.
 - Feed request times out after five seconds on the server and eight seconds in the browser. Invalid or unavailable data leaves checked uploads visible, with a link to the channel.
-- The public feed can be delayed or temporarily unavailable. Site CDN caches successful feeds for 30 minutes, failures for five minutes and thumbnails for a day. Provider usage limits and function costs still apply; caching reduces repeated requests but is not a promise of zero cost.
+- The public feed can be delayed or temporarily unavailable. Site CDN caches successful feeds and thumbnails for 30 minutes, failures for five minutes. Provider usage limits and function costs still apply; caching reduces repeated requests but is not a promise of zero cost.
+- Thumbnails try the maximum-resolution JPEG, then HQ if it is missing, too large, invalid or slow. Both attempts share a five-second server deadline. If the proxy still fails, Home uses a known local thumbnail when available, then the logo. Existing image dimensions keep the layout stable.
 - Failure responses expose only a small status category and, when relevant, the fixed public source's HTTP status. No visitor details, upstream body or raw error message is returned.
 - Test with `node scripts/check-youtube-feed.mjs`; production UI verification must also exercise the real browser parser and same-origin endpoints. Plain Vite previews do not run Netlify functions and intentionally fall back.
+
+On 2026-10-10 (NZ), the deployed preview feed and Home live state succeeded. The earlier upstream HTTP 404 was no longer reproduced; this is not a claim that upstream outages have been permanently fixed. Keep the fallback, and reconsider a server-side YouTube Data API only if persistent failures justify that extra setup. No API key is needed for the current public-feed approach.
 
 ## Optional Support
 

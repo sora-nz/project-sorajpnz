@@ -62,14 +62,15 @@ async function readBoundedBody(response, signal) {
   return bytes;
 }
 
-export async function fetchPublicBytes(url, acceptedTypes) {
+export async function fetchPublicBytes(url, acceptedTypes, timeoutMs = requestTimeoutMs) {
   const controller = new AbortController();
+  const boundedTimeoutMs = Number.isFinite(timeoutMs) ? Math.max(1, Math.min(requestTimeoutMs, timeoutMs)) : requestTimeoutMs;
   let timer;
   const timeout = new Promise((_, reject) => {
     timer = setTimeout(() => {
       controller.abort();
       reject(new Error('Public source timed out'));
-    }, requestTimeoutMs);
+    }, boundedTimeoutMs);
   });
 
   try {
