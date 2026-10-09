@@ -29,7 +29,7 @@ The first surfcasting companion is a review version: `noindex, follow`, excluded
 - No API key, database, analytics, browser storage, new package, payment embed or background polling is used.
 - Feed request times out after five seconds on the server and eight seconds in the browser. Invalid or unavailable data leaves checked uploads visible, with a link to the channel.
 - The public feed can be delayed or temporarily unavailable. Site CDN caches successful feeds and thumbnails for 30 minutes, failures for five minutes. Provider usage limits and function costs still apply; caching reduces repeated requests but is not a promise of zero cost.
-- Thumbnails try the maximum-resolution JPEG, then HQ if it is missing, too large, invalid or slow. Both attempts share a five-second server deadline. If the proxy still fails, Home uses a known local thumbnail when available, then the logo. Existing image dimensions keep the layout stable.
+- Thumbnails try the maximum-resolution JPEG, then HQ if it is missing, too large, invalid or slow. Images have a separate 512KiB ceiling; the feed retains its 128KiB limit. Both image attempts share a five-second server deadline. If the proxy still fails, Home uses a known local thumbnail when available, then the logo. Existing image dimensions keep the layout stable.
 - Failure responses expose only a small status category and, when relevant, the fixed public source's HTTP status. No visitor details, upstream body or raw error message is returned.
 - Test with `node scripts/check-youtube-feed.mjs`; production UI verification must also exercise the real browser parser and same-origin endpoints. Plain Vite previews do not run Netlify functions and intentionally fall back.
 

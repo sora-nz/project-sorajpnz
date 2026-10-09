@@ -1,4 +1,4 @@
-import { cacheHeaders, fetchPublicBytes, invalidRequest } from '../lib/youtube-public.mjs';
+import { cacheHeaders, fetchPublicBytes, invalidRequest, thumbnailResponseLimit } from '../lib/youtube-public.mjs';
 
 export default async function youtubeThumbnail(request) {
   if (request.method !== 'GET') return invalidRequest(405, 'GET');
@@ -13,7 +13,7 @@ export default async function youtubeThumbnail(request) {
     // Reserve time for the smaller image within one shared five-second budget.
     const timeoutMs = variant === 'maxresdefault' ? Math.min(2500, remainingMs) : remainingMs;
     try {
-      const image = await fetchPublicBytes(`https://i.ytimg.com/vi/${id}/${variant}.jpg`, ['image/jpeg'], timeoutMs);
+      const image = await fetchPublicBytes(`https://i.ytimg.com/vi/${id}/${variant}.jpg`, ['image/jpeg'], timeoutMs, thumbnailResponseLimit);
       if (image[0] !== 0xff || image[1] !== 0xd8 || image[2] !== 0xff) throw new Error('Unexpected thumbnail');
       return new Response(image, { headers: cacheHeaders('image/jpeg', 1800, 'id') });
     } catch {

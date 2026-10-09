@@ -1,5 +1,6 @@
 export const youtubeChannelId = 'UCIDqwDcCJEDbBhgBZW0PDpA';
 export const publicResponseLimit = 128 * 1024;
+export const thumbnailResponseLimit = 512 * 1024;
 const requestTimeoutMs = 5000;
 
 export function cacheHeaders(contentType, seconds, query) {
@@ -25,9 +26,9 @@ export function invalidRequest(status, allow) {
   });
 }
 
-async function readBoundedBody(response, signal) {
+async function readBoundedBody(response, signal, byteLimit) {
   const declaredLength = Number(response.headers.get('content-length'));
-  if (declaredLength > publicResponseLimit || !response.body) throw new Error('Unsupported response size');
+  if (declaredLength > byteLimit || !response.body) throw new Error('Unsupported response size');
 
   const reader = response.body.getReader();
   const cancel = () => { reader.cancel().catch(() => {}); };
@@ -41,7 +42,7 @@ async function readBoundedBody(response, signal) {
       const { done, value } = await reader.read();
       if (done) break;
       totalBytes += value.byteLength;
-      if (totalBytes > publicResponseLimit) {
+      if (totalBytes > byteLimit) {
         cancel();
         throw new Error('Response exceeds size limit');
       }
@@ -62,9 +63,10 @@ async function readBoundedBody(response, signal) {
   return bytes;
 }
 
-export async function fetchPublicBytes(url, acceptedTypes, timeoutMs = requestTimeoutMs) {
+export async function fetchPublicBytes(url, acceptedTypes, timeoutMs = requestTimeoutMs, byteLimit = publicResponseLimit) {
   const controller = new AbortController();
   const boundedTimeoutMs = Number.isFinite(timeoutMs) ? Math.max(1, Math.min(requestTimeoutMs, timeoutMs)) : requestTimeoutMs;
+  const boundedByteLimit = Number.isFinite(byteLimit) ? Math.max(1, Math.min(thumbnailResponseLimit, Math.floor(byteLimit))) : publicResponseLimit;
   let timer;
   const timeout = new Promise((_, reject) => {
     timer = setTimeout(() => {
@@ -86,7 +88,7 @@ export async function fetchPublicBytes(url, acceptedTypes, timeoutMs = requestTi
         if (response.status !== 200) throw new Error(`Public source unavailable (${response.status})`);
         const contentType = response.headers.get('content-type')?.split(';')[0].trim().toLowerCase();
         if (!contentType || !acceptedTypes.includes(contentType)) throw new Error('Unexpected content type');
-        return readBoundedBody(response, controller.signal);
+        return readBoundedBody(response, controller.signal, boundedByteLimit);
       })(),
       timeout
     ]);

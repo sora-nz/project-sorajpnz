@@ -72,6 +72,8 @@ Earlier Deploy Preview verification (2026-10-09): Netlify was ready and thumbnai
 
 Automatic-update follow-up (2026-10-10 NZ): the same deployed feed now returns valid Atom XML, and the actual Home browser reports `data-video-source="live"`. The previous upstream 404 is no longer reproduced, not proven permanently fixed. Live titles and thumbnails now take precedence over the checked registry, so edited uploads do not keep stale curated titles/covers. Maximum-resolution/HQ thumbnails share a five-second deadline and 30-minute success cache. New-upload and edited-known-title fixtures passed in the real browser; no old companion link attached to the new ID. Forced feed failure retained four checked videos. Forced thumbnail failure used the known local image or logo without hiding content. Independent read-only review found no actionable issues. No layout or animation redesign was made for this follow-up.
 
+The deployed browser also passed JA -> EN -> JA switching, all five sections visible, at desktop and mobile 390px/430px without horizontal overflow or console warnings/errors. Visual inspection caught the feed's 128KiB cap incorrectly forcing the main 313KB thumbnail to low-resolution HQ. A separate 512KiB image bound preserves the high-resolution image without loosening feed limits; this case and the upper bound now have regression tests.
+
 Feed refresh is cached and not promised to be instantaneous. Hosting-provider usage should be monitored; this implementation does not promise zero hosting cost.
 
 final result: passed

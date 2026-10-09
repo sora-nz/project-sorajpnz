@@ -3,7 +3,7 @@ import { readFile } from 'node:fs/promises';
 import ts from 'typescript';
 import youtubeFeed from '../netlify/functions/youtube-feed.mjs';
 import youtubeThumbnail from '../netlify/functions/youtube-thumbnail.mjs';
-import { publicResponseLimit, youtubeChannelId } from '../netlify/lib/youtube-public.mjs';
+import { fetchPublicBytes, publicResponseLimit, thumbnailResponseLimit, youtubeChannelId } from '../netlify/lib/youtube-public.mjs';
 
 const parserSource = await readFile(new URL('../src/lib/youtubeFeed.ts', import.meta.url), 'utf8');
 const { outputText } = ts.transpileModule(parserSource, {
@@ -90,12 +90,25 @@ try {
   assert.equal((await youtubeThumbnail(new Request(thumbnailEndpoint, { method: 'POST' }))).status, 405);
   assert.equal(upstreamCalls, beforeInvalidThumbnail);
 
+  const largeJpeg = new Uint8Array(312892);
+  largeJpeg.set(jpeg);
+  globalThis.fetch = async (url, options) => {
+    assert.equal(url, `https://i.ytimg.com/vi/${validId}/maxresdefault.jpg`);
+    assertPublicOptions(options);
+    return new Response(largeJpeg, { headers: { 'Content-Type': 'image/jpeg', 'Content-Length': String(largeJpeg.byteLength) } });
+  };
+  const largeThumbnail = await youtubeThumbnail(new Request(thumbnailEndpoint));
+  assert.equal(largeThumbnail.status, 200, 'A 313KB max-resolution thumbnail fits the separate image budget');
+  assert.equal((await largeThumbnail.arrayBuffer()).byteLength, largeJpeg.byteLength);
+  assert.equal(publicResponseLimit, 128 * 1024, 'The feed byte limit stays unchanged');
+  assert.equal(thumbnailResponseLimit, 512 * 1024);
+
   for (const unavailableMaxres of [
     () => new Response('Unavailable', { status: 404 }),
     () => new Response(jpeg, { headers: { 'Content-Type': 'text/html' } }),
     () => new Response('not a jpeg', { headers: { 'Content-Type': 'image/jpeg' } }),
-    () => new Response(jpeg, { headers: { 'Content-Type': 'image/jpeg', 'Content-Length': String(publicResponseLimit + 1) } }),
-    () => new Response(new Uint8Array(publicResponseLimit + 1), { headers: { 'Content-Type': 'image/jpeg' } })
+    () => new Response(jpeg, { headers: { 'Content-Type': 'image/jpeg', 'Content-Length': String(thumbnailResponseLimit + 1) } }),
+    () => new Response(new Uint8Array(thumbnailResponseLimit + 1), { headers: { 'Content-Type': 'image/jpeg' } })
   ]) {
     const attempts = [];
     globalThis.fetch = async (url, options) => {
@@ -120,13 +133,20 @@ try {
     () => new Response('Unavailable', { status: 404 }),
     () => new Response(jpeg, { headers: { 'Content-Type': 'text/html' } }),
     () => new Response('not a jpeg', { headers: { 'Content-Type': 'image/jpeg' } }),
-    () => new Response(new Uint8Array(publicResponseLimit + 1), { headers: { 'Content-Type': 'image/jpeg' } })
+    () => new Response(new Uint8Array(thumbnailResponseLimit + 1), { headers: { 'Content-Type': 'image/jpeg' } })
   ]) {
     globalThis.fetch = async () => upstream();
     const fallback = await youtubeThumbnail(new Request(thumbnailEndpoint));
     assert.equal(fallback.status, 404);
     assert.match(fallback.headers.get('Netlify-CDN-Cache-Control'), /max-age=300/);
   }
+
+  globalThis.fetch = async () => new Response(new Uint8Array(thumbnailResponseLimit + 1), { headers: { 'Content-Type': 'image/jpeg' } });
+  await assert.rejects(
+    () => fetchPublicBytes(`https://i.ytimg.com/vi/${validId}/maxresdefault.jpg`, ['image/jpeg'], 5000, Number.MAX_SAFE_INTEGER),
+    /Response exceeds size limit/,
+    'An explicit image budget cannot bypass the 512KiB ceiling'
+  );
 
   // Both image attempts share five seconds, even if upstream ignores abort.
   const timedOutImageAttempts = [];
