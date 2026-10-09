@@ -11,7 +11,7 @@ const projectJs = ts.transpileModule(projectSource, { compilerOptions: { module:
 const { calculatorProject } = await import(`data:text/javascript;base64,${Buffer.from(projectJs).toString('base64')}`);
 const videoSource = await readFile(resolve('src/lib/videos.ts'), 'utf8');
 const videoJs = ts.transpileModule(videoSource, { compilerOptions: { module: ts.ModuleKind.ESNext } }).outputText;
-const { latestVideo, videoNoteMeta } = await import(`data:text/javascript;base64,${Buffer.from(videoJs).toString('base64')}`);
+const { surfcastingVideo, videoNoteMeta } = await import(`data:text/javascript;base64,${Buffer.from(videoJs).toString('base64')}`);
 
 const siteUrl = 'https://sorajpnz.com';
 const outputDirectory = resolve('out');
@@ -62,7 +62,7 @@ for (const locale of ['en', 'ja']) {
 routes.push({ locale: 'ja', ...aucklandLivingCostMeta, title: `${aucklandLivingCostMeta.title} | SoraJPNZ`,
   image: assets.aucklandHarbour, imageAlt: 'Auckland', alternates: false });
 routes.push({ locale: 'ja', ...videoNoteMeta, title: `${videoNoteMeta.title} | SoraJPNZ Notes`,
-  image: latestVideo.thumbnail, imageAlt: latestVideo.ja.imageAlt, alternates: false });
+  image: surfcastingVideo.thumbnail, imageAlt: surfcastingVideo.ja.imageAlt, alternates: false });
 
 function escapeAttribute(value) {
   return value

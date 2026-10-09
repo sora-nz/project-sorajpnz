@@ -32,6 +32,17 @@ Update the real latest video, concise descriptions, related notes, and selected 
 Keep pictures honest: do not use a generated person, fake video cover, or mock calculator result as a substitute for approved content.
 Preserve privacy, sourcing, noindex policies, and calculation behavior when changing presentation.
 
+## Ongoing Videos And Support
+
+Home shows one recent upload and up to three smaller thumbnail/title/date links, including Shorts.
+The public channel feed updates this group on page load; it is not a carousel or a live player.
+Keep the actual thumbnails and titles, rather than generating replacement covers or adding sample uploads.
+Mobile uses compact thumbnail-and-title rows with no horizontal scrolling.
+
+Japanese Home remains video-first. English Home keeps the calculator and case study first, with the video group below.
+Buy Me a Coffee is an optional, quiet link below the personal introduction and near social/contact.
+Do not replace the main destinations with a donation prompt or load a payment widget automatically.
+
 ## Verification
 
 Check Japanese and English direct loads, JA/EN/JA switching, narrow mobile widths, keyboard focus, image loading, and reduced-motion rules.

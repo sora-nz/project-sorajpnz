@@ -5167,6 +5167,22 @@ img {
 .way-video-copy h3 { margin: 14px 0 2px; font-size: 25px; line-height: 1.5; }
 .way-video-copy time { display: block; color: var(--way-muted); font-size: 14px; font-variant-numeric: tabular-nums; }
 .way-video-copy p { margin: 8px 0 16px; font-size: 15px; line-height: 1.85; color: var(--way-muted); }
+.way-video-intro { margin: 0 0 16px; color: var(--way-muted); font-size: 14px; line-height: 1.85; }
+.way-recent-videos { margin-top: 26px; padding-top: 18px; border-top: 1px solid var(--way-line); }
+.way-recent-videos > h3 { margin: 0 0 12px; font-size: 16px; line-height: 1.6; }
+.way-video-list { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 18px; list-style: none; padding: 0; margin: 0; }
+.way-video-list li { min-width: 0; }
+.way-video-list a { display: block; height: 100%; }
+.way-video-list img { width: 100%; height: auto; aspect-ratio: 16 / 9; object-fit: cover; border-radius: 2px; }
+.way-video-list h4 { margin: 9px 0 5px; font-size: 14px; font-weight: 650; line-height: 1.65; overflow-wrap: anywhere; }
+.way-video-list time { color: var(--way-muted); font-size: 12px; font-variant-numeric: tabular-nums; }
+.way-video-list a:hover h4,
+.way-video-copy h3 a:hover { color: var(--way-green); text-decoration: underline; text-underline-offset: 4px; }
+.way-video-status { margin: 14px 0 0; color: var(--way-muted); font-size: 12px; line-height: 1.75; }
+.way-video-image img.way-thumbnail-fallback,
+.way-video-list img.way-thumbnail-fallback { object-fit: contain; padding: 12%; background: #f4f7f5; }
+.way-about-support { border-top: 1px solid var(--way-line); margin-top: 16px; padding-top: 12px; }
+.way-about-support p { margin: 4px 0 0; font-size: 13px; color: var(--way-muted); line-height: 1.8; }
 .way-actions { display: flex; flex-wrap: wrap; gap: 12px 26px; align-items: center; }
 .way-button { display: inline-flex; align-items: center; justify-content: center; gap: 12px; padding: 11px 20px; min-height: 46px; border-radius: 5px; font-size: 15px; line-height: 1.6; font-weight: 650; color: #fff; }
 .way-button-youtube { background: #c52219; }
@@ -5213,6 +5229,15 @@ img {
 .way-social-links a { display: inline-flex; align-items: center; gap: 7px; min-height: 44px; color: var(--way-green); font-size: 14px; }
 .way-social-links i { font-size: 20px; }
 .way-social-links a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.way-support { display: flex; justify-content: space-between; align-items: center; gap: 20px 36px; border-top: 1px solid var(--way-line); margin-top: 24px; padding-top: 24px; }
+.way-support h3 { font-size: 17px; line-height: 1.6; margin: 0 0 6px; }
+.way-support > a { flex-shrink: 0; }
+.way-support > a:hover { text-decoration: underline; text-underline-offset: 4px; }
+.links-support { display: flex; justify-content: center; align-items: center; gap: 10px; width: fit-content; margin: 20px auto 0; padding: 8px 0; font-size: 14px; line-height: 1.65; color: #304a42; }
+.links-support small { display: block; font-size: 12px; color: #5f6b7a; }
+.links-support > i { font-size: 21px; }
+.links-support:hover { text-decoration: underline; text-underline-offset: 4px; }
+.links-support:focus-visible { outline: 3px solid #075348; outline-offset: 4px; }
 .wayfinding-home .site-footer { background: #192823; }
 .wayfinding-home .site-footer p,
 .wayfinding-home .site-footer a { color: #c5d0ca; }
@@ -5272,6 +5297,12 @@ img {
   .way-section-heading h2 { font-size: 20px; }
   .way-section-heading > a { font-size: 12px; }
   .way-video-copy h3 { font-size: 22px; }
+  .way-video-list { grid-template-columns: 1fr; gap: 16px; }
+  .way-video-list a { display: grid; grid-template-columns: 124px minmax(0, 1fr); column-gap: 14px; align-content: start; }
+  .way-video-list img { grid-row: 1 / 3; }
+  .way-video-list h4 { margin: 0 0 5px; font-size: 14px; line-height: 1.6; }
+  .way-support { display: block; }
+  .way-support > a { margin-top: 12px; }
   .way-video-copy p,
   .way-project-copy > p { font-size: 15px; line-height: 1.85; }
   .way-actions { gap: 8px 20px; }

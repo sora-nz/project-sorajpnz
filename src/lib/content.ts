@@ -31,6 +31,7 @@ export const links = {
   linkedin: 'https://www.linkedin.com/in/soraoya/',
   github: 'https://github.com/sora-nz',
   youtube: 'https://www.youtube.com/@sorajpnz',
+  support: 'https://buymeacoffee.com/sorajpnz',
   relocationGithub: 'https://github.com/sora-nz/nz-relocation-affordability-dashboard',
   tableau:
     'https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard',

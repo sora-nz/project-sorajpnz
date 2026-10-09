@@ -1,9 +1,9 @@
 import type { Locale } from '../lib/content';
-import type { latestVideo } from '../lib/videos';
+import type { Video } from '../lib/videos';
 
 type VideoFeatureProps = {
   locale: Locale;
-  video: typeof latestVideo;
+  video: Video;
   headingLevel?: 2 | 3;
   showNote?: boolean;
   showDescription?: boolean;
@@ -34,7 +34,7 @@ export function VideoFeature({ locale, video, headingLevel = 2, showNote = false
           <a className="button primary small" href={video.url} target="_blank" rel="noopener noreferrer">
             <i className="ri-youtube-line" aria-hidden="true" /><span>{watch}</span><i className="ri-external-link-line" aria-hidden="true" />
           </a>
-          {showNote && locale === 'ja' && <a className="text-link" href={video.notePath}>動画の補足ノート<i className="ri-arrow-right-line" aria-hidden="true" /></a>}
+          {showNote && locale === 'ja' && video.notePath && <a className="text-link" href={video.notePath}>動画の補足ノート<i className="ri-arrow-right-line" aria-hidden="true" /></a>}
         </div>
       </div>
     </div>

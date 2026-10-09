@@ -1,4 +1,4 @@
-import { assets, common, linksPage, Locale, seo, socialLinks } from '../lib/content';
+import { assets, common, links, linksPage, Locale, seo, socialLinks } from '../lib/content';
 import { localize, swapLocale } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 
@@ -165,6 +165,11 @@ export function LinksPage({ locale, path }: LinksPageProps) {
         </div>
 
         <p className="links-footer-note">{l.footer}</p>
+        <a className="links-support" href={links.support} target="_blank" rel="noopener noreferrer">
+          <i className="ri-cup-line" aria-hidden="true" />
+          <span>{locale === 'ja' ? '動画やツール作りを応援する' : 'Support my videos and tools'}<small>Buy Me a Coffee</small></span>
+          <i className="ri-external-link-line" aria-hidden="true" />
+        </a>
       </main>
     </div>
   );

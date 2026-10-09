@@ -1,7 +1,7 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { VideoFeature } from '../components/VideoFeature';
-import { latestVideo, videoNoteMeta } from '../lib/videos';
+import { surfcastingVideo, videoNoteMeta } from '../lib/videos';
 import { articleJsonLd, useMeta } from '../lib/useMeta';
 
 export function VideoFieldNote({ path }: { path: string }) {
@@ -9,11 +9,11 @@ export function VideoFieldNote({ path }: { path: string }) {
     locale: 'ja', path,
     title: `${videoNoteMeta.title} | SoraJPNZ Notes`,
     description: videoNoteMeta.description,
-    image: latestVideo.thumbnail,
+    image: surfcastingVideo.thumbnail,
     noIndex: videoNoteMeta.noIndex,
     alternates: false,
     jsonLd: articleJsonLd({ locale: 'ja', path, title: videoNoteMeta.title,
-      description: videoNoteMeta.description, image: latestVideo.thumbnail,
+      description: videoNoteMeta.description, image: surfcastingVideo.thumbnail,
       datePublished: videoNoteMeta.created, dateModified: videoNoteMeta.created })
   });
 
@@ -29,13 +29,13 @@ export function VideoFieldNote({ path }: { path: string }) {
             <p className="draft-article-lead">今回はTheaと初めての浜釣りへ。夕飯になる魚を求めて場所を移動した一日を、Vlogにしました。</p>
             <p className="draft-article-lead">このページは、動画に添える短いメモです。釣り方の解説よりも、二人で海に出かけた日の様子を残しています。</p>
             <dl className="draft-article-meta">
-              <div><dt>動画公開</dt><dd><time dateTime={latestVideo.date}>2026年10月7日</time></dd></div>
+              <div><dt>動画公開</dt><dd><time dateTime={surfcastingVideo.date}>2026年10月7日</time></dd></div>
               <div><dt>ノート作成</dt><dd><time dateTime={videoNoteMeta.created}>2026年10月8日</time></dd></div>
               <div><dt>状態</dt><dd>レビュー版 / noindex</dd></div>
             </dl>
           </header>
 
-          <div className="video-note-feature"><VideoFeature locale="ja" video={latestVideo} headingLevel={2} showDescription={false} /></div>
+          <div className="video-note-feature"><VideoFeature locale="ja" video={surfcastingVideo} headingLevel={2} showDescription={false} /></div>
           <div className="draft-article-body">
             <section className="draft-article-chapter" aria-labelledby="video-note-day">
               <h2 id="video-note-day">夕飯を釣りに、もう一度</h2>
@@ -46,15 +46,15 @@ export function VideoFieldNote({ path }: { path: string }) {
               <h2 id="video-note-moments">動画の中の、こんな場面</h2>
               <p>気になるところから見るなら、こちらから。リンクはYouTubeの該当場面を開きます。</p>
               <ol className="video-moment-list">
-                <li><a href={`${latestVideo.url}&t=42s`} target="_blank" rel="noopener noreferrer"><time>00:42</time><span>初めてのsurfcasting。まだ手探りのスタート</span><i className="ri-external-link-line" aria-hidden="true" /></a></li>
-                <li><a href={`${latestVideo.url}&t=147s`} target="_blank" rel="noopener noreferrer"><time>02:27</time><span>魚がかかって、二人で大喜び</span><i className="ri-external-link-line" aria-hidden="true" /></a></li>
-                <li><a href={`${latestVideo.url}&t=832s`} target="_blank" rel="noopener noreferrer"><time>13:52</time><span>帰る前の片付けと、タックルボックス</span><i className="ri-external-link-line" aria-hidden="true" /></a></li>
+                <li><a href={`${surfcastingVideo.url}&t=42s`} target="_blank" rel="noopener noreferrer"><time>00:42</time><span>初めてのsurfcasting。まだ手探りのスタート</span><i className="ri-external-link-line" aria-hidden="true" /></a></li>
+                <li><a href={`${surfcastingVideo.url}&t=147s`} target="_blank" rel="noopener noreferrer"><time>02:27</time><span>魚がかかって、二人で大喜び</span><i className="ri-external-link-line" aria-hidden="true" /></a></li>
+                <li><a href={`${surfcastingVideo.url}&t=832s`} target="_blank" rel="noopener noreferrer"><time>13:52</time><span>帰る前の片付けと、タックルボックス</span><i className="ri-external-link-line" aria-hidden="true" /></a></li>
               </ol>
             </section>
             <section className="draft-article-chapter" aria-labelledby="video-note-previous">
               <h2 id="video-note-previous">この日の前編もあります</h2>
               <p>夕飯を釣りに出かけた前編から続く動画です。時間があれば、二本続けてどうぞ。</p>
-              <a className="text-link" href={latestVideo.previousUrl} target="_blank" rel="noopener noreferrer">前編をYouTubeで見る<i className="ri-external-link-line" aria-hidden="true" /></a>
+              <a className="text-link" href={surfcastingVideo.previousUrl} target="_blank" rel="noopener noreferrer">前編をYouTubeで見る<i className="ri-external-link-line" aria-hidden="true" /></a>
             </section>
             <aside className="video-note-caution">
               <p>このノートは公開動画に基づく個人の記録です。釣りのルールや海の安全を案内するものではありません。実際に出かける際は、最新の公式情報と現地の状況を確認してください。</p>

@@ -1,27 +1,48 @@
+import { useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { assets, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
-import { latestVideo } from '../lib/videos';
+import { homeVideoFallback, recentVideos } from '../lib/videos';
+import { useRecentVideos } from '../lib/useRecentVideos';
+import type { HomeVideo } from '../lib/youtubeFeed';
 
 type HomeProps = {
   locale: Locale;
   path: string;
 };
 
+function VideoThumbnail({ video, locale }: { video: HomeVideo; locale: Locale }) {
+  const [failed, setFailed] = useState(false);
+  const known = recentVideos.find((item) => item.id === video.id);
+  return (
+    <img className={failed ? 'way-thumbnail-fallback' : undefined}
+      src={failed ? assets.logoMark : known?.thumbnail ?? video.thumbnail}
+      alt={failed ? 'SoraJPNZ' : known?.[locale].imageAlt ?? (locale === 'ja' ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`)}
+      width={1280} height={720} loading="lazy" decoding="async"
+      onError={() => setFailed(true)} />
+  );
+}
+
 export function Home({ locale, path }: HomeProps) {
   const isJapanese = locale === 'ja';
   const p = projects[locale];
   const meta = seo[locale].home;
   const base = localize(locale);
-  const video = latestVideo[locale];
-  const videoDate = new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-NZ', {
+  const { videos, status: videoStatus } = useRecentVideos(homeVideoFallback);
+  const featuredVideo = videos[0];
+  const knownVideo = recentVideos.find((item) => item.id === featuredVideo.id);
+  const video = knownVideo?.[locale] ?? {
+    title: featuredVideo.title,
+    description: isJapanese ? 'SoraとTheaのNZでの日々を、YouTubeに残しています。' : 'A recent upload from SoraJPNZ. The original YouTube title is shown.'
+  };
+  const formatVideoDate = (date: string) => new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-NZ', {
     year: 'numeric',
     month: isJapanese ? '2-digit' : 'short',
     day: '2-digit',
     timeZone: 'UTC'
-  }).format(new Date(`${latestVideo.date}T00:00:00Z`));
+  }).format(new Date(`${date}T00:00:00Z`));
   const channels = socialLinks.filter((channel) => channel.href && channel.showOnHome);
   const destinations = [
     {
@@ -86,25 +107,26 @@ export function Home({ locale, path }: HomeProps) {
           <i className="ri-arrow-right-line" aria-hidden="true" />
         </a>
       </div>
-      <div className="way-video">
-        <a className="way-video-image" href={latestVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
-          <img src={latestVideo.thumbnail} alt={video.imageAlt} width={1280} height={720} loading="lazy" decoding="async" />
+      <p className="way-video-intro">{isJapanese ? 'Theaとの日常、海に出かけた日、短いひとこま。新しい動画も、ここから見られます。' : 'Life with Thea, ocean days, and shorter moments from New Zealand.'}</p>
+      <div className="way-video" data-video-source={videoStatus}>
+        <a className="way-video-image" href={featuredVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
+          <VideoThumbnail video={featuredVideo} locale={locale} key={featuredVideo.id} />
           <span className="way-play" aria-hidden="true"><i className="ri-play-fill" /></span>
         </a>
         <div className="way-video-copy">
           <h3>
-            <a href={latestVideo.url} target="_blank" rel="noopener noreferrer">{isJapanese ? 'Theaと初めての浜釣り' : video.title}</a>
+            <a href={featuredVideo.url} target="_blank" rel="noopener noreferrer">{video.title}</a>
           </h3>
-          <time dateTime={latestVideo.date}>{videoDate}</time>
+          <time dateTime={featuredVideo.date}>{formatVideoDate(featuredVideo.date)}</time>
           <p>{video.description}</p>
           <div className="way-actions">
-            <a className="way-button way-button-youtube" href={latestVideo.url} target="_blank" rel="noopener noreferrer">
+            <a className="way-button way-button-youtube" href={featuredVideo.url} target="_blank" rel="noopener noreferrer">
               <i className="ri-youtube-fill" aria-hidden="true" />
               {isJapanese ? 'YouTubeで見る' : 'Watch on YouTube'}
               <i className="ri-arrow-right-line" aria-hidden="true" />
             </a>
-            {isJapanese && (
-              <a className="way-link way-note-link" href={latestVideo.notePath}>
+            {isJapanese && knownVideo?.notePath && (
+              <a className="way-link way-note-link" href={knownVideo.notePath}>
                 <i className="ri-article-line" aria-hidden="true" />
                 動画の補足ノート
                 <i className="ri-arrow-right-line" aria-hidden="true" />
@@ -113,6 +135,28 @@ export function Home({ locale, path }: HomeProps) {
           </div>
         </div>
       </div>
+      {videos.length > 1 && (
+        <div className="way-recent-videos">
+          <h3>{isJapanese ? 'ほかの動画・ショート' : 'More videos and short moments'}</h3>
+          <ul className="way-video-list">
+            {videos.slice(1).map((item) => {
+              const title = recentVideos.find((entry) => entry.id === item.id)?.[locale].title ?? item.title;
+              return (
+                <li key={item.id}>
+                  <a href={item.url} target="_blank" rel="noopener noreferrer">
+                    <VideoThumbnail video={item} locale={locale} />
+                    <h4>{title}</h4>
+                    <time dateTime={item.date}>{formatVideoDate(item.date)}</time>
+                  </a>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
+      )}
+      {videoStatus === 'fallback' && (
+        <p className="way-video-status">{isJapanese ? '確認済みの動画を表示しています。最新の投稿はYouTubeからどうぞ。' : 'Showing checked uploads. Visit YouTube for the latest posts.'}</p>
+      )}
     </section>
   );
 
@@ -197,6 +241,14 @@ export function Home({ locale, path }: HomeProps) {
                 </a>
               )}
             </nav>
+            <div className="way-about-support">
+              <a className="way-link" href={links.support} target="_blank" rel="noopener noreferrer">
+                <i className="ri-cup-line" aria-hidden="true" />
+                {isJapanese ? '活動を応援する' : 'Support the work'}
+                <i className="ri-external-link-line" aria-hidden="true" />
+              </a>
+              <p>{isJapanese ? '動画やツールが役に立ったら、コーヒー1杯分の応援をいただけるとうれしいです。' : 'Enjoyed a video or found a tool useful? You can support the next one with a coffee.'}</p>
+            </div>
           </aside>
           <div className="way-feature">
             {isJapanese ? renderVideo('way-video-feature-main') : renderCalculator('way-project-feature way-project-feature-main')}
@@ -230,6 +282,13 @@ export function Home({ locale, path }: HomeProps) {
             <a href={links.linkedin} target="_blank" rel="noopener noreferrer"><i className="ri-linkedin-box-line" aria-hidden="true" />LinkedIn</a>
             <a href={`${base}/contact`}><i className="ri-mail-line" aria-hidden="true" />{isJapanese ? 'お問い合わせ' : 'Contact'}</a>
           </nav>
+          <div className="way-support">
+            <div>
+              <h3>{isJapanese ? '動画やツール作りを応援する' : 'Support my videos and tools'}</h3>
+              <p>{isJapanese ? '見てもらえるだけでもうれしいです。応援したいと思ったときは、こちらから。' : 'Watching and using the tools already means a lot. For anyone who would like to help with the next one.'}</p>
+            </div>
+            <a className="way-link" href={links.support} target="_blank" rel="noopener noreferrer"><i className="ri-cup-line" aria-hidden="true" />Buy Me a Coffee<i className="ri-external-link-line" aria-hidden="true" /></a>
+          </div>
         </section>
       </main>
       <Footer locale={locale} />

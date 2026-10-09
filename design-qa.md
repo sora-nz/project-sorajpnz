@@ -1,6 +1,6 @@
 # Home Design QA: Auckland Wayfinding
 
-Checked: 2026-10-08. Scope: the Home update on PR #18, not a production release.
+Checked: 2026-10-09. Scope: the Home update on PR #18, not a production release.
 
 ## Evidence
 
@@ -47,5 +47,27 @@ The source is 1070 x 1470 pixels. Browser override was 1085 x 1594 CSS pixels, w
 
 - Optional: supply the full-resolution harbour original if a sharper wide-desktop crop is desired.
 - Review the new video companion voice independently before changing its noindex policy.
+
+## Ongoing Video And Support Update
+
+- Revised reference within the selected Auckland Wayfinding motif: `/Users/oyasora/.codex/generated_images/01a11ab7-9327-77f0-99a0-6c6e01734a84/exec-893ddd1f-9c87-4d8b-af3d-da38aaca33a1.png` (921 x 1708).
+- Loaded Japanese render: `/private/tmp/sorajpnz-recents-ja-final.png` (1070 x 3058).
+- Combined reference/render: `/private/tmp/sorajpnz-recents-compare.jpg`. Reference scaled uniformly to 1070 x 1984; actual top 1984px preserved at 1:1. Both appear side by side with labels, Japanese Home at scroll top and loaded content.
+- English render: `/private/tmp/sorajpnz-recents-en-final.png`. Mobile evidence: `/private/tmp/sorajpnz-recents-ja-mobile390.png` and `/private/tmp/sorajpnz-recents-ja-mobile430.png`.
+
+Inspected the combined image: the harbour, green destination band, personal sidebar and ruled content rows preserve the chosen motif. The latest-video block is followed by three compact thumbnails, not another row of large floating cards. Optional support is a small sidebar link and a ruled row below the social links. No actionable P0/P1/P2 visual differences remain.
+
+Intentional content differences: the reference has two explicitly marked mock video entries; implementation instead uses four verified public uploads from SoraJPNZ. Actual video titles are longer, wrap naturally, and are not replaced with fabricated captions. The original portrait and calculator screenshot remain real assets. Japanese Home remains video-first; English Home keeps the calculator and work evidence first. No unrelated redesign or new perpetual movement was added.
+
+Additional checks:
+
+- Live public feed renders the latest upload plus three recent uploads/Shorts. Forced feed failure preserves the checked-in fallback list and channel link.
+- Browser-native XML parser: 10 tests pass, including actual YouTube root channel-ID format, a new upload with no old-note link, invalid XML/channel/date rejection and inert escaped titles.
+- JA -> EN -> JA at 390px and desktop: sections remain visible. At 390px/430px, document width equals viewport width. Recent thumbnails become compact rows rather than horizontally scrolling tiles.
+- Japanese calculator and Notes links work; calculator still displays JPY reference conversion and `noindex, follow`. JA/EN Links pages show the supplied support URL, retaining `noindex, follow`.
+- Local console warnings/errors: none observed. Independent read-only code review found no P1/P2 issues.
+- Upstream requests use fixed URLs, no visitor cookies/auth forwarding, bounded bodies, timeouts and shared cache. No iframe, payment widget, user-input storage or new package was added.
+
+Remaining operational check: confirm the two new functions on the actual Netlify Deploy Preview after this commit is pushed. Feed refresh is cached and not promised to be instantaneous. Hosting-provider usage should be monitored; this implementation does not promise zero hosting cost.
 
 final result: passed
