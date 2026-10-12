@@ -32,6 +32,7 @@ export const links = {
   github: 'https://github.com/sora-nz',
   youtube: 'https://www.youtube.com/@sorajpnz',
   support: 'https://buymeacoffee.com/sorajpnz',
+  theaSuperprof: 'https://www.superprof.co.nz/celta-tefl-certified-spent-years-helping-students-ace-the-ielts-band-score-recent-ielts-take-academic-and.html',
   relocationGithub: 'https://github.com/sora-nz/nz-relocation-affordability-dashboard',
   tableau:
     'https://public.tableau.com/app/profile/sora.oya/viz/NZ-JapanRelocationAffordabilityDashboard/NZ-JapanRelocationAffordabilityDashboard',
