@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { App } from './App';
 import { initAnalytics } from './lib/analytics';
 import './styles.css';
+import './pages/ContentPages.css';
 
 initAnalytics();
 
