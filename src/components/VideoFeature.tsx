@@ -1,5 +1,6 @@
 import type { Locale } from '../lib/content';
 import type { Video } from '../lib/videos';
+import { VideoThumbnail } from './VideoThumbnail';
 
 type VideoFeatureProps = {
   locale: Locale;
@@ -20,7 +21,7 @@ export function VideoFeature({ locale, video, headingLevel = 2, showNote = false
   return (
     <div className="video-feature">
       <a className="video-feature-image" href={video.url} target="_blank" rel="noopener noreferrer" aria-label={`${copy.title} - ${watch}`}>
-        <img src={video.thumbnail} alt={copy.imageAlt} width="1280" height="720" loading="lazy" decoding="async" />
+        <VideoThumbnail video={video} alt={copy.imageAlt} fallbackClassName="video-feature-thumbnail-fallback" key={video.id} />
         <span className="video-play" aria-hidden="true"><i className="ri-play-fill" /></span>
       </a>
       <div className="video-feature-copy">

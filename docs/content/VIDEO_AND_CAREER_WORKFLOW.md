@@ -29,11 +29,13 @@ The first surfcasting companion is a review version: `noindex, follow`, excluded
 - No API key, database, analytics, browser storage, new package, payment embed or background polling is used.
 - Feed request times out after five seconds on the server and eight seconds in the browser. Invalid or unavailable data leaves checked uploads visible, with a link to the channel.
 - The public feed can be delayed or temporarily unavailable. Site CDN caches successful feeds and thumbnails for 30 minutes, failures for five minutes. Provider usage limits and function costs still apply; caching reduces repeated requests but is not a promise of zero cost.
-- Thumbnails try the maximum-resolution JPEG, then HQ if it is missing, too large, invalid or slow. Images have a separate 512KiB ceiling; the feed retains its 128KiB limit. Both image attempts share a five-second server deadline. If the proxy still fails, Home uses a known local thumbnail when available, then the logo. Existing image dimensions keep the layout stable.
+- Thumbnails on Home, Notes Hub and video companions try the current image endpoint independently of whether the channel feed succeeds. The endpoint tries the maximum-resolution JPEG, then HQ if it is missing, too large, invalid or slow. Images have a separate 512KiB ceiling; the feed retains its 128KiB limit. Both image attempts share a five-second server deadline. If the proxy still fails, a known local thumbnail is used when available, then the logo. Existing image dimensions keep the layout stable.
 - Failure responses expose only a small status category and, when relevant, the fixed public source's HTTP status. No visitor details, upstream body or raw error message is returned.
 - Test with `node scripts/check-youtube-feed.mjs`; production UI verification must also exercise the real browser parser and same-origin endpoints. Plain Vite previews do not run Netlify functions and intentionally fall back.
 
 On 2026-10-10 (NZ), the deployed preview feed and Home live state succeeded. The earlier upstream HTTP 404 was no longer reproduced; this is not a claim that upstream outages have been permanently fixed. Keep the fallback, and reconsider a server-side YouTube Data API only if persistent failures justify that extra setup. No API key is needed for the current public-feed approach.
+
+On 2026-10-13 (NZ), the public feed again returned 404/500, while the thumbnail endpoint returned the updated image correctly. The saved list now includes the 10 October upload verified by the earlier successful feed and current official oEmbed. Saved uploads still cannot discover a later new upload during a feed outage; changing a known video's thumbnail does not require the channel feed to recover.
 
 ## Optional Support
 

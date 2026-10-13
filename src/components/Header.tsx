@@ -67,7 +67,7 @@ export function Header({ locale, path, languageSwitchHref, showContact = false }
           <SocialLinks compact placement="header" />
           <a className="language-pill" href={alternateLocaleHref} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
             <i className="ri-global-line" aria-hidden="true" />
-            <span>{locale === 'en' ? 'EN' : 'JA'}</span>
+            <span>{locale === 'ja' ? 'English' : 'Japanese'}</span>
           </a>
           {showContact && <a className="home-header-contact" href={localize(locale, '/contact')}>{t.contact}</a>}
         </div>
@@ -97,7 +97,7 @@ export function Header({ locale, path, languageSwitchHref, showContact = false }
             <SocialLinks compact placement="header" />
             <a className="language-pill" href={alternateLocaleHref} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
               <i className="ri-global-line" aria-hidden="true" />
-              <span>{locale === 'en' ? 'EN' : 'JA'}</span>
+              <span>{locale === 'ja' ? 'English' : 'Japanese'}</span>
             </a>
           </div>
         </div>
