@@ -59,9 +59,12 @@ tokens:
 
 ## Design Goal
 
-The Home-specific visual direction selected in October 2026 is **Auckland Wayfinding**.
+The Home-specific visual direction revised by Sora in October 2026 is **Auckland Harbour**.
 Read [the Home motif and motion rules](docs/design/HOME_WAYFINDING.md) before changing Home.
-It uses real Auckland photography, a route-green destination band, and unframed content.
+It uses an inset translucent header with a contact command, the real harbour photograph behind a stationary white reading veil and personal introduction, a green three-link strip, and a profile sidebar beside the main content.
+Japanese Home leads with recent videos; English leads with the calculator and its case study. Keep live uploads and essential content visible without animation or observer support.
+The user's narrow motion exception permits only a slow 20-second transform pan and small zoom of the harbour photograph, gated by `prefers-reduced-motion: no-preference`, with smaller mobile movement and a native pause/resume button. Do not extend this exception to other looping or parallax effects.
+The latest clarification asks for real scene motion (water and leaves), not photo pan/zoom. That video prototype is not yet available; the existing transform is an interim treatment. Thea's lesson illustration may use one short, contextual editing gesture on hover or keyboard focus, with a static reduced-motion state.
 Keep these overrides scoped to Home; the general tokens below remain the defaults for other pages and tools.
 
 SoraJPNZ should feel like a calm, practical Japan x New Zealand decision-making media site with a strong portfolio and data-tool backbone.

@@ -7,9 +7,10 @@ type HeaderProps = {
   locale: Locale;
   path: string;
   languageSwitchHref?: string;
+  showContact?: boolean;
 };
 
-export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
+export function Header({ locale, path, languageSwitchHref, showContact = false }: HeaderProps) {
   const [open, setOpen] = useState(false);
   const menuButton = useRef<HTMLButtonElement>(null);
   useEffect(() => setOpen(false), [path]);
@@ -68,6 +69,7 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
             <i className="ri-global-line" aria-hidden="true" />
             <span>{locale === 'en' ? 'EN' : 'JA'}</span>
           </a>
+          {showContact && <a className="home-header-contact" href={localize(locale, '/contact')}>{t.contact}</a>}
         </div>
 
         <button
@@ -90,6 +92,7 @@ export function Header({ locale, path, languageSwitchHref }: HeaderProps) {
               {item.label}
             </a>
           ))}
+          {showContact && <a href={localize(locale, '/contact')} onClick={() => setOpen(false)}>{t.contact}</a>}
           <div className="mobile-menu-bottom">
             <SocialLinks compact placement="header" />
             <a className="language-pill" href={alternateLocaleHref} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
