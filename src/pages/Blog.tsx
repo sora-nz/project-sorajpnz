@@ -1,216 +1,130 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { VideoFeature } from '../components/VideoFeature';
-import { latestVideo } from '../lib/videos';
 import { assets, blog, links, Locale, seo } from '../lib/content';
+import { homeVideoFallback, recentVideos, type Video } from '../lib/videos';
+import { useRecentVideos } from '../lib/useRecentVideos';
 import { blogJsonLd, useMeta } from '../lib/useMeta';
+import './NotesHub.css';
 
-type BlogProps = {
-  locale: Locale;
-  path: string;
-};
+type BlogProps = { locale: Locale; path: string };
 
 export function Blog({ locale, path }: BlogProps) {
   const b = blog[locale];
   const meta = seo[locale].blog;
-  const latestPostJsonLd = b.latestNote
-    ? {
-        path: b.latestNote.href,
-        title: b.latestNote.title,
-        description: b.latestNote.excerpt,
-        image: b.latestNote.image,
-        datePublished: b.latestNote.date,
-        dateModified: b.latestNote.updated
-      }
-    : undefined;
+  const isJapanese = locale === 'ja';
+  const note = b.latestNote;
+  const { videos, status } = useRecentVideos(homeVideoFallback);
+  const newest = videos[0];
+  const known = recentVideos.find((video) => video.id === newest.id);
+  const video: Video = {
+    ...newest,
+    thumbnail: known?.thumbnail ?? newest.thumbnail,
+    ja: {
+      title: status === 'live' ? newest.title : known?.ja.title ?? newest.title,
+      description: known?.ja.description ?? 'SoraとTheaのNZでの日々を、YouTubeに残しています。',
+      imageAlt: known?.ja.imageAlt ?? `${newest.title}の動画サムネイル`
+    },
+    en: {
+      title: status === 'live' ? newest.title : known?.en.title ?? newest.title,
+      description: known?.en.description ?? 'A recent video from our life in New Zealand.',
+      imageAlt: known?.en.imageAlt ?? `Video thumbnail: ${newest.title}`
+    },
+    notePath: known?.notePath
+  };
 
   useMeta({
-    locale,
-    path,
-    title: meta.title,
-    description: meta.description,
-    image: assets.westCoastRocks,
-    noIndex: locale === 'en',
-    alternates: false,
-    jsonLd: blogJsonLd(
-      locale,
-      path,
-      meta.title,
-      meta.description,
-      assets.westCoastRocks,
-      latestPostJsonLd
-    )
+    locale, path, title: meta.title, description: meta.description,
+    image: assets.westCoastRocks, noIndex: !isJapanese, alternates: false,
+    jsonLd: blogJsonLd(locale, path, meta.title, meta.description, assets.westCoastRocks,
+      note ? { path: note.href, title: note.title, description: note.excerpt,
+        image: note.image, datePublished: note.date, dateModified: note.updated } : undefined)
   });
 
   return (
-    <div className="page">
-      <Header locale={locale} path={path} />
+    <div className="page content-pages notes-page">
+      <Header locale={locale} path={path} showContact />
       <main>
-        <section className="notes-hub-hero">
-          <div className="section-inner notes-hub-hero-inner">
-            <div className="notes-hub-heading">
-              <p className="eyebrow">{b.eyebrow}</p>
-              <h1>{b.title}</h1>
-              <p>{b.subtitle}</p>
-            </div>
-            <div className="notes-hero-side">
-              <figure className="notes-hero-photo">
-                <img
-                  src={assets.westCoastRocks}
-                  alt={locale === 'ja' ? 'Auckland西海岸の岩場と海' : 'Rocky shoreline on Auckland\'s west coast'}
-                  width="864"
-                  height="1152"
-                  loading="eager"
-                  decoding="async"
-                  fetchPriority="high"
-                />
-                <figcaption>{locale === 'ja' ? 'Auckland西海岸での一日' : 'A day on Auckland\'s west coast'}</figcaption>
-              </figure>
-              <p className="notes-hero-margin-note">
-                {locale === 'ja'
-                  ? 'Living costs / Work / Money / Field notes'
-                  : 'Living costs / Work / Money / Field notes'}
-              </p>
-            </div>
+        <header className="content-page-heading">
+          <div className="section-inner">
+            <p className="content-page-kicker">Notes from Auckland</p>
+            <h1>{b.title}</h1>
+            <p>{b.subtitle}</p>
           </div>
-        </section>
-        <section className="content-section notes-hub-section">
-          <div className="section-inner notes-hub-inner">
-            <div className="notes-video-entry">
-              <VideoFeature locale={locale} video={latestVideo} headingLevel={2} showNote={locale === 'ja'} />
-            </div>
-            <div className="notes-editorial-lead">
-              {b.latestNote ? (
-                <a
-                  className="notes-latest-feature"
-                  href={b.latestNote.href}
-                  aria-label={`${b.latestNote.title} - ${b.latestNote.cta}`}
-                >
-                  <figure className="notes-latest-media">
-                    <img
-                      src={b.latestNote.image}
-                      alt={b.latestNote.imageAlt}
-                      width="1024"
-                      height="768"
-                      loading="lazy"
-                      decoding="async"
-                    />
-                  </figure>
-                  <div className="notes-latest-copy">
-                    <div className="notes-meta-row">
-                      <span>{locale === 'ja' ? '生活費のノート' : b.latestNote.label}</span>
-                      <span>{b.latestNote.category}</span>
-                      <time dateTime={b.latestNote.date}>{b.latestNote.dateLabel}</time>
-                    </div>
-                    <h2>{b.latestNote.title}</h2>
-                    <p>{b.latestNote.excerpt}</p>
-                    <span className="notes-read-link">
-                      {b.latestNote.cta}
-                      <i className="ri-arrow-right-line" aria-hidden="true" />
-                    </span>
+        </header>
+
+        {isJapanese && note ? (
+          <>
+            <section className="notes-reading section-inner" aria-labelledby="notes-reading-heading">
+              <div className="notes-current">
+                <h2 id="notes-reading-heading">いま読めるノート</h2>
+                <a className="notes-article" href={note.href} aria-label={`${note.title} - ${note.cta}`}>
+                  <div className="notes-article-meta">
+                    <span>{note.category}</span>
+                    <time dateTime={note.updated}>{note.dateLabel}</time>
                   </div>
+                  <h3>{note.title}</h3>
+                  <figure><img src={note.image} alt={note.imageAlt} width="1024" height="768" decoding="async" /></figure>
+                  <p>{note.excerpt}</p>
+                  <span className="content-link">{note.cta}<i className="ri-arrow-right-line" aria-hidden="true" /></span>
                 </a>
-              ) : (
-                <div className="notes-language-note">
-                  <p className="eyebrow">In progress</p>
-                  <h2>{b.introTitle}</h2>
-                  <p>{b.body}</p>
+              </div>
+              <aside className="notes-margin" aria-label="Soraと計算機について">
+                <div className="notes-author">
+                  <img src={assets.avatar} alt="SoraJPNZ" width="56" height="56" decoding="async" />
+                  <div><strong>Sora</strong><span>Auckland, New Zealand</span></div>
                 </div>
-              )}
+                <p>Aucklandで暮らすSoraです。動画では二人の日常を、ここではあとから読み返したいことを書いています。</p>
+                <div className="notes-tool">
+                  <i className="ri-calculator-line" aria-hidden="true" />
+                  <h2>自分の生活費も、試してみる</h2>
+                  <p>時給、勤務時間、家賃、車、貯金目標。自分の数字に変えると、月に残る金額をNZDと日本円で見られます。</p>
+                  <a className="content-link" href="/ja/tools/nz-life-reality-calculator">計算機を使う<i className="ri-arrow-right-line" aria-hidden="true" /></a>
+                </div>
+              </aside>
+            </section>
 
-              {b.featuredTool ? (
-                <a className="notes-tool-note" href={b.featuredTool.href}>
-                  <span className="notes-tool-icon" aria-hidden="true">
-                    <i className="ri-calculator-line" />
-                  </span>
-                  <span className="notes-featured-label">{b.featuredTool.title}</span>
-                  <strong>{b.featuredTool.body}</strong>
-                  <span className="notes-tool-link">
-                    {b.featuredTool.cta}
-                    <i className="ri-arrow-right-line" aria-hidden="true" />
-                  </span>
-                </a>
-              ) : null}
+            <section className="notes-video-section" aria-labelledby="notes-video-heading">
+              <div className="section-inner">
+                <div className="notes-section-label">
+                  <h2 id="notes-video-heading">動画に残したNZの日々</h2>
+                  <a className="content-link" href={links.youtube} target="_blank" rel="noopener noreferrer">すべての動画<i className="ri-external-link-line" aria-hidden="true" /></a>
+                </div>
+                <div data-video-source={status}><VideoFeature locale={locale} video={video} headingLevel={3} showNote /></div>
+              </div>
+            </section>
+
+            <section className="notes-topics section-inner" aria-labelledby="notes-topics-heading">
+              <h2 id="notes-topics-heading">ノートの話題</h2>
+              <p>生活費から、仕事や海で気づいたことまで。書けたものから少しずつ載せています。</p>
+              <ul>{b.categories.map((category) => <li key={category.title}>{category.title}</li>)}</ul>
+            </section>
+          </>
+        ) : (
+          <section className="notes-english section-inner" aria-labelledby="notes-language-heading">
+            <div className="notes-english-intro">
+              <h2 id="notes-language-heading">{b.introTitle}</h2>
+              <p>{b.body}</p>
+              <a className="content-link" href="/ja/blog">Read the Japanese notes<i className="ri-arrow-right-line" aria-hidden="true" /></a>
             </div>
-
-            <section className="notes-topics-section" aria-labelledby="notes-topics-title">
-              <div className="blog-category-intro">
-                <h2 id="notes-topics-title">{b.categoryTitle}</h2>
-                <p>{b.categoryBody}</p>
-              </div>
-
-              <ol className="notes-topic-list">
-                {b.categories.map((category, index) => {
-                  const isFieldNote = category.title.includes('Field Notes');
-                  return (
-                    <li className={`notes-topic-item${isFieldNote ? ' field-note' : ''}`} key={category.title}>
-                      <span className="notes-category-number">{String(index + 1).padStart(2, '0')}</span>
-                      <div className="notes-topic-copy">
-                        <h3>{category.title}</h3>
-                        <p>{category.description}</p>
-                        {isFieldNote && <a className="notes-read-link" href={links.youtube} target="_blank" rel="noopener noreferrer">
-                          {locale === 'ja' ? '釣り・海のVlogはYouTubeへ' : 'Watch the fishing and ocean vlogs'}
-                          <i className="ri-youtube-line" aria-hidden="true" />
-                        </a>}
-                      </div>
-                      <div className="notes-topic-side">
-                        {isFieldNote ? (
-                          <figure className="notes-topic-image">
-                            <img
-                              src={assets.blogHero}
-                              alt={
-                                locale === 'ja'
-                                  ? 'Auckland近郊での岸釣りの記録'
-                                  : 'Shore fishing field notes near Auckland'
-                              }
-                              width="1536"
-                              height="1152"
-                              loading="lazy"
-                              decoding="async"
-                            />
-                          </figure>
-                        ) : null}
-                        <span>{category.themes.join(' / ')}</span>
-                      </div>
-                    </li>
-                  );
-                })}
-              </ol>
-            </section>
-
-            <section className="notes-coming-soon" aria-labelledby="notes-coming-soon-title">
-              <div>
-                <p className="eyebrow">{locale === 'ja' ? 'Next notes' : 'Coming next'}</p>
-                <h2 id="notes-coming-soon-title">{b.comingSoonTitle}</h2>
-                <p>{b.comingSoonBody}</p>
-              </div>
-              <ul>
-                {b.comingSoonItems.map((item, index) => (
-                  <li key={item}>
-                    <span aria-hidden="true">{String(index + 1).padStart(2, '0')}</span>
-                    <span>{item}</span>
-                  </li>
-                ))}
-              </ul>
-            </section>
-
-            <aside className="notes-editor-note">
-              <img
-                src={assets.avatar}
-                alt={locale === 'ja' ? 'Sora Oya' : 'Sora Oya'}
-                width="72"
-                height="72"
-                loading="lazy"
-                decoding="async"
-              />
-              <div>
-                <p className="eyebrow">{b.editorNote.label}</p>
-                <h2>{b.editorNote.title}</h2>
-                <p>{b.editorNote.body}</p>
-              </div>
-            </aside>
-          </div>
-        </section>
+            <div className="notes-english-links">
+              <a href="/en/tools/nz-life-reality-calculator">
+                <i className="ri-calculator-line" aria-hidden="true" />
+                <div><h2>NZ Life Reality Calculator</h2><p>Change wages, hours, rent and car costs to see what could remain each month.</p></div>
+                <i className="ri-arrow-right-line" aria-hidden="true" />
+              </a>
+              <a href="/en/projects">
+                <i className="ri-tools-line" aria-hidden="true" />
+                <div><h2>Projects &amp; write-ups</h2><p>What I built, the choices I made, and what still needs work.</p></div>
+                <i className="ri-arrow-right-line" aria-hidden="true" />
+              </a>
+            </div>
+            <div className="notes-life">
+              <img src={assets.blogTaranaki} alt="Sora and Thea on a walking track in New Zealand" width="768" height="1024" loading="lazy" decoding="async" />
+              <div><h2>A little of life here, too.</h2><p>Thea and I share everyday life, fishing trips and ocean days on YouTube.</p><a className="content-link" href={links.youtube} target="_blank" rel="noopener noreferrer">Watch the videos<i className="ri-external-link-line" aria-hidden="true" /></a></div>
+            </div>
+          </section>
+        )}
       </main>
       <Footer locale={locale} />
     </div>

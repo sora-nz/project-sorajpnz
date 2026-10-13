@@ -22,6 +22,7 @@ import {
 } from '../lib/nzLifeRealityCalculator';
 import { useMeta } from '../lib/useMeta';
 import { useReveal } from '../lib/useReveal';
+import './CalculatorNavigation.css';
 
 type NzLifeRealityCalculatorProps = {
   locale: Locale;
@@ -376,6 +377,11 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
           value: calculateWithOverrides(inputs, { ownsCar: true, ...sampleCarCosts }).monthlyRemaining
         }
       ];
+  const carComparisonCosts = inputs.ownsCar ? inputs : sampleCarCosts;
+  const carComparisonAssumptions = t(
+    `${inputs.ownsCar ? '入力済みの車コスト' : '車ありサンプルの前提'}: 燃料 ${formatCurrency(carComparisonCosts.weeklyFuel)}/週、駐車場 ${formatCurrency(carComparisonCosts.weeklyParking)}/週、保険 ${formatCurrency(carComparisonCosts.monthlyCarInsurance)}/月、整備・WOF・rego積立 ${formatCurrency(carComparisonCosts.monthlyCarMaintenance)}/月。`,
+    `${inputs.ownsCar ? 'Configured car costs' : 'Sample car assumptions'}: fuel ${formatCurrency(carComparisonCosts.weeklyFuel)}/week, parking ${formatCurrency(carComparisonCosts.weeklyParking)}/week, insurance ${formatCurrency(carComparisonCosts.monthlyCarInsurance)}/month, maintenance, WOF and rego allowance ${formatCurrency(carComparisonCosts.monthlyCarMaintenance)}/month.`
+  );
   const savingsProgress = Math.min(Math.max(result.savingsAchievementRate, 0), 2);
 
   useEffect(() => {
@@ -449,10 +455,27 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
 
         <section className="calculator-section">
           <div className="section-inner calculator-layout">
-            <form className="calculator-input-panel reveal-on-scroll" onSubmit={(event) => event.preventDefault()}>
+            <form
+              id="calculator-inputs"
+              className="calculator-input-panel reveal-on-scroll"
+              aria-labelledby="calculator-input-heading"
+              tabIndex={-1}
+              onSubmit={(event) => event.preventDefault()}
+            >
+              <div className="calculator-mobile-summary">
+                <div>
+                  <span>{t('月の残り・概算', 'Estimated amount left / month')}</span>
+                  <strong data-testid="mobile-monthly-remaining">{formatCurrency(result.monthlyRemaining)} <small>NZD</small></strong>
+                </div>
+                <a href="#calculator-results">
+                  <span>{t('内訳を見る', 'View details')}</span>
+                  <i className="ri-arrow-down-line" aria-hidden="true" />
+                </a>
+                <p>{formatReferenceJpy(result.monthlyRemaining)} <span>{t('参考換算 / 貯金目標を引く前', 'reference / before savings target')}</span></p>
+              </div>
               <div className="calculator-panel-heading">
                 <p className="eyebrow">{t('入力', 'Inputs')}</p>
-                <h2>{t('自分の数字を入れる', 'Test your assumptions')}</h2>
+                <h2 id="calculator-input-heading">{t('自分の数字を入れる', 'Test your assumptions')}</h2>
                 <p>{t(
                   '入力した数字はこのブラウザ内で計算し、保存しません。最低賃金など制度に関わる数字は変わるため、最新の公式情報も確認してください。',
                   'The numbers are calculated in this browser and are not stored. Wage rules and other official figures can change, so always check current official sources.'
@@ -695,7 +718,20 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
               </fieldset>
             </form>
 
-            <aside className="calculator-results-panel reveal-on-scroll" aria-live="polite">
+            <aside
+              id="calculator-results"
+              className="calculator-results-panel reveal-on-scroll"
+              aria-labelledby="calculator-result-heading"
+              aria-live="polite"
+              tabIndex={-1}
+            >
+              <div className="calculator-result-heading">
+                <h2 id="calculator-result-heading">{t('試算結果', 'Your estimate')}</h2>
+                <a href="#calculator-inputs">
+                  <i className="ri-arrow-up-line" aria-hidden="true" />
+                  <span>{t('入力へ戻る', 'Back to inputs')}</span>
+                </a>
+              </div>
               <div className={`calculator-status ${result.status}`}>
                 <span>{t('判定', 'Status')}</span>
                 <strong>{statusLabels[locale][result.status]}</strong>
@@ -874,7 +910,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
             <div className="calculator-scenario-grid">
               <ScenarioCard title={t('時給の比較', 'Wage comparison')} items={wageScenarios} />
               <ScenarioCard title={t('勤務時間の比較', 'Work-hours comparison')} items={hourScenarios} />
-              <ScenarioCard title={t('車コストの比較', 'Car-cost comparison')} items={carScenarios} />
+              <ScenarioCard title={t('車コストの比較', 'Car-cost comparison')} items={carScenarios} helper={carComparisonAssumptions} />
             </div>
           </div>
         </section>
@@ -909,9 +945,13 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
                 <li>
                   <strong>{t('車コスト', 'Car costs')}</strong>
                   <span>{t(
-                    `今のサンプルでは、車の有無で月に約 ${formatCurrency(impacts.carImpact)} の差が出ます`,
-                    `The sample car setup changes the monthly result by about ${formatCurrency(impacts.carImpact)}`
+                    `入力欄に設定された車コストでは、車の有無で月に約 ${formatCurrency(impacts.carImpact)} の差が出ます。${inputs.ownsCar ? '' : '上の車ありサンプルとは別の条件です。'}`,
+                    `The car costs configured in the inputs change the monthly result by about ${formatCurrency(impacts.carImpact)}.${inputs.ownsCar ? '' : ' These differ from the sample car assumptions above.'}`
                   )}</span>
+                  <small className="calculator-car-assumptions">{t(
+                    `燃料 ${formatCurrency(inputs.weeklyFuel)}/週、駐車場 ${formatCurrency(inputs.weeklyParking)}/週、保険 ${formatCurrency(inputs.monthlyCarInsurance)}/月、整備・WOF・rego積立 ${formatCurrency(inputs.monthlyCarMaintenance)}/月。`,
+                    `Fuel ${formatCurrency(inputs.weeklyFuel)}/week, parking ${formatCurrency(inputs.weeklyParking)}/week, insurance ${formatCurrency(inputs.monthlyCarInsurance)}/month, maintenance, WOF and rego allowance ${formatCurrency(inputs.monthlyCarMaintenance)}/month.`
+                  )}</small>
                 </li>
               </ul>
             </div>
@@ -960,7 +1000,7 @@ export function NzLifeRealityCalculator({ locale, path }: NzLifeRealityCalculato
   );
 }
 
-function ScenarioCard({ title, items }: { title: string; items: Array<{ label: string; value: number }> }) {
+function ScenarioCard({ title, items, helper }: { title: string; items: Array<{ label: string; value: number }>; helper?: string }) {
   const values = items.map((item) => item.value);
   const max = Math.max(...values.map((value) => Math.abs(value)), 1);
 
@@ -981,6 +1021,7 @@ function ScenarioCard({ title, items }: { title: string; items: Array<{ label: s
           );
         })}
       </div>
+      {helper && <p className="calculator-scenario-assumptions">{helper}</p>}
     </article>
   );
 }

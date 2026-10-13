@@ -1,10 +1,10 @@
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
-import { ProjectCard } from '../components/ProjectCard';
-import { assets, common, links, Locale, projects, seo } from '../lib/content';
+import { assets, links, Locale, seo } from '../lib/content';
+import { projectIndexCopy } from '../lib/projectStories';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
-import { useReveal } from '../lib/useReveal';
+import './ProjectPages.css';
 
 type ProjectsProps = {
   locale: Locale;
@@ -12,12 +12,33 @@ type ProjectsProps = {
 };
 
 export function Projects({ locale, path }: ProjectsProps) {
-  const p = projects[locale];
-  const c = common[locale];
+  const copy = projectIndexCopy[locale];
   const meta = seo[locale].projects;
   const base = localize(locale);
 
-  useReveal();
+  const rows = [
+    {
+      ...copy.calculator,
+      image: locale === 'ja' ? assets.calculatorJa : assets.calculator,
+      width: 1280, height: 720,
+      href: `${base}/tools/nz-life-reality-calculator`,
+      storyHref: `${base}/projects/nz-life-reality-calculator`,
+      storyAction: copy.calculator.story
+    },
+    {
+      ...copy.relocation,
+      image: assets.dashboard, width: 1399, height: 949,
+      href: `${base}/projects/nz-japan-relocation`,
+      storyHref: undefined, storyAction: undefined
+    },
+    {
+      ...copy.rent,
+      image: assets.rentRadar, width: 1106, height: 616,
+      href: `${base}/projects/rent-radar`,
+      storyHref: undefined, storyAction: undefined
+    }
+  ];
+
   useMeta({
     locale,
     path,
@@ -28,56 +49,41 @@ export function Projects({ locale, path }: ProjectsProps) {
   });
 
   return (
-    <div className="page">
+    <div className="page content-pages projects-page">
       <Header locale={locale} path={path} />
       <main>
-        <section className="subhero">
-          <div className="section-inner narrow">
-            <p className="eyebrow">Portfolio</p>
-            <h1>{p.title}</h1>
-            <p>{p.subtitle}</p>
-          </div>
+        <header className="project-page-intro section-inner">
+          <p className="eyebrow">Projects</p>
+          <h1>{copy.title}</h1>
+          <p className="project-page-lead">{copy.intro}</p>
+        </header>
+        <section className="section-inner project-collection" aria-label={copy.title}>
+          {rows.map((project, index) => (
+            <article className="project-work-row" key={project.href}>
+              <a className="project-work-image" href={project.href} aria-label={project.action}>
+                <img src={project.image} alt={project.title} width={project.width} height={project.height} loading={index === 0 ? 'eager' : 'lazy'} decoding="async" />
+              </a>
+              <div className="project-work-copy">
+                <p className="project-work-label"><span>{String(index + 1).padStart(2, '0')}</span>{project.label}</p>
+                <h2><a href={project.href}>{project.title}</a></h2>
+                <p>{project.body}</p>
+                <p className="project-work-tools">{project.tools}</p>
+                <div className="project-work-actions">
+                  <a className="project-action-link" href={project.href}>{project.action}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
+                  {project.storyHref && <a className="project-secondary-link" href={project.storyHref}>{project.storyAction}<i className="ri-arrow-right-line" aria-hidden="true" /></a>}
+                </div>
+              </div>
+            </article>
+          ))}
         </section>
-        <section className="content-section">
-          <div className="section-inner project-grid">
-            <ProjectCard
-              image={locale === 'ja' ? assets.calculatorJa : assets.calculator}
-              title={p.calculatorTitle}
-              description={p.calculatorDescription}
-              tags={p.calculatorTags}
-              href={`${base}/tools/nz-life-reality-calculator`}
-              action={p.calculatorAction}
-              featured={p.calculatorBadge}
-              caseStudyHref={`${base}/projects/nz-life-reality-calculator`}
-              caseStudyAction={locale === 'ja' ? '制作メモを読む' : 'Read case study'}
-            />
-            <ProjectCard
-              image={assets.dashboard}
-              title={p.relocationTitle}
-              description={p.relocationDescription}
-              tags={p.tags}
-              href={`${base}/projects/nz-japan-relocation`}
-              action={c.viewProject}
-              featured={p.featured}
-            />
-            <ProjectCard
-              image={assets.rentRadar}
-              title={p.rentRadarTitle}
-              description={p.rentRadarDescription}
-              tags={p.rentTags}
-              href={`${base}/projects/rent-radar`}
-              action={c.viewProject}
-            />
+        <section className="section-inner project-contact-row">
+          <div>
+            <h2>{copy.contactTitle}</h2>
+            <p>{copy.contactBody}</p>
           </div>
-        </section>
-        <section className="content-section project-next-steps">
-          <div className="section-inner">
-            <h2>{locale === 'ja' ? '作ったものについて話す' : 'Talk about the work'}</h2>
-            <p>{locale === 'ja' ? 'これらは個人制作です。採用・面談のご連絡や、設計・前提へのフィードバックを歓迎します。' : 'These are independent projects. I welcome recruitment conversations and questions about the requirements, assumptions, and implementation.'}</p>
-            <div className="button-row left">
-              <a className="button primary small" href={`${base}/contact`}>{c.contact}</a>
-              <a className="button secondary small" href={links.github} target="_blank" rel="noopener noreferrer">GitHub<i className="ri-external-link-line" aria-hidden="true" /></a>
-            </div>
+          <div className="project-work-actions">
+            <a className="project-action-link" href={`${base}/contact`}>{copy.contact}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
+            <a className="project-secondary-link" href={links.github} target="_blank" rel="noopener noreferrer">{copy.github}<i className="ri-external-link-line" aria-hidden="true" /></a>
           </div>
         </section>
       </main>

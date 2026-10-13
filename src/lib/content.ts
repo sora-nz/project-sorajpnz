@@ -205,7 +205,7 @@ export const seo = {
     projects: {
       title: 'Projects | SoraJPNZ',
       description:
-        'Explore SoraJPNZ projects across New Zealand life, relocation, ocean notes, work, money, content experiments, and practical data tools.'
+        'Explore a New Zealand living-cost calculator and two dashboard projects, with screenshots, design decisions, data sources, and limitations.'
     },
     relocation: {
       title: 'NZ Relocation Affordability Dashboard | SoraJPNZ',
@@ -220,7 +220,7 @@ export const seo = {
     blog: {
       title: 'SoraJPNZ Notes | SoraJPNZ',
       description:
-        'SoraJPNZ Notes organizes New Zealand living costs, work, money, Japan comparisons, field notes, and practical tools.'
+        'Read SoraJPNZ Notes in Japanese, or explore the English living-cost calculator and data projects. Notes from life in Auckland.'
     },
     links: {
       title: 'Links | SoraJPNZ',
@@ -250,7 +250,7 @@ export const seo = {
         'NZ生活で気になった家賃、為替、生活費を、計算機やダッシュボードで確かめられる形にしたSoraJPNZのプロジェクトです。'
     },
     relocation: {
-      title: 'NZ移住向け家賃負担ダッシュボード | SoraJPNZ',
+      title: 'NZの家賃・為替ダッシュボード | SoraJPNZ',
       description:
         'ニュージーランドの家賃、NZD/JPY為替、食品価格指数を組み合わせた、移住検討向けのTableau公的データダッシュボードです。'
     },
@@ -1042,11 +1042,11 @@ export const blog = {
   en: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      'Notes from Auckland on living costs, work, money, Japan comparisons, and the everyday context behind New Zealand life.',
+      'Life in New Zealand, from living costs to days by the sea.',
     eyebrow: 'Notes hub',
-    introTitle: 'Practical notes are being organized.',
+    introTitle: 'The notes are in Japanese for now.',
     body:
-      'SoraJPNZ Notes is being shaped around realistic Japan x New Zealand decision-making. English article links are not published here yet.',
+      'The living-cost calculator and project write-ups are available in English. You can try the tool, or read how I built it.',
     featuredTool: {
       title: 'Try your own assumptions',
       body: 'The calculator is available in English. Compare wage, work hours, rent and car costs in NZD with an optional JPY reference.',
@@ -1109,7 +1109,7 @@ export const blog = {
   ja: {
     title: 'SoraJPNZ Notes',
     subtitle:
-      '動画に入りきらなかったこと、暮らしていて気になったこと、ツールを作りながら考えたこと。Aucklandの日々を、あとから読み返せるノートに。',
+      'Aucklandで暮らして気になったことを、動画とノートに残しています。生活費や仕事のこと、Theaとの日常や海での記録。',
     eyebrow: 'Notes from Auckland',
     introTitle: 'Aucklandで迷ったことを、あとから読み返せるノートに。',
     body:
@@ -1128,7 +1128,7 @@ export const blog = {
       dateLabel: '2026年9月1日 更新',
       title: aucklandLivingCostMeta.title,
       excerpt:
-        '時給が高く見えても、家賃や車まで入れると月に残る金額は大きく変わります。最低賃金、Living Wage、家賃、貯金をAucklandでの生活感と一緒に見直しました。',
+        '家賃、車、貯金まで入れると、月に何が残るのか。Aucklandでの生活感と、最低賃金・Living Wageなどの数字を合わせて考えました。',
       cta: 'ノートを読む',
       href: '/ja/blog/auckland-living-cost-hourly-wage',
       image: assets.aucklandHarbour,
@@ -1223,12 +1223,24 @@ export const legal = {
     en: {
       title: 'Privacy Policy',
       body:
-        'This website is a personal portfolio. If you contact me by email, I will use your details only to respond to your message. I do not sell personal information. This site may collect basic hosting, analytics, or security logs through the hosting provider.'
+        'How SoraJPNZ handles enquiries, site analytics, calculator inputs and external services.',
+      sections: [
+        { title: 'Enquiries', body: 'When you use the contact form, your name, email address and message are received through Netlify Forms and used to respond to your enquiry. The same applies when you contact me by email. Please do not send passwords or other people\'s personal information. I do not sell personal information.' },
+        { title: 'Site analytics', body: 'The production site uses Google Analytics to understand page views and events such as a completed contact-form submission. The site\'s custom analytics events do not include your message or calculator amounts. Google Analytics may use cookies and similar technologies.' },
+        { title: 'Calculator inputs', body: 'Amounts entered into the calculator are used in your browser. There is no feature that saves them, and they are not sent to the site\'s server. The JPY reference display connects to Frankfurter to retrieve an exchange rate; that request does not include your budget amounts.' },
+        { title: 'External services', body: 'Netlify hosts this site and may process access and security logs. Some pages link to YouTube or offer embedded Tableau and Power BI dashboards. Opening an external service or loading an embed sends access information to that provider. Each provider handles that information under its own policies.' }
+      ]
     },
     ja: {
       title: 'プライバシーポリシー',
       body:
-        'このWebサイトは個人ポートフォリオです。メールでご連絡いただいた場合、いただいた情報は返信のためにのみ使用します。個人情報の販売は行いません。ホスティング、分析、セキュリティ目的で、基本的なログがホスティング事業者により収集される場合があります。'
+        'お問い合わせ、アクセス解析、計算機の入力、外部サービスでの情報の扱いについて。',
+      sections: [
+        { title: 'お問い合わせ', body: 'フォームで送信したお名前、メールアドレス、お問い合わせ内容は、Netlifyのフォーム機能を通じて受け取り、返信やお問い合わせへの対応に使います。メールでご連絡いただいた場合も同様です。パスワードや、他の方の個人情報は送らないでください。個人情報の販売は行いません。' },
+        { title: 'アクセス解析', body: '本番サイトでは、Google Analyticsで閲覧ページやフォーム送信完了などを記録しています。サイト側で設定した解析イベントには、お問い合わせ本文や計算機の金額を含めていません。Google AnalyticsはCookieなどを使用する場合があります。' },
+        { title: '計算機の入力', body: '計算機に入力した金額は、お使いのブラウザー内で計算に使います。金額を保存する機能はなく、当サイトのサーバーへも送信しません。日本円の参考表示では、為替レートを取得するためFrankfurterへ接続します。この通信に家計の金額は含まれません。' },
+        { title: '外部サービス', body: 'サイトの配信にはNetlifyを利用しており、アクセスやセキュリティに関するログが処理される場合があります。また、YouTubeへのリンクや、Tableau・Power BIの埋め込みがあります。外部サービスを開いたり、埋め込みを読み込んだりすると、そのサービスにもアクセス情報が送られます。各サービスでの情報の扱いは、それぞれの方針をご確認ください。' }
+      ]
     }
   },
   terms: {
