@@ -130,9 +130,9 @@ export function LinksPage({ locale, path }: LinksPageProps) {
             <img src={assets.logoMark} alt="" />
             <span>SoraJPNZ</span>
           </a>
-          <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={c.language}>
+          <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
             <i className="ri-global-line" />
-            <span>{locale === 'en' ? 'EN' : 'JA'}</span>
+            <span>{locale === 'ja' ? 'English' : 'Japanese'}</span>
           </a>
         </div>
 

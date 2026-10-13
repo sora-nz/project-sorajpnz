@@ -30,9 +30,25 @@ export const surfcastingVideo = {
   previousUrl: 'https://www.youtube.com/watch?v=SPNGt_ROUaI'
 } as const;
 
-// Public titles, dates and thumbnails checked on YouTube on 2026-10-09.
+// Dates come from the public feed; newest title and thumbnail checked on 2026-10-13.
 // These also keep Home useful when the public channel feed is unavailable.
 export const recentVideos: readonly Video[] = [
+  {
+    id: 'D-M2nnnd5Fc',
+    url: 'https://www.youtube.com/watch?v=D-M2nnnd5Fc',
+    thumbnail: '/assets/videos/D-M2nnnd5Fc.jpg',
+    date: '2026-10-10',
+    ja: {
+      title: 'massive snapper at Ti Point yesterday！スペアフィッシング vs 釣り。釣りをした彼女が2匹の50, 58cmの大物真鯛(snapper)をゲット！',
+      description: 'SoraとTheaのNZでの日々を、YouTubeに残しています。',
+      imageAlt: 'SoraJPNZの釣りとスピアフィッシング動画のサムネイル'
+    },
+    en: {
+      title: 'massive snapper at Ti Point yesterday！スペアフィッシング vs 釣り。釣りをした彼女が2匹の50, 58cmの大物真鯛(snapper)をゲット！',
+      description: 'A recent upload from SoraJPNZ. The original YouTube title is shown.',
+      imageAlt: 'Thumbnail from a SoraJPNZ fishing and spearfishing video'
+    }
+  },
   { ...surfcastingVideo, ja: { ...surfcastingVideo.ja,
     title: '初めての浜釣りで食いつき激しめの魚が...ニュージーランドの海で彼女が大喜び' } },
   {
@@ -86,7 +102,7 @@ export const recentVideos: readonly Video[] = [
 ];
 
 export const latestVideo = recentVideos[0];
-export const homeVideoFallback = recentVideos.map((video) => ({
+export const homeVideoFallback = recentVideos.slice(0, 4).map((video) => ({
   id: video.id, title: video.ja.title, date: video.date,
   url: video.url, thumbnail: video.thumbnail
 }));

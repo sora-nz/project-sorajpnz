@@ -212,6 +212,8 @@ img {
   font-weight: 650;
 }
 
+.language-pill { white-space: nowrap; }
+
 .menu-button {
   display: none;
   width: 42px;
@@ -4899,7 +4901,7 @@ img {
   }
 }
 
-/* Shared video entry: a local thumbnail, not an auto-loading third-party player. */
+/* Shared video entry uses a thumbnail and opens the player on YouTube. */
 .home-latest-video {
   padding: 64px 0;
   background: #f4f8f6;
@@ -4927,6 +4929,12 @@ img {
   width: 100%;
   height: 100%;
   object-fit: cover;
+}
+
+.video-feature-image img.video-feature-thumbnail-fallback {
+  object-fit: contain;
+  padding: 32px;
+  background: #f4f8f6;
 }
 
 .video-play {

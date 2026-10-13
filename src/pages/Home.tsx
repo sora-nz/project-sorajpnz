@@ -2,36 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { TheaLessonVisual } from '../components/TheaLessonVisual';
+import { VideoThumbnail } from '../components/VideoThumbnail';
 import { assets, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { homeVideoFallback, recentVideos } from '../lib/videos';
 import { useRecentVideos } from '../lib/useRecentVideos';
-import type { HomeVideo } from '../lib/youtubeFeed';
 import './Home.css';
 
 type HomeProps = {
   locale: Locale;
   path: string;
 };
-
-function VideoThumbnail({ video, locale }: { video: HomeVideo; locale: Locale }) {
-  const [failedSources, setFailedSources] = useState<string[]>([]);
-  const known = recentVideos.find((item) => item.id === video.id);
-  const sources = [video.thumbnail, known?.thumbnail, assets.logoMark];
-  const src = sources.find((source) => source && !failedSources.includes(source)) ?? assets.logoMark;
-  const isLogo = src === assets.logoMark;
-  const alt = isLogo ? 'SoraJPNZ' : src === known?.thumbnail ? known[locale].imageAlt
-    : locale === 'ja' ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`;
-  return (
-    <img className={isLogo ? 'index-thumbnail-fallback' : undefined}
-      src={src} alt={alt}
-      width={1280} height={720} loading="lazy" decoding="async"
-      onError={() => {
-        if (!isLogo) setFailedSources((failed) => failed.includes(src) ? failed : [...failed, src]);
-      }} />
-  );
-}
 
 export function Home({ locale, path }: HomeProps) {
   const mainRef = useRef<HTMLElement>(null);
@@ -151,7 +133,7 @@ export function Home({ locale, path }: HomeProps) {
       <p className="index-video-intro">{isJapanese ? 'Theaとの日常、海に出かけた日、短いひとこま。新しい動画も、ここから見られます。' : 'Life with Thea, ocean days, and shorter moments from New Zealand.'}</p>
       <div className="index-video" data-video-source={videoStatus}>
         <a className="index-video-image" href={featuredVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
-          <span className="index-image-frame"><VideoThumbnail video={featuredVideo} locale={locale} key={`${featuredVideo.id}:${featuredVideo.thumbnail}`} /></span>
+          <span className="index-image-frame"><VideoThumbnail video={{ ...featuredVideo, thumbnail: knownVideo?.thumbnail ?? featuredVideo.thumbnail }} alt={isJapanese ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`} fallbackClassName="index-thumbnail-fallback" key={`${featuredVideo.id}:${featuredVideo.thumbnail}`} /></span>
           <span className="index-play" aria-hidden="true"><i className="ri-play-fill" /></span>
         </a>
         <div className="index-video-copy">
@@ -185,7 +167,7 @@ export function Home({ locale, path }: HomeProps) {
               return (
                 <li key={item.id}>
                   <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <span className="index-image-frame"><VideoThumbnail video={item} locale={locale} key={`${item.id}:${item.thumbnail}`} /></span>
+                    <span className="index-image-frame"><VideoThumbnail video={{ ...item, thumbnail: recentVideos.find((entry) => entry.id === item.id)?.thumbnail ?? item.thumbnail }} alt={isJapanese ? `${title}の動画サムネイル` : `Video thumbnail: ${title}`} fallbackClassName="index-thumbnail-fallback" key={`${item.id}:${item.thumbnail}`} /></span>
                     <h4>{title}</h4>
                     <time dateTime={item.date}>{formatVideoDate(item.date)}</time>
                   </a>
