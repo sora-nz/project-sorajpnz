@@ -225,12 +225,12 @@ export const seo = {
     links: {
       title: 'Links | SoraJPNZ',
       description:
-        'Quick links to SoraJPNZ YouTube, blog, Instagram, TikTok, projects, contact, and Facebook.'
+        'Find SoraJPNZ videos, the NZ Life Reality Calculator, notes, project write-ups and social channels in one place.'
     },
     contact: {
       title: 'Contact | SoraJPNZ',
       description:
-        'Contact SoraJPNZ for Business Analyst / Data Analyst opportunities, project enquiries, interviews, or data analysis conversations.'
+        'Contact SoraJPNZ about a role or interview, a project, or feedback on a video or note.'
     }
   },
   ja: {
@@ -267,12 +267,12 @@ export const seo = {
     links: {
       title: 'リンク | SoraJPNZ',
       description:
-        'SoraJPNZのYouTube、ブログ、Instagram、TikTok、プロジェクト、お問い合わせ、Facebookへの入口です。'
+        'SoraJPNZの動画、NZ生活リアリティ計算機、Notes、プロジェクト、SNSへのリンクをまとめています。'
     },
     contact: {
       title: 'お問い合わせ | SoraJPNZ',
       description:
-        'Business Analyst / Data Analystの機会、面談、プロジェクト相談、データ分析に関するお問い合わせはこちらから。'
+        '採用・面談のご連絡、公開中のプロジェクトへの質問、動画やノートのご感想はこちらへ。'
     }
   }
 } as const;
@@ -616,7 +616,8 @@ export const servicesPage = {
 export const contactPage = {
   en: {
     title: 'Contact',
-    intro: "Feel free to reach out to me. I'll get back to you as soon as possible.",
+    intro: 'Get in touch about a role or interview, ask about a project, or send feedback on a video or note.',
+    formTitle: 'Send a message',
     emailLabel: 'Email',
     privacyLabel: 'Privacy contact',
     nameLabel: 'Name',
@@ -629,15 +630,16 @@ export const contactPage = {
     send: 'Send Message',
     sending: 'Sending...',
     success: 'Thank you. Your message has been sent.',
-    error: 'Sorry, the form could not be sent. Please email me directly.',
+    error: 'I could not confirm the submission. Your text is still here. Try again or contact me by email.',
     subject: 'Contact form - SoraJPNZ'
   },
   ja: {
     title: 'お問い合わせ',
-    intro: 'お気軽にお問い合わせください。できるだけ早くご返信いたします。',
+    intro: '採用・面談のご連絡、公開中のプロジェクトへの質問、動画やノートのご感想はこちらへ。',
+    formTitle: 'フォームから送る',
     emailLabel: 'メール',
-    privacyLabel: '個人情報問い合わせ',
-    nameLabel: '氏名',
+    privacyLabel: '個人情報のお問い合わせ',
+    nameLabel: 'お名前',
     namePlaceholder: 'お名前を入力してください',
     emailFieldLabel: 'メールアドレス',
     emailPlaceholder: 'メールアドレスを入力してください',
@@ -647,7 +649,7 @@ export const contactPage = {
     send: '送信',
     sending: '送信中...',
     success: 'お問い合わせを送信しました。',
-    error: '送信できませんでした。メールで直接ご連絡ください。',
+    error: '送信を確認できませんでした。入力内容は残っています。もう一度試すか、メールでご連絡ください。',
     subject: 'お問い合わせフォーム - SoraJPNZ'
   }
 } as const;
@@ -1190,31 +1192,33 @@ export const blog = {
 export const linksPage = {
   en: {
     title: 'SoraJPNZ Links',
-    eyebrow: 'SoraJPNZ',
-    intro: 'Documenting New Zealand life, ocean stories, work, money, and practical data projects from Auckland.',
-    primaryNote: 'Start here',
-    secondaryNote: 'Explore the site',
+    eyebrow: 'Auckland, New Zealand',
+    intro: 'I’m Sora, based in Auckland. I share life with Thea on YouTube and keep my notes, calculator and project write-ups here.',
     youtubeCta: 'Watch on YouTube',
-    blogCta: 'Read the Blog',
-    projectsCta: 'View Projects',
-    servicesCta: 'Small projects and support',
-    servicesNote: 'Website analytics, portfolio feedback, and data organization',
+    calculatorCta: 'NZ Life Reality Calculator',
+    calculatorNote: 'Change wages and living costs to estimate what remains each month.',
+    blogCta: 'Notes · Japanese articles',
+    blogNote: 'Living costs and things I’ve noticed in Auckland.',
+    projectsCta: 'View projects',
+    projectsNote: 'The calculator, dashboards and how I built them.',
+    socialTitle: 'Around the web',
     contactCta: 'Contact',
-    footer: 'This page is the lightweight SoraJPNZ link-in-bio hub.'
+    contactNote: 'Roles, interviews, project questions and feedback.'
   },
   ja: {
     title: 'SoraJPNZ リンク',
-    eyebrow: 'SoraJPNZ',
-    intro: 'Aucklandで暮らしながら、NZ生活・海・仕事・お金・データ活用を記録しています。',
-    primaryNote: 'まずはこちら',
-    secondaryNote: 'サイトを見る',
+    eyebrow: 'Auckland, New Zealand',
+    intro: 'AucklandでTheaと暮らすSoraです。二人の日常をYouTubeに、生活費のメモや作ったものをこのサイトに残しています。',
     youtubeCta: 'YouTubeを見る',
-    blogCta: 'ブログを読む',
-    projectsCta: 'プロジェクトを見る',
-    servicesCta: '制作・相談について',
-    servicesNote: 'サイト分析、ポートフォリオ、データ整理など',
+    calculatorCta: 'NZ生活リアリティ計算機',
+    calculatorNote: '家賃や働く時間を変えて、月の残りを試算。',
+    blogCta: 'Notesを読む',
+    blogNote: '生活費など、Aucklandで考えたこと。',
+    projectsCta: '作ったものを見る',
+    projectsNote: '計算機・ダッシュボードと制作記録。',
+    socialTitle: 'SNS',
     contactCta: 'お問い合わせ',
-    footer: 'SNSプロフィール用の、SoraJPNZ公式リンク入口です。'
+    contactNote: '採用・面談、プロジェクトへの質問やご感想。'
   }
 } as const;
 
