@@ -1,0 +1,131 @@
+.calculator-case-opening {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 40px;
+  align-items: center;
+}
+
+.calculator-story-page .project-story-intro h1 {
+  font-size: 38px;
+  line-height: 1.4;
+}
+
+.calculator-case-preview {
+  min-width: 0;
+}
+
+.calculator-case-preview img {
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+}
+
+.calculator-case-facts {
+  grid-template-columns: 1.2fr 1fr 1fr 1fr;
+  margin-top: 38px;
+}
+
+.calculator-case-facts dd {
+  color: var(--project-muted);
+  font-size: 13px;
+}
+
+.calculator-case-facts > div:first-child dt {
+  color: var(--project-green);
+  font-weight: 650;
+}
+
+.calculator-case-facts > div:first-child dd {
+  color: var(--project-ink);
+}
+
+.calculator-case-disclosure {
+  margin-top: 24px;
+  border-block: 1px solid var(--project-line);
+}
+
+.calculator-case-disclosure summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  min-height: 48px;
+  padding-block: 14px;
+  color: var(--project-green);
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 1.6;
+  cursor: pointer;
+  list-style: none;
+}
+
+.calculator-case-disclosure summary::-webkit-details-marker {
+  display: none;
+}
+
+.calculator-case-disclosure summary i {
+  flex-shrink: 0;
+  font-size: 20px;
+}
+
+.calculator-case-disclosure[open] summary i {
+  transform: rotate(45deg);
+}
+
+.calculator-case-disclosure .project-simple-list {
+  margin-block: 0 18px;
+}
+
+.calculator-case-note {
+  margin-top: 28px;
+  padding-left: 18px;
+  border-left: 2px solid var(--project-line);
+}
+
+.calculator-case-note p {
+  font-size: 14px;
+}
+
+.calculator-case-code code {
+  display: block;
+  color: var(--project-muted);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+
+.calculator-case-next p:not(.eyebrow) {
+  max-width: 800px;
+}
+
+@media (max-width: 900px) {
+  .calculator-case-opening {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+
+  .calculator-case-facts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 600px) {
+  .calculator-story-page .project-story-intro h1 {
+    font-size: 30px;
+  }
+
+  .calculator-case-facts {
+    grid-template-columns: 1fr;
+    margin-top: 26px;
+  }
+
+  .calculator-case-facts > div {
+    grid-template-columns: 88px minmax(0, 1fr);
+  }
+
+  .calculator-case-facts dd {
+    font-size: 14px;
+  }
+
+  .calculator-case-disclosure summary {
+    font-size: 14px;
+  }
+}

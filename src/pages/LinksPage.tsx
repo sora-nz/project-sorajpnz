@@ -1,6 +1,7 @@
 import { assets, common, links, linksPage, Locale, seo, socialLinks } from '../lib/content';
 import { localize, swapLocale } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
+import './LinksPage.css';
 
 type LinksPageProps = {
   locale: Locale;
@@ -15,7 +16,6 @@ type LinkItem = {
   href: string;
   icon: string;
   external?: boolean;
-  tone?: string;
   featured?: boolean;
   note?: string;
 };
@@ -31,10 +31,6 @@ export function LinksPage({ locale, path }: LinksPageProps) {
   const base = localize(locale);
 
   const youtube = channel('youtube');
-  const instagram = channel('instagram');
-  const tiktok = channel('tiktok');
-  const facebook = channel('facebook');
-
   const items: LinkItem[] = [
     ...(youtube
       ? [
@@ -44,73 +40,50 @@ export function LinksPage({ locale, path }: LinksPageProps) {
             href: youtube.href,
             icon: youtube.icon,
             external: true,
-            tone: youtube.tone,
             featured: true,
             note: youtube.role[locale]
           }
         ]
       : []),
     {
+      key: 'calculator',
+      label: l.calculatorCta,
+      href: `${base}/tools/nz-life-reality-calculator`,
+      icon: 'ri-calculator-line',
+      note: l.calculatorNote
+    },
+    {
       key: 'blog',
       label: l.blogCta,
       href: `${base}/blog`,
       icon: 'ri-article-line',
-      note: l.secondaryNote
+      note: l.blogNote
     },
-    ...(instagram
-      ? [
-          {
-            key: 'instagram',
-            label: instagram.label,
-            href: instagram.href,
-            icon: instagram.icon,
-            external: true,
-            tone: instagram.tone,
-            note: instagram.role[locale]
-          }
-        ]
-      : []),
-    ...(tiktok
-      ? [
-          {
-            key: 'tiktok',
-            label: tiktok.label,
-            href: tiktok.href,
-            icon: tiktok.icon,
-            external: true,
-            tone: tiktok.tone,
-            note: tiktok.role[locale]
-          }
-        ]
-      : []),
     {
       key: 'projects',
       label: l.projectsCta,
       href: `${base}/projects`,
       icon: 'ri-folder-chart-line',
-      note: c.projects
-    },
-    {
-      key: 'contact',
-      label: l.contactCta,
-      href: `${base}/contact`,
-      icon: 'ri-mail-line',
-      note: c.contact
-    },
-    ...(facebook
-      ? [
-          {
-            key: 'facebook',
-            label: facebook.label,
-            href: facebook.href,
-            icon: facebook.icon,
-            external: true,
-            tone: facebook.tone,
-            note: facebook.role[locale]
-          }
-        ]
-      : [])
+      note: l.projectsNote
+    }
   ];
+
+  const socials: LinkItem[] = socialLinks
+    .filter((item) => item.id !== 'youtube' && item.showOnLinks && item.href)
+    .map((item) => ({ key: item.id, label: item.label, href: item.href, icon: item.icon, external: true, note: item.role[locale] }));
+
+  function renderLink(item: LinkItem) {
+    return (
+      <li key={item.key}>
+        <a className={`links-list-item${item.featured ? ' featured' : ''}`} href={item.href}
+          target={item.external ? '_blank' : undefined} rel={item.external ? 'noopener noreferrer' : undefined}>
+          <span className="links-item-icon" aria-hidden="true"><i className={item.icon} /></span>
+          <span className="links-item-copy"><strong>{item.label}</strong>{item.note && <span>{item.note}</span>}</span>
+          <i className={item.external ? 'ri-external-link-line' : 'ri-arrow-right-line'} aria-hidden="true" />
+        </a>
+      </li>
+    );
+  }
 
   useMeta({
     locale,
@@ -123,7 +96,7 @@ export function LinksPage({ locale, path }: LinksPageProps) {
   });
 
   return (
-    <div className="links-page">
+    <div className="links-page content-pages links-refresh">
       <main className="links-shell" aria-label={l.title}>
         <div className="links-topbar">
           <a className="links-home" href={base} aria-label="SoraJPNZ home">
@@ -131,45 +104,35 @@ export function LinksPage({ locale, path }: LinksPageProps) {
             <span>SoraJPNZ</span>
           </a>
           <a className="language-pill" href={swapLocale(path, locale === 'en' ? 'ja' : 'en')} aria-label={locale === 'ja' ? 'Switch to English' : '日本語に切り替える'}>
-            <i className="ri-global-line" />
+            <i className="ri-global-line" aria-hidden="true" />
             <span>{locale === 'ja' ? 'English' : 'Japanese'}</span>
           </a>
         </div>
 
         <section className="links-profile">
-          <img className="links-logo" src={assets.logoMark} alt="" />
-          <p className="eyebrow">{l.eyebrow}</p>
-          <h1>{l.title}</h1>
+          <div className="links-identity">
+            <img src={assets.blogTaranaki} alt={locale === 'ja' ? 'NZの遊歩道で撮ったSoraとThea' : 'Sora and Thea on a walking track in New Zealand'} width="768" height="1024" decoding="async" />
+            <div><p className="eyebrow">{l.eyebrow}</p><h1>{l.title}</h1></div>
+          </div>
           <p>{l.intro}</p>
         </section>
 
-        <div className="links-list">
-          {items.map((item) => (
-            <a
-              className={`links-list-item ${item.featured ? 'featured' : ''} ${item.tone ?? ''}`}
-              href={item.href}
-              target={item.external ? '_blank' : undefined}
-              rel={item.external ? 'noopener noreferrer' : undefined}
-              key={item.key}
-            >
-              <span className="links-item-icon" aria-hidden="true">
-                <i className={item.icon} />
-              </span>
-              <span className="links-item-copy">
-                <strong>{item.label}</strong>
-                {item.note && <span>{item.note}</span>}
-              </span>
-              <i className={item.external ? 'ri-external-link-line' : 'ri-arrow-right-line'} aria-hidden="true" />
-            </a>
-          ))}
-        </div>
+        <ul className="links-list">{items.map(renderLink)}</ul>
 
-        <p className="links-footer-note">{l.footer}</p>
+        <section className="links-social-section" aria-labelledby="links-social-title">
+          <h2 id="links-social-title">{l.socialTitle}</h2>
+          <ul className="links-list">{socials.map(renderLink)}</ul>
+        </section>
+        <ul className="links-list links-contact-row">{renderLink({ key: 'contact', label: l.contactCta, href: `${base}/contact`, icon: 'ri-mail-line', note: l.contactNote })}</ul>
         <a className="links-support" href={links.support} target="_blank" rel="noopener noreferrer">
           <i className="ri-cup-line" aria-hidden="true" />
           <span>{locale === 'ja' ? '動画やツール作りを応援する' : 'Support my videos and tools'}<small>Buy Me a Coffee</small></span>
           <i className="ri-external-link-line" aria-hidden="true" />
         </a>
+        <footer className="links-bottom">
+          <a href={base}>{c.home}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
+          <a href={`${base}/privacy`}>{c.privacy}</a>
+        </footer>
       </main>
     </div>
   );
