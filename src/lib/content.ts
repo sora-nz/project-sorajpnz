@@ -235,9 +235,9 @@ export const seo = {
   },
   ja: {
     home: {
-      title: 'SoraJPNZ | Aucklandでの暮らし、海の動画、使えるツール',
+      title: 'ニュージーランド生活の実体験と生活費 | SoraJPNZ',
       description:
-        'SoraとTheaのNZでの日常や釣りのVlog、生活費のNotes、計算機、データプロジェクト。Aucklandで暮らしながら撮ったもの、考えたこと、作ったものをまとめています。'
+        'Aucklandで暮らすSoraのニュージーランド生活。家賃・車・貯金を考える生活費のノートと計算機、家賃や為替のデータプロジェクト、Theaとの日常や釣りの動画を公開しています。'
     },
     services: {
       title: 'サービス | SoraJPNZ',
@@ -250,9 +250,9 @@ export const seo = {
         'NZ生活で気になった家賃、為替、生活費を、計算機やダッシュボードで確かめられる形にしたSoraJPNZのプロジェクトです。'
     },
     relocation: {
-      title: 'NZの家賃・為替ダッシュボード | SoraJPNZ',
+      title: 'ニュージーランドの家賃・為替ダッシュボード | SoraJPNZ',
       description:
-        'ニュージーランドの家賃、NZD/JPY為替、食品価格指数を組み合わせた、移住検討向けのTableau公的データダッシュボードです。'
+        'ニュージーランドの地域別家賃、NZD/JPY為替、食品価格指数を公的データで比較。NZドル・日本円で家賃の目安を確認できるTableauダッシュボードと、使用データや制約を紹介します。'
     },
     rentRadar: {
       title: 'Rent Radar Power BIダッシュボード | SoraJPNZ',
@@ -260,9 +260,9 @@ export const seo = {
         '架空データを使い、家賃情報の整理、比較、フィルター設計を試した初期Power BIダッシュボードプロトタイプです。'
     },
     blog: {
-      title: 'SoraJPNZ Notes | SoraJPNZ',
+      title: 'ニュージーランド生活・生活費のノート | SoraJPNZ Notes',
       description:
-        'NZ生活費のノートと、Theaとの釣りVlogに添える海の記録。Aucklandでの暮らしや、作ったツールにつながる話を書き残しています。'
+        'ニュージーランドの生活費を、家賃・車・貯金まで含めて考えるSoraJPNZ Notes。Aucklandでの実体験と数字をもとにしたノートを読み、自分の条件で生活費計算機を試せます。'
     },
     links: {
       title: 'リンク | SoraJPNZ',
@@ -1035,7 +1035,7 @@ export const rentRadar = {
 
 export const aucklandLivingCostMeta = {
   title: 'Auckland生活費のリアル。家賃・車・貯金まで入れると、月いくら残る？',
-  description: 'Auckland生活で月にいくら残るのかを、家賃、車、貯金目標、緊急資金、日本円の参考換算から考えるSoraJPNZの記事です。',
+  description: 'ニュージーランドのAucklandで、生活費を払うと月にいくら残るのか。時給・家賃・車・貯金目標に加え、緊急資金や日本円の参考換算も取り上げ、自分の条件を試せる生活費計算機を紹介します。',
   path: '/ja/blog/auckland-living-cost-hourly-wage',
   updated: '2026-09-01'
 } as const;

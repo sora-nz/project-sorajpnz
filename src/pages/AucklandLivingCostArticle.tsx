@@ -220,7 +220,7 @@ export function AucklandLivingCostArticle({ locale, path }: AucklandLivingCostAr
       description: articleDescription,
       image: assets.aucklandHarbour,
       datePublished: '2026-08-28',
-      dateModified: '2026-08-28'
+      dateModified: aucklandLivingCostMeta.updated
     })
   });
 
