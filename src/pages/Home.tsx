@@ -3,7 +3,7 @@ import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
 import { TheaLessonVisual } from '../components/TheaLessonVisual';
 import { VideoThumbnail } from '../components/VideoThumbnail';
-import { assets, links, Locale, projects, seo, socialLinks } from '../lib/content';
+import { assets, aucklandLivingCostMeta, links, Locale, projects, seo, socialLinks } from '../lib/content';
 import { localize } from '../lib/routes';
 import { pageJsonLd, useMeta } from '../lib/useMeta';
 import { homeVideoFallback, recentVideos } from '../lib/videos';
@@ -207,6 +207,14 @@ export function Home({ locale, path }: HomeProps) {
               <i className="ri-arrow-right-line" aria-hidden="true" />
             </a>
           </div>
+          {isJapanese && (
+            <p className="index-tool-note">
+              <a className="index-link" href={aucklandLivingCostMeta.path}>
+                Aucklandの生活費：家賃・車・貯金のノートを読む
+                <i className="ri-arrow-right-line" aria-hidden="true" />
+              </a>
+            </p>
+          )}
         </div>
       </div>
     </section>
