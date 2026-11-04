@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { HomeCarousel } from '../components/HomeCarousel';
+import { HomeDetour } from '../components/HomeDetour';
 import { TheaLessonVisual } from '../components/TheaLessonVisual';
 import { VideoThumbnail } from '../components/VideoThumbnail';
 import { assets, aucklandLivingCostMeta, links, Locale, projects, seo, socialLinks } from '../lib/content';
@@ -23,12 +25,6 @@ export function Home({ locale, path }: HomeProps) {
   const meta = seo[locale].home;
   const base = localize(locale);
   const { videos, status: videoStatus } = useRecentVideos(homeVideoFallback);
-  const featuredVideo = videos[0];
-  const knownVideo = recentVideos.find((item) => item.id === featuredVideo.id);
-  const video = {
-    title: videoStatus === 'live' ? featuredVideo.title : knownVideo?.[locale].title ?? featuredVideo.title,
-    description: knownVideo?.[locale].description ?? (isJapanese ? 'SoraとTheaのNZでの日々を、YouTubeに残しています。' : 'A recent upload from SoraJPNZ. The original YouTube title is shown.')
-  };
   const formatVideoDate = (date: string) => new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-NZ', {
     year: 'numeric',
     month: isJapanese ? '2-digit' : 'short',
@@ -62,6 +58,14 @@ export function Home({ locale, path }: HomeProps) {
   const orderedDestinations = isJapanese ? destinations : [destinations[2], destinations[1], destinations[0]];
   const selectedWork = [
     {
+      path: 'nz-life-reality-calculator',
+      image: isJapanese ? assets.calculatorJa : assets.calculator,
+      width: 1280,
+      height: 720,
+      title: p.calculatorTitle,
+      body: isJapanese ? '時給と生活費を変えて、月に残る金額を試す。日英対応の計算機と、その制作記録。' : 'A bilingual living-cost calculator, with the assumptions, implementation choices and checks behind it.'
+    },
+    {
       path: 'nz-japan-relocation',
       image: assets.dashboard,
       width: 1399,
@@ -75,7 +79,7 @@ export function Home({ locale, path }: HomeProps) {
       width: 1106,
       height: 616,
       title: p.rentRadarTitle,
-      body: isJapanese ? 'エリアごとの家賃を比べ、変化を追う小さなデータプロジェクト。' : 'A small data project for comparing local rents and tracking changes.'
+      body: isJapanese ? 'サンプルデータで家賃の比較やフィルターを試した、初期のPower BIプロトタイプ。' : 'An early Power BI prototype using sample data to explore rent comparisons and filters.'
     }
   ];
 
@@ -136,62 +140,38 @@ export function Home({ locale, path }: HomeProps) {
         </a>
       </div>
       <p className="index-video-intro">{isJapanese ? 'Theaとの日常、海に出かけた日、短いひとこま。新しい動画も、ここから見られます。' : 'Life with Thea, ocean days, and shorter moments from New Zealand.'}</p>
-      <div className="index-video" data-video-source={videoStatus}>
-        <a className="index-video-image" href={featuredVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
-          <span className="index-image-frame"><VideoThumbnail video={{ ...featuredVideo, thumbnail: knownVideo?.thumbnail ?? featuredVideo.thumbnail }} alt={isJapanese ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`} fallbackClassName="index-thumbnail-fallback" key={`${featuredVideo.id}:${featuredVideo.thumbnail}`} /></span>
-          <span className="index-play" aria-hidden="true"><i className="ri-play-fill" /></span>
-        </a>
-        <div className="index-video-copy">
-          <h3>
-            <a href={featuredVideo.url} target="_blank" rel="noopener noreferrer">{video.title}</a>
-          </h3>
-          <time dateTime={featuredVideo.date}>{formatVideoDate(featuredVideo.date)}</time>
-          <p>{video.description}</p>
-          <div className="index-actions">
-            <a className="index-button index-button-youtube" href={featuredVideo.url} target="_blank" rel="noopener noreferrer">
-              <i className="ri-youtube-fill" aria-hidden="true" />
-              {isJapanese ? 'YouTubeで見る' : 'Watch on YouTube'}
-              <i className="ri-arrow-right-line" aria-hidden="true" />
-            </a>
-            {isJapanese && knownVideo?.notePath && (
-              <a className="index-link index-note-link" href={knownVideo.notePath}>
-                <i className="ri-article-line" aria-hidden="true" />
-                動画の補足ノート
-                <i className="ri-arrow-right-line" aria-hidden="true" />
-              </a>
-            )}
-          </div>
-        </div>
+      <div data-video-source={videoStatus}>
+        <HomeCarousel id="home-video-carousel" label={isJapanese ? '最近の動画' : 'Recent videos'} locale={locale} itemKeys={videos.map((item) => item.id)}>
+          {videos.map((item, index) => {
+            const known = recentVideos.find((entry) => entry.id === item.id);
+            const title = videoStatus === 'live' ? item.title : known?.[locale].title ?? item.title;
+            return (
+              <article className="index-media-card index-video-card" key={item.id}>
+                <a className="index-video-image" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${title}をYouTubeで見る` : `Watch ${title} on YouTube`}>
+                  <span className="index-image-frame"><VideoThumbnail video={{ ...item, thumbnail: known?.thumbnail ?? item.thumbnail }} alt={isJapanese ? `${title}の動画サムネイル` : `Video thumbnail: ${title}`} fallbackClassName="index-thumbnail-fallback" key={`${item.id}:${item.thumbnail}`} /></span>
+                  <span className="index-play" aria-hidden="true"><i className="ri-play-fill" /></span>
+                </a>
+                <div className="index-media-copy">
+                  <div className="index-media-meta"><span>VIDEO {String(index + 1).padStart(2, '0')}</span><time dateTime={item.date}>{formatVideoDate(item.date)}</time></div>
+                  <h3><a href={item.url} target="_blank" rel="noopener noreferrer" title={title}>{title}</a></h3>
+                  <a className="index-link index-button-youtube" href={item.url} target="_blank" rel="noopener noreferrer">{isJapanese ? 'YouTubeで見る' : 'Watch on YouTube'}<i className="ri-arrow-right-up-line" aria-hidden="true" /></a>
+                  {index === 0 && isJapanese && known?.notePath && <a className="index-link index-note-link" href={known.notePath}>動画の補足ノート<i className="ri-arrow-right-line" aria-hidden="true" /></a>}
+                </div>
+              </article>
+            );
+          })}
+        </HomeCarousel>
       </div>
-      {videos.length > 1 && (
-        <div className="index-recent-videos">
-          <h3>{isJapanese ? 'ほかの動画・ショート' : 'More videos and short moments'}</h3>
-          <ul className="index-video-list">
-            {videos.slice(1).map((item) => {
-              const title = videoStatus === 'live' ? item.title : recentVideos.find((entry) => entry.id === item.id)?.[locale].title ?? item.title;
-              return (
-                <li key={item.id}>
-                  <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <span className="index-image-frame"><VideoThumbnail video={{ ...item, thumbnail: recentVideos.find((entry) => entry.id === item.id)?.thumbnail ?? item.thumbnail }} alt={isJapanese ? `${title}の動画サムネイル` : `Video thumbnail: ${title}`} fallbackClassName="index-thumbnail-fallback" key={`${item.id}:${item.thumbnail}`} /></span>
-                    <h4>{title}</h4>
-                    <time dateTime={item.date}>{formatVideoDate(item.date)}</time>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
       {videoStatus === 'fallback' && (
         <p className="index-video-status">{isJapanese ? '確認済みの動画を表示しています。最新の投稿はYouTubeからどうぞ。' : 'Showing checked uploads. Visit YouTube for the latest posts.'}</p>
       )}
       <figure key={locale} className="index-field-sketch" data-index-rule>
-        <figcaption>
-          <span>{isJapanese ? '体験する' : 'Experience'}</span>
+        <figcaption lang="en">
+          <span>Watch</span>
           <i className="ri-arrow-right-line" aria-hidden="true" />
-          <span>{isJapanese ? '残す' : 'Document'}</span>
+          <span>Read</span>
           <i className="ri-arrow-right-line" aria-hidden="true" />
-          <span>{isJapanese ? '試してみる' : 'Build & test'}</span>
+          <span>Make</span>
         </figcaption>
         <img src="/assets/home/harbour-notebook.webp" alt="" width={2172} height={724} loading="lazy" decoding="async" />
       </figure>
@@ -273,6 +253,8 @@ export function Home({ locale, path }: HomeProps) {
           </div>
         </nav>
 
+        <div className="index-inner index-detour-wrap"><HomeDetour locale={locale} videos={videos} videoStatus={videoStatus} /></div>
+
         <div className="index-inner index-content">
           <div className="index-feed">
             {isJapanese ? <>{renderVideo('index-video-feature')}<div className="index-tool-band">{renderCalculator('index-project-feature')}</div></> : <><div className="index-tool-band">{renderCalculator('index-project-feature')}</div>{renderVideo('index-video-feature')}</>}
@@ -307,16 +289,17 @@ export function Home({ locale, path }: HomeProps) {
 
         <section className="index-inner index-work-list" aria-labelledby="index-work-heading" data-index-rule>
           <div className="index-section-heading">
-            <h2 id="index-work-heading"><span className="index-section-number" aria-hidden="true">03</span>{isJapanese ? 'ほかに作ったもの' : 'More selected work'}</h2>
+            <h2 id="index-work-heading"><span className="index-section-number" aria-hidden="true">03</span>{isJapanese ? '作ったもの' : 'Selected projects'}</h2>
             <a className="index-link" href={`${base}/projects`}>{isJapanese ? 'プロジェクト一覧' : 'All projects'}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
           </div>
-          {selectedWork.map((work) => (
-            <a className="index-work-row" href={`${base}/projects/${work.path}`} key={work.path}>
-              <span className="index-work-image"><img src={work.image} alt="" width={work.width} height={work.height} loading="lazy" decoding="async" /></span>
-              <div><h3>{work.title}</h3><p>{work.body}</p></div>
-              <i className="ri-arrow-right-line" aria-hidden="true" />
-            </a>
-          ))}
+          <HomeCarousel id="home-project-carousel" label={isJapanese ? '作ったもの' : 'Selected projects'} locale={locale} itemKeys={selectedWork.map((work) => work.path)} delay={7800}>
+            {selectedWork.map((work, index) => (
+              <article className="index-media-card index-work-card" key={work.path}>
+                <a className="index-work-image" href={`${base}/projects/${work.path}`} aria-label={work.title}><img src={work.image} alt="" width={work.width} height={work.height} loading="lazy" decoding="async" /></a>
+                <div className="index-media-copy"><p className="index-media-meta">PROJECT {String(index + 1).padStart(2, '0')}</p><h3><a href={`${base}/projects/${work.path}`}>{work.title}</a></h3><p>{work.body}</p><a className="index-link" href={`${base}/projects/${work.path}`}>{isJapanese ? '制作記録を見る' : 'Read the project'}<i className="ri-arrow-right-line" aria-hidden="true" /></a></div>
+              </article>
+            ))}
+          </HomeCarousel>
         </section>
 
         <section className="index-inner index-footer-links" aria-labelledby="index-connect-heading" data-index-rule>

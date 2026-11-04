@@ -1,0 +1,30 @@
+.home-carousel { display: flex; flex-direction: column; width: 100%; min-width: 0; }
+.home-carousel__controls { order: 2; display: grid; grid-template-columns: 44px minmax(0, 1fr) 92px; align-items: center; gap: 12px; margin-top: 15px; }
+.home-carousel__control { display: grid; place-items: center; width: 44px; height: 44px; padding: 0; border: 1px solid #ccd8d2; border-radius: 50%; background: #fff; color: #075348; cursor: pointer; }
+.home-carousel__control i { font-size: 20px; line-height: 1; }
+.home-carousel__control:hover:not(:disabled) { border-color: #075348; background: #edf5f0; }
+.home-carousel__control:disabled { opacity: 0.45; cursor: default; }
+.home-carousel__control:focus-visible,
+.home-carousel__dot:focus-visible { outline: 3px solid #075348; outline-offset: 3px; }
+.home-carousel__arrows { display: flex; justify-content: flex-end; gap: 4px; }
+.home-carousel__dots { display: flex; justify-content: center; gap: 2px; min-width: 0; overflow-x: auto; scrollbar-width: none; }
+.home-carousel__dots::-webkit-scrollbar { display: none; }
+.home-carousel__dot { flex: 0 0 32px; display: grid; place-items: center; width: 32px; height: 44px; padding: 0; border: 0; background: none; cursor: pointer; }
+.home-carousel__dot::before { content: ''; display: block; width: 8px; height: 8px; border-radius: 50%; background: #afc2b9; transition: width 180ms ease, border-radius 180ms ease, background-color 180ms ease; }
+.home-carousel__dot[aria-current="true"]::before { width: 19px; border-radius: 5px; background: #075348; }
+.home-carousel__dot:hover::before { background: #075348; }
+.home-carousel__viewport { order: 1; width: 100%; overflow: hidden; touch-action: pan-y pinch-zoom; }
+.home-carousel__track { display: flex; gap: 20px; margin: 0; }
+.home-carousel__slide { flex: 0 0 88%; min-width: 0; }
+.home-carousel__slide > * { height: 100%; }
+.home-carousel__announcement { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0, 0, 0, 0); white-space: nowrap; }
+
+@media (max-width: 650px) {
+  .home-carousel__controls { gap: 6px; margin-top: 12px; }
+  .home-carousel__track { gap: 12px; }
+  .home-carousel__slide { flex-basis: 91%; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .home-carousel__dot::before { transition: none; }
+}
