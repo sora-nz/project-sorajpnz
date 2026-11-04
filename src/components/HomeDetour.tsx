@@ -49,40 +49,46 @@ function HomeDetourSession({ locale, videos, videoStatus }: HomeDetourProps) {
     <section className="index-detour" aria-labelledby={headingId}>
       <div className="index-detour-heading">
         <h2 id={headingId}>{isJapanese ? '今日の寄り道' : 'A small detour'}</h2>
-        <button className="index-detour-draw" type="button" onClick={choose} aria-controls={resultId}>
-          <i className="ri-camera-line" aria-hidden="true" />
-          {isJapanese ? (draw ? 'もう一枚引く' : '一枚引いてみる') : (draw ? 'Pick another' : 'Pick a detour')}
-        </button>
       </div>
-      <div className="index-detour-layout" id={resultId}>
-        <div className={`index-detour-frame${selected ? ` index-detour-frame-${selected.kind}` : ' index-detour-frame-empty'}`}>
-          {video ? (
-            <VideoThumbnail key={`${video.id}:${video.thumbnail}`} video={{ ...video, thumbnail: checkedVideo?.thumbnail ?? video.thumbnail }} alt={isJapanese ? `${selected.title}の動画サムネイル` : `Video thumbnail: ${selected.title}`} fallbackClassName="index-detour-thumbnail-fallback" />
-          ) : (
-            <img src={selected?.image ?? assets.aucklandHarbour} alt={selected ? (selected.kind === 'project' ? `${selected.title}${isJapanese ? 'の表示例' : ' preview'}` : (isJapanese ? '海越しに見えるAucklandの街並み' : 'Auckland skyline across the harbour')) : ''} width={1280} height={720} loading="lazy" decoding="async" />
-          )}
-          {!selected && <i className="ri-camera-line index-detour-camera" aria-hidden="true" />}
+      <div className="index-detour-device">
+        <img className="index-detour-shell" src="/assets/home/detour-camera.webp" alt="" aria-hidden="true" width={1216} height={895} decoding="async" />
+        <button className="index-detour-draw" type="button" onClick={choose} aria-controls={resultId}
+          aria-label={isJapanese ? (draw ? 'シャッターを押してもう一枚見る' : 'シャッターを押して一枚見る') : (draw ? 'Press the shutter for another detour' : 'Explore a detour with the shutter')}
+          title={isJapanese ? (draw ? 'もう一枚見る' : '一枚見る') : (draw ? 'Pick another' : 'Pick a detour')}>
+          <i className="ri-camera-line" aria-hidden="true" />
+          <span>{isJapanese ? (draw ? 'もう一枚' : '一枚見る') : (draw ? 'Another' : 'Explore')}</span>
+        </button>
+        <div className="index-detour-layout" id={resultId}>
+          <div className={`index-detour-frame${selected ? ` index-detour-frame-${selected.kind}` : ' index-detour-frame-empty'}`}>
+            {video ? (
+              <VideoThumbnail key={`${video.id}:${video.thumbnail}`} video={{ ...video, thumbnail: checkedVideo?.thumbnail ?? video.thumbnail }} alt={isJapanese ? `${selected.title}の動画サムネイル` : `Video thumbnail: ${selected.title}`} fallbackClassName="index-detour-thumbnail-fallback" />
+            ) : (
+              <img src={selected?.image ?? assets.aucklandHarbour} alt={selected ? (selected.kind === 'project' ? `${selected.title}${isJapanese ? 'の表示例' : ' preview'}` : (isJapanese ? '海越しに見えるAucklandの街並み' : 'Auckland skyline across the harbour')) : ''} width={1280} height={720} loading="lazy" decoding="async" />
+            )}
+          </div>
+          <div className="index-detour-copy">
+            {selected ? (
+              <>
+                <p className="index-detour-kind">{typeLabel}</p>
+                <h3>{selected.title}</h3>
+                <p>{selected.description}</p>
+                <a className="index-detour-open" href={selected.href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
+                  {isJapanese ? (external ? 'YouTubeで見る' : selected.kind === 'note' ? 'ノートを読む' : 'プロジェクトを見る') : (external ? 'Watch on YouTube' : selected.kind === 'note' ? 'Read the note' : 'View the project')}
+                  <i className={external ? 'ri-external-link-line' : 'ri-arrow-right-line'} aria-hidden="true" />
+                </a>
+              </>
+            ) : (
+              <>
+                <p className="index-detour-kind">SoraJPNZ</p>
+                <h3>{isJapanese ? '今日は、どこへ？' : 'A little detour today?'}</h3>
+                <p>{isJapanese ? '海の日の動画、暮らしのノート、小さな制作記録。' : 'New Zealand videos, notes and small projects.'}</p>
+              </>
+            )}
+          </div>
           {selected && draw && <span className="index-detour-shutter" key={draw.revision} aria-hidden="true" />}
         </div>
-        <div className="index-detour-copy">
-          {selected ? (
-            <>
-              <p className="index-detour-kind">{typeLabel}</p>
-              <h3>{selected.title}</h3>
-              <p>{selected.description}</p>
-              <a className="index-detour-open" href={selected.href} target={external ? '_blank' : undefined} rel={external ? 'noopener noreferrer' : undefined}>
-                {isJapanese ? (external ? 'YouTubeで見る' : selected.kind === 'note' ? 'ノートを読む' : 'プロジェクトを見る') : (external ? 'Watch on YouTube' : selected.kind === 'note' ? 'Read the note' : 'View the project')}
-                <i className={external ? 'ri-external-link-line' : 'ri-arrow-right-line'} aria-hidden="true" />
-              </a>
-              {external && draw?.checkedVideo && <p className="index-detour-source">{isJapanese ? '確認済みの動画から選んでいます。' : 'From the checked video selection.'}</p>}
-            </>
-          ) : (
-            <>
-              <p className="index-detour-invitation">{isJapanese ? '海の日の動画、暮らしのメモ、小さな制作記録。' : 'New Zealand videos and the projects behind this site.'}</p>
-            </>
-          )}
-        </div>
       </div>
+      <p className="index-detour-source">{external && draw?.checkedVideo ? (isJapanese ? '確認済みの動画から選んでいます。' : 'From the checked video selection.') : '\u00a0'}</p>
       <p className="index-detour-announcement" role="status" aria-live="polite" aria-atomic="true">{draw?.announcement ?? ''}</p>
     </section>
   );

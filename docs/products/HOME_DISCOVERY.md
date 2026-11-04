@@ -11,7 +11,12 @@ turning Home into an agency landing page or hiding its practical tools.
 
 ## Today's Detour
 
-- A native camera command draws one existing item. It never navigates automatically.
+- A native shutter command draws one existing item. It never navigates automatically.
+- Place the dedicated rear-camera bitmap in the hero's right column, in the user's
+  annotated open harbour area. Embed the real image, short description and explicit
+  link in its opaque LCD window. The large top cap is the interactive shutter.
+- Keep a stable camera aspect ratio and bounded copy slots; drawing must not change
+  the hero height. Stack below the introduction on narrow screens without overlap.
 - The result has a real image, title, short context and an explicit destination link.
 - Use a shuffle bag: cover the eligible items before refill; avoid immediate repeats.
 - Eligible items: current checked/live channel videos, real project case studies,
@@ -21,7 +26,7 @@ turning Home into an agency landing page or hiding its practical tools.
 - A selected item is snapshotted so a late feed update does not replace it silently.
 - Reset only the discovery session on locale changes. No storage, account, tracker,
   new fetch, payment flow or automatic content timer.
-- Keep the band compact, keyboard accessible and announced only after user action.
+- Keep the camera compact, keyboard accessible and announced only after user action.
 - The small shutter gesture is optional and does not flash. Reduced motion is static.
 
 ## Video And Project Shelves
@@ -48,7 +53,9 @@ turning Home into an agency landing page or hiding its practical tools.
 Preserve the selected Harbour Field Journal: white canvas, real photography,
 green/ink type and restrained coral accents. Use repeated-item cards only for real
 videos/projects, not floating section cards. Replace the old process slogan with
-small `Watch / Read / Make` captions; retain the original line illustration.
+small `Videos / Notes / Projects` captions; retain the original line illustration.
+These are content categories, not a task visitors must complete. The previous
+`Watch / Read / Make` wording was ambiguous, particularly "Make".
 
 ## Validation
 

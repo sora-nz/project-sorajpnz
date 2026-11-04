@@ -32,7 +32,7 @@
 }
 
 .index-inner { width: min(1200px, calc(100% - 112px)); margin-inline: auto; }
-.home-index .site-header { background: rgba(255,255,255,0.96); backdrop-filter: none; border: 0; }
+.home-index .site-header { background: #fff; backdrop-filter: none; border: 0; }
 .home-index .header-shell { width: min(1200px, calc(100% - 112px)); height: 64px; margin-block: 0; padding-inline: 0; grid-template-columns: 1fr auto auto; gap: 28px; background: none; border-radius: 0; }
 .home-index .brand { justify-self: start; font-size: 24px; font-weight: 750; }
 .home-index .brand img { width: 28px; height: 28px; }
@@ -55,7 +55,9 @@
 .index-hero-image { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 53%; z-index: -2; }
 /* Keep the veil and text stationary while only the photograph drifts. */
 .index-hero::after { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(90deg, rgba(255,255,255,0.98) 0%, rgba(255,255,255,0.91) 30%, rgba(255,255,255,0.7) 47%, rgba(255,255,255,0.12) 73%, rgba(255,255,255,0) 100%); }
-.index-hero-copy { padding-block: 96px 36px; }
+.index-hero-layout { display: grid; width: auto; margin-inline: max(56px, calc((100% - 1200px) / 2)) 56px; grid-template-columns: minmax(0, 1fr) minmax(340px, 480px); gap: 48px; align-items: center; padding-block: 96px 36px; }
+.index-hero-layout > .index-detour { justify-self: end; }
+.index-hero-copy { min-width: 0; max-width: 560px; }
 .index-hero-name { width: fit-content; margin: 0 0 18px; padding-bottom: 6px; border-bottom: 2px solid var(--index-green); color: var(--index-green); font-size: 16px; font-weight: 650; }
 .index-hero-copy h1 { margin: 0 0 26px; color: #182823; font-size: 44px; line-height: 1.4; font-weight: 750; letter-spacing: 0; }
 .index-hero-copy h1 > span { display: block; }
@@ -120,7 +122,6 @@
 .index-sidebar-support { border-top: 1px solid var(--index-line); margin-top: 16px; padding-top: 16px; }
 .index-sidebar-support > p { margin: 8px 0 0; font-size: 12px; color: var(--index-muted); line-height: 1.85; }
 .index-feed { grid-column: 2; grid-row: 1; min-width: 0; }
-.index-detour-wrap { margin-top: 12px; }
 .index-kicker { display: block; color: var(--index-muted); font-size: 13px; font-weight: 500; line-height: 1.6; margin: 0 0 8px; }
 .index-tool-band { margin-top: 48px; padding: 0; background: #fff; }
 .index-project-feature { position: relative; padding-top: 24px; }
@@ -229,6 +230,7 @@
   .index-hero-image { object-position: center 60%; }
 }
 @media (max-width: 1100px) {
+  .index-hero-layout { grid-template-columns: minmax(0, 1fr) minmax(340px, 420px); gap: 32px; }
   .index-hero-copy h1 { font-size: 40px; }
   .index-hero-copy-japanese h1 { font-size: 36px; }
   .index-hero-copy-japanese h1 > .index-hero-address { font-size: 64px; }
@@ -252,7 +254,8 @@
   .home-index .header-actions { display: none; }
   .home-index .brand { font-size: 22px; }
   .index-hero { margin-top: -64px; }
-  .index-hero-copy { padding-top: 100px; }
+  .index-hero-layout { width: calc(100% - 64px); margin-inline: auto; grid-template-columns: 1fr; gap: 14px; padding-block: 100px 70px; }
+  .index-hero-layout > .index-detour { justify-self: center; }
   .index-hero-copy h1 { font-size: 40px; }
   .index-hero-copy-japanese h1 { font-size: 36px; }
   .index-destination-grid { padding-block: 20px; }
@@ -278,11 +281,10 @@
   .index-hero { height: auto; min-height: 690px; }
   .index-hero-image { height: 120%; object-position: 62% top; --harbour-shift-x: 0.65%; --harbour-shift-y: -0.8%; --harbour-scale-start: 1.04; --harbour-scale-end: 1.065; }
   .index-hero::after { background: linear-gradient(180deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.93) 50%, rgba(255,255,255,0.78) 68%, rgba(255,255,255,0.08) 100%); }
-  .index-hero-copy { padding-block: 120px 180px; }
+  .index-hero-layout { width: calc(100% - 40px); padding-block: 108px 64px; gap: 12px; }
   .index-hero-name { margin-bottom: 20px; font-size: 16px; }
   .index-hero-copy h1 { font-size: 30px; line-height: 1.5; margin-bottom: 24px; }
   .index-hero-description { max-width: 360px; font-size: 15px; line-height: 1.9; }
-  .index-hero-copy-japanese { padding-bottom: 112px; }
   .index-hero-copy-japanese h1 { font-size: 28px; line-height: 1.6; }
   .index-hero-copy-japanese h1 > .index-hero-address { font-size: 50px; line-height: 1.25; }
   .index-hero-copy-japanese .index-hero-description { font-size: 15px; line-height: 1.9; }

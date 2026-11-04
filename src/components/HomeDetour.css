@@ -1,62 +1,58 @@
-.index-detour {
-  --detour-green: var(--index-green, #075348);
-  --detour-ink: var(--index-ink, #17221f);
-  --detour-muted: var(--index-muted, #58615e);
-  padding-block: 22px 24px;
-  border-bottom: 1px solid var(--index-line, #dce3df);
-  color: var(--detour-ink);
-}
-.index-detour-heading { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-.index-detour-heading h2 { margin: 0; font-size: 21px; line-height: 1.5; }
-.index-detour-draw { display: inline-flex; align-items: center; justify-content: center; gap: 8px; min-height: 44px; padding: 7px 13px; border: 1px solid var(--detour-green); border-radius: 4px; background: #fff; color: var(--detour-green); font: inherit; font-size: 14px; font-weight: 650; line-height: 1.5; cursor: pointer; }
-.index-detour-draw > i { font-size: 19px; }
-.index-detour-layout { display: grid; grid-template-columns: 200px minmax(0, 1fr); min-height: 160px; gap: 24px; align-items: center; }
-.index-detour-frame { position: relative; aspect-ratio: 16 / 9; overflow: hidden; border: 1px solid var(--index-line, #dce3df); border-radius: 2px; background: #fff; }
+.index-detour { width: 100%; max-width: 480px; min-width: 0; color: var(--index-ink, #17221f); }
+.index-detour-heading { padding-left: 7%; margin-bottom: 10px; }
+.index-detour-heading h2 { width: fit-content; margin: 0; padding: 2px 8px; background: rgba(255,255,255,0.94); color: var(--index-green, #075348); font-size: 20px; line-height: 1.5; }
+.index-detour-device { position: relative; width: 100%; aspect-ratio: 1216 / 895; }
+.index-detour-shell { display: block; width: 100%; height: 100%; pointer-events: none; }
+.index-detour-layout { position: absolute; left: 7.319079%; top: 26.592179%; width: 74.342105%; height: 63.240223%; display: grid; grid-template-columns: 36% minmax(0, 1fr); gap: 12px; padding: 12px; overflow-x: hidden; overflow-y: auto; scrollbar-width: thin; border-radius: 3px; background: #fff; }
+.index-detour-frame { min-width: 0; height: 100%; overflow: hidden; background: #eef3f0; }
 .index-detour-frame > img { display: block; width: 100%; height: 100%; object-fit: contain; }
 .index-detour-frame-note > img,
 .index-detour-frame-empty > img { object-fit: cover; }
-.index-detour-frame-empty > img { opacity: 0.32; filter: grayscale(0.8); }
-.index-detour-camera { position: absolute; inset: 0; display: grid; place-items: center; color: var(--detour-green); font-size: 28px; }
-.index-detour-frame > .index-detour-thumbnail-fallback { object-fit: contain; padding: 20px; }
-.index-detour-copy { min-width: 0; }
-.index-detour-copy h3 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin: 0 0 5px; font-size: 17px; line-height: 1.65; overflow-wrap: anywhere; }
-.index-detour-copy > p { margin: 0; color: var(--detour-muted); font-size: 14px; line-height: 1.8; }
-.index-detour-copy > .index-detour-kind { margin-bottom: 3px; color: #9c422e; font-size: 12px; font-weight: 650; }
-.index-detour-copy > .index-detour-invitation { margin-bottom: 5px; color: var(--detour-ink); font-size: 17px; font-weight: 600; }
-.index-detour-open { display: inline-flex; align-items: center; gap: 8px; min-height: 44px; width: fit-content; color: var(--detour-green); font-size: 14px; font-weight: 650; line-height: 1.6; }
-.index-detour-open > i { font-size: 18px; }
-.index-detour-copy > .index-detour-source { font-size: 12px; }
-.index-detour-draw:focus-visible,
-.index-detour-open:focus-visible { outline: 3px solid var(--detour-green); outline-offset: 4px; }
-.index-detour-draw:active { background: #eaf1ed; }
+.index-detour-frame > .index-detour-thumbnail-fallback { padding: 10px; }
+.index-detour-copy { min-width: 0; align-self: center; align-self: safe center; }
+.index-detour-copy h3 { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin: 0 0 7px; font-size: 16px; font-weight: 700; line-height: 1.5; overflow-wrap: anywhere; }
+.index-detour-copy > p { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; margin: 0; color: var(--index-muted, #58615e); font-size: 13px; line-height: 1.6; }
+.index-detour-copy > .index-detour-kind { margin-bottom: 5px; color: #9c422e; font-size: 11px; font-weight: 650; }
+.index-detour-open { display: inline-flex; align-items: center; gap: 5px; min-height: 36px; max-width: 100%; margin-top: 5px; color: var(--index-green, #075348); font-size: 13px; font-weight: 650; line-height: 1.5; }
+.index-detour-open > i { flex: 0 0 auto; font-size: 16px; }
+.index-detour-draw { position: absolute; z-index: 1; left: 72%; top: 0; width: 21%; min-width: 64px; height: 24%; min-height: 64px; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px; padding: 2px; border: 0; border-radius: 6px; background: transparent; color: #075348; font: inherit; cursor: pointer; }
+.index-detour-draw > i { font-size: 23px; line-height: 1; }
+.index-detour-draw > span { padding: 1px 5px; background: #fff; font-size: 12px; font-weight: 700; line-height: 1.5; white-space: nowrap; }
+.index-detour-draw:focus-visible { outline: 3px solid #075348; outline-offset: 4px; }
+.index-detour-open:focus-visible { outline: 3px solid #075348; outline-offset: 2px; }
+.index-detour-draw:active > i { transform: translateY(2px); }
+.index-detour-source { min-height: 20px; margin: 3px 0 0; padding-left: 7%; color: var(--index-muted, #58615e); font-size: 11px; line-height: 1.6; }
 .index-detour-announcement { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0; }
-.index-detour-shutter { position: absolute; inset: 0; pointer-events: none; background: var(--detour-green); transform: scaleY(0); transform-origin: top; }
+.index-detour-shutter { position: absolute; inset: 0; pointer-events: none; background: #203f37; transform: scaleY(0); transform-origin: top; }
 @media (prefers-reduced-motion: no-preference) {
   .index-detour-shutter { animation: index-detour-exposure 260ms ease-out 1; }
-  .index-detour-draw { transition: background-color 180ms ease-out; }
+  .index-detour-draw > i { transition: transform 120ms ease-out; }
 }
 @keyframes index-detour-exposure { 0% { transform: scaleY(1); } 100% { transform: scaleY(0); } }
 @media (hover: hover) and (pointer: fine) {
-  .index-detour-draw:hover { background: #eaf1ed; }
-  .index-detour-open:hover { text-decoration: underline; text-underline-offset: 4px; }
+  .index-detour-draw:hover > span { text-decoration: underline; text-underline-offset: 3px; }
+  .index-detour-open:hover { text-decoration: underline; text-underline-offset: 3px; }
+}
+@media (max-width: 1100px) and (min-width: 901px), (max-width: 430px) {
+  .index-detour-layout { gap: 8px; padding: 9px; grid-template-columns: 32% minmax(0, 1fr); }
+  .index-detour-copy h3 { margin-bottom: 5px; font-size: 14px; line-height: 1.45; }
+  .index-detour-copy > p { font-size: 12px; line-height: 1.5; }
+  .index-detour-copy > .index-detour-kind { margin-bottom: 3px; font-size: 10px; }
+  .index-detour-open { min-height: 32px; margin-top: 2px; font-size: 12px; gap: 3px; }
+  .index-detour-open > i { font-size: 14px; }
+  .index-detour-draw > i { font-size: 20px; }
+  .index-detour-draw > span { font-size: 11px; }
 }
 @media (max-width: 650px) {
-  .index-detour { padding-block: 18px 20px; }
-  .index-detour-heading { gap: 10px; margin-bottom: 14px; }
+  .index-detour-heading { margin-bottom: 8px; }
   .index-detour-heading h2 { font-size: 19px; }
-  .index-detour-draw { padding-inline: 10px; font-size: 13px; }
-  .index-detour-layout { grid-template-columns: 112px minmax(0, 1fr); gap: 14px; align-items: start; }
-  .index-detour-frame { aspect-ratio: 4 / 3; }
-  .index-detour-copy h3 { font-size: 15px; }
-  .index-detour-copy > p { font-size: 13px; }
-  .index-detour-copy > .index-detour-invitation { font-size: 15px; }
-  .index-detour-copy > .index-detour-kind,
-  .index-detour-copy > .index-detour-source { font-size: 11px; }
-  .index-detour-open { font-size: 13px; }
 }
-@media (max-width: 360px) {
-  .index-detour-layout { grid-template-columns: 88px minmax(0, 1fr); gap: 12px; }
-  .index-detour-heading { flex-wrap: wrap; }
+@media (max-width: 380px) {
+  .index-detour-copy > .index-detour-kind { display: none; }
+}
+@media (max-width: 340px) {
+  .index-detour-layout { gap: 6px; padding: 7px; }
+  .index-detour-copy > p { -webkit-line-clamp: 1; }
 }
 @media (prefers-reduced-motion: reduce) {
   .index-detour *, .index-detour *::before, .index-detour *::after { animation: none !important; transition: none !important; }

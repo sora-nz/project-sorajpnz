@@ -45,7 +45,14 @@ assert.ok(!home.includes('reveal-on-scroll') && !home.includes('useReveal'), 'Ho
 assert.ok(home.includes('home-index') && home.includes('assets.aucklandHarbour'), 'Selected Home motif uses the real harbour image');
 assert.ok(home.includes('useRecentVideos(homeVideoFallback)') && home.includes('id="home-video-carousel"'), 'Home supports ongoing channel uploads in the video carousel');
 assert.ok(home.includes('id="home-project-carousel"') && home.includes('<HomeDetour '), 'Home includes real project previews and user-triggered discovery');
-assert.ok(home.includes('<span>Watch</span>') && home.includes('<span>Read</span>') && home.includes('<span>Make</span>'), 'Illustration captions use the selected English labels');
+const fieldSketch = home.match(/<figure\b[^>]*className="index-field-sketch"[\s\S]*?<\/figure>/)?.[0];
+assert.ok(fieldSketch, 'Home keeps its harbour notebook illustration');
+for (const label of ['Videos', 'Notes', 'Projects']) {
+  assert.ok(fieldSketch.includes(`<span>${label}</span>`), `Illustration caption uses the selected label: ${label}`);
+}
+for (const label of ['Watch', 'Read', 'Make']) {
+  assert.ok(!fieldSketch.includes(`<span>${label}</span>`), `Retired illustration caption is removed: ${label}`);
+}
 assert.ok(!home.includes('体験する') && !home.includes('試してみる</span>'), 'Retired illustration slogans are removed');
 const carousel = await readFile('src/components/HomeCarousel.tsx', 'utf8');
 assert.ok(carousel.includes("from 'embla-carousel-react'"), 'Swipe and slide layout use the established carousel library');

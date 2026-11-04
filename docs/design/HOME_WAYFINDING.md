@@ -18,7 +18,7 @@ The page is a personal index of life, videos, notes, and working tools, not a co
 - White unframed content, thin rules, small image corners, compact commands, and no decorative card shadows. The rounded header contact command is an intentional Home exception to general component defaults.
 - Stack the sidebar and main content on small screens, keeping the profile concise and links large enough for touch. Links remain native links with clear destinations.
 - Use existing styles and icons. Embla Carousel React 8.6.0 is the narrow exception for the requested swipeable video/project slides; add no general animation or UI component library.
-- Add one original black-ink harbour-to-notebook bitmap below the video group, with the English captions Watch / Read / Make. It is a decorative conceptual drawing, not a precise map or an image of Sora/Thea. Do not copy the reference site's characters, branding, content, or sales funnel.
+- Add one original black-ink harbour-to-notebook bitmap below the video group, with the English category labels Videos / Notes / Projects. It is a decorative conceptual drawing, not a precise map or an image of Sora/Thea. Do not copy the reference site's characters, branding, content, or sales funnel.
 
 ## Motion Has A Job
 
@@ -55,7 +55,7 @@ The public channel feed updates this group on page load. Sora's subsequent disco
 Keep the actual thumbnails and titles, rather than generating replacement covers or adding sample uploads.
 Video and project slides show a small neighboring preview, arrows, dots, and pause/play. Pause on pointer attention, keyboard focus, drag, manual selection, hidden document, and offscreen state. Honor reduced motion. Only the carousel viewport scrolls horizontally; the page must not overflow. Keep all visible cards usable and remove only offscreen cards from keyboard navigation.
 
-The small, user-triggered "今日の寄り道" band draws from actual videos, three project case studies, and the published Japanese Auckland note. Never select private/noindex draft notes or nonexistent English article routes. It does not auto-navigate, store activity, or add tracking. See `docs/products/HOME_DISCOVERY.md`.
+The user-triggered "今日の寄り道" now sits inside a dedicated camera illustration on the hero's right, replacing the separate band below the destinations. Real image, description and result link sit in its LCD; a nearby native shutter button draws another item. Stack below the introduction on mobile. Keep its dimensions stable, and preserve the original background, title and main destinations. It draws from actual videos, three project case studies, and the published Japanese Auckland note. Never select private/noindex draft notes or nonexistent English article routes. It does not auto-navigate, store activity, or add tracking. See `docs/products/HOME_DISCOVERY.md`.
 
 Japanese remains video-first in the main column; English remains calculator-and-case-study-first. Both keep the latest video and recent uploads available without changing the underlying feed.
 Buy Me a Coffee is an optional, quiet link below the personal introduction in the sidebar.

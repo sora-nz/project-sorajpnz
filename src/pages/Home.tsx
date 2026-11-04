@@ -167,11 +167,11 @@ export function Home({ locale, path }: HomeProps) {
       )}
       <figure key={locale} className="index-field-sketch" data-index-rule>
         <figcaption lang="en">
-          <span>Watch</span>
+          <span>Videos</span>
           <i className="ri-arrow-right-line" aria-hidden="true" />
-          <span>Read</span>
+          <span>Notes</span>
           <i className="ri-arrow-right-line" aria-hidden="true" />
-          <span>Make</span>
+          <span>Projects</span>
         </figcaption>
         <img src="/assets/home/harbour-notebook.webp" alt="" width={2172} height={724} loading="lazy" decoding="async" />
       </figure>
@@ -221,14 +221,17 @@ export function Home({ locale, path }: HomeProps) {
       <main ref={mainRef}>
         <section className="index-hero" data-index-title data-motion-paused={heroPaused} aria-labelledby="index-home-heading">
           <img className="index-hero-image" src={assets.aucklandHarbour} alt={isJapanese ? '木陰の遊歩道から、海越しに見えるAucklandの街並み' : 'Auckland skyline across the harbour, viewed from a tree-lined waterfront path'} width={1024} height={768} loading="eager" fetchPriority="high" decoding="async" />
-          <div className={`index-inner index-hero-copy${isJapanese ? ' index-hero-copy-japanese' : ''}`}>
-            <p className="index-hero-name">SoraJPNZ</p>
-            <h1 key={locale} id="index-home-heading">{isJapanese ? <><span>海外生活に憧れや</span><span>不安を抱えている</span><span className="index-hero-address">あなたへ。</span></> : <><span>Life in New Zealand,</span><span>and the tools I build.</span></>}</h1>
-            <div className="index-hero-description">
-              <p className="index-hero-mission">{isJapanese ? <><span>そんな方たちの、</span><span>ちょっとした支えになるものを届けたい。</span></> : 'Practical work, with real life behind it.'}</p>
-              <p>{isJapanese ? 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。' : 'I’m Sora, an Auckland-based analyst in my eighth year in New Zealand. I build practical calculators and data projects, and share everyday life with Thea through videos and notes.'}</p>
-              <p>{isJapanese ? 'これまでの長い海外生活から、日本人として感じたことを、少し深掘りした視点から。' : 'Start with the calculator and its case study for my project work, or follow the videos for everyday New Zealand life.'}</p>
+          <div className="index-inner index-hero-layout">
+            <div className={`index-hero-copy${isJapanese ? ' index-hero-copy-japanese' : ''}`}>
+              <p className="index-hero-name">SoraJPNZ</p>
+              <h1 key={locale} id="index-home-heading">{isJapanese ? <><span>海外生活に憧れや</span><span>不安を抱えている</span><span className="index-hero-address">あなたへ。</span></> : <><span>Life in New Zealand,</span><span>and the tools I build.</span></>}</h1>
+              <div className="index-hero-description">
+                <p className="index-hero-mission">{isJapanese ? <><span>そんな方たちの、</span><span>ちょっとした支えになるものを届けたい。</span></> : 'Practical work, with real life behind it.'}</p>
+                <p>{isJapanese ? 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。' : 'I’m Sora, an Auckland-based analyst in my eighth year in New Zealand. I build practical calculators and data projects, and share everyday life with Thea through videos and notes.'}</p>
+                <p>{isJapanese ? 'これまでの長い海外生活から、日本人として感じたことを、少し深掘りした視点から。' : 'Start with the calculator and its case study for my project work, or follow the videos for everyday New Zealand life.'}</p>
+              </div>
             </div>
+            <HomeDetour locale={locale} videos={videos} videoStatus={videoStatus} />
           </div>
           <button className="index-motion-toggle" type="button" aria-pressed={heroPaused}
             aria-label={isJapanese ? heroPaused ? '背景の動きを再開' : '背景の動きを一時停止' : heroPaused ? 'Resume background motion' : 'Pause background motion'}
@@ -252,8 +255,6 @@ export function Home({ locale, path }: HomeProps) {
             ))}
           </div>
         </nav>
-
-        <div className="index-inner index-detour-wrap"><HomeDetour locale={locale} videos={videos} videoStatus={videoStatus} /></div>
 
         <div className="index-inner index-content">
           <div className="index-feed">
