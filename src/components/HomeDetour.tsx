@@ -88,7 +88,7 @@ function HomeDetourSession({ locale, videos, videoStatus }: HomeDetourProps) {
           {selected && draw && <span className="index-detour-shutter" key={draw.revision} aria-hidden="true" />}
         </div>
       </div>
-      <p className="index-detour-source">{external && draw?.checkedVideo ? (isJapanese ? '確認済みの動画から選んでいます。' : 'From the checked video selection.') : '\u00a0'}</p>
+      <p className="index-detour-source">{external && draw?.checkedVideo && <span>{isJapanese ? '確認済みの動画から選んでいます。' : 'From the checked video selection.'}</span>}</p>
       <p className="index-detour-announcement" role="status" aria-live="polite" aria-atomic="true">{draw?.announcement ?? ''}</p>
     </section>
   );
