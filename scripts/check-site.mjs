@@ -51,7 +51,7 @@ assert.ok(home.indexOf('<div className="index-feed">') < home.indexOf('<aside cl
 for (const text of ['海外生活に憧れや', '不安を抱えている', 'そんな方たちの、', 'ちょっとした支えになるものを届けたい。', 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。', 'これまでの長い海外生活から、日本人として感じたことを、少し深掘りした視点から。']) {
   assert.ok(home.includes(text), `Japanese hero preserves approved copy: ${text}`);
 }
-assert.match(homeCss, /\.index-hero-copy-japanese h1[^{}]*\{[^}]*font-family: 'Zen Maru Gothic'/, 'Selected Japanese typeface does not change the site-wide font');
+assert.match(homeCss, /\.index-hero-copy-japanese h1[^{}]*\{[^}]*font-family: 'Noto Serif JP Home'/, 'Selected Japanese display typeface stays scoped to Home');
 assert.match(homeCss, /\.index-hero-copy-japanese h1 > \.index-hero-address\s*\{[^}]*color: var\(--index-green\)/, 'Personal address has a distinct green hierarchy');
 assert.match(homeCss, /\.index-feed,\s*\.index-sidebar\s*\{\s*grid-column: auto; grid-row: auto;/, 'Mobile Home follows the content-first DOM order');
 for (const weight of ['medium', 'bold']) {
@@ -61,6 +61,13 @@ for (const weight of ['medium', 'bold']) {
 }
 assert.ok((await readFile('public/assets/fonts/zen-maru-gothic/OFL.txt', 'utf8')).includes('SIL OPEN FONT LICENSE'), 'Font license is distributed with the assets');
 assert.ok(homeCss.includes('prefers-reduced-motion: reduce') && homeCss.includes('transform: none !important'), 'Home motion can be disabled');
+const displayFont = await readFile('public/assets/fonts/noto-serif-jp/home-black.woff2');
+assert.equal(displayFont.subarray(0, 4).toString(), 'wOF2', 'New Home display font is WOFF2');
+assert.ok(displayFont.length < 30000, 'Home display font is a small local subset');
+assert.ok((await readFile('public/assets/fonts/noto-serif-jp/OFL.txt', 'utf8')).includes('SIL OPEN FONT LICENSE'));
+assert.ok(home.includes('index-field-sketch') && home.includes('harbour-notebook.webp'), 'Selected Home illustration is a real bitmap asset');
+assert.ok(homeCss.includes('index-ink-trace 1600ms') && homeCss.includes('index-light-pass 650ms'), 'Contextual gestures are brief, not ambient loops');
+assert.ok(!/index-(?:ink-trace|light-pass)[^;]*infinite/.test(homeCss), 'New gestures play once');
 assert.ok(!/opacity:\s*0(?:\D|$)|visibility:\s*hidden/.test(homeCss), 'Essential Home sections are not hidden by animation');
 assert.ok(home.includes("observer?.disconnect()") && home.includes("motion.removeEventListener('change', configure)"), 'Home decorative observer cleans up on locale change');
 assert.ok(home.includes('links.support'), 'Home has an optional support link');

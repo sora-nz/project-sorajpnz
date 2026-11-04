@@ -61,10 +61,11 @@ tokens:
 
 The Home-specific visual direction revised by Sora in October 2026 is **Auckland Harbour**.
 Read [the Home motif and motion rules](docs/design/HOME_WAYFINDING.md) before changing Home.
-It uses an inset translucent header with a contact command, the real harbour photograph behind a stationary white reading veil and personal introduction, a green three-link strip, and a profile sidebar beside the main content.
+The November 2026 Harbour Field Journal update uses a plain white masthead, the real harbour photograph behind a stationary white reading veil, local Noto Serif JP display type, a numbered green three-link strip, and a profile sidebar beside the main content. A small original ink illustration connects the harbour to a notebook. The user selected this first visual mock and requested contextual motion inspired by the LEAD OTAKU reference; do not copy that site's brand, characters, sales copy or visual assets.
 Japanese Home leads with recent videos; English leads with the calculator and its case study. Keep live uploads and essential content visible without animation or observer support.
 The user's narrow motion exception permits only a slow 20-second transform pan and small zoom of the harbour photograph, gated by `prefers-reduced-motion: no-preference`, with smaller mobile movement and a native pause/resume button. Do not extend this exception to other looping or parallax effects.
 The latest clarification asks for real scene motion (water and leaves), not photo pan/zoom. That video prototype is not yet available; the existing transform is an interim treatment. Thea's lesson illustration may use one short, contextual editing gesture on hover or keyboard focus, with a static reduced-motion state.
+The November update also permits brief title settling, a one-shot decorative ink wipe on scroll, and a single light sweep on destination hover or keyboard focus. Essential content remains visible without animation or observer support. These are not new ambient loops; all stop under reduced motion.
 Keep these overrides scoped to Home; the general tokens below remain the defaults for other pages and tools.
 
 SoraJPNZ should feel like a calm, practical Japan x New Zealand decision-making media site with a strong portfolio and data-tool backbone.

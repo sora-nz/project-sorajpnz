@@ -41,7 +41,6 @@ export function Home({ locale, path }: HomeProps) {
       id: 'video',
       href: links.youtube,
       external: true,
-      icon: 'ri-play-circle-line',
       label: isJapanese ? '動画を見る' : 'Watch the videos',
       hint: isJapanese ? 'NZでの暮らしや海の動画' : 'Everyday NZ life, with Thea.'
     },
@@ -49,7 +48,6 @@ export function Home({ locale, path }: HomeProps) {
       id: 'notes',
       href: `${base}/blog`,
       external: false,
-      icon: 'ri-book-open-line',
       label: isJapanese ? 'Notesを読む' : 'Read the Notes',
       hint: isJapanese ? '生活のこと、仕事のこと' : 'Life, work, and money.'
     },
@@ -57,7 +55,6 @@ export function Home({ locale, path }: HomeProps) {
       id: 'projects',
       href: `${base}/projects`,
       external: false,
-      icon: 'ri-tools-line',
       label: isJapanese ? '作ったものを見る' : 'Explore my work',
       hint: isJapanese ? '使えるツールとプロジェクト' : 'Practical tools and data projects.'
     }
@@ -124,7 +121,7 @@ export function Home({ locale, path }: HomeProps) {
   const renderVideo = (className: string) => (
     <section id="home-videos" className={className} aria-labelledby="index-video-heading" data-index-rule>
       <div className="index-section-heading">
-        <h2 id="index-video-heading">{isJapanese ? '最近の動画' : 'Life behind the projects'}</h2>
+        <h2 id="index-video-heading"><span className="index-section-number" aria-hidden="true">{isJapanese ? '01' : '02'}</span>{isJapanese ? '最近の動画' : 'Life behind the projects'}</h2>
         <a className="index-link" href={links.youtube} target="_blank" rel="noopener noreferrer">
           {isJapanese ? 'すべての動画を見る' : 'All videos'}
           <i className="ri-arrow-right-line" aria-hidden="true" />
@@ -180,6 +177,16 @@ export function Home({ locale, path }: HomeProps) {
       {videoStatus === 'fallback' && (
         <p className="index-video-status">{isJapanese ? '確認済みの動画を表示しています。最新の投稿はYouTubeからどうぞ。' : 'Showing checked uploads. Visit YouTube for the latest posts.'}</p>
       )}
+      <figure className="index-field-sketch" data-index-rule>
+        <figcaption>
+          <span>{isJapanese ? '体験する' : 'Experience'}</span>
+          <i className="ri-arrow-right-line" aria-hidden="true" />
+          <span>{isJapanese ? '残す' : 'Document'}</span>
+          <i className="ri-arrow-right-line" aria-hidden="true" />
+          <span>{isJapanese ? '試してみる' : 'Build & test'}</span>
+        </figcaption>
+        <img src="/assets/home/harbour-notebook.webp" alt="" width={2172} height={724} loading="lazy" decoding="async" />
+      </figure>
     </section>
   );
 
@@ -191,7 +198,7 @@ export function Home({ locale, path }: HomeProps) {
         <span className="index-preview-label">{isJapanese ? '表示例' : 'Example screen'}</span>
         </a>
         <div className="index-project-copy">
-          <p className="index-kicker">{isJapanese ? '暮らしの数字を、試してみる' : 'Featured project'}</p>
+          <p className="index-kicker"><span className="index-section-number" aria-hidden="true">{isJapanese ? '02' : '01'}</span>{isJapanese ? '暮らしの数字を、試してみる' : 'Featured project'}</p>
           <h2 id="index-tool-heading">{isJapanese ? 'NZ生活リアリティ計算機' : 'NZ Life Reality Calculator'}</h2>
           <p>{isJapanese ? '時給・勤務時間・家賃・車・貯金目標を入れて、月にどれくらい残るかを試せます。' : 'A browser tool for testing how wages, rent, transport, and savings goals affect monthly room in a New Zealand budget.'}</p>
           <p className="index-tool-note">{isJapanese ? 'NZDと日本円の参考表示に対応。入力内容は保存しません。概算ツールです。' : 'Client-side calculations, adjustable assumptions, and optional JPY reference amounts. Inputs are not stored; results are estimates.'}</p>
@@ -221,7 +228,7 @@ export function Home({ locale, path }: HomeProps) {
   );
 
   return (
-    <div className="page home-index">
+    <div className="page home-index" lang={locale}>
       <Header locale={locale} path={path} showContact />
       <main ref={mainRef}>
         <section className="index-hero" data-motion-paused={heroPaused} aria-labelledby="index-home-heading">
@@ -245,13 +252,14 @@ export function Home({ locale, path }: HomeProps) {
 
         <nav className="index-destinations" aria-label={isJapanese ? 'SoraJPNZの主な入口' : 'Explore SoraJPNZ'}>
           <div className="index-inner index-destination-grid">
-            {orderedDestinations.map((destination) => (
+            {orderedDestinations.map((destination, index) => (
               <a className={`index-destination index-destination-${destination.id}`} href={destination.href} target={destination.external ? '_blank' : undefined} rel={destination.external ? 'noopener noreferrer' : undefined} key={destination.id}>
-                <span className="index-destination-icon" aria-hidden="true"><i className={destination.icon} /></span>
                 <span className="index-destination-text">
-                  <span className="index-destination-label">{destination.label}<i className="ri-arrow-right-line" aria-hidden="true" /></span>
+                  <span className="index-destination-number" aria-hidden="true">0{index + 1}</span>
+                  <span className="index-destination-label">{destination.label}</span>
                   <span className="index-destination-hint">{destination.hint}</span>
                 </span>
+                <i className="ri-arrow-right-line index-destination-arrow" aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -291,7 +299,7 @@ export function Home({ locale, path }: HomeProps) {
 
         <section className="index-inner index-work-list" aria-labelledby="index-work-heading" data-index-rule>
           <div className="index-section-heading">
-            <h2 id="index-work-heading">{isJapanese ? 'ほかに作ったもの' : 'More selected work'}</h2>
+            <h2 id="index-work-heading"><span className="index-section-number" aria-hidden="true">03</span>{isJapanese ? 'ほかに作ったもの' : 'More selected work'}</h2>
             <a className="index-link" href={`${base}/projects`}>{isJapanese ? 'プロジェクト一覧' : 'All projects'}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
           </div>
           {selectedWork.map((work) => (
