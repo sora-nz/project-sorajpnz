@@ -68,6 +68,11 @@ assert.ok((await readFile('public/assets/fonts/noto-serif-jp/OFL.txt', 'utf8')).
 assert.ok(home.includes('index-field-sketch') && home.includes('harbour-notebook.webp'), 'Selected Home illustration is a real bitmap asset');
 assert.ok(homeCss.includes('index-ink-trace 1600ms') && homeCss.includes('index-light-pass 650ms'), 'Contextual gestures are brief, not ambient loops');
 assert.ok(!/index-(?:ink-trace|light-pass)[^;]*infinite/.test(homeCss), 'New gestures play once');
+assert.ok(!home.includes('unobserve('), 'Home motion remains observed for scroll re-entry');
+assert.ok(home.includes("section.querySelector('h1, h2, figcaption')"), 'Motion entry follows visible headings, not tall section bounds');
+assert.ok(home.includes("rootMargin: '0px'"), 'Motion resets only after the actual viewport exit');
+assert.ok(home.includes('<h1 key={locale}') && home.includes('<figure key={locale}'), 'Locale reuse recreates the title and decorative motion targets');
+assert.match(homeCss, /\.index-hero\[data-rule-drawn="true"\] \.index-hero-copy h1 > span\s*\{[^}]*index-title-settle/, 'Title motion follows viewport re-entry');
 assert.ok(!/opacity:\s*0(?:\D|$)|visibility:\s*hidden/.test(homeCss), 'Essential Home sections are not hidden by animation');
 assert.ok(home.includes("observer?.disconnect()") && home.includes("motion.removeEventListener('change', configure)"), 'Home decorative observer cleans up on locale change');
 assert.ok(home.includes('links.support'), 'Home has an optional support link');

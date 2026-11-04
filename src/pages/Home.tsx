@@ -92,7 +92,12 @@ export function Home({ locale, path }: HomeProps) {
     const root = mainRef.current;
     if (!root || !('IntersectionObserver' in window)) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const sections = [...root.querySelectorAll<HTMLElement>('[data-index-rule]')];
+    const sections = [...root.querySelectorAll<HTMLElement>('[data-index-rule], [data-index-title]')];
+    const targets = new Map<Element, HTMLElement>();
+    sections.forEach((section) => {
+      // A long section can remain onscreen after its heading has left the viewport.
+      targets.set(section.querySelector('h1, h2, figcaption') ?? section, section);
+    });
     let observer: IntersectionObserver | undefined;
     const configure = () => {
       observer?.disconnect();
@@ -101,13 +106,16 @@ export function Home({ locale, path }: HomeProps) {
       // Only the decorative rule reacts to scroll. Content never waits for an observer.
       observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
+          const section = targets.get(entry.target);
+          if (!section) return;
           if (entry.isIntersecting) {
-            (entry.target as HTMLElement).dataset.ruleDrawn = 'true';
-            observer?.unobserve(entry.target);
+            section.dataset.ruleDrawn = 'true';
+          } else {
+            section.removeAttribute('data-rule-drawn');
           }
         });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
-      sections.forEach((section) => observer?.observe(section));
+      }, { rootMargin: '0px', threshold: 0 });
+      targets.forEach((_section, target) => observer?.observe(target));
     };
     configure();
     motion.addEventListener('change', configure);
@@ -177,7 +185,7 @@ export function Home({ locale, path }: HomeProps) {
       {videoStatus === 'fallback' && (
         <p className="index-video-status">{isJapanese ? '確認済みの動画を表示しています。最新の投稿はYouTubeからどうぞ。' : 'Showing checked uploads. Visit YouTube for the latest posts.'}</p>
       )}
-      <figure className="index-field-sketch" data-index-rule>
+      <figure key={locale} className="index-field-sketch" data-index-rule>
         <figcaption>
           <span>{isJapanese ? '体験する' : 'Experience'}</span>
           <i className="ri-arrow-right-line" aria-hidden="true" />
@@ -231,11 +239,11 @@ export function Home({ locale, path }: HomeProps) {
     <div className="page home-index" lang={locale}>
       <Header locale={locale} path={path} showContact />
       <main ref={mainRef}>
-        <section className="index-hero" data-motion-paused={heroPaused} aria-labelledby="index-home-heading">
+        <section className="index-hero" data-index-title data-motion-paused={heroPaused} aria-labelledby="index-home-heading">
           <img className="index-hero-image" src={assets.aucklandHarbour} alt={isJapanese ? '木陰の遊歩道から、海越しに見えるAucklandの街並み' : 'Auckland skyline across the harbour, viewed from a tree-lined waterfront path'} width={1024} height={768} loading="eager" fetchPriority="high" decoding="async" />
           <div className={`index-inner index-hero-copy${isJapanese ? ' index-hero-copy-japanese' : ''}`}>
             <p className="index-hero-name">SoraJPNZ</p>
-            <h1 id="index-home-heading">{isJapanese ? <><span>海外生活に憧れや</span><span>不安を抱えている</span><span className="index-hero-address">あなたへ。</span></> : <><span>Life in New Zealand,</span><span>and the tools I build.</span></>}</h1>
+            <h1 key={locale} id="index-home-heading">{isJapanese ? <><span>海外生活に憧れや</span><span>不安を抱えている</span><span className="index-hero-address">あなたへ。</span></> : <><span>Life in New Zealand,</span><span>and the tools I build.</span></>}</h1>
             <div className="index-hero-description">
               <p className="index-hero-mission">{isJapanese ? <><span>そんな方たちの、</span><span>ちょっとした支えになるものを届けたい。</span></> : 'Practical work, with real life behind it.'}</p>
               <p>{isJapanese ? 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。' : 'I’m Sora, an Auckland-based analyst in my eighth year in New Zealand. I build practical calculators and data projects, and share everyday life with Thea through videos and notes.'}</p>
