@@ -1,6 +1,6 @@
 # Auckland Harbour: Home
 
-Revised by Sora in October 2026 after the second visual concept and a further review of the header, personal introduction, and content layout.
+Revised in November 2026 after Sora selected the first Harbour Field Journal mock and requested contextual motion inspired by the LEAD OTAKU reference.
 This replaces the standalone white title and large destination rows from Auckland Open Index, while restoring the profile-sidebar and main-feature composition. The filename remains stable for existing links.
 The page is a personal index of life, videos, notes, and working tools, not a corporate sales page or a travel brochure.
 
@@ -9,15 +9,16 @@ The page is a personal index of life, videos, notes, and working tools, not a co
 - Actual harbour photograph, approved Sora/Thea photo, real video thumbnail, and real product screenshots.
 - White reading surfaces, near-black primary text, green `#075348` for the destination strip and commands, muted text `#58615e`, and light rules `#dce3df`.
 - YouTube action red `#c52219`; do not spread this accent across unrelated elements.
-- Existing system Japanese-capable sans-serif stack, zero letter spacing. Japanese hero heading and mission alone use the selected "A Warm Address" treatment: locally hosted Zen Maru Gothic, two lighter introductory lines, then a larger green "あなたへ。". Body copy and English retain the system stack. Keep the approved wording and let paragraphs wrap naturally.
-- Inset translucent plain header over the harbour image, with the existing navigation, language switch, and a clear contact command. Keep this treatment scoped to Home.
+- Existing system Japanese-capable sans-serif body, zero letter spacing. Japanese hero and selected section headings use locally hosted Noto Serif JP 900 (a 22 KB text subset); the larger green "あなたへ。" stays distinct. Body copy and English retain the system stack. Keep the approved wording and let paragraphs wrap naturally. The older Zen Maru assets are retained, not used by this treatment.
+- Plain white masthead, with the existing navigation, language switch, and a clear contact command. Keep this treatment scoped to Home.
 - The real harbour photograph sits behind a stationary white reading veil. Personal audience copy and the SoraJPNZ name remain still and readable; do not replace them with a dark dramatic photo overlay.
 - Japanese copy addresses readers with hopes or worries about overseas life. Sora's user-confirmed eighth year in NZ is personal context, not a claim of professional advice or guaranteed outcomes. English keeps practical tools and career work easy to find.
 - A green three-link strip leads to YouTube, Notes, and Projects. Japanese leads with YouTube; English leads with Projects. Stack the strip naturally on mobile.
 - Profile and approved couple photo sit in a sidebar beside the main feature. Japanese shows recent videos before the calculator; English shows the calculator and case study before videos.
-- White unframed content, thin rules, small image corners, compact commands, and no decorative card shadows. The inset header and its rounded contact command are intentional Home exceptions to general component defaults.
+- White unframed content, thin rules, small image corners, compact commands, and no decorative card shadows. The rounded header contact command is an intentional Home exception to general component defaults.
 - Stack the sidebar and main content on small screens, keeping the profile concise and links large enough for touch. Links remain native links with clear destinations.
-- Use existing styles and icons; add no animation or component library.
+- Use existing styles and icons. Embla Carousel React 8.6.0 is the narrow exception for the requested swipeable video/project slides; add no general animation or UI component library.
+- Add one original black-ink harbour-to-notebook bitmap below the video group, with the English category labels Videos / Notes / Projects. It is a decorative conceptual drawing, not a precise map or an image of Sora/Thea. Do not copy the reference site's characters, branding, content, or sales funnel.
 
 ## Motion Has A Job
 
@@ -31,11 +32,13 @@ Sora subsequently clarified that the desired harbour effect is movement *inside*
 - Destination text and arrows may move a few pixels on fine-pointer hover or keyboard focus. Use a brief underline or green surface accent, not a bouncing or looping effect.
 - Image hover may use a slight scale within a stable, clipped image frame. Do not shift surrounding text or hide captions.
 - Touch uses a static pressed surface instead of requiring hover.
-- A single decorative section rule may respond to scroll. Keep this optional and confined to the rule: no text or image opacity changes, section resizing, layout shifts, or scroll blocking.
+- Supporting section rules trace on each viewport entry. The harbour-to-notebook illustration may wipe in left-to-right over 1.6 seconds each time its caption returns after fully leaving the viewport, without moving surrounding content. Observe the heading/caption rather than a tall parent section. Only this decorative empty-alt image can be masked; essential text and images are never hidden by observer state.
+- Hero title lines settle upward by 14px over 700ms with 120ms staggering on re-entry, without changing opacity. Recreate only the heading and decorative figure on locale changes so reuse cannot retain a completed CSS animation; retain the user's background pause state. The native links work throughout the gesture.
+- Destination hover or keyboard focus may trigger a single 650ms light sweep. This is feedback on the hovered target, not a looping CTA. Use static focus rings and colour feedback under reduced motion; touch never needs hover.
 - The decorative rule is fully drawn by default when IntersectionObserver is unavailable. If observer support is used, disconnect on cleanup and do not carry hidden states across locale changes.
 - `prefers-reduced-motion: reduce` disables Home animation and transitions. Focus outlines and link affordances remain.
 - Reduced-motion users see the harbour photograph and decorative rule in complete, static states. Do not leave the photograph transformed or show an unnecessary motion toggle when movement is disabled.
-- The harbour is the only authorized ambient loop. Do not add loops elsewhere, scroll-linked parallax, face zoom, generic floating, or observer-dependent visibility. Essential content must never start at `opacity: 0` or require JavaScript animation to appear.
+- The harbour is still the only ambient loop. No flashing, blinking, sticky scroll locking, fake count-ups, face zoom, generic floating, or observer-dependent essential visibility. Essential content must never start at `opacity: 0` or require JavaScript animation to appear.
 - Do not make essential UI wait for motion to finish.
 - Thea's lesson introduction uses a small, decorative Writing Task 2 illustration. On hover or keyboard focus within the introduction, the pencil makes one 1.1-second editing gesture and a correction line extends. No scores, outcome promises, personal data, third-party embeds, or constant looping. Keep the illustration static under reduced motion.
 
@@ -47,10 +50,12 @@ Preserve privacy, sourcing, noindex policies, and calculation behavior when chan
 
 ## Ongoing Videos And Support
 
-Home shows one recent upload and up to three smaller thumbnail/title/date links, including Shorts.
-The public channel feed updates this group on page load; it is not a carousel or a live player.
+Home shows up to four real thumbnail/title/date cards, including Shorts.
+The public channel feed updates this group on page load. Sora's subsequent discovery request replaces the one-feature/three-small-links arrangement with a controlled carousel of up to four real uploads, including Shorts; it is not a live player.
 Keep the actual thumbnails and titles, rather than generating replacement covers or adding sample uploads.
-Mobile uses compact thumbnail-and-title rows with no horizontal scrolling.
+Video and project slides show a small neighboring preview, arrows, dots, and pause/play. Pause on pointer attention, keyboard focus, drag, manual selection, hidden document, and offscreen state. Honor reduced motion. Only the carousel viewport scrolls horizontally; the page must not overflow. Keep all visible cards usable and remove only offscreen cards from keyboard navigation.
+
+The user-triggered "今日の寄り道" now sits inside a dedicated camera illustration on the hero's right, replacing the separate band below the destinations. Real image, description and result link sit in its LCD; a nearby native shutter button draws another item. Stack below the introduction on mobile. Keep its dimensions stable, and preserve the original background, title and main destinations. It draws from actual videos, three project case studies, and the published Japanese Auckland note. Never select private/noindex draft notes or nonexistent English article routes. It does not auto-navigate, store activity, or add tracking. See `docs/products/HOME_DISCOVERY.md`.
 
 Japanese remains video-first in the main column; English remains calculator-and-case-study-first. Both keep the latest video and recent uploads available without changing the underlying feed.
 Buy Me a Coffee is an optional, quiet link below the personal introduction in the sidebar.

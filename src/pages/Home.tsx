@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState } from 'react';
 import { Footer } from '../components/Footer';
 import { Header } from '../components/Header';
+import { HomeCarousel } from '../components/HomeCarousel';
+import { HomeDetour } from '../components/HomeDetour';
 import { TheaLessonVisual } from '../components/TheaLessonVisual';
 import { VideoThumbnail } from '../components/VideoThumbnail';
 import { assets, aucklandLivingCostMeta, links, Locale, projects, seo, socialLinks } from '../lib/content';
@@ -23,12 +25,6 @@ export function Home({ locale, path }: HomeProps) {
   const meta = seo[locale].home;
   const base = localize(locale);
   const { videos, status: videoStatus } = useRecentVideos(homeVideoFallback);
-  const featuredVideo = videos[0];
-  const knownVideo = recentVideos.find((item) => item.id === featuredVideo.id);
-  const video = {
-    title: videoStatus === 'live' ? featuredVideo.title : knownVideo?.[locale].title ?? featuredVideo.title,
-    description: knownVideo?.[locale].description ?? (isJapanese ? 'SoraとTheaのNZでの日々を、YouTubeに残しています。' : 'A recent upload from SoraJPNZ. The original YouTube title is shown.')
-  };
   const formatVideoDate = (date: string) => new Intl.DateTimeFormat(isJapanese ? 'ja-JP' : 'en-NZ', {
     year: 'numeric',
     month: isJapanese ? '2-digit' : 'short',
@@ -41,7 +37,6 @@ export function Home({ locale, path }: HomeProps) {
       id: 'video',
       href: links.youtube,
       external: true,
-      icon: 'ri-play-circle-line',
       label: isJapanese ? '動画を見る' : 'Watch the videos',
       hint: isJapanese ? 'NZでの暮らしや海の動画' : 'Everyday NZ life, with Thea.'
     },
@@ -49,7 +44,6 @@ export function Home({ locale, path }: HomeProps) {
       id: 'notes',
       href: `${base}/blog`,
       external: false,
-      icon: 'ri-book-open-line',
       label: isJapanese ? 'Notesを読む' : 'Read the Notes',
       hint: isJapanese ? '生活のこと、仕事のこと' : 'Life, work, and money.'
     },
@@ -57,13 +51,20 @@ export function Home({ locale, path }: HomeProps) {
       id: 'projects',
       href: `${base}/projects`,
       external: false,
-      icon: 'ri-tools-line',
       label: isJapanese ? '作ったものを見る' : 'Explore my work',
       hint: isJapanese ? '使えるツールとプロジェクト' : 'Practical tools and data projects.'
     }
   ];
   const orderedDestinations = isJapanese ? destinations : [destinations[2], destinations[1], destinations[0]];
   const selectedWork = [
+    {
+      path: 'nz-life-reality-calculator',
+      image: isJapanese ? assets.calculatorJa : assets.calculator,
+      width: 1280,
+      height: 720,
+      title: p.calculatorTitle,
+      body: isJapanese ? '時給と生活費を変えて、月に残る金額を試す。日英対応の計算機と、その制作記録。' : 'A bilingual living-cost calculator, with the assumptions, implementation choices and checks behind it.'
+    },
     {
       path: 'nz-japan-relocation',
       image: assets.dashboard,
@@ -78,7 +79,7 @@ export function Home({ locale, path }: HomeProps) {
       width: 1106,
       height: 616,
       title: p.rentRadarTitle,
-      body: isJapanese ? 'エリアごとの家賃を比べ、変化を追う小さなデータプロジェクト。' : 'A small data project for comparing local rents and tracking changes.'
+      body: isJapanese ? 'サンプルデータで家賃の比較やフィルターを試した、初期のPower BIプロトタイプ。' : 'An early Power BI prototype using sample data to explore rent comparisons and filters.'
     }
   ];
 
@@ -95,7 +96,12 @@ export function Home({ locale, path }: HomeProps) {
     const root = mainRef.current;
     if (!root || !('IntersectionObserver' in window)) return;
     const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-    const sections = [...root.querySelectorAll<HTMLElement>('[data-index-rule]')];
+    const sections = [...root.querySelectorAll<HTMLElement>('[data-index-rule], [data-index-title]')];
+    const targets = new Map<Element, HTMLElement>();
+    sections.forEach((section) => {
+      // A long section can remain onscreen after its heading has left the viewport.
+      targets.set(section.querySelector('h1, h2, figcaption') ?? section, section);
+    });
     let observer: IntersectionObserver | undefined;
     const configure = () => {
       observer?.disconnect();
@@ -104,13 +110,16 @@ export function Home({ locale, path }: HomeProps) {
       // Only the decorative rule reacts to scroll. Content never waits for an observer.
       observer = new IntersectionObserver((entries) => {
         entries.forEach((entry) => {
+          const section = targets.get(entry.target);
+          if (!section) return;
           if (entry.isIntersecting) {
-            (entry.target as HTMLElement).dataset.ruleDrawn = 'true';
-            observer?.unobserve(entry.target);
+            section.dataset.ruleDrawn = 'true';
+          } else {
+            section.removeAttribute('data-rule-drawn');
           }
         });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0 });
-      sections.forEach((section) => observer?.observe(section));
+      }, { rootMargin: '0px', threshold: 0 });
+      targets.forEach((_section, target) => observer?.observe(target));
     };
     configure();
     motion.addEventListener('change', configure);
@@ -124,62 +133,48 @@ export function Home({ locale, path }: HomeProps) {
   const renderVideo = (className: string) => (
     <section id="home-videos" className={className} aria-labelledby="index-video-heading" data-index-rule>
       <div className="index-section-heading">
-        <h2 id="index-video-heading">{isJapanese ? '最近の動画' : 'Life behind the projects'}</h2>
+        <h2 id="index-video-heading"><span className="index-section-number" aria-hidden="true">{isJapanese ? '01' : '02'}</span>{isJapanese ? '最近の動画' : 'Life behind the projects'}</h2>
         <a className="index-link" href={links.youtube} target="_blank" rel="noopener noreferrer">
           {isJapanese ? 'すべての動画を見る' : 'All videos'}
           <i className="ri-arrow-right-line" aria-hidden="true" />
         </a>
       </div>
       <p className="index-video-intro">{isJapanese ? 'Theaとの日常、海に出かけた日、短いひとこま。新しい動画も、ここから見られます。' : 'Life with Thea, ocean days, and shorter moments from New Zealand.'}</p>
-      <div className="index-video" data-video-source={videoStatus}>
-        <a className="index-video-image" href={featuredVideo.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${video.title}をYouTubeで見る` : `Watch ${video.title} on YouTube`}>
-          <span className="index-image-frame"><VideoThumbnail video={{ ...featuredVideo, thumbnail: knownVideo?.thumbnail ?? featuredVideo.thumbnail }} alt={isJapanese ? `${video.title}の動画サムネイル` : `Video thumbnail: ${video.title}`} fallbackClassName="index-thumbnail-fallback" key={`${featuredVideo.id}:${featuredVideo.thumbnail}`} /></span>
-          <span className="index-play" aria-hidden="true"><i className="ri-play-fill" /></span>
-        </a>
-        <div className="index-video-copy">
-          <h3>
-            <a href={featuredVideo.url} target="_blank" rel="noopener noreferrer">{video.title}</a>
-          </h3>
-          <time dateTime={featuredVideo.date}>{formatVideoDate(featuredVideo.date)}</time>
-          <p>{video.description}</p>
-          <div className="index-actions">
-            <a className="index-button index-button-youtube" href={featuredVideo.url} target="_blank" rel="noopener noreferrer">
-              <i className="ri-youtube-fill" aria-hidden="true" />
-              {isJapanese ? 'YouTubeで見る' : 'Watch on YouTube'}
-              <i className="ri-arrow-right-line" aria-hidden="true" />
-            </a>
-            {isJapanese && knownVideo?.notePath && (
-              <a className="index-link index-note-link" href={knownVideo.notePath}>
-                <i className="ri-article-line" aria-hidden="true" />
-                動画の補足ノート
-                <i className="ri-arrow-right-line" aria-hidden="true" />
-              </a>
-            )}
-          </div>
-        </div>
+      <div data-video-source={videoStatus}>
+        <HomeCarousel id="home-video-carousel" label={isJapanese ? '最近の動画' : 'Recent videos'} locale={locale} itemKeys={videos.map((item) => item.id)}>
+          {videos.map((item, index) => {
+            const known = recentVideos.find((entry) => entry.id === item.id);
+            const title = videoStatus === 'live' ? item.title : known?.[locale].title ?? item.title;
+            return (
+              <article className="index-media-card index-video-card" key={item.id}>
+                <a className="index-video-image" href={item.url} target="_blank" rel="noopener noreferrer" aria-label={isJapanese ? `${title}をYouTubeで見る` : `Watch ${title} on YouTube`}>
+                  <span className="index-image-frame"><VideoThumbnail video={{ ...item, thumbnail: known?.thumbnail ?? item.thumbnail }} alt={isJapanese ? `${title}の動画サムネイル` : `Video thumbnail: ${title}`} fallbackClassName="index-thumbnail-fallback" key={`${item.id}:${item.thumbnail}`} /></span>
+                  <span className="index-play" aria-hidden="true"><i className="ri-play-fill" /></span>
+                </a>
+                <div className="index-media-copy">
+                  <div className="index-media-meta"><span>VIDEO {String(index + 1).padStart(2, '0')}</span><time dateTime={item.date}>{formatVideoDate(item.date)}</time></div>
+                  <h3><a href={item.url} target="_blank" rel="noopener noreferrer" title={title}>{title}</a></h3>
+                  <a className="index-link index-button-youtube" href={item.url} target="_blank" rel="noopener noreferrer">{isJapanese ? 'YouTubeで見る' : 'Watch on YouTube'}<i className="ri-arrow-right-up-line" aria-hidden="true" /></a>
+                  {index === 0 && isJapanese && known?.notePath && <a className="index-link index-note-link" href={known.notePath}>動画の補足ノート<i className="ri-arrow-right-line" aria-hidden="true" /></a>}
+                </div>
+              </article>
+            );
+          })}
+        </HomeCarousel>
       </div>
-      {videos.length > 1 && (
-        <div className="index-recent-videos">
-          <h3>{isJapanese ? 'ほかの動画・ショート' : 'More videos and short moments'}</h3>
-          <ul className="index-video-list">
-            {videos.slice(1).map((item) => {
-              const title = videoStatus === 'live' ? item.title : recentVideos.find((entry) => entry.id === item.id)?.[locale].title ?? item.title;
-              return (
-                <li key={item.id}>
-                  <a href={item.url} target="_blank" rel="noopener noreferrer">
-                    <span className="index-image-frame"><VideoThumbnail video={{ ...item, thumbnail: recentVideos.find((entry) => entry.id === item.id)?.thumbnail ?? item.thumbnail }} alt={isJapanese ? `${title}の動画サムネイル` : `Video thumbnail: ${title}`} fallbackClassName="index-thumbnail-fallback" key={`${item.id}:${item.thumbnail}`} /></span>
-                    <h4>{title}</h4>
-                    <time dateTime={item.date}>{formatVideoDate(item.date)}</time>
-                  </a>
-                </li>
-              );
-            })}
-          </ul>
-        </div>
-      )}
       {videoStatus === 'fallback' && (
         <p className="index-video-status">{isJapanese ? '確認済みの動画を表示しています。最新の投稿はYouTubeからどうぞ。' : 'Showing checked uploads. Visit YouTube for the latest posts.'}</p>
       )}
+      <figure key={locale} className="index-field-sketch" data-index-rule>
+        <figcaption lang="en">
+          <span>Videos</span>
+          <i className="ri-arrow-right-line" aria-hidden="true" />
+          <span>Notes</span>
+          <i className="ri-arrow-right-line" aria-hidden="true" />
+          <span>Projects</span>
+        </figcaption>
+        <img src="/assets/home/harbour-notebook.webp" alt="" width={2172} height={724} loading="lazy" decoding="async" />
+      </figure>
     </section>
   );
 
@@ -191,7 +186,7 @@ export function Home({ locale, path }: HomeProps) {
         <span className="index-preview-label">{isJapanese ? '表示例' : 'Example screen'}</span>
         </a>
         <div className="index-project-copy">
-          <p className="index-kicker">{isJapanese ? '暮らしの数字を、試してみる' : 'Featured project'}</p>
+          <p className="index-kicker"><span className="index-section-number" aria-hidden="true">{isJapanese ? '02' : '01'}</span>{isJapanese ? '暮らしの数字を、試してみる' : 'Featured project'}</p>
           <h2 id="index-tool-heading">{isJapanese ? 'NZ生活リアリティ計算機' : 'NZ Life Reality Calculator'}</h2>
           <p>{isJapanese ? '時給・勤務時間・家賃・車・貯金目標を入れて、月にどれくらい残るかを試せます。' : 'A browser tool for testing how wages, rent, transport, and savings goals affect monthly room in a New Zealand budget.'}</p>
           <p className="index-tool-note">{isJapanese ? 'NZDと日本円の参考表示に対応。入力内容は保存しません。概算ツールです。' : 'Client-side calculations, adjustable assumptions, and optional JPY reference amounts. Inputs are not stored; results are estimates.'}</p>
@@ -221,19 +216,22 @@ export function Home({ locale, path }: HomeProps) {
   );
 
   return (
-    <div className="page home-index">
+    <div className="page home-index" lang={locale}>
       <Header locale={locale} path={path} showContact />
       <main ref={mainRef}>
-        <section className="index-hero" data-motion-paused={heroPaused} aria-labelledby="index-home-heading">
+        <section className="index-hero" data-index-title data-motion-paused={heroPaused} aria-labelledby="index-home-heading">
           <img className="index-hero-image" src={assets.aucklandHarbour} alt={isJapanese ? '木陰の遊歩道から、海越しに見えるAucklandの街並み' : 'Auckland skyline across the harbour, viewed from a tree-lined waterfront path'} width={1024} height={768} loading="eager" fetchPriority="high" decoding="async" />
-          <div className={`index-inner index-hero-copy${isJapanese ? ' index-hero-copy-japanese' : ''}`}>
-            <p className="index-hero-name">SoraJPNZ</p>
-            <h1 id="index-home-heading">{isJapanese ? <><span>海外生活に憧れや</span><span>不安を抱えている</span><span className="index-hero-address">あなたへ。</span></> : <><span>Life in New Zealand,</span><span>and the tools I build.</span></>}</h1>
-            <div className="index-hero-description">
-              <p className="index-hero-mission">{isJapanese ? <><span>そんな方たちの、</span><span>ちょっとした支えになるものを届けたい。</span></> : 'Practical work, with real life behind it.'}</p>
-              <p>{isJapanese ? 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。' : 'I’m Sora, an Auckland-based analyst in my eighth year in New Zealand. I build practical calculators and data projects, and share everyday life with Thea through videos and notes.'}</p>
-              <p>{isJapanese ? 'これまでの長い海外生活から、日本人として感じたことを、少し深掘りした視点から。' : 'Start with the calculator and its case study for my project work, or follow the videos for everyday New Zealand life.'}</p>
+          <div className="index-inner index-hero-layout">
+            <div className={`index-hero-copy${isJapanese ? ' index-hero-copy-japanese' : ''}`}>
+              <p className="index-hero-name">SoraJPNZ</p>
+              <h1 key={locale} id="index-home-heading">{isJapanese ? <><span>海外生活に憧れや</span><span>不安を抱えている</span><span className="index-hero-address">あなたへ。</span></> : <><span>Life in New Zealand,</span><span>and the tools I build.</span></>}</h1>
+              <div className="index-hero-description">
+                <p className="index-hero-mission">{isJapanese ? <><span>そんな方たちの、</span><span>ちょっとした支えになるものを届けたい。</span></> : 'Practical work, with real life behind it.'}</p>
+                <p>{isJapanese ? 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。' : 'I’m Sora, an Auckland-based analyst in my eighth year in New Zealand. I build practical calculators and data projects, and share everyday life with Thea through videos and notes.'}</p>
+                <p>{isJapanese ? 'これまでの長い海外生活から、日本人として感じたことを、少し深掘りした視点から。' : 'Start with the calculator and its case study for my project work, or follow the videos for everyday New Zealand life.'}</p>
+              </div>
             </div>
+            <HomeDetour locale={locale} videos={videos} videoStatus={videoStatus} />
           </div>
           <button className="index-motion-toggle" type="button" aria-pressed={heroPaused}
             aria-label={isJapanese ? heroPaused ? '背景の動きを再開' : '背景の動きを一時停止' : heroPaused ? 'Resume background motion' : 'Pause background motion'}
@@ -245,13 +243,14 @@ export function Home({ locale, path }: HomeProps) {
 
         <nav className="index-destinations" aria-label={isJapanese ? 'SoraJPNZの主な入口' : 'Explore SoraJPNZ'}>
           <div className="index-inner index-destination-grid">
-            {orderedDestinations.map((destination) => (
+            {orderedDestinations.map((destination, index) => (
               <a className={`index-destination index-destination-${destination.id}`} href={destination.href} target={destination.external ? '_blank' : undefined} rel={destination.external ? 'noopener noreferrer' : undefined} key={destination.id}>
-                <span className="index-destination-icon" aria-hidden="true"><i className={destination.icon} /></span>
                 <span className="index-destination-text">
-                  <span className="index-destination-label">{destination.label}<i className="ri-arrow-right-line" aria-hidden="true" /></span>
+                  <span className="index-destination-number" aria-hidden="true">0{index + 1}</span>
+                  <span className="index-destination-label">{destination.label}</span>
                   <span className="index-destination-hint">{destination.hint}</span>
                 </span>
+                <i className="ri-arrow-right-line index-destination-arrow" aria-hidden="true" />
               </a>
             ))}
           </div>
@@ -291,16 +290,17 @@ export function Home({ locale, path }: HomeProps) {
 
         <section className="index-inner index-work-list" aria-labelledby="index-work-heading" data-index-rule>
           <div className="index-section-heading">
-            <h2 id="index-work-heading">{isJapanese ? 'ほかに作ったもの' : 'More selected work'}</h2>
+            <h2 id="index-work-heading"><span className="index-section-number" aria-hidden="true">03</span>{isJapanese ? '作ったもの' : 'Selected projects'}</h2>
             <a className="index-link" href={`${base}/projects`}>{isJapanese ? 'プロジェクト一覧' : 'All projects'}<i className="ri-arrow-right-line" aria-hidden="true" /></a>
           </div>
-          {selectedWork.map((work) => (
-            <a className="index-work-row" href={`${base}/projects/${work.path}`} key={work.path}>
-              <span className="index-work-image"><img src={work.image} alt="" width={work.width} height={work.height} loading="lazy" decoding="async" /></span>
-              <div><h3>{work.title}</h3><p>{work.body}</p></div>
-              <i className="ri-arrow-right-line" aria-hidden="true" />
-            </a>
-          ))}
+          <HomeCarousel id="home-project-carousel" label={isJapanese ? '作ったもの' : 'Selected projects'} locale={locale} itemKeys={selectedWork.map((work) => work.path)} delay={7800}>
+            {selectedWork.map((work, index) => (
+              <article className="index-media-card index-work-card" key={work.path}>
+                <a className="index-work-image" href={`${base}/projects/${work.path}`} aria-label={work.title}><img src={work.image} alt="" width={work.width} height={work.height} loading="lazy" decoding="async" /></a>
+                <div className="index-media-copy"><p className="index-media-meta">PROJECT {String(index + 1).padStart(2, '0')}</p><h3><a href={`${base}/projects/${work.path}`}>{work.title}</a></h3><p>{work.body}</p><a className="index-link" href={`${base}/projects/${work.path}`}>{isJapanese ? '制作記録を見る' : 'Read the project'}<i className="ri-arrow-right-line" aria-hidden="true" /></a></div>
+              </article>
+            ))}
+          </HomeCarousel>
         </section>
 
         <section className="index-inner index-footer-links" aria-labelledby="index-connect-heading" data-index-rule>

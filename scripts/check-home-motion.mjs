@@ -17,10 +17,16 @@ const { outputText } = ts.transpileModule(`const runEffect = ${effect.arguments[
   compilerOptions: { target: ts.ScriptTarget.ES2022, module: ts.ModuleKind.None }
 });
 
-function section() {
+function section(targetTag) {
   const attributes = new Map();
+  const motionTarget = targetTag ? Object.freeze({ tagName: targetTag }) : null;
   return Object.freeze({
     attributes,
+    motionTarget,
+    querySelector(selector) {
+      assert.equal(selector, 'h1, h2, figcaption', 'Observe a short heading or caption instead of the full section');
+      return motionTarget;
+    },
     dataset: new Proxy({}, {
       set(_target, name, value) {
         assert.equal(name, 'ruleDrawn', 'Only the decorative data attribute may change');
@@ -39,7 +45,8 @@ function section() {
 }
 
 function environment({ reduced = false, supported = true } = {}) {
-  let sections = [section(), section()];
+  const createSections = () => ['h1', 'h2', 'figcaption', null].map(section);
+  let sections = createSections();
   const observers = [];
   const listeners = new Set();
   const media = {
@@ -59,11 +66,11 @@ function environment({ reduced = false, supported = true } = {}) {
       this.targets = new Set();
       this.disconnects = 0;
       assert.equal(options.threshold, 0, 'Tall mobile sections need no visibility ratio');
-      assert.equal(options.rootMargin, '0px 0px -8% 0px');
+      assert.equal(options.rootMargin, '0px', 'Decorative motion follows the heading entering the actual viewport');
       observers.push(this);
     }
     observe(target) { this.targets.add(target); }
-    unobserve(target) { assert.ok(this.targets.delete(target), 'A drawn rule is unobserved'); }
+    unobserve() { assert.fail('Decorative targets remain observed so motion can replay on re-entry'); }
     disconnect() { this.disconnects += 1; this.targets.clear(); }
     enter(target, isIntersecting = true) { this.callback([{ target, isIntersecting }]); }
   }
@@ -77,7 +84,7 @@ function environment({ reduced = false, supported = true } = {}) {
   const mainRef = {
     current: {
       querySelectorAll(selector) {
-        assert.equal(selector, '[data-index-rule]', 'Only decorative section markers are queried');
+        assert.equal(selector, '[data-index-rule], [data-index-title]', 'Only decorative rule and title markers are queried');
         return sections;
       }
     }
@@ -86,7 +93,8 @@ function environment({ reduced = false, supported = true } = {}) {
   return {
     run, observers, listeners,
     get sections() { return sections; },
-    nextLocale() { sections = [section(), section()]; },
+    get targets() { return sections.map((item) => item.motionTarget ?? item); },
+    nextLocale() { sections = createSections(); },
     setReduced(value) {
       media.matches = value;
       [...listeners].forEach((listener) => listener());
@@ -99,13 +107,25 @@ const cleanup = normal.run();
 assert.equal(normal.observers.length, 1);
 assert.equal(normal.listeners.size, 1);
 const observer = normal.observers[0];
-assert.equal(observer.targets.size, 2, 'All decorative rules are observed');
-observer.enter(normal.sections[0], false);
+assert.deepEqual([...observer.targets], normal.targets, 'Headings, captions and a headingless section fallback are observed');
+assert.ok(!observer.targets.has(normal.sections[0]), 'The hero heading, not its long section, is the visibility target');
+observer.enter(normal.targets[0], false);
 assert.equal(normal.sections[0].attributes.size, 0, 'Offscreen entries do not draw a rule');
-observer.enter(normal.sections[0]);
+observer.enter(normal.targets[0]);
 assert.equal(normal.sections[0].attributes.get('data-rule-drawn'), 'true');
-assert.equal(normal.sections[1].attributes.size, 0);
-assert.equal(observer.targets.size, 1, 'A visible rule runs once');
+assert.ok(normal.sections.slice(1).every((item) => item.attributes.size === 0), 'Only the intersecting target decorates its owning section');
+assert.equal(observer.targets.size, 4, 'A visible decorative target stays observed');
+for (let replay = 0; replay < 2; replay += 1) {
+  observer.enter(normal.targets[0], false);
+  assert.equal(normal.sections[0].attributes.size, 0, 'Viewport exit clears the decorative attribute');
+  observer.enter(normal.targets[0]);
+  assert.equal(normal.sections[0].attributes.get('data-rule-drawn'), 'true', 'Repeated viewport entry reapplies the decorative attribute');
+}
+normal.targets.slice(1).forEach((target, index) => {
+  observer.enter(target);
+  assert.equal(normal.sections[index + 1].attributes.get('data-rule-drawn'), 'true', 'Each descendant or fallback target updates its owning section');
+});
+assert.equal(observer.targets.size, 4, 'Replayed targets are never unobserved');
 
 normal.setReduced(true);
 assert.equal(observer.disconnects, 1);
@@ -114,8 +134,8 @@ assert.equal(normal.observers.length, 1, 'Enabling reduced motion does not creat
 assert.ok(normal.sections.every((item) => item.attributes.size === 0));
 normal.setReduced(false);
 assert.equal(normal.observers.length, 2, 'Returning to normal motion reconnects decorative rules');
-assert.equal(normal.observers[1].targets.size, 2);
-normal.observers[1].enter(normal.sections[1]);
+assert.deepEqual([...normal.observers[1].targets], normal.targets);
+normal.observers[1].enter(normal.targets[1]);
 cleanup();
 assert.equal(normal.observers[1].disconnects, 1);
 assert.equal(normal.listeners.size, 0);
@@ -126,8 +146,8 @@ normal.nextLocale();
 const nextCleanup = normal.run();
 assert.equal(normal.observers.length, 3);
 assert.equal(normal.listeners.size, 1, 'A new locale owns only one listener');
-assert.deepEqual([...normal.observers[2].targets], normal.sections, 'A new locale observes its current DOM');
-normal.observers[2].enter(normal.sections[0]);
+assert.deepEqual([...normal.observers[2].targets], normal.targets, 'A new locale observes its current heading and caption DOM');
+normal.observers[2].enter(normal.targets[0]);
 assert.ok(oldSections.every((item) => item.attributes.size === 0), 'Previous locale elements stay untouched');
 nextCleanup();
 assert.equal(normal.listeners.size, 0);
@@ -146,7 +166,7 @@ assert.equal(unsupported.observers.length, 0);
 assert.equal(unsupported.listeners.size, 0);
 assert.ok(unsupported.sections.every((item) => item.attributes.size === 0));
 
-console.log('PASS: Home decorative-only scroll motion, one-shot rules, reduced-motion initial/change, observer fallback, cleanup and fresh locale lifecycle');
+console.log('PASS: Home decorative-only heading/caption motion, repeated viewport entry, reduced-motion initial/change, observer fallback, cleanup and fresh locale lifecycle');
 
 // Static CSS guards supplement the effect checks; they do not emulate browser rendering.
 const css = await readFile(new URL('../src/pages/Home.css', import.meta.url), 'utf8');

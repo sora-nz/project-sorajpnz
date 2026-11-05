@@ -43,7 +43,24 @@ assert.ok(css.includes('prefers-reduced-motion: reduce'));
 const home = await readFile('src/pages/Home.tsx', 'utf8');
 assert.ok(!home.includes('reveal-on-scroll') && !home.includes('useReveal'), 'Home is visible independently of observer state');
 assert.ok(home.includes('home-index') && home.includes('assets.aucklandHarbour'), 'Selected Home motif uses the real harbour image');
-assert.ok(home.includes('useRecentVideos(homeVideoFallback)') && home.includes('index-video-list'), 'Home supports ongoing channel uploads');
+assert.ok(home.includes('useRecentVideos(homeVideoFallback)') && home.includes('id="home-video-carousel"'), 'Home supports ongoing channel uploads in the video carousel');
+assert.ok(home.includes('id="home-project-carousel"') && home.includes('<HomeDetour '), 'Home includes real project previews and user-triggered discovery');
+const fieldSketch = home.match(/<figure\b[^>]*className="index-field-sketch"[\s\S]*?<\/figure>/)?.[0];
+assert.ok(fieldSketch, 'Home keeps its harbour notebook illustration');
+for (const label of ['Videos', 'Notes', 'Projects']) {
+  assert.ok(fieldSketch.includes(`<span>${label}</span>`), `Illustration caption uses the selected label: ${label}`);
+}
+for (const label of ['Watch', 'Read', 'Make']) {
+  assert.ok(!fieldSketch.includes(`<span>${label}</span>`), `Retired illustration caption is removed: ${label}`);
+}
+assert.ok(!home.includes('体験する') && !home.includes('試してみる</span>'), 'Retired illustration slogans are removed');
+const carousel = await readFile('src/components/HomeCarousel.tsx', 'utf8');
+assert.ok(carousel.includes("from 'embla-carousel-react'"), 'Swipe and slide layout use the established carousel library');
+assert.ok(carousel.includes('!playing || reducedMotion || !inView || !documentVisible || slideCount < 2'), 'Automatic slides respect user choice, reduced motion, visibility and item count');
+assert.ok(carousel.includes('onFocusCapture={pause}') && carousel.includes('onPointerEnter='), 'Reading and keyboard focus stop rotation');
+assert.ok(carousel.includes('window.clearInterval(timer)') && carousel.includes("removeEventListener('visibilitychange'"), 'Carousel timers and listeners clean up');
+assert.ok(carousel.includes('inert={activeIndex !== index && !visibleIndices.includes(index)}') && carousel.includes("emblaApi.on('slidesInView', onVisibility)") && carousel.includes('aria-live="off"'), 'Visible preview cards remain usable; offscreen links are not tab targets and automatic updates are not announced');
+assert.ok(carousel.indexOf('home-carousel__rotation') < carousel.indexOf('home-carousel__viewport'), 'Rotation control precedes moving content in keyboard order');
 const homeCss = await readFile('src/pages/Home.css', 'utf8');
 assert.ok(home.includes("isJapanese ? ' index-hero-copy-japanese' : ''"), 'Selected type treatment is scoped to Japanese Home');
 assert.ok(home.includes('index-hero-address">あなたへ。'), 'Personal address stays within the single Home heading');
@@ -51,7 +68,7 @@ assert.ok(home.indexOf('<div className="index-feed">') < home.indexOf('<aside cl
 for (const text of ['海外生活に憧れや', '不安を抱えている', 'そんな方たちの、', 'ちょっとした支えになるものを届けたい。', 'NZ生活8年目。実体験をもとに、ニュージーランドの日常をシェアしています。', 'これまでの長い海外生活から、日本人として感じたことを、少し深掘りした視点から。']) {
   assert.ok(home.includes(text), `Japanese hero preserves approved copy: ${text}`);
 }
-assert.match(homeCss, /\.index-hero-copy-japanese h1[^{}]*\{[^}]*font-family: 'Zen Maru Gothic'/, 'Selected Japanese typeface does not change the site-wide font');
+assert.match(homeCss, /\.index-hero-copy-japanese h1[^{}]*\{[^}]*font-family: 'Noto Serif JP Home'/, 'Selected Japanese display typeface stays scoped to Home');
 assert.match(homeCss, /\.index-hero-copy-japanese h1 > \.index-hero-address\s*\{[^}]*color: var\(--index-green\)/, 'Personal address has a distinct green hierarchy');
 assert.match(homeCss, /\.index-feed,\s*\.index-sidebar\s*\{\s*grid-column: auto; grid-row: auto;/, 'Mobile Home follows the content-first DOM order');
 for (const weight of ['medium', 'bold']) {
@@ -61,6 +78,18 @@ for (const weight of ['medium', 'bold']) {
 }
 assert.ok((await readFile('public/assets/fonts/zen-maru-gothic/OFL.txt', 'utf8')).includes('SIL OPEN FONT LICENSE'), 'Font license is distributed with the assets');
 assert.ok(homeCss.includes('prefers-reduced-motion: reduce') && homeCss.includes('transform: none !important'), 'Home motion can be disabled');
+const displayFont = await readFile('public/assets/fonts/noto-serif-jp/home-black.woff2');
+assert.equal(displayFont.subarray(0, 4).toString(), 'wOF2', 'New Home display font is WOFF2');
+assert.ok(displayFont.length < 30000, 'Home display font is a small local subset');
+assert.ok((await readFile('public/assets/fonts/noto-serif-jp/OFL.txt', 'utf8')).includes('SIL OPEN FONT LICENSE'));
+assert.ok(home.includes('index-field-sketch') && home.includes('harbour-notebook.webp'), 'Selected Home illustration is a real bitmap asset');
+assert.ok(homeCss.includes('index-ink-trace 1600ms') && homeCss.includes('index-light-pass 650ms'), 'Contextual gestures are brief, not ambient loops');
+assert.ok(!/index-(?:ink-trace|light-pass)[^;]*infinite/.test(homeCss), 'New gestures play once');
+assert.ok(!home.includes('unobserve('), 'Home motion remains observed for scroll re-entry');
+assert.ok(home.includes("section.querySelector('h1, h2, figcaption')"), 'Motion entry follows visible headings, not tall section bounds');
+assert.ok(home.includes("rootMargin: '0px'"), 'Motion resets only after the actual viewport exit');
+assert.ok(home.includes('<h1 key={locale}') && home.includes('<figure key={locale}'), 'Locale reuse recreates the title and decorative motion targets');
+assert.match(homeCss, /\.index-hero\[data-rule-drawn="true"\] \.index-hero-copy h1 > span\s*\{[^}]*index-title-settle/, 'Title motion follows viewport re-entry');
 assert.ok(!/opacity:\s*0(?:\D|$)|visibility:\s*hidden/.test(homeCss), 'Essential Home sections are not hidden by animation');
 assert.ok(home.includes("observer?.disconnect()") && home.includes("motion.removeEventListener('change', configure)"), 'Home decorative observer cleans up on locale change');
 assert.ok(home.includes('links.support'), 'Home has an optional support link');
