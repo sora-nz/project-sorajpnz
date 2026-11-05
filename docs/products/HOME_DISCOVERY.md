@@ -15,6 +15,10 @@ turning Home into an agency landing page or hiding its practical tools.
 - Place the dedicated rear-camera bitmap in the hero's right column, in the user's
   annotated open harbour area. Embed the real image, short description and explicit
   link in its opaque LCD window. The large top cap is the interactive shutter.
+- The camera and heading sit lower on desktop so the body meets the photographed
+  rocks. The existing bitmap remains unchanged; a lightly tinted native cap button
+  is the hit target, without an overlaid icon. The adjacent visible label is exactly
+  `Click!?`, included in the localized accessible name. Keep a 44px touch target.
 - Keep a stable camera aspect ratio and bounded copy slots; drawing must not change
   the hero height. Stack below the introduction on narrow screens without overlap.
 - The result has a real image, title, short context and an explicit destination link.

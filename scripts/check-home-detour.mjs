@@ -119,15 +119,39 @@ assert.equal(attribute(shutter, 'type')?.text, 'button');
 assert.equal(expression(shutter, 'onClick', componentAst), 'choose', 'Only a user shutter action draws a result');
 assert.equal(expression(shutter, 'aria-controls', componentAst), expression(result.opening, 'id', componentAst));
 assert.equal(expression(result.opening, 'id', componentAst), 'resultId', 'Shutter controls identify the actual result');
+const clickLabels = byClass('index-detour-click');
+assert.equal(clickLabels.length, 1, 'The shutter has one visible Click!? label');
+const clickLabel = clickLabels[0];
+assert.ok(isWithin(clickLabel.node, shutters[0].node), 'The visible label belongs to the native shutter button');
+assert.equal(clickLabel.opening.tagName.getText(componentAst), 'span');
+assert.ok(ts.isJsxElement(clickLabel.node) && clickLabel.node.children.every(ts.isJsxText), 'The shutter label is literal text');
+const visibleLabel = clickLabel.node.children.map((child) => child.text).join('').trim();
+assert.equal(visibleLabel, 'Click!?', 'The requested visible label stays exact in both locales and draw states');
+assert.ok(elements.filter(({ node }) => isWithin(node, shutters[0].node)).every(({ node }) => node === clickLabel.node),
+  'No extra camera icon is overlaid on the bitmap shutter');
 const label = expression(shutter, 'aria-label', componentAst);
 assert.ok(label, 'An illustrated shutter has an accessible name');
 for (const isJapanese of [true, false]) {
   for (const drawn of [false, true]) {
-    assert.equal(runInNewContext(label, { isJapanese, draw: drawn ? {} : null }), isJapanese
-      ? drawn ? 'シャッターを押してもう一枚見る' : 'シャッターを押して一枚見る'
-      : drawn ? 'Press the shutter for another detour' : 'Explore a detour with the shutter');
+    const accessibleName = runInNewContext(label, { isJapanese, draw: drawn ? {} : null });
+    assert.ok(accessibleName.startsWith(`${visibleLabel} `), 'Every accessible shutter name includes the visible label first');
+    assert.equal(accessibleName, isJapanese
+      ? drawn ? 'Click!? シャッターでもう一枚見る' : 'Click!? シャッターで一枚見る'
+      : drawn ? 'Click!? Take another detour' : 'Click!? Explore a detour');
   }
 }
+const componentCss = await readFile(new URL('../src/components/HomeDetour.css', import.meta.url), 'utf8');
+const shutterCss = componentCss.match(/\.index-detour-draw\s*\{([^}]*)\}/)?.[1];
+assert.ok(shutterCss, 'The native shutter has a stable target rule');
+for (const property of ['min-width', 'min-height']) {
+  const minimum = shutterCss.match(new RegExp(`(?:^|;)\\s*${property}:\\s*(\\d+(?:\\.\\d+)?)px\\s*(?:;|$)`));
+  assert.ok(minimum && Number(minimum[1]) >= 44, `The shutter ${property} preserves a 44px touch target`);
+}
+const reducedCss = componentCss.match(/@media\s*\(prefers-reduced-motion:\s*reduce\)\s*\{([\s\S]*)\}\s*$/)?.[1];
+assert.ok(reducedCss, 'The shutter preserves an explicit reduced-motion mode');
+assert.match(reducedCss, /animation:\s*none !important;/);
+assert.match(reducedCss, /transition:\s*none !important;/);
+assert.match(reducedCss, /\.index-detour-shutter\s*\{\s*display:\s*none;/, 'Reduced motion hides the decorative exposure gesture');
 assert.equal(attribute(announcement.opening, 'role')?.text, 'status');
 assert.equal(attribute(announcement.opening, 'aria-live')?.text, 'polite');
 assert.equal(attribute(announcement.opening, 'aria-atomic')?.text, 'true');
@@ -152,4 +176,5 @@ assert.equal(detours.length, 1, 'Home renders one discovery camera, not a duplic
 assert.equal(heroes.length, 1);
 assert.ok(isWithin(detours[0].node, heroes[0].node), 'The discovery camera belongs inside the hero');
 console.log('PASS: detour public routes, locale boundary, canonical video URLs, shuffle cycles and no immediate repeat');
-console.log('PASS: hero camera placement, real decorative bitmap dimensions, localized native shutter and separate polite result status');
+console.log('PASS: hero camera placement, decorative bitmap dimensions, exact Click!? label, native 44px shutter, localized names and reduced motion');
+console.log('PASS: explicit result destination and separate polite result status');

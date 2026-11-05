@@ -53,10 +53,9 @@ function HomeDetourSession({ locale, videos, videoStatus }: HomeDetourProps) {
       <div className="index-detour-device">
         <img className="index-detour-shell" src="/assets/home/detour-camera.webp" alt="" aria-hidden="true" width={1216} height={895} decoding="async" />
         <button className="index-detour-draw" type="button" onClick={choose} aria-controls={resultId}
-          aria-label={isJapanese ? (draw ? 'シャッターを押してもう一枚見る' : 'シャッターを押して一枚見る') : (draw ? 'Press the shutter for another detour' : 'Explore a detour with the shutter')}
+          aria-label={isJapanese ? (draw ? 'Click!? シャッターでもう一枚見る' : 'Click!? シャッターで一枚見る') : (draw ? 'Click!? Take another detour' : 'Click!? Explore a detour')}
           title={isJapanese ? (draw ? 'もう一枚見る' : '一枚見る') : (draw ? 'Pick another' : 'Pick a detour')}>
-          <i className="ri-camera-line" aria-hidden="true" />
-          <span>{isJapanese ? (draw ? 'もう一枚' : '一枚見る') : (draw ? 'Another' : 'Explore')}</span>
+          <span className="index-detour-click">Click!?</span>
         </button>
         <div className="index-detour-layout" id={resultId}>
           <div className={`index-detour-frame${selected ? ` index-detour-frame-${selected.kind}` : ' index-detour-frame-empty'}`}>
